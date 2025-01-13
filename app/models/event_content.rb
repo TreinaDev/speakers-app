@@ -1,0 +1,2 @@
+class EventContent < ApplicationRecord
+end
