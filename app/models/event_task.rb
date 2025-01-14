@@ -1,0 +1,2 @@
+class EventTask < ApplicationRecord
+end
