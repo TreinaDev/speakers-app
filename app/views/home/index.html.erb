@@ -4,3 +4,18 @@
   <button data-action="click->home#helloWorld">Ver mensagem</button>
   <div data-home-target="result"></div>
 </div>
+
+<div> 
+  <h1> Lista de Eventos </h1>
+  <% if @events.any? %>
+    <ul>
+      <% @events.each do |event| %>
+        <li> <%= event.name %> </li>
+        <li> <%= event.description %> </li>
+        <li> Data início: <%= event.start_date %> </li>
+      <% end %>
+    <ul>
+  <% else %>
+    <p>Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.</p>
+  <% end %>
+</div>
