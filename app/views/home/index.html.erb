@@ -1,21 +1,17 @@
-<h1>Olá mundo</h1>
-
-<div data-controller="home">
-  <button data-action="click->home#helloWorld">Ver mensagem</button>
-  <div data-home-target="result"></div>
-</div>
-
 <div> 
-  <h1> Lista de Eventos </h1>
-  <% if @events.any? %>
-    <ul>
-      <% @events.each do |event| %>
-        <li> <%= event.name %> </li>
-        <li> <%= event.description %> </li>
-        <li> Data início: <%= event.start_date %> </li>
+      <h1 class="mb-4 text-4xl font-semibold text-gray-900 md:text-5xl lg:text-6xl "> Lista de Eventos </h1>
+      <% if @events.any? %>
+        <ul class="flex flex-wrap gap-6">
+          <% @events.each do |event| %>
+          <li class="border border-gray-200 w-96 p-6 rounded-lg shadow flex-column items-center">
+            <%= image_tag "https://picsum.photos/200/300", class: "w-96 h-32 object-cover rounded-lg mr-6" %>
+           <h2 class="text-2xl font-bold text-indigo-700 hover:text-indigo-900 mb-2"><%= event.name %></h2>
+           <p class="text-gray-700 text-lg mb-2"><%= event.description %></p>
+           <p> Data início: <%= event.start_date %> </p>
+          </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.</p>
       <% end %>
-    <ul>
-  <% else %>
-    <p>Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.</p>
-  <% end %>
 </div>
