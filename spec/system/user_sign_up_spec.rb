@@ -1,7 +1,10 @@
 require 'rails_helper'
 
-describe 'Palestrante cria a sua conta', type: :system, js: true do
+describe 'Palestrante cria a sua conta', type: :system do
   it 'e deve estar previamente cadastrado' do
+    response = double('response', status: 404, success?: false )
+    allow(Faraday).to receive(:get).and_return(response)
+
     visit root_path
     click_on 'Criar conta'
     fill_in 'E-mail', with: 'joao@campuscode.com'
@@ -16,9 +19,34 @@ describe 'Palestrante cria a sua conta', type: :system, js: true do
   end
 
   it 'com sucesso' do
-    
+    response = double('response', status: 200, success?: true )
+    allow(Faraday).to receive(:get).and_return(response)
+
+    visit root_path
+    click_on 'Criar conta'
+    fill_in 'E-mail', with: 'joao@campuscode.com'
+    fill_in 'Senha', with: 'password'
+    fill_in 'Confirme sua senha', with: 'password'
+    fill_in 'Nome', with: 'João'
+    fill_in 'Sobrenome', with: 'Almeida'
+    click_on 'Cadastrar'
+
+    expect(User.count).to eq 1
+    expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso.'
+  end
+
+  it 'falha devido a indisponibilidade da Api' do
+    allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
+
+    visit root_path
+    click_on 'Criar conta'
+    fill_in 'E-mail', with: 'joao@campuscode.com'
+    fill_in 'Senha', with: 'password'
+    fill_in 'Confirme sua senha', with: 'password'
+    fill_in 'Nome', with: 'João'
+    fill_in 'Sobrenome', with: 'Almeida'
+    click_on 'Cadastrar'
+
+    expect(User.count).to eq 0
   end
 end
-
-# thiagogoes1011@gmail.com
-# pedroddias98@gmail.com

@@ -7,3 +7,6 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+User.skip_callback(:create, :before, :api_auth_user)
+User.create!(first_name: 'João', last_name: 'Campus', email: 'joao@email.com', password: '123456')
+User.set_callback(:create, :before, :api_auth_user)

@@ -1,10 +1,4 @@
-<h1>Olá mundo</h1>
-
 <nav>
   <%= link_to 'Criar conta', new_user_registration_path, data:{turbo: false} %>
+  <%= link_to 'Login', new_user_session_path, data:{turbo: false} %>
 </nav>
-
-<div data-controller="home">
-  <button data-action="click->home#helloWorld">Ver mensagem</button>
-  <div data-home-target="result"></div>
-</div>
