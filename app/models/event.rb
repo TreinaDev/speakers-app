@@ -14,6 +14,7 @@ class Event
   end
 
   def self.all
+    result = {}
     begin
       response = Faraday.get("localhost:3001/api/events")
 
@@ -31,6 +32,6 @@ class Event
     rescue => e
       Rails.logger.error "Erro: #{e}"
     end
-    {}
+    result
   end
 end
