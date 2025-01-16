@@ -24,8 +24,9 @@
   </head>
 
   <body>
-    <%= render 'shared/flash'%>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <%= render "shared/navbar" %>
+    <main class="container mx-auto mt-10 px-5">
+      <%= render "shared/flash" %>
       <%= yield %>
     </main>
   </body>
