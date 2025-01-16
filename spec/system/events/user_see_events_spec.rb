@@ -21,7 +21,7 @@ describe 'user visit home and see list of events', type: :system do
                           event_type: 'in-person',
                           location: 'Florianópolis',
                           participant_limit: 20,
-                          status: 'draft')]
+                          status: 'draft') ]
 
     allow(Event).to receive(:all).and_return(events)
     user = User.create!(first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
@@ -39,9 +39,9 @@ describe 'user visit home and see list of events', type: :system do
   end
 
   it 'and dont exists events for him', type: :system do
-    events = {}
-
-    allow(Event).to receive(:all).and_return(events)
+    mock_events = double('Event')
+    allow(Event).to receive(:all).and_return(mock_events)
+    allow(mock_events).to receive(:presence).and_return({})
     user = User.create!(first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
 
     login_as user, scope: :user
@@ -53,7 +53,7 @@ describe 'user visit home and see list of events', type: :system do
 
   it 'and cannot visit homepage if not authenticated',  type: :system do
     visit root_path
-    
+
     expect(current_path).to eq new_user_session_path
     expect(page).to have_content 'You need to sign in or sign up before continuing'
   end
