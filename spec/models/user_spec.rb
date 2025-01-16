@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   context 'validations' do
     it { validate_presence_of(:first_name) }
     it { validate_presence_of(:last_name) }
+    it { should have_many(:event_contents) }
   end
 
   context '#api_auth_user' do
