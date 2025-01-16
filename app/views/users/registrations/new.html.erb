@@ -1,38 +1,38 @@
-<h2>Sign up</h2>
+<h2 class="heading-2">Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), class:"max-w-sm mx-auto") do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
+    <%= f.label :first_name, class: 'label-primary' %><br />
+    <%= f.text_field :first_name, autofocus: true, class: 'field-primary' %>
   </div>
 
   <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
+    <%= f.label :last_name, class: 'label-primary' %><br />
+    <%= f.text_field :last_name, class: 'field-primary' %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+    <%= f.label :email, class: 'label-primary' %><br />
+    <%= f.email_field :email, autocomplete: "email", class: 'field-primary' %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, class: 'label-primary' %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> caracteres mínimos)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: 'field-primary' %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :password_confirmation, class: 'label-primary' %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'field-primary' %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Cadastrar" %>
+    <%= f.submit "Cadastrar", class: 'btn-primary' %>
   </div>
 <% end %>
 

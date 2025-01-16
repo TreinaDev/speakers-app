@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Palestrante cria a sua conta', type: :system do
   it 'e deve estar previamente cadastrado' do
-    response = double('response', status: 404, success?: false )
+    response = double('response', status: 404, success?: false)
     allow(Faraday).to receive(:get).and_return(response)
 
     visit root_path
@@ -15,11 +15,11 @@ describe 'Palestrante cria a sua conta', type: :system do
     click_on 'Cadastrar'
 
     expect(User.count).to eq 0
-    expect(page).not_to have_content 'Bem vindo! Você realizou seu registro com sucesso.'
+    expect(page).to have_content 'Algo deu errado, contate o responsável.'
   end
 
   it 'com sucesso' do
-    response = double('response', status: 200, success?: true )
+    response = double('response', status: 200, success?: true)
     allow(Faraday).to receive(:get).and_return(response)
 
     visit root_path
@@ -63,6 +63,6 @@ describe 'Palestrante cria a sua conta', type: :system do
     click_on 'Cadastrar'
 
     expect(User.count).to eq 0
-    expect(page).to have_content 'Algo deu errado, contate o responsável'
+    expect(page).to have_content 'Algo deu errado, contate o responsável.'
   end
 end

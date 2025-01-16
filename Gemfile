@@ -35,7 +35,7 @@ gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
-gem 'devise'
+gem "devise"
 
 gem 'faraday'
 group :development, :test do
@@ -50,8 +50,8 @@ group :development, :test do
   gem "cuprite"
   gem "simplecov", require: false
   gem "factory_bot_rails"
-  gem 'shoulda-matchers'
-  gem 'faker'
+  gem "shoulda-matchers"
+  gem "faker"
 end
 
 group :development do
