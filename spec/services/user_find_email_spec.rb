@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe ExternalEventApi::UserFindEmailService do
   context '#find_email' do
-    it 'quando a Api retorna sucesso' do
+    it 'when API return success' do
       email = 'test@email.com'
       service = ExternalEventApi::UserFindEmailService.new(email)
       response = instance_double(Faraday::Response, success?: true)
@@ -11,7 +11,7 @@ describe ExternalEventApi::UserFindEmailService do
       expect(service.find_email).to eq(true)
     end
 
-    it 'quando a Api retorna não localizado' do
+    it 'when API return not found' do
       email = 'test@email.com'
       service = ExternalEventApi::UserFindEmailService.new(email)
       response = instance_double(Faraday::Response, success?: false)
@@ -20,7 +20,7 @@ describe ExternalEventApi::UserFindEmailService do
       expect(service.find_email).to eq(false)
     end
 
-    it 'quando ocorre uma excessão loga o erro e retorna false' do
+    it 'when Connection Failed exception happens' do
       email = 'test@email.com'
       service = ExternalEventApi::UserFindEmailService.new(email)
       allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)

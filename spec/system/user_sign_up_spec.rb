@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Palestrante cria a sua conta', type: :system do
-  it 'e deve estar previamente cadastrado' do
+describe 'Speacker create account', type: :system do
+  it 'and must be previusly registred' do
     response = double('response', status: 404, success?: false)
     allow(Faraday).to receive(:get).and_return(response)
 
@@ -18,9 +18,9 @@ describe 'Palestrante cria a sua conta', type: :system do
     expect(page).to have_content 'Algo deu errado, contate o responsável.'
   end
 
-  it 'com sucesso' do
-    response = double('response', status: 200, success?: true)
-    allow(Faraday).to receive(:get).and_return(response)
+  it 'with success' do
+    service = ExternalEventApi::UserFindEmailService
+    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return(true)
 
     visit root_path
     click_on 'Criar conta'
@@ -35,7 +35,7 @@ describe 'Palestrante cria a sua conta', type: :system do
     expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso.'
   end
 
-  it 'e falha devido a campos vazios' do
+  it 'and fail with empty fields' do
     visit root_path
     click_on 'Criar conta'
     fill_in 'E-mail', with: 'joao@campuscode.com'
@@ -50,7 +50,7 @@ describe 'Palestrante cria a sua conta', type: :system do
     expect(page).to have_content 'Sobrenome não pode ficar em branco'
   end
 
-  it 'falha devido a indisponibilidade da Api' do
+  it 'and fails when API do not work' do
     allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
 
     visit root_path
