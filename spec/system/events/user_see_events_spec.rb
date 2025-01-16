@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 describe 'user visit home and see list of events', type: :system do
+  it 'is redirected to list of events page' do
+    user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+
+    login_as user, scope: :user
+    visit root_path
+
+    expect(current_path).to eq events_path
+    expect(page).to have_content 'Lista de Eventos'
+  end
+
   it 'with success' do
     events = [ Event.new(id: 1,
                           name: 'Event1',
@@ -24,10 +34,10 @@ describe 'user visit home and see list of events', type: :system do
                           status: 'draft') ]
 
     allow(Event).to receive(:all).and_return(events)
-    user = User.create!(first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+    user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
 
     login_as user, scope: :user
-    visit root_path
+    visit events_path
 
     expect(page).to have_content 'Lista de Eventos'
     expect(page).to have_content('Event1')
@@ -38,23 +48,21 @@ describe 'user visit home and see list of events', type: :system do
     expect(page).to have_content('Data início: 15-01-2025')
   end
 
-  it 'and dont exists events for him', type: :system do
-    mock_events = double('Event')
-    allow(Event).to receive(:all).and_return(mock_events)
-    allow(mock_events).to receive(:presence).and_return({})
-    user = User.create!(first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+  it 'and dont exists events for him' do
+    allow(Event).to receive(:all).and_return({})
+    user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
 
     login_as user, scope: :user
-    visit root_path
+    visit events_path
 
     expect(page).to have_content 'Lista de Eventos'
     expect(page).to have_content('Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.')
   end
 
-  it 'and cannot visit homepage if not authenticated',  type: :system do
-    visit root_path
+  it 'and cannot visit homepage if not authenticated' do
+    visit events_path
 
     expect(current_path).to eq new_user_session_path
-    expect(page).to have_content 'You need to sign in or sign up before continuing'
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 end

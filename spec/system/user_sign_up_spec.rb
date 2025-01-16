@@ -19,8 +19,8 @@ describe 'Palestrante cria a sua conta', type: :system do
   end
 
   it 'com sucesso' do
-    response = double('response', status: 200, success?: true)
-    allow(Faraday).to receive(:get).and_return(response)
+    service = ExternalEventApi::UserFindEmailService
+    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return(true)
 
     visit root_path
     click_on 'Criar conta'
