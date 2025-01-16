@@ -59,7 +59,7 @@ describe 'user visit home and see list of events', type: :system do
     expect(page).to have_content('Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.')
   end
 
-  it 'and cannot visit homepage if not authenticated' do
+  it 'and cannot visit event page if not authenticated' do
     visit events_path
 
     expect(current_path).to eq new_user_session_path

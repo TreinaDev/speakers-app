@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário acessa sua conta', type: :system do
-  it 'com sucesso' do
+describe 'User sign-in', type: :system do
+  it 'with success' do
     create(:user, first_name: 'João', last_name: 'Almeida', email: 'joao@campuscode.com', password: 'password')
 
     visit root_path
@@ -14,7 +14,7 @@ describe 'Usuário acessa sua conta', type: :system do
     expect(page).to have_content 'Login efetuado com sucesso.'
   end
 
-  it 'e realiza seu logout em seguida' do
+  it 'and then log out' do
     create(:user, first_name: 'João', last_name: 'Almeida', email: 'joao@campuscode.com', password: 'password')
 
     visit root_path
@@ -27,7 +27,7 @@ describe 'Usuário acessa sua conta', type: :system do
     expect(page).to have_content 'Logout efetuado com sucesso.'
   end
 
-  it 'e não preenche o formulário corretamente' do
+  it 'and not fill form correctly' do
     create(:user, password: '123456')
 
     visit root_path
