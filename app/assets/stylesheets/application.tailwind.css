@@ -50,4 +50,8 @@
   .input-label {
     @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
   }
+
+  .card {
+    @apply grid grid-col-4 gap-3 px-2 py-2 mx-1;
+  }
 }

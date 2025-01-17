@@ -1,0 +1,20 @@
+<h2 class="heading-2"><%= @event_content.title %></h2>
+
+<div>
+  <div>
+    <%= @event_content.description %>
+  </div>
+  <div>
+    <% @event_content.files.each do |file| %>
+      <% if file.content_type.starts_with?('image/') %>
+        <%= image_tag file, width: 300, height: 200 %>
+      <% elsif file.content_type.starts_with?('video/') %>
+        <%= video_tag url_for(file), controls: true, width: 300, height: 200 %>
+      <% elsif file.content_type == 'application/pdf' %>
+        <%= link_to "Visualizar PDF: #{file.filename.to_s}", url_for(file), target: '_blank' %>
+      <% else %>
+        <%= link_to "Arquivo #{file.filename.to_s}", url_for(file), target: '_blank' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
