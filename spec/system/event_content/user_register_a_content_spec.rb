@@ -13,6 +13,7 @@ describe 'User register a content', type: :system do
 
     login_as user
     visit root_path
+    click_on 'Meus Conteúdos'
     click_on 'Cadastrar Conteúdo'
     fill_in 'Título', with: 'Ruby para iniciantes'
     fill_in 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
@@ -36,6 +37,7 @@ describe 'User register a content', type: :system do
 
     login_as user
     visit root_path
+    click_on 'Meus Conteúdos'
     click_on 'Cadastrar Conteúdo'
     fill_in 'Título', with: 'Ruby para iniciantes'
     fill_in 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
@@ -58,6 +60,7 @@ describe 'User register a content', type: :system do
 
     login_as user
     visit root_path
+    click_on 'Meus Conteúdos'
     click_on 'Cadastrar Conteúdo'
     fill_in 'Título', with: 'Ruby para iniciantes'
     fill_in 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
@@ -74,6 +77,7 @@ describe 'User register a content', type: :system do
 
     login_as user
     visit root_path
+    click_on 'Meus Conteúdos'
     click_on 'Cadastrar Conteúdo'
     fill_in 'Título', with: ''
     fill_in 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'

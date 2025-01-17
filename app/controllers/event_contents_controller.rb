@@ -1,5 +1,9 @@
 class EventContentsController < ApplicationController
   before_action :authenticate_user!
+
+  def index
+    @event_contents = current_user.event_contents
+  end
   def new
     @event_content = current_user.event_contents.build
   end
@@ -8,7 +12,7 @@ class EventContentsController < ApplicationController
     @event_content = current_user.event_contents.build(event_content_params)
 
     if @event_content.save
-      redirect_to root_path, notice: "Conteúdo registrado com sucesso."
+      redirect_to event_contents_path, notice: "Conteúdo registrado com sucesso."
     else
       flash.now[:alert] = "Falha ao registrar o conteúdo."
       render :new, status: :unprocessable_entity
