@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      event_task: Tarefa
+    attributes:
+      event_task:
+        name: 'Título'
+        description: 'Descrição'
+        certificate_requirement: 'Obrigatória para emissão de certificado'
+        content: 'Conteúdos'
