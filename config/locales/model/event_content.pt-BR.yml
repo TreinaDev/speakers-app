@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    models:
+      event_content: Conteúdo
+    attributes:
+      event_content:
+        title: 'Título'
+        description: 'Descrição'
