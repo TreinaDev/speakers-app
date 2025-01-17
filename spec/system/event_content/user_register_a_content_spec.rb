@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 describe 'User register a content', type: :system do
+  it 'must be authenticated' do
+    visit new_event_content_path
+
+    expect(page).not_to have_link 'Cadastrar Conteúdo'
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'with success' do
     user = create(:user, first_name: 'João')
 
@@ -59,7 +66,7 @@ describe 'User register a content', type: :system do
 
     expect(EventContent.count).to eq 0
     expect(page).to have_content 'Falha ao registrar o conteúdo.'
-    expect(page).to have_content 'Não é possível enviar com mais de 50mb.'
+    expect(page).to have_content 'Não é possível enviar arquivos com mais de 50mb.'
   end
 
   it 'failure if title is empty' do

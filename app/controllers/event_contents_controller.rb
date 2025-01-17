@@ -1,4 +1,5 @@
 class EventContentsController < ApplicationController
+  before_action :authenticate_user!
   def new
     @event_content = current_user.event_contents.build
   end

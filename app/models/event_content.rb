@@ -18,7 +18,7 @@ class EventContent < ApplicationRecord
 
     files.each do |file|
       unless file.blob.byte_size <= 50.megabyte
-        errors.add(:base, "Não é possível enviar com mais de 50mb.")
+        errors.add(:base, "Não é possível enviar arquivos com mais de 50mb.")
       end
     end
   end
