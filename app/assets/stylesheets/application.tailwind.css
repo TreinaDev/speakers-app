@@ -36,11 +36,11 @@
   }
 
   .notice {
-    @apply p-4 mb-4 text-sm rounded-lg bg-gray-800 text-blue-400;
+    @apply p-4 mb-4 text-sm rounded-lg bg-green-200 text-green-500;
   }
 
   .alert {
-    @apply p-4 mb-4 text-sm  rounded-lg bg-gray-800 text-red-400;
+    @apply p-4 mb-4 text-sm  rounded-lg bg-red-200 text-red-500;
   }
 
   .card_container{
@@ -62,5 +62,9 @@
 
   .card_description{
     @apply font-serif;
+  }
+
+  .errors {
+    @apply p-4 mb-1 text-sm rounded-lg bg-red-200 text-red-500;
   }
 }
