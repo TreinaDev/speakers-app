@@ -24,8 +24,7 @@
   font-weight: 600;
   margin-top: 2rem;
   border-radius: 5px;
-  height: auto;
-  padding: 5px;
+  height: 3rem;
   transition: background ease-in-out 0.2s;
  }
 
@@ -57,6 +56,11 @@
   display: grid;
   grid-template-columns: 1;
   line-height: 1rem;
+  margin-bottom: 0.3rem;
+ }
+
+ .field input{
+  border: solid 0.5px rgb(180, 175, 175);
  }
 
  .nav-background {
@@ -71,7 +75,7 @@
 
  .navbar-img {
   background-image: url(background-nav.jpg);
-  height: 5rem;
+  height: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
