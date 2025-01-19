@@ -8,3 +8,24 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ :root {
+  --success-color: rgb(78, 78, 177);
+  --success-color-hover: rgb(53, 53, 141);
+ }
+ .btn-success {
+  width: 100%;
+  background-color: var(--success-color);
+  color: #fff;
+  font-weight: 600;
+  margin-top: 3px;
+  border-radius: 5px;
+  height: auto;
+  padding: 5px;
+  transition: background ease-in-out 0.2s;
+ }
+
+ .btn-success:hover{
+  cursor: pointer;
+  background-color: var(--success-color-hover);
+ }
