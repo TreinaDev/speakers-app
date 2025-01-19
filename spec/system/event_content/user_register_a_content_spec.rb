@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User register a content', type: :system do
+describe 'User register a content', type: :system, js: true do
   it 'must be authenticated' do
     visit new_event_content_path
 
@@ -16,7 +16,7 @@ describe 'User register a content', type: :system do
     click_on 'Meus Conteúdos'
     click_on 'Cadastrar Conteúdo'
     fill_in 'Título', with: 'Ruby para iniciantes'
-    fill_in 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
+    fill_in_rich_text_area 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
     attach_file('Arquivos', [ Rails.root.join('spec/fixtures/mark_zuckerberg.jpeg'),
                               Rails.root.join('spec/fixtures/capi.png'),
                               Rails.root.join('spec/fixtures/puts.png'),
@@ -40,7 +40,7 @@ describe 'User register a content', type: :system do
     click_on 'Meus Conteúdos'
     click_on 'Cadastrar Conteúdo'
     fill_in 'Título', with: 'Ruby para iniciantes'
-    fill_in 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
+    fill_in_rich_text_area 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
     attach_file('Arquivos', [ Rails.root.join('spec/fixtures/mark_zuckerberg.jpeg'),
                               Rails.root.join('spec/fixtures/capi.png'),
                               Rails.root.join('spec/fixtures/puts.png'),
@@ -63,7 +63,7 @@ describe 'User register a content', type: :system do
     click_on 'Meus Conteúdos'
     click_on 'Cadastrar Conteúdo'
     fill_in 'Título', with: 'Ruby para iniciantes'
-    fill_in 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
+    fill_in_rich_text_area 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
     attach_file('Arquivos', [ Rails.root.join('spec/fixtures/Topicos de Fisica.pdf') ])
     click_on 'Criar Conteúdo'
 
@@ -80,7 +80,7 @@ describe 'User register a content', type: :system do
     click_on 'Meus Conteúdos'
     click_on 'Cadastrar Conteúdo'
     fill_in 'Título', with: ''
-    fill_in 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
+    fill_in_rich_text_area 'Descrição', with: 'Um guia sobre o mundo dos desenvolvedores felizes.'
     click_on 'Criar Conteúdo'
 
     expect(EventContent.count).to eq 0

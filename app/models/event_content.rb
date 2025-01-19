@@ -4,6 +4,7 @@ class EventContent < ApplicationRecord
   validate :must_have_less_than_five_files
   validate :valid_file_size
   validates :title, presence: true
+  has_rich_text :description
 
   protected
 
