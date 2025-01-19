@@ -18,7 +18,7 @@
   background-color: var(--success-color);
   color: #fff;
   font-weight: 600;
-  margin-top: 3px;
+  margin-top: 2rem;
   border-radius: 5px;
   height: auto;
   padding: 5px;
@@ -28,4 +28,29 @@
  .btn-success:hover{
   cursor: pointer;
   background-color: var(--success-color-hover);
+ }
+
+ .img-container {
+  margin-right: 50px;
+ }
+
+ .form {
+  display: flex;
+  justify-items: center;
+ }
+
+ .form-background {
+  width: 40rem;
+  position: absolute;
+  top: 0;
+  transform: translateX(-30%);
+  margin: 0 auto;
+  z-index: -1;
+  opacity: 0.5
+ }
+
+ .field {
+  display: grid;
+  grid-template-columns: 1;
+  line-height: 1rem;
  }

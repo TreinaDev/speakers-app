@@ -1,7 +1,7 @@
 <h2 class="heading-2 flex justify-center">Realize seu login</h2>
 
 <div class="flex items-center justify-center">
-  <div>
+  <div class="img-container">
     <%= image_tag 'login.jpg', class: 'w-96' %>
   </div>
 
@@ -18,7 +18,7 @@
       </div>
 
       <% if devise_mapping.rememberable? %>
-      <div class="field">
+      <div>
         <%= f.check_box :remember_me %>
         <%= f.label :remember_me %>
       </div>
