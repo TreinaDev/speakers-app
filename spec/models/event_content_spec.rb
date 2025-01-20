@@ -6,6 +6,8 @@ RSpec.describe EventContent, type: :model do
     it { should_not validate_presence_of(:description) }
     it { should have_many_attached(:files) }
     it { should belong_to(:user) }
+    it { should have_many(:event_task_contents) }
+    it { should have_many(:event_tasks) }
   end
 
   context '.must_have_less_than_five_files' do

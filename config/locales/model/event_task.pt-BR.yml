@@ -6,5 +6,8 @@ pt-BR:
       event_task:
         name: 'Título'
         description: 'Descrição'
-        certificate_requirement: 'Obrigatória para emissão de certificado'
         content: 'Conteúdos'
+        certificate_requirement: 'Obrigatória para emissão de certificado'
+        certificate_requirements: 
+          mandatory: 'Obrigatória'
+          optional: 'Opcional'

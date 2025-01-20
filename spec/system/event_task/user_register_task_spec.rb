@@ -20,6 +20,87 @@ describe 'User register tasks' do
     expect(page).to have_field 'Título'
     expect(page).to have_field 'Descrição'
     expect(page).to have_content 'Obrigatória para emissão de certificado'
-    expect(page).to have_content 'Conteúdos'
+    expect(page).to have_content 'Conteúdo'
+  end
+
+
+  it 'and shouldnt see other users content' do
+    user = create(:user)
+    create(:event_content, title: 'My content', description: 'My own content', user: user)
+    other_user = create(:user, first_name: 'other', email: 'other_user@email.com')
+    create(:event_content, title: 'Other user content', description: 'The other user content', user: other_user)
+
+    login_as user
+    visit new_event_task_path
+
+    expect(page).to have_field('My content', type: 'checkbox')
+    expect(page).not_to have_field('Other user content', type: 'checkbox')
+  end
+
+  it 'with success' do
+    user = create(:user)
+    create(:event_content, title: 'My content', description: 'My own content', user: user)
+
+    login_as user
+    visit new_event_task_path
+
+    fill_in 'Título', with: 'Tarefa 01'
+    fill_in 'Descrição', with: 'Lorem ipsum'
+    choose 'Obrigatória'
+    check 'My content'
+    click_on 'Salvar'
+
+    expect(EventTask.count).to eq 1
+    expect(page).to have_content('Tarefa cadastrada com sucesso!')
+    expect(current_path).to eq event_tasks_path
+  end
+  it 'and not fill title ' do
+    user = create(:user)
+    create(:event_content, title: 'My content', description: 'My own content', user: user)
+
+    login_as user
+    visit new_event_task_path
+
+    fill_in 'Descrição', with: 'Lorem ipsum'
+    choose 'Obrigatória'
+    check 'My content'
+    click_on 'Salvar'
+
+    expect(EventTask.count).to eq 0
+    expect(page).to have_content('Título não pode ficar em branco')
+    expect(page).to have_field('Descrição', with: 'Lorem ipsum')
+  end
+  it 'and not fill description' do
+    user = create(:user)
+    create(:event_content, title: 'My content', description: 'My own content', user: user)
+
+    login_as user
+    visit new_event_task_path
+
+    fill_in 'Título', with: 'Tarefa 01'
+    choose 'Obrigatória'
+    check 'My content'
+    click_on 'Salvar'
+
+    expect(EventTask.count).to eq 0
+    expect(page).to have_content('Descrição não pode ficar em branco')
+    expect(page).to have_field('Título', with: 'Tarefa 01')
+  end
+  it 'and not check if is mandatory or not' do
+    user = create(:user)
+    create(:event_content, title: 'My content', description: 'My own content', user: user)
+
+    login_as user
+    visit new_event_task_path
+
+    fill_in 'Título', with: 'Tarefa 01'
+    fill_in 'Descrição', with: 'Lorem ipsum'
+    check 'My content'
+    click_on 'Salvar'
+
+    expect(EventTask.count).to eq 0
+    expect(page).to have_content('Obrigatória para emissão de certificado não pode ficar em branco')
+    expect(page).to have_field('Título', with: 'Tarefa 01')
+    expect(page).to have_field('Descrição', with: 'Lorem ipsum')
   end
 end

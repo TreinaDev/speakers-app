@@ -1,4 +1,4 @@
 class EventTaskContent < ApplicationRecord
-  belongs_to :event_contents
-  belongs_to :event_tasks
+  belongs_to :event_content
+  belongs_to :event_task
 end

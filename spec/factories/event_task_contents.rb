@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :event_task_content do
-    event_contents { nil }
-    event_tasks { nil }
+    event_content { nil }
+    event_task { nil }
   end
 end
