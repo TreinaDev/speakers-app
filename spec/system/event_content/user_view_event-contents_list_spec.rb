@@ -16,7 +16,7 @@ describe 'User access contents list', type: :system do
     expect(page).to have_content 'Avançado'
   end
 
-  it 'and view registered contents' do
+  it 'and view your own registered contents' do
     firt_user = create(:user, first_name: 'João')
     second_user = create(:user, first_name: 'Matheus')
     firt_user.event_contents.create(title: 'Introdução', description: 'Apresentação')
