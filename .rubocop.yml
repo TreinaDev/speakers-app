@@ -9,3 +9,9 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 AllCops:
   Exclude:
     - 'config/initializers/**/*'
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

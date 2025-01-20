@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Event do
     it 'should get all event information' do
       json = File.read(Rails.root.join('spec/support/events_data.json'))
-      url = 'localhost:3001/api/events'
+      url = 'http://localhost:3001/api/v1/events'
       response = double('faraday_response', body: json, status: 200)
       allow(Faraday).to receive(:get).with(url).and_return(response)
       result = Event.all

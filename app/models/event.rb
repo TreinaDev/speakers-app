@@ -16,16 +16,16 @@ class Event
 
 
   def self.all
-    result = {}
+    result = []
     begin
-      response = Faraday.get("localhost:3001/api/events")
+      response = Faraday.get("http://localhost:3001/api/v1/events")
 
       if response.status == 200
-        json = JSON.parse(response.body, symbolize_names: true)[:data]
+        json = JSON.parse(response.body)
         result = json.map do |event|
-          new(id: event[:id], name: event[:name], url: event[:url], description: event[:description],
-              start_date: event[:start_date], end_date: event[:end_date], event_type: event[:event_type],
-              location: event[:location], participant_limit: event[:participant_limit], status: event[:status])
+          new(id: event['id'], name: event['name'], url: event['url'], description: event['description'],
+              start_date: event['start_date'], end_date: event['end_date'], event_type: event['event_type'],
+              location: event['location'], participant_limit: event['participant_limit'], status: event['status'])
         end
         return result
       end
