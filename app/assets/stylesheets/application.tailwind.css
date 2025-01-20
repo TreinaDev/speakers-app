@@ -20,26 +20,51 @@
   }
 
   .link-primary {
-    @apply font-medium text-blue-600 dark:text-blue-500 hover:underline;
+    @apply font-medium text-blue-500 hover:underline;
   }
 
   .navbar {
-    @apply bg-white border-gray-200 dark:bg-gray-900 py-5 px-5;
+    @apply border-gray-200 bg-gray-900 py-5 px-5;
   }
 
   .nav-link-primary {
-    @apply text-2xl text-gray-900 dark:text-white hover:dark:bg-gray-700 rounded-lg px-2 py-2;
+    @apply text-lg font-bold text-white hover:dark:bg-gray-700 rounded-lg px-2 h-10 flex items-center;
   }
 
   .heading-2 {
-    @apply text-3xl font-semibold text-gray-900 dark:text-blue-500 mb-2;
+    @apply text-3xl font-semibold text-blue-500 mb-2;
   }
 
   .notice {
-    @apply p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400;
+    @apply p-4 mb-4 text-sm rounded-lg bg-green-200 text-green-500;
   }
 
   .alert {
-    @apply p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400;
+    @apply p-4 mb-4 text-sm  rounded-lg bg-red-200 text-red-500;
+  }
+
+  .card_container{
+    @apply flex flex-wrap p-10 rounded-lg bg-gray-100 gap-y-10 mt-10;
+  }
+
+  .card{
+    @apply p-2 border border-solid rounded-lg bg-white border-gray-900 shadow-md hover:shadow-xl hover:border-gray-500 mx-4 max-h-28 overflow-hidden;
+    width: 30%;
+  }
+
+  .card_title{
+    @apply font-bold text-lg;
+  }
+
+  .card_title_2{
+    @apply text-xs tracking-widest text-blue-600;
+  }
+
+  .card_description{
+    @apply font-serif;
+  }
+
+  .errors {
+    @apply p-4 mb-1 text-sm rounded-lg bg-red-200 text-red-500;
   }
 }

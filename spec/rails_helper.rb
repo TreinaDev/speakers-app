@@ -12,6 +12,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/cuprite'
+
+require "action_text/system_test_helper"
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -36,6 +38,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 include Warden::Test::Helpers
+include ActionText::SystemTestHelper
 
 RSpec.configure do |config|
   config.include Warden::Test::Helpers
@@ -44,14 +47,18 @@ RSpec.configure do |config|
     driven_by :rack_test
   end
 
-  config.before(:each, type: :system) do
-    driven_by(:cuprite, screen_size: [ 1440, 810 ], options: {
-      js_errors: false,
-      headless: %w[0],
-      process_timeout: 15,
-      timeout: 10,
-      browser_options: { "no-sandbox" => nil }
-    })
+  # config.before(:each, type: :system) do
+  #   driven_by(:cuprite, screen_size: [ 1440, 810 ], options: {
+  #     js_errors: false,
+  #     headless: %w[0],
+  #     process_timeout: 15,
+  #     timeout: 10,
+  #     browser_options: { "no-sandbox" => nil }
+  #   })
+  # end
+
+  config.before(type: :system, js: true) do
+    driven_by(:cuprite)
   end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

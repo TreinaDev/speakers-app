@@ -8,3 +8,80 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+ body {
+  font-family: "Poppins", serif !important;
+ }
+ :root {
+  --success-color: rgb(78, 78, 177);
+  --success-color-hover: rgb(53, 53, 141);
+ }
+ .btn-success {
+  width: 100%;
+  background-color: var(--success-color);
+  color: #fff;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  height: 3rem;
+  transition: background ease-in-out 0.2s;
+ }
+
+ .btn-success:hover{
+  cursor: pointer;
+  background-color: var(--success-color-hover);
+ }
+
+ .img-container {
+  margin-right: 50px;
+ }
+
+ .form {
+  display: flex;
+  justify-items: center;
+  margin-top: 3rem;
+ }
+
+ .form-background {
+  width: 40rem;
+  position: absolute;
+  top: 0;
+  transform: translateX(-30%);
+  margin: 0 auto;
+  z-index: -1;
+  opacity: 0.5
+ }
+
+ .field {
+  display: grid;
+  grid-template-columns: 1;
+  line-height: 0.6rem;
+  margin-bottom: 0.3rem;
+ }
+
+ .field input{
+  border: solid 0.5px rgb(180, 175, 175);
+ }
+
+ .nav-background {
+  width: 40rem;
+  position: absolute;
+  top: 0;
+  transform: translateX(-30%);
+  margin: 0 auto;
+  z-index: -1;
+  opacity: 0.5;
+ }
+
+ .navbar-img {
+  background-image: url(background-nav.jpg);
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+  filter: brightness(0.9);
+  background-position: right;
+  background-size: cover;
+ }
