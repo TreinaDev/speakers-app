@@ -17,8 +17,8 @@
   <% end %>
 </div>
   <div>
-    <%= f.label :content , class: 'label-primary'%>
-    <%= f.select :content_ids, EventContent.all.collect { |content| [content.title, content.id] }, { multiple: true }, class: "w-full p-2 border-b border-[#735EBC] bg-field rounded focus:outline-none focus:ring-2 focus:ring-[#735EBC]" %>
+    <%= f.label :event_content , class: 'label-primary'%>
+    <%= f.select :event_content_ids, EventContent.all.collect { |content| [content.title, content.id] }, { multiple: true }, class: "w-full p-2 border-b border-[#735EBC] bg-field rounded focus:outline-none focus:ring-2 focus:ring-[#735EBC]" %>
   </div>
   <div>
     <%= f.submit 'Salvar' %>
