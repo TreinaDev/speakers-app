@@ -8,5 +8,44 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 User.skip_callback(:create, :before, :api_auth_user)
-User.create!(first_name: 'João', last_name: 'Campus', email: 'joao@email.com', password: '123456')
+user = User.create!(first_name: 'João', last_name: 'Campus', email: 'joao@email.com', password: '123456')
 User.set_callback(:create, :before, :api_auth_user)
+
+content = user.event_contents.create!(title: 'Ruby para iniciantes',
+                                      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                      Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an
+                                       unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                        It has survived not only five centuries, but also the leap into electronic typesetting,
+                                         remaining essentially unchanged. It was popularised in the 1960s with the release of
+                                          Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+                                           software like Aldus PageMaker including versions of Lorem Ipsum.')
+
+content.files.attach(
+  io: File.open(Rails.root.join('spec/fixtures/nota-ufjf.pdf')),
+  filename: 'nota-ufjf.pdf',
+  content_type: 'application/pdf'
+)
+
+content.files.attach(
+  io: File.open(Rails.root.join('spec/fixtures/mark_zuckerberg.jpeg')),
+  filename: 'mark_zuckerberg.jpeg',
+  content_type: 'image/jpeg'
+)
+
+content.files.attach(
+  io: File.open(Rails.root.join('spec/fixtures/capi.png')),
+  filename: 'capi.png',
+  content_type: 'image/png'
+)
+
+content.files.attach(
+  io: File.open(Rails.root.join('spec/fixtures/puts.png')),
+  filename: 'puts.png',
+  content_type: 'image/png'
+)
+
+content.files.attach(
+  io: File.open(Rails.root.join('spec/fixtures/joker.mp4')),
+  filename: 'joker.mp4',
+  content_type: 'video/mp4'
+)

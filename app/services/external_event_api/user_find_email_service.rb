@@ -24,4 +24,3 @@ class ExternalEventApi::UserFindEmailService
     end
   end
 end
-

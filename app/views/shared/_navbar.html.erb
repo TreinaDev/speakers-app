@@ -1,12 +1,12 @@
-<nav class="navbar">
+<nav class="navbar-img">
   <div class="flex gap-5 content-center">
     <%= link_to 'Home', root_path, class: 'nav-link-primary' %>
     <% unless user_signed_in? %>
-      <%= link_to 'Criar conta', new_user_registration_path, data:{turbo: false}, class: 'nav-link-primary' %>
-      <%= link_to 'Acesse sua conta', new_user_session_path, data:{turbo: false}, class: 'nav-link-primary' %>
+      <%= link_to 'Criar conta', new_user_registration_path, class: 'nav-link-primary' %>
+      <%= link_to 'Acesse sua conta', new_user_session_path, class: 'nav-link-primary' %>
     <% else %>
-      <%= link_to 'Cadastrar Conteúdo', new_event_content_path, data:{turbo: false}, class: 'nav-link-primary' %>
-      <%= button_to 'Sair', destroy_user_session_path, method: :delete, data:{turbo: false}, class: 'nav-link-primary' %>
+      <%= link_to 'Meus Conteúdos', event_contents_path, class: 'nav-link-primary' %>
+      <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'nav-link-primary' %>
     <% end %>
   </div>
 </nav>

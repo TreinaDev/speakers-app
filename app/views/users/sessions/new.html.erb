@@ -1,26 +1,34 @@
-<h2 class="heading-2">Realize seu login</h2>
+<h2 class="heading-2 flex justify-center">Realize seu login</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), class:"max-w-sm mx-auto") do |f| %>
-  <div class="mb-3">
-    <%= f.label :email, class: 'label-primary' %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'field-primary' %>
+<div class="flex items-center justify-center">
+  <div class="img-container">
+    <%= image_tag 'login.jpg', class: 'w-96' %>
   </div>
 
-  <div class="field">
-    <%= f.label :password, class: 'label-primary' %><br />
-    <%= f.password_field :password, autocomplete: "current-password", class: 'field-primary' %>
-  </div>
+  <div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'w-full' }) do |f| %>
+      <div class="field">
+      <%= f.label :email, class: 'label-primary' %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'field-primary' %>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <div class="field">
+      <%= f.label :password, class: 'label-primary' %><br />
+      <%= f.password_field :password, autocomplete: "current-password", class: 'field-primary' %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+      <div>
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+      <% end %>
+
+
+      <%= f.submit "Entrar", class: 'btn-success' %>
+    <% end %>
+    <div>
+      <%= render "users/shared/links" %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Entrar", class: 'btn-primary' %>
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

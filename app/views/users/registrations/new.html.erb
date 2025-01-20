@@ -1,39 +1,50 @@
-<h2 class="heading-2">Crie sua conta</h2>
+<div class="flex items-center justify-center">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), class:"max-w-sm mx-auto") do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :first_name, class: 'label-primary' %><br />
-    <%= f.text_field :first_name, autofocus: true, class: 'field-primary' %>
+  <div class="img-container">
+    <h2 class="heading-2 flex justify-center">Crie sua conta</h2>
+    <% unless resource.errors.any? %>
+      <%= image_tag 'sign_up.png', class: 'w-96' %>
+    <% else %>
+      <%= render "users/shared/error_messages", resource: resource %>
+    <% end %>
+    
+    <div class="flex items-center justift-end p-2">
+      <%= render "users/shared/links" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :last_name, class: 'label-primary' %><br />
-    <%= f.text_field :last_name, class: 'field-primary' %>
-  </div>
+  <div class="form">
+    <%= image_tag 'background-form.png', class: 'form-background' %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :first_name, class: 'label-primary' %><br />
+        <%= f.text_field :first_name, autofocus: true, class: 'field-primary' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :email, class: 'label-primary' %><br />
-    <%= f.email_field :email, autocomplete: "email", class: 'field-primary' %>
-  </div>
+      <div class="field">
+        <%= f.label :last_name, class: 'label-primary' %><br />
+        <%= f.text_field :last_name, class: 'field-primary' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password, class: 'label-primary' %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> caracteres mínimos)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", class: 'field-primary' %>
-  </div>
+      <div class="field">
+        <%= f.label :email, class: 'label-primary' %><br />
+        <%= f.email_field :email, autocomplete: "email", class: 'field-primary' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, class: 'label-primary' %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'field-primary' %>
-  </div>
+      <div class="field">
+        <%= f.label :password, class: 'label-primary' %>
+        <% if @minimum_password_length %>
+          <em style = "font-size: 12px;">(<%= @minimum_password_length %> caracteres mínimos)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: 'field-primary' %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Cadastrar", class: 'btn-primary' %>
-  </div>
-<% end %>
+      <div class="field">
+        <%= f.label :password_confirmation, class: 'label-primary' %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'field-primary' %>
+      </div>
 
-<%= render "users/shared/links" %>
+      <%= f.submit "Cadastrar", class: 'btn-success' %>
+    <% end %>
+  </div>
+</div>
