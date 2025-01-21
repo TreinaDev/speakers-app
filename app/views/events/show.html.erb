@@ -1,0 +1,10 @@
+<h2 class='heading-2'>Evento: <%= @event.name %></h2>
+<div>
+  <span><%= @event.description %></span>
+  <span><%= @event.url %></span>
+  <span>Modalidade: <%= @event.event_type %></span>
+  <span>Data de início: <%= Event.formatted_date(@event.start_date) %></span>
+  <span>Encerramento: <%= Event.formatted_date(@event.end_date) %></span>
+  <span>Localização: <%= @event.location %></span>
+  <span>Status: <%= @event.status %></span>
+</div>

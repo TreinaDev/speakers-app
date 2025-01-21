@@ -3,4 +3,9 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
   end
+
+  def show
+    @event = Event.find(params[:id])
+    return redirect_to events_path, alert: 'Evento não localizado!' unless @event
+  end
 end
