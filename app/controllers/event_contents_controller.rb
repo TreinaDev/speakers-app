@@ -1,16 +1,12 @@
 class EventContentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_event_content, only: %i[ show edit ]
 
   def index
     @event_contents = current_user.event_contents
   end
 
   def show
-    begin
-      @event_content = set_event_content
-    rescue
-      redirect_to events_path, notice: "Conteúdo Indisponível!"
-    end
   end
   def new
     @event_content = current_user.event_contents.build
@@ -29,11 +25,6 @@ class EventContentsController < ApplicationController
   end
 
   def edit
-    begin
-      @event_content = set_event_content
-    rescue
-      redirect_to events_path, notice: "Conteúdo Indisponível!"
-    end
   end
 
   def update
@@ -55,6 +46,10 @@ class EventContentsController < ApplicationController
   end
 
   def set_event_content
-    current_user.event_contents.find(params[:id])
+    begin
+      @event_content = current_user.event_contents.find(params[:id])
+    rescue
+      redirect_to events_path, notice: "Conteúdo Indisponível!"
+    end
   end
 end
