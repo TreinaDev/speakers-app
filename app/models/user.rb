@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   before_create :api_auth_user
   has_many :event_contents
+  has_many :event_tasks
 
   private
 
