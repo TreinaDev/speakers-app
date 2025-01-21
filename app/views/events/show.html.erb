@@ -1,10 +1,10 @@
-<h2 class='heading-2'>Evento: <%= @event.name %></h2>
-<div>
-  <span><%= @event.description %></span>
+<h2 class='heading-2'><%= Event.model_name.human %>: <%= @event.name %></h2>
+<div class="event-card">
+  <span><%= Event.human_attribute_name(:description) %>: <%= @event.description %></span>
   <span><%= @event.url %></span>
-  <span>Modalidade: <%= @event.event_type %></span>
-  <span>Data de início: <%= Event.formatted_date(@event.start_date) %></span>
-  <span>Encerramento: <%= Event.formatted_date(@event.end_date) %></span>
-  <span>Localização: <%= @event.location %></span>
-  <span>Status: <%= @event.status %></span>
+  <span><%= Event.human_attribute_name(:event_type) %>: <%= @event.event_type %></span>
+  <span><%= Event.human_attribute_name(:start_date) %>: <%= formatted_date(@event.start_date) %></span>
+  <span><%= Event.human_attribute_name(:end_date) %>: <%= formatted_date(@event.end_date) %></span>
+  <span><%= Event.human_attribute_name(:location) %>: <%= @event.location %></span>
+  <span><%= Event.human_attribute_name(:status) %>: <%= @event.status %></span>
 </div>

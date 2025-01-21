@@ -1,5 +1,5 @@
 class Event
-  extend DateTimeHelper
+  extend ActiveModel::Translation
 
   attr_accessor :id, :name, :url, :description, :start_date, :end_date, :event_type, :location, :participant_limit, :status
 

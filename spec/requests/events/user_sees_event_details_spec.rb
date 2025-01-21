@@ -6,7 +6,7 @@ describe 'User sees Event details', type: :request do
             start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
             event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
     allow(Event).to receive(:find).and_return(event)
-    
+
     get event_path(event.id)
 
     expect(response).to redirect_to new_user_session_path

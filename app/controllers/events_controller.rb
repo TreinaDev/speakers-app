@@ -6,6 +6,6 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    return redirect_to events_path, alert: 'Evento não localizado!' unless @event
+    redirect_to events_path, alert: 'Evento não localizado!' unless @event
   end
 end
