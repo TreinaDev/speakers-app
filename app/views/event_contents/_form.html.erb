@@ -9,11 +9,22 @@
     <%= f.rich_textarea :description, class: 'text-area' %>
   </div>
 
-  <div>
+  <% if event_content.files.attached? %>
+    <div class="mt-5 mb-5">
+      <strong>Arquivos já anexados:</strong>
+      <% event_content.files.each do |file| %>
+        <div>
+          <%= file.filename %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
     <%= f.label :files, 'Arquivos' %>
     <%= f.file_field :files, multiple: true %>
   </div>
 
   <%= f.submit class: 'btn-primary' %>
+  <%= link_to 'Cancelar', event_content, class: 'btn-primary' %>
 <% end %>
-
