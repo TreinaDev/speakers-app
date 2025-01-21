@@ -7,7 +7,7 @@ RSpec.describe EventContent, type: :model do
     it { should have_many_attached(:files) }
     it { should belong_to(:user) }
     it { should have_many(:event_task_contents) }
-    it { should have_many(:event_tasks) }
+    it { should have_many(:event_tasks).through(:event_task_contents) }
   end
 
   context '.must_have_less_than_five_files' do

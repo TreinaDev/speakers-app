@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_20_214036) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_21_141033) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -69,7 +69,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_20_214036) do
   create_table "event_tasks", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
-    t.integer "certificate_requirement", null: false
+    t.integer "certificate_requirement", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false

@@ -6,5 +6,5 @@ class EventTask < ApplicationRecord
 
   validates :name, :description, :certificate_requirement, presence: true
 
-  enum :certificate_requirement, { mandatory: 1, optional: 0 }
+  enum :certificate_requirement, { mandatory: 1, optional: 0 }, default: :optional
 end
