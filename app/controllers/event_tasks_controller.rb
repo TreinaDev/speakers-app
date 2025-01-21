@@ -27,6 +27,7 @@ class EventTasksController < ApplicationController
   end
 
   def check_event_content_owner
+    return unless current_user.event_contents.present?
     contents = params[:event_task][:event_content_ids].reject(&:blank?)
     contents.each do |content|
       unless current_user.event_contents.find_by(id: content)
