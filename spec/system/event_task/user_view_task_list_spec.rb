@@ -37,4 +37,15 @@ describe 'user view task list', type: :system do
     expect(page).not_to have_link 'Revisão rails 8.0'
     expect(page).to have_link 'Tarefas iniciais básicas rails'
   end
+
+  it 'and dont have task previusly registered' do
+    user = create(:user, first_name: 'João')
+
+    login_as user
+    visit root_path
+    click_on 'Tarefas'
+
+    expect(page).to have_content 'Não há tarefas cadastradas!'
+    expect(current_path).to eq event_tasks_path
+  end
 end

@@ -1,4 +1,4 @@
-<h2 class='heading-2'>Cadastrar tarefa</h2>
+<h2 class='heading-2'> <%= t('.title') %></h2>
 
 <%= form_with model: @event_task, data: { turbo: false } do |f| %>
   <div>
@@ -28,9 +28,9 @@
     <% end %>
   </div>
   <div class="col-span-2">
-        <%= f.label :event_content_ids, 'Conteudos', class: "block text-sm font-medium text-gray-700" %>
+        <%= f.label :event_content_ids, class: "block text-sm font-medium text-gray-700" %>
           <% if @contents.blank? %>
-            <p>Nenhum conteúdo cadastrado.</p>
+            <p> <%= t('.no_contents') %></p>
           <% else %>
             <%= f.collection_check_boxes(:event_content_ids, @contents, :id, :title) do |b| %>
                 <%= b.check_box %>
@@ -39,7 +39,7 @@
           <% end %>
       </div>
   <div>
-    <%= f.submit 'Salvar', class: 'btn-primary'%>
+    <%= f.submit t('.save'), class: 'btn-primary'%>
   </div>
 <% end %>
 

@@ -1,10 +1,14 @@
-<h2 class="heading-2">Minhas Tarefas</h2>
+<h2 class="heading-2"><%= t('.my_tasks') %></h2>
 
-<%= link_to 'Cadastrar Tarefa', new_event_task_path, data: { turbo: false }, class: 'link-primary' %>
+<%= link_to t('.new_task'), new_event_task_path, data: { turbo: false }, class: 'link-primary' %>
 <div>
   <% if @event_tasks.any? %>
     <div class="card_container">
       <%= render @event_tasks %>
+    </div>
+  <% else %>
+    <div>
+      <%= t('.no_tasks')%>
     </div>
   <% end %>
 </div>

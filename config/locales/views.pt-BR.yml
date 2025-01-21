@@ -1,0 +1,12 @@
+pt-BR:
+  event_tasks:
+    new:
+      title: 'Cadastrar Tarefa'
+      no_contents: 'Nenhum conteúdo cadastrado'
+      save: 'Salvar'
+    index:
+      my_tasks: 'Minhas Tarefas'
+      new_task: 'Cadastrar Tarefa'
+      no_tasks: 'Não há tarefas cadastradas!'
+    event_task:
+      task: 'Tarefa'
