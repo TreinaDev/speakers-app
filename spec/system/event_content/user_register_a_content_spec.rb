@@ -30,6 +30,7 @@ describe 'User register a content', type: :system, js: true do
     expect(files.attached?).to eq true
     expect(files.count).to eq 5
     expect(page).to have_content 'Conteúdo registrado com sucesso.'
+    expect(current_path).to eq event_content_path(EventContent.last)
   end
 
   it 'failure with more than 5 files' do

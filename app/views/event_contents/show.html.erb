@@ -1,5 +1,9 @@
 <h2 class="heading-2"><%= @event_content.title %></h2>
 
+<%= link_to edit_event_content_path(@event_content), data: { turbo: false } do %>
+  <%= image_tag 'pencil_edit.png', id: 'pencil_edit', class: 'icon' %>
+<% end %>
+
 <div>
   <div>
     <%= @event_content.description %>

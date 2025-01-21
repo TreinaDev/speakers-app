@@ -1,4 +1,4 @@
 <%= render 'shared/errors', object: @event_content %>
-<h2 class='heading-2'>Cadastre seus conteúdos</h2>
+<h2 class='heading-2'>Edite <%= @event_content.title.capitalize %></h2>
 
 <%= render 'form', event_content: @event_content %>

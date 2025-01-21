@@ -1,0 +1,19 @@
+<%= form_with(model: event_content, data: { turbo: false }) do |f| %>
+  <div class="field">
+    <%= f.label :title, class: 'label-primary' %>
+    <%= f.text_field :title, class: 'field-primary' %>
+  </div>
+
+  <div>
+    <%= f.label :description, class: 'label-primary'  %>
+    <%= f.rich_textarea :description, class: 'text-area' %>
+  </div>
+
+  <div>
+    <%= f.label :files, 'Arquivos' %>
+    <%= f.file_field :files, multiple: true %>
+  </div>
+
+  <%= f.submit class: 'btn-primary' %>
+<% end %>
+
