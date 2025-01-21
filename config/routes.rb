@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   root "home#index"
   resources :event_contents, only: %i[ index show new create edit update ]
   resources :event_tasks, only: %i[ index new create]
+  resources :profiles, only: %i[ new create ]
 end

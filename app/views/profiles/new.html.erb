@@ -1,0 +1,21 @@
+<%= render 'shared/errors', object: @profile %>
+<h2 class='heading-2'>Cadastre seu perfil</h2>
+
+<%= form_with(model: @profile) do |f| %>
+  <div class="field">
+    <%= f.label :title, class: 'label-primary' %>
+    <%= f.text_field :title, class: 'field-primary' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :about_me, class: 'label-primary'  %>
+    <%= f.text_area :about_me, class: 'text-area' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :profile_picture %>
+    <%= f.file_field :profile_picture %>
+  </div>
+
+  <%= f.submit 'Criar perfil', class: 'btn-primary' %>
+<% end %>
