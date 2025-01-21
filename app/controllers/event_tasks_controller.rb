@@ -2,7 +2,9 @@ class EventTasksController < ApplicationController
   before_action :authenticate_user!
   before_action :check_event_content_owner, only: :create
 
-  def index; end
+  def index
+    @event_tasks = current_user.event_tasks
+  end
 
   def new
     @event_task = current_user.event_tasks.build
