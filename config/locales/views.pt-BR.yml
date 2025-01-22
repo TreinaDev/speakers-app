@@ -10,3 +10,10 @@ pt-BR:
       no_tasks: 'Não há tarefas cadastradas!'
     event_task:
       task: 'Tarefa'
+    show:
+      task: 'Tarefa'
+      mandatory: Obrigatória
+      optional: Opcional
+      no_content_attetched: 'Nenhum conteúdo vinculado.'
+      attatched_contents: 'Conteúdos vinculados:'
+      content: 'Conteúdo'

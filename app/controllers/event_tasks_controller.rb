@@ -1,6 +1,7 @@
 class EventTasksController < ApplicationController
   before_action :authenticate_user!
   before_action :check_event_content_owner, only: :create
+  before_action :set_event_task, only: %i[ show edit ]
 
   def index
     @event_tasks = current_user.event_tasks
@@ -11,6 +12,13 @@ class EventTasksController < ApplicationController
     @contents = current_user.event_contents
   end
 
+  def show; end
+
+  def edit
+  end
+
+  def update
+  end
   def create
     @event_task = current_user.event_tasks.build(event_task_params)
     @contents = current_user.event_contents
@@ -25,6 +33,15 @@ class EventTasksController < ApplicationController
   def event_task_params
     params.require(:event_task).permit(:name, :description, :certificate_requirement, event_content_ids: [])
   end
+
+  def set_event_task
+    begin
+      @event_task = current_user.event_tasks.find(params[:id])
+    rescue
+      redirect_to events_path, notice: "Acesso não autorizado."
+    end
+  end
+
 
   def check_event_content_owner
     return unless current_user.event_contents.present?
