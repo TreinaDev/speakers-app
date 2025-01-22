@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe Event do
+  context '.all' do
     it 'should get all event information' do
       json = File.read(Rails.root.join('spec/support/events_data.json'))
       url = 'http://localhost:3001/api/v1/events'
@@ -40,9 +41,53 @@ describe Event do
     it 'raise error' do
       logger = Rails.logger
       allow(logger).to receive(:error)
-      allow(Faraday).to receive(:get).and_raise
+      allow(Faraday).to receive(:get).and_raise(StandardError)
       Event.all
 
-      expect(logger).to have_received(:error).with("Erro: ")
+      expect(logger).to have_received(:error).with("Erro: StandardError")
     end
+  end
+
+  context '#schedule_items' do
+    it 'should get all schedules items associated with event' do
+      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
+              start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
+              event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      items = [
+        build(:schedule_item, title: 'Ruby on Rails', description: 'Introdução a programação'),
+        build(:schedule_item, title: "TDD e introdução a API's", description: 'Desvolvimento Web')
+      ]
+      allow(ExternalEventApi::ScheduleItemsService).to receive(:call).and_return(items)
+      schedule_items = event.schedule_items('teste@email.com')
+
+      expect(schedule_items[0].title).to eq 'Ruby on Rails'
+      expect(schedule_items[0].description).to eq 'Introdução a programação'
+      expect(schedule_items[1].title).to eq "TDD e introdução a API's"
+      expect(schedule_items[1].description).to eq 'Desvolvimento Web'
+    end
+
+    it 'raise connection failed error' do
+      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
+              start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
+              event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      logger = Rails.logger
+      allow(logger).to receive(:error)
+      allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
+      event.schedule_items('teste@email.com')
+
+      expect(logger).to have_received(:error).with(instance_of(Faraday::ConnectionFailed))
+    end
+
+    it 'raise error' do
+      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
+                    start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
+                    event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      logger = Rails.logger
+      allow(logger).to receive(:error)
+      allow(Faraday).to receive(:get).and_raise(StandardError)
+      event.schedule_items('teste@email.com')
+
+      expect(logger).to have_received(:error).with("Erro: StandardError")
+    end
+  end
 end
