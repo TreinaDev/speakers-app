@@ -2,6 +2,9 @@
   <div class="field">
     <%= f.label :title, class: 'label-primary' %>
     <%= f.text_field :title, class: 'field-primary' %>
+    <% if event_content.errors[:title].any? %> 
+      <span class="text-red-500 text-sm"><%= event_content.errors[:title].first %></span>
+    <% end %>
   </div>
 
   <div>
