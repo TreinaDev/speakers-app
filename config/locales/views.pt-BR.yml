@@ -2,8 +2,8 @@ pt-BR:
   event_tasks:
     new:
       title: 'Cadastrar Tarefa'
-      no_contents: 'Nenhum conteúdo cadastrado'
-      save: 'Salvar'
+    edit:
+      title: 'Editar Tarefa'
     index:
       my_tasks: 'Minhas Tarefas'
       new_task: 'Cadastrar Tarefa'
@@ -17,3 +17,6 @@ pt-BR:
       no_content_attetched: 'Nenhum conteúdo vinculado.'
       attatched_contents: 'Conteúdos vinculados:'
       content: 'Conteúdo'
+    form:
+      no_contents: 'Nenhum conteúdo cadastrado'
+      save: 'Salvar'
