@@ -22,6 +22,22 @@ describe 'User register tasks' do
     check 'My content'
     click_on 'Salvar'
 
+    expect(page).to have_content('Tarefa cadastrada com sucesso!')
+    expect(EventTask.count).to eq 1
+    expect(current_path).to eq event_tasks_path
+  end
+
+  it 'with success without content' do
+    user = create(:user)
+
+    login_as user
+    visit new_event_task_path
+
+    fill_in 'Título', with: 'Tarefa 01'
+    fill_in 'Descrição', with: 'Lorem ipsum'
+    choose 'Obrigatória'
+    click_on 'Salvar'
+
     expect(EventTask.count).to eq 1
     expect(page).to have_content('Tarefa cadastrada com sucesso!')
     expect(current_path).to eq event_tasks_path
