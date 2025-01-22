@@ -1,0 +1,3 @@
+pt-BR:
+  helpers:
+    date_time_error: "Não foi possivel realizar a conversão da data: %{datetime}"

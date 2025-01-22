@@ -44,8 +44,8 @@ describe 'user visit home and see list of events', type: :system do
     expect(page).to have_content('Event2')
     expect(page).to have_content('Event1 description')
     expect(page).to have_content('Event2 description')
-    expect(page).to have_content('Data início: 14-01-2025')
-    expect(page).to have_content('Data início: 15-01-2025')
+    expect(page).to have_content('Data início: 14/01/2025')
+    expect(page).to have_content('Data início: 15/01/2025')
   end
 
   it 'and dont exists events for him' do
