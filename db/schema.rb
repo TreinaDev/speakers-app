@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_21_194925) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_22_133550) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -85,6 +85,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_21_194925) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "social_networks", force: :cascade do |t|
+    t.string "url"
+    t.integer "social_network_type"
+    t.integer "profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_social_networks_on_profile_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -106,4 +115,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_21_194925) do
   add_foreign_key "event_task_contents", "event_tasks"
   add_foreign_key "event_tasks", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "social_networks", "profiles"
 end
