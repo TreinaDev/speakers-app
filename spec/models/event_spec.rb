@@ -48,10 +48,39 @@ describe Event do
 
   context '.count' do
     it 'should return a count of all instances' do
-      events = []
-      3.times { events << build(:event) }
+      Event.delete_all
+      10.times do
+        build(:event)
+      end
 
-      expect(Event.count).to eq 3
+      expect(Event.count).to eq 10
+    end
+
+    it 'should return zero if there are no instances' do
+      Event.delete_all
+      expect(Event.count).to eq 0
+    end
+  end
+
+  context '.last' do
+    it 'must return the last instance' do
+      Event.delete_all
+      4.times do |n|
+        build(:event, name: "Dev show #{n}", description: "Take #{n}")
+      end
+      build(:event, name: 'Tech Week', description: 'Desenvolvimento guiado por testes.')
+
+      last_event = Event.last
+
+      expect(last_event.name).to eq 'Tech Week'
+      expect(last_event.description).to eq 'Desenvolvimento guiado por testes.'
+      expect(last_event.inspect).not_to include 'Dev show'
+      expect(last_event.inspect).not_to include 'Take'
+    end
+
+    it 'should return nil if there are no instances' do
+      Event.delete_all
+      expect(Event.last).to be_nil
     end
   end
 end

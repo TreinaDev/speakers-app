@@ -52,4 +52,8 @@ class Event
   def self.last
     @@instances.last
   end
+
+  def self.delete_all
+    @@instances = []
+  end
 end
