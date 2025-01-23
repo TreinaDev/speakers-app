@@ -132,6 +132,7 @@ describe 'User register a profile' do
     visit new_profile_path
 
     expect(current_path).to eq(events_path)
+    expect(page).not_to have_content('Cadastrar Perfil')
     expect(page).to have_content('Só é possível cadastrar um perfil.')
   end
 end
