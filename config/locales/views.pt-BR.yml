@@ -20,3 +20,6 @@ pt-BR:
     form:
       no_contents: 'Nenhum conteúdo cadastrado'
       save: 'Salvar'
+  event_contents:
+    form:
+      files_attached: 'Arquivos já anexados:'

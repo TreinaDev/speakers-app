@@ -12,12 +12,12 @@
     <%= f.rich_textarea :description, class: 'text-area' %>
   </div>
 
-  <% if event_content.files.attached? %>
+  <% if event_content.files.any? { |file| file.persisted? } %>
     <div class="mt-5 mb-5">
-      <strong>Arquivos já anexados:</strong>
+      <strong><%= t('.files_attached') %></strong>
       <% event_content.files.each do |file| %>
         <div>
-          <%= file.filename %>
+          <%= file.filename if file.persisted? %>
         </div>
       <% end %>
     </div>
@@ -26,8 +26,11 @@
   <div class="mb-3">
     <%= f.label :files, 'Arquivos' %>
     <%= f.file_field :files, multiple: true %>
+    <% if event_content.errors[:base].any? %> 
+      <div class="text-red-500 text-sm"><%= event_content.errors[:base].first %></div>
+    <% end %>
   </div>
-
+  
   <%= f.submit class: 'btn-primary' %>
   <%= link_to 'Cancelar', event_content, class: 'btn-primary' %>
 <% end %>

@@ -65,6 +65,34 @@ describe 'User edit event content', type: :system, js: true do
     expect(page).to have_content 'Título não pode ficar em branco'
   end
 
+  it 'and try to add a sixth file' do
+    user = create(:user)
+    files = [ Rails.root.join('spec/fixtures/mark_zuckerberg.jpeg'),
+              Rails.root.join('spec/fixtures/capi.png'),
+              Rails.root.join('spec/fixtures/puts.png'),
+              Rails.root.join('spec/fixtures/joker.mp4'),
+              Rails.root.join('spec/fixtures/nota-ufjf.pdf')
+            ]
+    user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01', files: files)
+
+    login_as user
+    visit root_path
+    click_on 'Meus Conteúdos'
+    click_on 'Dev week'
+    find("#pencil_edit").click
+    attach_file('Arquivos', Rails.root.join('spec/fixtures/Reunião.pdf'))
+    click_on 'Atualizar Conteúdo'
+
+    expect(page).to have_content 'Não foi possível atualizar seu Conteúdo.'
+    expect(page).to have_content 'Não é possível enviar mais que 5 arquivos.'
+    expect(page).to have_content 'mark_zuckerberg.jpeg'
+    expect(page).to have_content 'capi.png'
+    expect(page).to have_content 'joker.mp4'
+    expect(page).to have_content 'puts.png'
+    expect(page).to have_content 'nota-ufjf.pdf'
+    expect(page).not_to have_content 'Reunião.pdf'
+  end
+
   it 'and cancels' do
     user = create(:user, first_name: 'João')
     image_1 = fixture_file_upload(Rails.root.join('spec/fixtures/mark_zuckerberg.jpeg'))

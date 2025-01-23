@@ -54,6 +54,12 @@ describe 'User register a content', type: :system, js: true do
     expect(EventContent.count).to eq 0
     expect(page).to have_content 'Falha ao registrar o conteúdo.'
     expect(page).to have_content 'Não é possível enviar mais que 5 arquivos.'
+    expect(page).not_to have_content 'mark_zuckerberg.jpeg'
+    expect(page).not_to have_content 'capi.png'
+    expect(page).not_to have_content 'puts.png'
+    expect(page).not_to have_content 'joker.mp4'
+    expect(page).not_to have_content 'nota-ufjf.pdf'
+    expect(page).not_to have_content 'Reunião.pdf'
   end
 
   it 'failure with file larger than 50mb' do
@@ -71,6 +77,8 @@ describe 'User register a content', type: :system, js: true do
     expect(EventContent.count).to eq 0
     expect(page).to have_content 'Falha ao registrar o conteúdo.'
     expect(page).to have_content 'Não é possível enviar arquivos com mais de 50mb.'
+    expect(page).not_to have_content 'Arquivos já anexados:'
+    expect(page).not_to have_content 'Topicos de Fisica.pdf'
   end
 
   it 'failure if title is empty' do
