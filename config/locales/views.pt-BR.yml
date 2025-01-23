@@ -15,7 +15,7 @@ pt-BR:
       mandatory: Obrigatória
       optional: Opcional
       no_content_attetched: 'Nenhum conteúdo vinculado.'
-      attatched_contents: 'Conteúdos vinculados:'
+      attached_contents: 'Conteúdos vinculados:'
       content: 'Conteúdo'
     form:
       no_contents: 'Nenhum conteúdo cadastrado'
@@ -23,3 +23,9 @@ pt-BR:
   event_contents:
     form:
       files_attached: 'Arquivos já anexados:'
+    show:
+      attached_to_tasks: 'Tarefas que utilizam este conteúdo:'
+      task: 'Tarefa'
+      no_tasks_attached: 'Esse conteúdo não foi associado a nenhuma tarefa.'
+      no_files_attached: 'Não há arquivos anexados a esse conteúdo.'
+      view_pdf: 'Visualizar PDF:'

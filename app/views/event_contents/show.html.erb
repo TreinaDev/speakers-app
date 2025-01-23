@@ -21,7 +21,7 @@
         <% elsif file.content_type == 'application/pdf' %>
           <%= link_to(url_for(file), target: '_blank', class: 'card max-h-96 flex flex-col justify-center items-center' ) do %>
             <%= image_tag("pdf.png", class: 'w-2/3 h-2/3') %>
-            <p>Visualizar PDF: <%= "#{file.filename.to_s}" %></p>
+            <p><%= t('.view_pdf') %> <%= "#{file.filename.to_s}" %></p>
           <% end %>
         <% else %>
           <%= link_to "Arquivo #{file.filename.to_s}", url_for(file), target: '_blank', class: 'card max-h-96' %>
@@ -31,7 +31,27 @@
 
   <% else %>
     <div class="mt-10">
-      <strong>Não há arquivos anexados a esse conteúdo.</strong>
+      <strong><%=t('.no_files_attached')%></strong>
     </div>
+  <% end %>
+</div>
+
+<div>
+  <% if @event_content.event_tasks.any? %>
+    <div>
+      <strong><%= t('.attached_to_tasks') %></strong>
+      <div class="card_container mb-10">
+        <% @event_content.event_tasks.each do |task| %>
+          <%= link_to(task, class: "card") do %>
+            <div>
+              <p class="card_title_2"> <%= t('.task') %> </p>
+              <h3 class="card_title"><%= task.name %></h3>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div> <%=t('.no_tasks_attached')%> </div>
   <% end %>
 </div>
