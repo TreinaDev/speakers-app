@@ -4,11 +4,11 @@ describe ExternalEventApi::UserFindEmailService do
   context '#find_email' do
     it 'when API return success' do
       email = 'test@email.com'
-      service = ExternalEventApi::UserFindEmailService.new(email)
       response = instance_double(Faraday::Response, success?: true)
       allow(Faraday).to receive(:get).and_return(response)
+      service = ExternalEventApi::UserFindEmailService.find_email(email)
 
-      expect(service.find_email).to eq(true)
+      expect(service).to eq(true)
     end
 
     it 'when API return not found' do

@@ -3,7 +3,7 @@ class ExternalEventApi::UserFindEmailService
     @email = email
   end
 
-  def self.find_email
+  def self.find_email(email)
     new(email).find_email
   end
 
