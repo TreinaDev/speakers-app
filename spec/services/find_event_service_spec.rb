@@ -15,11 +15,11 @@ describe ExternalEventApi::FindEventService do
         "participant_limit": 20,
         "status": "published"
       }
-      service = ExternalEventApi::FindEventService.new(json_event.id)
-      response = instance_double(Faraday::Response, success?: true, body: json_event)
+      service = ExternalEventApi::FindEventService.new(json_event['id'])
+      response = instance_double(Faraday::Response, success?: true, body: json_event.to_json)
       allow(Faraday).to receive(:get).and_return(response)
 
-      expect { service.find }.to change(Event, :count).by(1)
+      expect { service.call }.to change(Event, :count).by(1)
       event = Event.last
       expect(event.name).to eq 'Event1'
       expect(event.url).to eq 'meuevento.com/eventos/Event1'
@@ -37,14 +37,14 @@ describe ExternalEventApi::FindEventService do
       response = instance_double(Faraday::Response, success?: false, body: {})
       allow(Faraday).to receive(:get).and_return(response)
 
-      expect { service.find }.to change(Event, :count).by(0)
+      expect { service.call }.to change(Event, :count).by(0)
     end
 
     it 'when Connection Failed exception happens' do
-      ExternalEventApi::FindEventService.new(1)
+      service = ExternalEventApi::FindEventService.new(1)
       allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
-
       expect(Rails.logger).to receive(:error).with(instance_of(Faraday::ConnectionFailed))
+      expect(service.call).to be_nil
     end
   end
 end
