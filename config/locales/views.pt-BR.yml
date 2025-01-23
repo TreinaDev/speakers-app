@@ -20,3 +20,7 @@ pt-BR:
     form:
       no_contents: 'Nenhum conteúdo cadastrado'
       save: 'Salvar'
+  profiles:
+    new:
+      title: 'Cadastre seu perfil'
+      social_networks: 'Redes Socias'
