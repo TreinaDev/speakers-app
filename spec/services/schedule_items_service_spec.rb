@@ -60,5 +60,25 @@ describe ExternalEventApi::ScheduleItemsService do
       expect(schedule_items[2].title).to eq 'Title 3'
       expect(schedule_items[2].description).to eq 'Something 3'
     end
+
+    it 'when API return not found' do
+      ScheduleItem.delete_all
+      service = ExternalEventApi::ScheduleItemsService.new(999999, 'abc@email.com')
+      response = instance_double(Faraday::Response, success?: false, body: {})
+      allow(Faraday).to receive(:get).and_return(response)
+
+      expect { service.call }.to change(ScheduleItem, :count).by(0)
+    end
+
+    it 'when Connection Failed exception happens' do
+      ScheduleItem.delete_all
+      logger = Rails.logger
+      allow(logger).to receive(:error)
+      allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
+      service = ExternalEventApi::ScheduleItemsService.new(1, 'abc@email.com')
+      service.call
+
+      expect(logger).to have_received(:error).with(instance_of(Faraday::ConnectionFailed))
+    end
   end
 end
