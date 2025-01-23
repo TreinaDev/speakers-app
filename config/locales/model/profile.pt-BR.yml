@@ -1,8 +1,5 @@
 pt-BR:
   activerecord:
-    errors:
-      messages:
-        blank: "não pode ficar em branco"
     models:
       profile: Perfil
     attributes:
@@ -12,3 +9,4 @@ pt-BR:
         profile_picture: 'Foto de Perfil'
         my_site: 'Meu site'
         github: 'GitHub'
+        social_networks: Rede Social

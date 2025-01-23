@@ -2,12 +2,10 @@ pt-BR:
   activerecord:
     models:
       social_network: 
-        one: Rede Social
-        other: Redes Sociais
+        one: "Rede Social"
+        other: "Redes Sociais"
     attributes:
       social_network:
-        social_network_type:
-          one: 'Tip'
         social_network_type:
           one: 'Tipo da rede social'
           facebook: 'Facebook'

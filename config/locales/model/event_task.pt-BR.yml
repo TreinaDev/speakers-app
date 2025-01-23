@@ -7,6 +7,7 @@ pt-BR:
         name: 'Título'
         description: 'Descrição'
         content: 'Conteúdos'
+        event_content_ids: 'Conteúdos'
         certificate_requirement: 'Obrigatória para emissão de certificado'
         certificate_requirements: 
           mandatory: 'Obrigatória'

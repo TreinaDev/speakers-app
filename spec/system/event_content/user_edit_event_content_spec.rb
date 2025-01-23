@@ -33,7 +33,6 @@ describe 'User edit event content', type: :system, js: true do
     click_on 'Meus Conteúdos'
     click_on 'Dev week'
     find("#pencil_edit").click
-    save_page
     fill_in 'Título', with: 'Workshop POO'
     fill_in_rich_text_area 'Descrição', with: 'Conetúdo para auxiliar o workshop POO'
     attach_file('Arquivos', [ Rails.root.join('spec/fixtures/puts.png') ])

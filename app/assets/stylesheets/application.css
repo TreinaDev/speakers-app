@@ -89,3 +89,9 @@
  .icon {
   width: 1.5rem;
  }
+
+ .event-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+ }

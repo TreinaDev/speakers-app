@@ -1,4 +1,6 @@
 class Event
+  extend ActiveModel::Translation
+
   attr_accessor :id, :name, :url, :description, :start_date, :end_date, :event_type, :location, :participant_limit, :status
 
   def initialize(id:, name:, url:, description:, start_date:, end_date:, event_type:, location:, participant_limit:, status:)
@@ -35,5 +37,9 @@ class Event
       Rails.logger.error "Erro: #{e}"
     end
     result
+  end
+
+  def self.find(id)
+    ExternalEventApi::FindEventService.call(id)
   end
 end

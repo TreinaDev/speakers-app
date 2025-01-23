@@ -114,11 +114,24 @@ describe 'User register a profile' do
 
     expect(current_path).to eq(profiles_path)
     expect(page).to have_content('Falha ao registrar o perfil.')
-    expect(page).to have_content('Social networks não é válido')
+    expect(page).to have_content('Rede Social não é válido')
     expect(page).to have_content('Url inválida para YouTube')
     expect(page).to have_content('Url inválida para Twitter')
     expect(page).to have_content('Url inválida para GitHub')
     expect(page).to have_content('Url inválida para Facebook')
     expect(page).to have_content('Url inválida para Meu Site')
+  end
+
+  it 'for the second time' do
+    service = ExternalEventApi::UserFindEmailService
+    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return(true)
+    user = create(:user, first_name: 'João')
+    create(:profile, user: user)
+
+    login_as user
+    visit new_profile_path
+
+    expect(current_path).to eq(events_path)
+    expect(page).to have_content('Só é possível cadastrar um perfil.')
   end
 end

@@ -6,7 +6,7 @@
   <% end %>
 <% end %>
 
-<h2 class='heading-2'>Cadastre seu perfil</h2>
+<h2 class='heading-2'><%= t('.title') %></h2>
 
 <%= form_with(model: @profile) do |f| %>
   <div class="field">
@@ -19,12 +19,12 @@
     <%= f.text_area :about_me, class: 'text-area' %>
   </div>
 
-  <div class="mb-3">
+  <div class="my-3">
     <%= f.label :profile_picture %>
     <%= f.file_field :profile_picture %>
   </div>
 
-  <h3 class='heading-2 text-2xl'>Redes Socias</h3>
+  <h3 class='heading-2 text-2xl'><%= t('.social_networks') %></h3>
 
   <div class="field">
     <%= f.label :my_site, class: 'label-primary' %>
