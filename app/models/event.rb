@@ -3,6 +3,7 @@ class Event
 
   attr_accessor :id, :name, :url, :description, :start_date, :end_date, :event_type, :location, :participant_limit, :status
 
+  @@instances = []
   def initialize(id:, name:, url:, description:, start_date:, end_date:, event_type:, location:, participant_limit:, status:)
     @id = id
     @name = name
@@ -14,6 +15,7 @@ class Event
     @location = location
     @participant_limit = participant_limit
     @status = status
+    @@instances << self
   end
 
 
@@ -41,5 +43,13 @@ class Event
 
   def self.find(id)
     ExternalEventApi::FindEventService.call(id)
+  end
+
+  def self.count
+    @@instances.size
+  end
+
+  def self.last
+    @@instances.last
   end
 end

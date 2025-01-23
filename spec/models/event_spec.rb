@@ -45,4 +45,13 @@ describe Event do
 
       expect(logger).to have_received(:error).with("Erro: ")
     end
+
+  context '.count' do
+    it 'should return a count of all instances' do
+      events = []
+      3.times { events << build(:event) }
+
+      expect(Event.count).to eq 3
+    end
+  end
 end
