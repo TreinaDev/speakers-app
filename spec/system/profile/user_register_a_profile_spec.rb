@@ -5,6 +5,7 @@ describe 'User register a profile' do
     visit new_profile_path
 
     expect(current_path).to eq new_user_session_path
+    expect(page).to have_content('Para continuar, faça login ou registre-se.')
   end
 
   it 'with success' do
@@ -42,29 +43,6 @@ describe 'User register a profile' do
     expect(networks.find_by(url: 'https://x.com/joao').present?).to eq(true)
     expect(networks.find_by(url: 'https://github.com/joaorsalmeida').present?).to eq(true)
     expect(networks.find_by(url: 'https://www.facebook.com/joaoalmeida').present?).to eq(true)
-  end
-
-  it 'with blank fields' do
-    service = ExternalEventApi::UserFindEmailService
-    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return(true)
-
-    visit root_path
-    click_on 'Criar conta'
-    fill_in 'E-mail', with: 'joao@campuscode.com'
-    fill_in 'Senha', with: 'password'
-    fill_in 'Confirme sua senha', with: 'password'
-    fill_in 'Nome', with: 'João'
-    fill_in 'Sobrenome', with: 'Almeida'
-    click_on 'Cadastrar'
-    fill_in 'Título', with: ''
-    fill_in 'Sobre mim', with: ''
-    click_on 'Criar perfil'
-
-    expect(current_path).to eq(profiles_path)
-    expect(page).to have_content('Falha ao registrar o perfil.')
-    expect(page).to have_content('Título não pode ficar em branco')
-    expect(page).to have_content('Sobre mim não pode ficar em branco')
-    expect(page).to have_content('Foto de Perfil não pode ficar em branco')
   end
 
   it 'with blank fields' do
