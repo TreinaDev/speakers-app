@@ -83,4 +83,15 @@ describe Event do
       expect(Event.last).to be_nil
     end
   end
+
+  context '.delete_all' do
+    it 'must be delete all instances' do
+      4.times do |n|
+        build(:event, name: "Dev show #{n}", description: "Take #{n}")
+      end
+      Event.delete_all
+
+      expect(Event.count).to eq 0
+    end
+  end
 end
