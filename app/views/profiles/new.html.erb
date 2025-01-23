@@ -1,0 +1,61 @@
+<%= render 'shared/errors', object: @profile %>
+
+<% if @profile.social_networks.any? %>
+  <% @profile.social_networks.each do |network| %>
+    <%= render 'shared/errors', object: network %>
+  <% end %>
+<% end %>
+
+<h2 class='heading-2'><%= t('.title') %></h2>
+
+<%= form_with(model: @profile) do |f| %>
+  <div class="field">
+    <%= f.label :title, class: 'label-primary' %>
+    <%= f.text_field :title, class: 'field-primary' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :about_me, class: 'label-primary'  %>
+    <%= f.text_area :about_me, class: 'text-area' %>
+  </div>
+
+  <div class="my-3">
+    <%= f.label :profile_picture %>
+    <%= f.file_field :profile_picture %>
+  </div>
+
+  <h3 class='heading-2 text-2xl'><%= t('.social_networks') %></h3>
+
+  <div class="field">
+    <%= f.label :my_site, class: 'label-primary' %>
+    <%= f.text_field :my_site, name: 'profile[social_networks][network_1][url]', class: 'field-primary' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_1][social_network_type]', value: '0', class: 'field-primary' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :youtube, class: 'label-primary' %>
+    <%= f.text_field :youtube, name: 'profile[social_networks][network_2][url]', class: 'field-primary' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_2][social_network_type]', value: '1', class: 'field-primary' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :twitter, class: 'label-primary' %>
+    <%= f.text_field :twitter, name: 'profile[social_networks][network_3][url]', class: 'field-primary' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_3][social_network_type]', value: '2', class: 'field-primary' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :github, class: 'label-primary' %>
+    <%= f.text_field :github, name: 'profile[social_networks][network_4][url]', class: 'field-primary' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_4][social_network_type]', value: '3', class: 'field-primary' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :facebook, class: 'label-primary' %>
+    <%= f.text_field :facebook, name: 'profile[social_networks][network_5][url]', class: 'field-primary' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_5][social_network_type]', value: '4', class: 'field-primary' %>
+  </div>
+
+
+  <%= f.submit 'Criar perfil', class: 'btn-primary' %>
+<% end %>

@@ -1,6 +1,8 @@
 class EventTasksController < ApplicationController
   before_action :authenticate_user!
   before_action :check_event_content_owner, only: :create
+  before_action :set_event_task, only: %i[ show edit update ]
+  before_action :set_event_contents, only: %i[ new create edit update ]
 
   def index
     @event_tasks = current_user.event_tasks
@@ -8,22 +10,45 @@ class EventTasksController < ApplicationController
 
   def new
     @event_task = current_user.event_tasks.build
-    @contents = current_user.event_contents
   end
 
   def create
     @event_task = current_user.event_tasks.build(event_task_params)
-    @contents = current_user.event_contents
     return redirect_to event_tasks_path, notice: "Tarefa cadastrada com sucesso!" if @event_task.save
 
     flash.now["alert"] = "Falha ao criar tarefa."
     render :new, status: :unprocessable_entity
   end
 
+  def show; end
+
+  def edit; end
+
+  def update
+    if @event_task.update(event_task_params)
+      redirect_to @event_task, notice: "Tarefa atualizada com sucesso!"
+    else
+      flash.now[:alert] = "Não foi possível atualizar sua tarefa."
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def event_task_params
     params.require(:event_task).permit(:name, :description, :certificate_requirement, event_content_ids: [])
+  end
+
+  def set_event_task
+    begin
+      @event_task = current_user.event_tasks.find(params[:id])
+    rescue
+      redirect_to events_path, alert: "Acesso não autorizado."
+    end
+  end
+
+  def set_event_contents
+    @contents = current_user.event_contents
   end
 
   def check_event_content_owner
