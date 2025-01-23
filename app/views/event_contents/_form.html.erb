@@ -3,7 +3,7 @@
     <%= f.label :title, class: 'label-primary' %>
     <%= f.text_field :title, class: 'field-primary' %>
     <% if event_content.errors[:title].any? %> 
-      <span class="text-red-500 text-sm"><%= event_content.errors[:title].first %></span>
+      <span class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:title).first %></span>
     <% end %>
   </div>
 
@@ -27,7 +27,7 @@
     <%= f.label :files, 'Arquivos' %>
     <%= f.file_field :files, multiple: true %>
     <% if event_content.errors[:base].any? %> 
-      <div class="text-red-500 text-sm"><%= event_content.errors[:base].first %></div>
+      <div class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:base).first %></div>
     <% end %>
   </div>
   
