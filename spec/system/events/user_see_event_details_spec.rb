@@ -51,7 +51,7 @@ describe 'User see event details', type: :system do
     expect(page).to have_content 'Python'
   end
 
-  it 'and sees your schedules items' do
+  it 'and should see a message when doesnt have schedule items' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
     event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
             start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',

@@ -9,14 +9,14 @@ class ExternalEventApi::ScheduleItemsService
   end
 
   def call
-    where
+    get_user_schedule_items
   end
 
   private
 
   attr_reader :event_id, :email
 
-  def where
+  def get_user_schedule_items
     result = []
     begin
       response = Faraday.get('http://localhost:3001/events/schedule_items', { email: email, event_id: event_id })
