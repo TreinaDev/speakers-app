@@ -33,3 +33,8 @@ pt-BR:
     new:
       title: 'Cadastre seu perfil'
       social_networks: 'Redes Socias'
+  events: 
+    show:
+      schedule_items_title: 'Suas Agendas'
+      no_schedule_items: 'Você não possui agendas disponíveis para esse evento. Se você acha que isso é um erro, entre em contato com o organizador.'
+      

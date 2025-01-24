@@ -1,0 +1,8 @@
+pt-BR:
+  activemodel:
+    models:
+      schedule_item: Programação
+    attributes:
+      schedule_item:
+        title: 'Título'
+        description: 'Descrição'

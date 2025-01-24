@@ -45,6 +45,10 @@ class Event
     ExternalEventApi::FindEventService.call(id)
   end
 
+  def schedule_items(email)
+    ExternalEventApi::ScheduleItemsService.call(id, email)
+  end
+
   def self.count
     @@instances.size
   end
