@@ -9,8 +9,8 @@
                 <div class="nav_social_network_container">
                     <% @profile.social_networks.each do |network| %>
                             <%= link_to(network.url, class: 'container_link', target: "_blank") do %>
-                            <%= raw File.read(Rails.root.join("app", "assets", "images", network.social_network_type + ".svg")) %>
-                            <p><%= network.translated_social_network_type(network.social_network_type) %></p>
+                                <%= raw File.read(Rails.root.join("app", "assets", "images", network.social_network_type + ".svg")) %>
+                                <p><%= network.translated_social_network_type(network.social_network_type) %></p>
                             <% end %>
                     <% end %>
                 </div>
