@@ -1,0 +1,8 @@
+pt-BR:
+  profiles:
+    show:
+      error: 'O usuário %{profile} não existe ou foi escrito errado.'
+    create:
+      success: 'Perfil cadastrado com sucesso.'
+      error: 'Falha ao registrar o perfil.'
+    check_if_have_an_existing_profile: 'Só é possível cadastrar um perfil.'

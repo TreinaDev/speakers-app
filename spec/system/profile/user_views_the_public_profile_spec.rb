@@ -67,4 +67,11 @@ describe 'User views the public profile' do
     expect(page).to have_content('Olá, meu nome é José e eu sou um instrutor de Ruby on Rails')
     expect(page).to have_css("img[src*='puts.png']")
   end
+
+  it 'that does not exist' do
+    visit profile_path('Thiago')
+
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content('O usuário Thiago não existe ou foi escrito errado.')
+  end
 end
