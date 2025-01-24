@@ -8,7 +8,6 @@ describe 'User register tasks' do
     expect(current_path).to eq new_user_session_path
   end
 
-
   it 'with success' do
     user = create(:user)
     create(:event_content, title: 'My content', description: 'My own content', user: user)
@@ -79,5 +78,22 @@ describe 'User register tasks' do
     visit new_event_task_path
 
     expect(page).to have_checked_field('Opcional')
+  end
+
+  it 'and cancel' do
+    user = create(:user)
+    create(:event_content, title: 'My content', description: 'My own content', user: user)
+
+    login_as user
+    visit new_event_task_path
+
+    fill_in 'Título', with: 'Tarefa 01'
+    fill_in 'Descrição', with: 'Lorem ipsum'
+    choose 'Obrigatória'
+    check 'My content'
+    click_on 'Cancelar'
+
+    expect(EventTask.count).to eq 0
+    expect(current_path).to eq event_tasks_path
   end
 end
