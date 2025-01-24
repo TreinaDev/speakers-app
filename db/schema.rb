@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_22_133550) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_23_201510) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -82,7 +82,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_22_133550) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
     t.index ["user_id"], name: "index_profiles_on_user_id"
+    t.index ["username"], name: "index_profiles_on_username", unique: true
   end
 
   create_table "social_networks", force: :cascade do |t|

@@ -1,6 +1,12 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_if_have_an_existing_profile
+  before_action :authenticate_user!, except: :show
+  before_action :check_if_have_an_existing_profile, except: :show
+
+  def show
+    # resolver erro quando não encontrar
+    @profile = Profile.find_by(username: params[:username])
+    @events = Event.all
+  end
   def new
     @profile = current_user.build_profile
   end
@@ -24,7 +30,7 @@ class ProfilesController < ApplicationController
   end
 
   def check_if_have_an_existing_profile
-    redirect_to events_path, alert: 'Só é possível cadastrar um perfil.' if current_user.profile.present?
+    redirect_to events_path, alert: 'Só é possível cadastrar um perfil.' if user_signed_in? && current_user.profile.present?
   end
 
   def create_networks(networks)

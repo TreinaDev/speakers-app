@@ -32,7 +32,7 @@
   }
 
   .heading-2 {
-    @apply text-3xl font-semibold text-blue-500 mb-2;
+    @apply text-5xl font-semibold text-blue-500 mb-2;
   }
 
   .notice {

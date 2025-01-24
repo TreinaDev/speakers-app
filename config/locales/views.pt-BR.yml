@@ -24,3 +24,6 @@ pt-BR:
     new:
       title: 'Cadastre seu perfil'
       social_networks: 'Redes Socias'
+    show:
+      title: 'Perfil'
+      my_events: 'Meus Eventos'

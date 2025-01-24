@@ -6,8 +6,10 @@
       <%= link_to 'Acesse sua conta', new_user_session_path, class: 'nav-link-primary' %>
     <% else %>
       <%= link_to 'Meus Conteúdos', event_contents_path, class: 'nav-link-primary' %>
-      <% if current_user.profile.nil?%>
+      <% if current_user.profile.nil? %>
         <%= link_to 'Cadastrar Perfil', new_profile_path, class: 'nav-link-primary' %>
+      <% elsif current_user.profile.persisted?%>
+        <%= link_to 'Meu Perfil', profile_path(username: current_user&.profile.username), class: 'nav-link-primary' %>
       <% end %>
       <%= link_to 'Tarefas', event_tasks_path, data:{turbo: false}, class: 'nav-link-primary' %>
       <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'nav-link-primary' %>
