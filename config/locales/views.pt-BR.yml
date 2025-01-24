@@ -33,6 +33,11 @@ pt-BR:
     new:
       title: 'Cadastre seu perfil'
       social_networks: 'Redes Socias'
+    show:
+      title: 'Perfil'
+      my_events: 'Meus Eventos'
+      about_me: 'Sobre mim'
+      dont_exist_event: 'Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.'
   events: 
     show:
       schedule_items_title: 'Suas Agendas'

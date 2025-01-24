@@ -32,7 +32,7 @@
   }
 
   .heading-2 {
-    @apply text-3xl font-semibold text-blue-500 mb-2;
+    @apply text-5xl font-semibold text-blue-500 mb-2;
   }
 
   .notice {
@@ -66,5 +66,26 @@
 
   .errors {
     @apply p-4 mb-1 text-sm rounded-lg bg-red-200 text-red-500;
+  }
+
+  .container_link{
+    @apply border inline-flex font-semibold text-indigo-600 border-indigo-600 rounded-lg py-2 px-6 items-center;
+  }
+
+  .container_link .link_icon{
+    @apply fill-indigo-600 mr-1 w-5 h-5;
+
+  }
+
+  .container_link .icon_size{
+    @apply w-5 h-5 mr-1;
+  }
+
+  .container_link .link_icon_my_site{
+    @apply stroke-indigo-600;
+  }
+
+  .nav_social_network_container{
+    @apply flex flex-wrap gap-4 flex-row mt-6;
   }
 }

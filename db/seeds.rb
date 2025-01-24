@@ -9,8 +9,28 @@
 #   end
 User.skip_callback(:create, :before, :api_auth_user)
 user = User.create!(first_name: 'João', last_name: 'Campus', email: 'joao@email.com', password: '123456')
-user = User.create!(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456')
+user_2 = User.create!(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456')
 User.set_callback(:create, :before, :api_auth_user)
+
+profile = Profile.create!(title: 'Instrutor / Desenvolvedor',
+                          about_me: 'Sou João, desenvolvedor Ruby apaixonado por criar soluções eficientes e bem estruturadas.
+                          Meu principal foco está no Ruby on Rails, onde tenho ampla experiência no desenvolvimento de aplicações
+                          web modernas e escaláveis. Gosto de transformar ideias em realidade por meio de código limpo, organizado e
+                          que prioriza a manutenibilidade.
+                          Tenho um grande interesse por boas práticas de desenvolvimento, como TDD, padrões de design e princípios
+                          de desenvolvimento ágil. Além de programar, busco estar sempre atualizado com as tendências do mercado e
+                          as novas tecnologias que podem agregar valor aos projetos em que trabalho.
+                          Minha motivação vem da possibilidade de resolver problemas reais, criando sistemas que otimizem processos,
+                          melhorem a experiência dos usuários e tragam impacto positivo para as empresas. Fora do mundo do código, gosto
+                            de compartilhar conhecimento, aprender com a comunidade e me desafiar constantemente a ser um profissional melhor.',
+                          user: user, profile_picture: { io: File.open(Rails.root.join('spec/fixtures/puts.png')),
+                                                         filename: 'puts.png',
+                                                         content_type: 'image/png' })
+profile.social_networks.create(url: 'https://www.joaotutoriais.com/', social_network_type: :my_site)
+profile.social_networks.create(url: 'https://www.youtube.com/@JoãoTutoriais', social_network_type: :youtube)
+profile.social_networks.create(url: 'https://x.com/joao', social_network_type: :x)
+profile.social_networks.create(url: 'https://github.com/joaorsalmeida', social_network_type: :github)
+profile.social_networks.create(url: 'https://www.facebook.com/joaoalmeida', social_network_type: :facebook)
 
 content = user.event_contents.create!(title: 'Ruby para iniciantes',
                                       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.
