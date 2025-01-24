@@ -1,6 +1,12 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_if_have_an_existing_profile
+  before_action :authenticate_user!, except: :show
+  before_action :check_if_have_an_existing_profile, except: :show
+
+  def show
+    @profile = Profile.find_by(username: params[:username])
+    redirect_to root_path, alert: t('profiles.show.error', profile: params[:username]) if @profile.nil?
+    @events = Event.all
+  end
   def new
     @profile = current_user.build_profile
   end
@@ -10,9 +16,9 @@ class ProfilesController < ApplicationController
     create_networks(params[:profile][:social_networks])
 
     if @profile.save
-      redirect_to events_path, notice: "Perfil cadastrado com sucesso."
+      redirect_to events_path, notice: t('profiles.create.success')
     else
-      flash.now[:alert] = "Falha ao registrar o perfil."
+      flash.now[:alert] = t('profiles.create.error')
       render :new, status: :unprocessable_entity
     end
   end
@@ -24,7 +30,7 @@ class ProfilesController < ApplicationController
   end
 
   def check_if_have_an_existing_profile
-    redirect_to events_path, alert: 'Só é possível cadastrar um perfil.' if current_user.profile.present?
+    redirect_to events_path, alert: t('profiles.check_if_have_an_existing_profile') if user_signed_in? && current_user.profile.present?
   end
 
   def create_networks(networks)

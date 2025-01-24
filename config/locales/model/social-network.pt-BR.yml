@@ -9,7 +9,7 @@ pt-BR:
         social_network_type:
           one: 'Tipo da rede social'
           facebook: 'Facebook'
-          twitter: 'Twitter'
-          youtube: 'YouTube'
+          x: 'X'
+          youtube: 'Youtube'
           github: 'GitHub'
           my_site: 'Meu Site'
