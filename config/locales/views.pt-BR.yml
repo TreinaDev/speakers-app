@@ -22,7 +22,7 @@ pt-BR:
       save: 'Salvar'
   event_contents:
     form:
-      files_attached: 'Arquivos já anexados:'
+      files_attached: 'Arquivos anexados a este conteúdo:'
     show:
       attached_to_tasks: 'Tarefas que utilizam este conteúdo:'
       task: 'Tarefa'
