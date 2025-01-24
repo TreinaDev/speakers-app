@@ -1,15 +1,19 @@
 class ScheduleItem
   extend ActiveModel::Translation
 
-  attr_accessor :id, :title, :speaker_email, :description, :lenght
+  attr_accessor :id, :title, :speaker_email, :description, :length
   @@instances = []
-  def initialize(id:, title:, speaker_email:, description:, lenght:)
+  def initialize(id:, title:, speaker_email:, description:, length:)
     @id = id
     @title = title
     @speaker_email = speaker_email
     @description = description
-    @lenght = lenght
+    @length = length
     @@instances << self
+  end
+
+  def self.find(id, email)
+    ExternalEventApi::FindScheduleItemService.call(id, email)
   end
 
   def self.count
