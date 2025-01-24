@@ -1,7 +1,7 @@
 pt-BR:
   profiles:
     show:
-      error: 'O usuário %{profile} não existe ou foi escrito errado.'
+      error: 'O usuário %{profile} não existe.'
     create:
       success: 'Perfil cadastrado com sucesso.'
       error: 'Falha ao registrar o perfil.'

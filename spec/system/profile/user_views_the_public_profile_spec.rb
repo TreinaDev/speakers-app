@@ -53,8 +53,9 @@ describe 'User views the public profile' do
   it 'as owner' do
     user = create(:user, first_name: 'José', last_name: 'de Jesus')
     image = fixture_file_upload(Rails.root.join('spec/fixtures/puts.png'))
-    create(:profile, title: 'Instrutor', about_me: 'Olá, meu nome é José e eu sou um instrutor de Ruby on Rails',
+    profile = create(:profile, title: 'Instrutor', about_me: 'Olá, meu nome é José e eu sou um instrutor de Ruby on Rails',
                      user: user, profile_picture: image)
+    create(:social_network, profile: profile)
 
     login_as user
     visit events_path
@@ -66,12 +67,13 @@ describe 'User views the public profile' do
     expect(page).to have_content('Instrutor')
     expect(page).to have_content('Olá, meu nome é José e eu sou um instrutor de Ruby on Rails')
     expect(page).to have_css("img[src*='puts.png']")
+    expect(page).to have_link('Youtube')
   end
 
   it 'that does not exist' do
     visit profile_path('Thiago')
 
     expect(current_path).to eq(root_path)
-    expect(page).to have_content('O usuário Thiago não existe ou foi escrito errado.')
+    expect(page).to have_content('O usuário Thiago não existe.')
   end
 end
