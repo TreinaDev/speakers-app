@@ -1,0 +1,126 @@
+<section class="banner_container">
+    <div class="flex items-center justify-center h-full">
+        <div class="banner_content">
+            <div class="banner_overlay"></div>
+            <div class="banner_container_text">
+                <h1 class="title_banner"><%= t('.banner_title') %></h1>
+                <p class="text_banner"><%= t('.banner_text') %></p>
+                <%= link_to t('.register'), new_user_registration_path, class: 'register_button' %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-28" >
+    <div class="flex flex-col">
+        <div class="flex flex-col items-center mb-24">
+            <h2 class="font-bold text-4xl mb-8"><%= t('.about_title') %></h2>
+            <p class="text-2xl w-4/5"><%= t('.about_text') %></p>
+        </div>
+        <div class="flex gap-x-10 justify-center" id="how_works">
+            <div class="landing_card">
+                <span class="landing_card_icon"><%= raw File.read(Rails.root.join("app", "assets", "images", "paper.svg")) %></span>
+                <div class="landing_card_content">
+                    <h3><%= t('.card_title_1') %></h3>
+                    <p><%= t('.card_describe_1') %></p>
+                </div>
+            </div>
+            <div class="landing_card">
+                <span class="landing_card_icon"><%= raw File.read(Rails.root.join("app", "assets", "images", "video.svg")) %></span>
+                <div class="landing_card_content">
+                    <h3><%= t('.card_title_2') %></h3>
+                    <p><%= t('.card_describe_2') %></p>
+                </div>
+            </div>
+            <div class="landing_card">
+                <span class="landing_card_icon"><%= raw File.read(Rails.root.join("app", "assets", "images", "calendar.svg")) %></span>
+                <div class="landing_card_content">
+                        <h3><%= t('.card_title_3') %></h3>
+                        <p><%= t('.card_describe_3') %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-20 mb-48 flex justify-center">
+    <div class="how_works">
+        <h2><%= t('.how_works') %></h2>
+        <div class="flex flex-col mt-20">
+            <div class="flex">
+                <div class="how_works_count">
+                    <span class="how_works_count_number">1</span>
+                    <span class="how_works_count_bar"></span>
+                </div>
+                <div class="how_works_content">
+                    <h3 class="text-2xl"><%= t('.how_works_title_1') %></h3>
+                    <p class="how_works_text"><%= t('.how_works_text_1') %></p>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <div class="how_works_count">
+                    <span class="how_works_count_bar"></span>
+                    <span class="how_works_count_number">2</span>
+                    <span class="how_works_count_bar"></span>
+                </div>
+                <div class="how_works_content">
+                    <h3 class="text-2xl"><%= t('.how_works_title_2') %></h3>
+                    <p class="how_works_text"><%= t('.how_works_text_2') %></p>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <div class="how_works_count">
+                    <span class="how_works_count_bar"></span>
+                    <span class="how_works_count_number">3</span>
+                    <span class="how_works_count_bar"></span>
+                </div>
+                <div class="how_works_content">
+                    <h3 class="text-2xl"><%= t('.how_works_title_3') %></h3>
+                    <p class="how_works_text"><%= t('.how_works_text_3') %></p>
+                </div>
+            </div>
+            <div class="flex items-end">
+                <div class="how_works_count">
+                    <span class="how_works_count_bar"></span>
+                    <span class="how_works_count_number">4</span>
+                    <span class="h-12"></span>
+                </div>
+                <div class="how_works_content">
+                    <h3 class="text-2xl"><%= t('.how_works_title_4') %></h3>
+                    <p class="how_works_text"><%= t('.how_works_text_4') %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="call_action">
+        <div class="call_action_overlay"></div>
+        <div class="flex items-center justify-center w-full h-full">
+            <div class="call_action_content">
+                <h2><%= t('.call_action_title') %></h2>
+                <p class="text-2xl"><%= t('.call_action_text') %></p>
+                <%= link_to t('.register'), new_user_registration_path, class: 'register_button' %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="footer">
+    <p class="text-center text-white py-8"><%= t('.copyright') %></p>
+</section>
+
+<script>
+    document.onscroll= () =>{
+        const docViewTop = window.scrollY;
+        const navbar = document.querySelector('.navbar');
+        const box = document.querySelector('.banner_container');
+        
+        if(docViewTop >= box.offsetHeight / 2 - navbar.offsetHeight){
+            navbar.classList.add('navbar--actived')
+        }else{
+            navbar.classList.remove('navbar--actived')
+        }
+    }
+</script>
