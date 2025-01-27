@@ -19,10 +19,10 @@ class Event
   end
 
 
-  def self.all
+  def self.all(email)
     result = []
     begin
-      response = Faraday.get("http://localhost:3001/api/v1/events")
+      response = Faraday.get("http://localhost:3001/events/speaker_events?email=#{email}")
 
       if response.status == 200
         json = JSON.parse(response.body)
