@@ -16,9 +16,9 @@
   <div class="grid grid-cols-4 gap-1">
     <% @schedule_items&.each do |item | %>
       <%= link_to schedule_item_path(item.id) do %>
-        <div class="schedule_items-card grid grid-col-1 p-2 border w-64 mb-2">
+        <div class="schedule_items-card grid grid-col-1 p-2 border w-80 mb-2">
           <span> <b> <%= ScheduleItem.human_attribute_name(:title) %>:</b> <%= item.title %></span>
-          <span> <b><%= ScheduleItem.human_attribute_name(:description) %>:</b> <%= item.description %></span>
+          <span class='truncate'> <b><%= ScheduleItem.human_attribute_name(:description) %>:</b> <%= item.description %></span>
         </div>
       <% end %>
     <% end %>
