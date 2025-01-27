@@ -12,16 +12,20 @@
     <%= f.rich_textarea :description, class: 'text-area' %>
   </div>
 
-  <% if event_content.files.any? { |file| file.persisted? } %>
-    <div class="mt-5 mb-5">
+  <div class="mt-5 mb-5">
+    <% if event_content.files.any? { |file| file.persisted? } %>
       <strong><%= t('.files_attached') %></strong>
-      <% event_content.files.each do |file| %>
-        <div>
-          <%= file.filename if file.persisted? %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+      <div>
+        <%= f.collection_check_boxes :files, @files, :signed_id, :filename do |file| %>
+          <% check_box_id = "check_box_#{file.object.filename}" %>
+          <div class="mr-2 ml-4"> 
+            <%= file.check_box(class: 'mr-1', checked: true, id: check_box_id) %>
+            <%= file.label(class: 'inline') %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="mb-3">
     <%= f.label :files, 'Arquivos' %>
@@ -34,3 +38,4 @@
   <%= f.submit class: 'btn-primary' %>
   <%= link_to 'Cancelar', event_content, class: 'btn-primary' %>
 <% end %>
+
