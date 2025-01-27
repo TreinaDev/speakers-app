@@ -48,6 +48,7 @@
 
   .heading-1 {
     @apply text-4xl font-semibold text-blue-500 mb-2;
+  }
 
   .logo{
     @apply text-white text-4xl;
