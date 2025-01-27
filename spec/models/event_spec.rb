@@ -4,10 +4,10 @@ describe Event do
   context '.all' do
     it 'should get all event information' do
       json = File.read(Rails.root.join('spec/support/events_data.json'))
-      url = 'http://localhost:3001/api/v1/events'
+      url = "http://localhost:3001/events/speaker_events?email=teste@email.com"
       response = double('faraday_response', body: json, status: 200)
       allow(Faraday).to receive(:get).with(url).and_return(response)
-      result = Event.all
+      result = Event.all('teste@email.com')
       expect(result.length).to eq 2
       expect(result[0].name).to eq 'Event1'
       expect(result[0].url).to eq ''
@@ -33,7 +33,7 @@ describe Event do
       logger = Rails.logger
       allow(logger).to receive(:error)
       allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
-      Event.all
+      Event.all('teste@email.com')
 
       expect(logger).to have_received(:error).with(instance_of(Faraday::ConnectionFailed))
     end
@@ -42,7 +42,7 @@ describe Event do
       logger = Rails.logger
       allow(logger).to receive(:error)
       allow(Faraday).to receive(:get).and_raise(StandardError)
-      Event.all
+      Event.all('teste@email.com')
 
       expect(logger).to have_received(:error).with("Erro: StandardError")
     end

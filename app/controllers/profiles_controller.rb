@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.find_by(username: params[:username])
     return redirect_to events_path, alert: t('profiles.show.error', profile: params[:username]) if @profile.nil? && user_signed_in?
     return redirect_to root_path, alert: t('profiles.show.error', profile: params[:username]) if @profile.nil?
-    @events = Event.all
+    @events = Event.all(@profile.user.email)
   end
   def new
     @profile = current_user.build_profile
