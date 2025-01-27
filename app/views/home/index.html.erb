@@ -3,6 +3,7 @@
         <div class="banner_content">
             <div class="banner_overlay"></div>
             <div class="banner_container_text">
+                <%= render "shared/flash" %>
                 <h1 class="title_banner"><%= t('.banner_title') %></h1>
                 <p class="text_banner"><%= t('.banner_text') %></p>
                 <%= link_to t('.register'), new_user_registration_path, class: 'register_button' %>

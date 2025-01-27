@@ -76,4 +76,14 @@ describe 'User views the public profile' do
     expect(current_path).to eq(root_path)
     expect(page).to have_content('O usuário Thiago não existe.')
   end
+
+  it 'that does not exist. (Authenticated user)' do
+    user = create(:user, first_name: 'João')
+
+    login_as user
+    visit profile_path('Thiago')
+
+    expect(current_path).to eq(events_path)
+    expect(page).to have_content('O usuário Thiago não existe.')
+  end
 end

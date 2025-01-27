@@ -4,7 +4,8 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find_by(username: params[:username])
-    redirect_to root_path, alert: t('profiles.show.error', profile: params[:username]) if @profile.nil?
+    return redirect_to events_path, alert: t('profiles.show.error', profile: params[:username]) if @profile.nil? && user_signed_in?
+    return redirect_to root_path, alert: t('profiles.show.error', profile: params[:username]) if @profile.nil?
     @events = Event.all
   end
   def new
