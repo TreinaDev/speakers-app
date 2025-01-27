@@ -46,6 +46,10 @@
     @apply text-lg font-bold text-white hover:dark:bg-gray-700 rounded-lg px-2 h-10 flex items-center;
   }
 
+  .heading-1 {
+    @apply text-4xl font-semibold text-blue-500 mb-2;
+  }
+
   .logo{
     @apply text-white text-4xl;
     font-family: "Piedra", serif;

@@ -4,10 +4,10 @@ FactoryBot.define do
     title { "Schedule #{ id }" }
     description { "Something" }
     speaker_email { generate :email }
-    lenght { rand(45..120) }
+    length { rand(45..120) }
 
     initialize_with {
-      new(id: id, title: title, speaker_email: speaker_email, description: description, lenght: lenght)
+      new(id: id, title: title, speaker_email: speaker_email, description: description, length: length)
     }
   end
 end
