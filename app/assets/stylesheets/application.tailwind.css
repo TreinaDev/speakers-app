@@ -24,7 +24,22 @@
   }
 
   .navbar {
-    @apply border-gray-200 bg-gray-900 py-5 px-5;
+    @apply absolute top-8 border-white w-full;
+    border-bottom: 1px solid white;
+    -webkit-transition: all .5s ease 0s;
+    -moz-transition: all .5s ease 0s;
+    -o-transition: all .5s ease 0s;
+    transition: all .5s ease 0s;
+  }
+
+  .navbar.navbar--actived{
+    @apply fixed top-0 pt-4 w-full z-10;
+    border-radius: 0 0 60px 60px;
+    background-color: #7A6AD8
+  }
+
+  .navbar_content{
+    @apply flex justify-between w-full pb-4 px-36;
   }
 
   .nav-link-primary {
@@ -34,6 +49,9 @@
   .heading-1 {
     @apply text-4xl font-semibold text-blue-500 mb-2;
 
+  .logo{
+    @apply text-white text-4xl;
+    font-family: "Piedra", serif;
   }
 
   .heading-2 {
@@ -73,13 +91,16 @@
     @apply p-4 mb-1 text-sm rounded-lg bg-red-200 text-red-500;
   }
 
+  .container{
+    @apply mt-40 px-40 mb-36;
+  }
+
   .container_link{
     @apply border inline-flex font-semibold text-indigo-600 border-indigo-600 rounded-lg py-2 px-6 items-center;
   }
 
   .container_link .link_icon{
     @apply fill-indigo-600 mr-1 w-5 h-5;
-
   }
 
   .container_link .icon_size{
@@ -92,5 +113,131 @@
 
   .nav_social_network_container{
     @apply flex flex-wrap gap-4 flex-row mt-6;
+  }
+
+  .banner_container{
+    height: 90vh;
+    background-image: url('banner-bg.jpg');
+    background-size: cover;
+    border-end-end-radius: 260px;
+  }
+
+  .banner_content{
+    @apply h-2/3 relative w-2/3 flex items-center text-white;
+    background: url('banner_content.jpg');
+    background-size: cover;
+    border-radius: 70px;
+  }
+
+  .banner_overlay{
+    @apply w-full h-full absolute z-0;
+    background-color: rgba(0, 0, 0, 0.548);
+    border-radius: 70px;
+  }
+
+  .banner_container_text{
+    @apply ml-32 w-2/3 flex flex-col items-start;
+    z-index: 1;
+  }
+
+  .title_banner{
+    @apply font-bold text-4xl mb-8;
+  }
+
+  .register_button{
+    @apply py-4 px-8 text-black mt-8 rounded-2xl;
+    background-color: #E9E1FB;
+  }
+
+  .register_button:hover{
+    background-color: #bea2fd;
+    box-shadow: 2px 2px 4px rgb(46, 46, 46);
+  }
+
+  .landing_card{
+    @apply relative pt-10;
+    width: 22%;
+  }
+
+  .landing_card_content{
+    @apply p-9 rounded-3xl mt-3 mr-3 h-full flex flex-col justify-center;
+    background-color: #E9E1FB;
+  }
+
+  .landing_card_content h3{
+    @apply font-bold;
+  }
+
+  .landing_card_icon{
+    @apply inline-flex items-center justify-center p-4 rounded-full absolute right-0 top-0;
+    background-color: #7A6AD8;
+  }
+
+  .how_works{
+    @apply p-20 pb-24 text-white;
+    background-image: url('bg_como_funciona.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    border-radius: 100px;
+    width: 65vw;
+    font-family: "Piedra", serif;
+  }
+
+  .how_works h2{
+    @apply text-4xl mx-auto w-full text-center;
+  }
+
+  .how_works_count{
+    @apply flex flex-col items-center mr-20;
+  }
+
+  .how_works_count_number{
+    @apply py-3 px-6 text-5xl;
+    border: 10px solid white;
+    border-radius: 50%;
+    width: 95px;
+  }
+
+  .how_works_count_bar{
+    @apply bg-white;
+    width: 10px;
+    height: 150px;
+  }
+
+  .how_works_content{
+    @apply p-14;
+    background-color: rgba(0, 0, 0, 0.685);
+    border-radius: 40px;
+  }
+
+  .how_works_text{
+    @apply mt-4;
+    font-family: "Poppins", serif;
+  }
+
+  .call_action{
+    @apply w-full relative bg-cover;
+    height: 80vh;
+    background-image: url('modern-office.jpg');
+  }
+
+  .call_action_overlay{
+    @apply w-full h-full absolute z-0;
+    background-color: rgba(0, 0, 0, 0.548);
+  }
+
+  .call_action_content{
+    @apply text-white flex flex-col items-center px-14;
+    z-index: 1;
+  }
+  
+  .call_action_content h2{
+    @apply text-6xl mb-7;
+    font-family: "Piedra", serif;
+  }
+
+  .footer{
+    @apply w-full;
+    background-color: #7A6AD8;
   }
 }
