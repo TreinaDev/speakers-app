@@ -20,29 +20,11 @@ class Event
 
 
   def self.all(email)
-    result = []
-    begin
-      response = Faraday.get("http://localhost:3001/events/speaker_events?email=#{email}")
-
-      if response.status == 200
-        json = JSON.parse(response.body)
-        result = json.map do |event|
-          new(id: event['id'], name: event['name'], url: event['url'], description: event['description'],
-              start_date: event['start_date'], end_date: event['end_date'], event_type: event['event_type'],
-              location: event['location'], participant_limit: event['participant_limit'], status: event['status'])
-        end
-        return result
-      end
-    rescue Faraday::ConnectionFailed => e
-      Rails.logger.error e
-    rescue => e
-      Rails.logger.error "Erro: #{e}"
-    end
-    result
+    ExternalEventApi::GetAllEventsService.call(email: email)
   end
 
   def self.find(id)
-    ExternalEventApi::FindEventService.call(id)
+    ExternalEventApi::FindEventService.call(id: id)
   end
 
   def schedule_items(email)
