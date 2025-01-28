@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe ExternalEventApi::FindScheduleItemService do
-  context '#find' do
+  context '#call' do
     it 'when API return success' do
       ScheduleItem.delete_all
       json_schedule_item =   {
