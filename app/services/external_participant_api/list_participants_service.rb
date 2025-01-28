@@ -8,14 +8,14 @@ class ExternalParticipantApi::ListParticipantsService
   end
 
   def call
-    get_list_participants
+    get_list_of_participants
   end
 
   private
 
   attr_reader :schedule_item_id
 
-  def get_list_participants
+  def get_list_of_participants
     participants = []
     begin
       response = Faraday.get('http://localhost:3002/schedule_items/participants', { schedule_item_id: schedule_item_id })
