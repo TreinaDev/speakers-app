@@ -1,12 +1,4 @@
-class ExternalParticipantApi::ListParticipantsService
-  def initialize(schedule_item_id)
-    @schedule_item_id = schedule_item_id
-  end
-
-  def self.call(id)
-    new(id).call
-  end
-
+class ExternalParticipantApi::ListParticipantsService < ApplicationService
   def call
     get_list_of_participants
   end
@@ -18,7 +10,7 @@ class ExternalParticipantApi::ListParticipantsService
   def get_list_of_participants
     participants = []
     begin
-      response = Faraday.get('http://localhost:3002/schedule_items/participants', { schedule_item_id: schedule_item_id })
+      response = Faraday.get('http://localhost:3002/schedule_items/participants', { schedule_item_id: kwargs[:schedule_item_id] })
       if response.success?
         json_response = JSON.parse(response.body)
         json_response.each do |participant|

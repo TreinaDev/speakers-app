@@ -1,25 +1,14 @@
-class ExternalEventApi::ScheduleItemsService
-  def initialize(event_id, email)
-    @event_id = event_id
-    @email = email
-  end
-
-  def self.call(event_id, email)
-    new(event_id, email).call
-  end
-
+class ExternalEventApi::ScheduleItemsService < ApplicationService
   def call
     get_user_schedule_items
   end
 
   private
 
-  attr_reader :event_id, :email
-
   def get_user_schedule_items
     result = []
     begin
-      response = Faraday.get('http://localhost:3001/events/schedule_items', { email: email, event_id: event_id })
+      response = Faraday.get('http://localhost:3001/events/schedule_items', { email: kwargs[:email], event_id: kwargs[:event_id] })
       if response.success?
         schedule_items = JSON.parse(response.body)
         result = schedule_items['schedule_items'].map do |item|

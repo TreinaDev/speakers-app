@@ -19,7 +19,7 @@ describe ExternalParticipantApi::ListParticipantsService do
       ]
       response = instance_double(Faraday::Response, success?: true, body: json.to_json)
       allow(Faraday).to receive(:get).and_return(response)
-      service = ExternalParticipantApi::ListParticipantsService.new(1)
+      service = ExternalParticipantApi::ListParticipantsService.new(schedule_item_id: 1)
 
       participants = service.call
 
@@ -32,7 +32,7 @@ describe ExternalParticipantApi::ListParticipantsService do
     it 'when Api return not found' do
       response = instance_double(Faraday::Response, success?: true, body: {})
       allow(Faraday).to receive(:get).and_return(response)
-      service = ExternalParticipantApi::ListParticipantsService.new(1)
+      service = ExternalParticipantApi::ListParticipantsService.new(schedule_item_id: 1)
 
       participants = service.call
 
@@ -43,7 +43,7 @@ describe ExternalParticipantApi::ListParticipantsService do
       logger = Rails.logger
       allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
       allow(logger).to receive(:error)
-      service = ExternalParticipantApi::ListParticipantsService.new(1)
+      service = ExternalParticipantApi::ListParticipantsService.new(schedule_item_id: 1)
 
       participants = service.call
 

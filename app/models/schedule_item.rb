@@ -25,6 +25,6 @@ class ScheduleItem
   end
 
   def participants
-    ExternalParticipantApi::ListParticipantsService.call(id)
+    ExternalParticipantApi::ListParticipantsService.call(schedule_item_id: id)
   end
 end

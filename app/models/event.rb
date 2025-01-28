@@ -28,7 +28,7 @@ class Event
   end
 
   def schedule_items(email)
-    ExternalEventApi::ScheduleItemsService.call(id, email)
+    ExternalEventApi::ScheduleItemsService.call(event_id: id, email: email)
   end
 
   def self.count

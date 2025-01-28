@@ -48,7 +48,7 @@ describe Event do
         build(:schedule_item, title: 'Ruby on Rails', description: 'Introdução a programação'),
         build(:schedule_item, title: "TDD e introdução a API's", description: 'Desvolvimento Web')
       ]
-      allow(ExternalEventApi::ScheduleItemsService).to receive(:call).and_return(items)
+      allow(event).to receive(:schedule_items).and_return(items)
       schedule_items = event.schedule_items('teste@email.com')
 
       expect(schedule_items[0].title).to eq 'Ruby on Rails'
