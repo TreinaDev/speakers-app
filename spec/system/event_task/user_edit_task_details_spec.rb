@@ -66,4 +66,30 @@ describe 'user edit task', type: :system, js: true do
     expect(current_path).to eq events_path
     expect(page).to have_content 'Acesso não autorizado.'
   end
+
+  it 'click on edit and cancel' do
+    user = create(:user)
+    content = create(:event_content, title: 'My content', description: 'My own content', user: user)
+    task = user.event_tasks.create!(name: 'Tarefa inicial', description: 'Desafio para iniciantes')
+    EventTaskContent.create!(event_content: content, event_task: task)
+    create(:event_content, title: 'Second Content', description: 'My second content', user: user)
+
+    login_as user
+    visit event_tasks_path
+    click_on 'Tarefa inicial'
+    find("#pencil_edit").click
+    check 'My content'
+    check 'Second Content'
+    fill_in 'Título', with: 'Conteúdo editado'
+    fill_in 'Descrição', with: 'Descrição editada'
+    choose 'Obrigatória'
+    click_on 'Cancelar'
+
+    expect(current_path).to eq event_task_path(task)
+    expect(page).to have_link 'My content'
+    expect(page).to have_content 'Opcional'
+    expect(page).not_to have_link 'Second Content'
+    expect(page).not_to have_link 'Conteúdo editado'
+    expect(page).not_to have_content 'Descrição editada'
+  end
 end

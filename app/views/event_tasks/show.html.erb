@@ -20,11 +20,11 @@
 <div class="mt-5">
   <% if @event_task.event_contents.any? %>
     <div>
-      <strong><%= t('.attatched_contents') %></strong>
+      <strong><%= t('.attached_contents') %></strong>
       <div class="card_container">
         <% @event_task.event_contents.each do |content| %>
           <%= link_to(content, class: "card") do %>
-            <div >
+            <div>
               <p class="card_title_2"><%= t('.content') %></p>
               <h3 class="card_title"><%= content.title %></h3>
             </div>

@@ -15,8 +15,58 @@ pt-BR:
       mandatory: Obrigatória
       optional: Opcional
       no_content_attetched: 'Nenhum conteúdo vinculado.'
-      attatched_contents: 'Conteúdos vinculados:'
+      attached_contents: 'Conteúdos vinculados:'
       content: 'Conteúdo'
     form:
       no_contents: 'Nenhum conteúdo cadastrado'
       save: 'Salvar'
+  event_contents:
+    form:
+      files_attached: 'Arquivos anexados a este conteúdo:'
+    show:
+      attached_to_tasks: 'Tarefas que utilizam este conteúdo:'
+      task: 'Tarefa'
+      no_tasks_attached: 'Esse conteúdo não foi associado a nenhuma tarefa.'
+      no_files_attached: 'Não há arquivos anexados a esse conteúdo.'
+      view_pdf: 'Visualizar PDF:'
+  profiles:
+    new:
+      title: 'Cadastre seu perfil'
+      social_networks: 'Redes Socias'
+    show:
+      title: 'Perfil'
+      my_events: 'Meus Eventos'
+      about_me: 'Sobre mim'
+      dont_exist_event: 'Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.'
+  events: 
+    show:
+      schedule_items_title: 'Suas Agendas'
+      no_schedule_items: 'Você não possui agendas disponíveis para esse evento. Se você acha que isso é um erro, entre em contato com o organizador.'
+  schedule_items:
+    show:
+      not_found: 'Essa Programação não existe'
+  home:
+    index:
+      register: 'Cadastre-se Agora'
+      banner_title: 'Facilite sua jornada como palestrante: Organize e Ensine!'
+      banner_text: 'Um portal completo para gerenciar suas palestras, tarefas e conteúdos, além de acompanhar eventos de forma integrada.'
+      about_title: 'Tudo o que você precisa para brilhar como palestrante, em um só lugar.'
+      about_text: 'Nosso sistema foi projetado pensando nas necessidades dos palestrantes. Aqui, você pode gerenciar todas as suas atividades, criar conteúdos para suas apresentações e acompanhar eventos de forma integrada.'
+      card_title_1: 'Gerenciamento de Tarefas'
+      card_describe_1: 'Planeje suas palestras com facilidade.'
+      card_title_2: 'Criação de Conteúdos'
+      card_describe_2: 'Organize materiais exclusivos para seus participantes.'
+      card_title_3: 'Eventos Integrados'
+      card_describe_3: 'Receba informações automáticas sobre os eventos em que você vai ensinar.'
+      how_works: 'Como funciona?'
+      how_works_title_1: 'Crie sua conta e comece a planejar.'
+      how_works_text_1: 'Registre-se em poucos cliques e comece a organizar suas atividades. Para se cadastrar é necessario que um organizador de evento tenha cadastrado seu email previamente.'
+      how_works_title_2: 'Crie seu perfil.'
+      how_works_text_2: 'Cadastre um perfil que ficará visível para todos os participantes dos seus eventos.'
+      how_works_title_3: 'Cadastre tarefas e conteúdos.'
+      how_works_text_3: 'Armazene tudo o que você precisa para sua palestra em um só lugar.'
+      how_works_title_4: 'Integração com eventos.'
+      how_works_text_4: 'Receba informações sobre onde e quando você vai ensinar.'
+      call_action_title: 'Pronto para transformar suas palestras?'
+      call_action_text: 'Junte-se a outros palestrantes que já estão usando nosso sistema para simplificar sua rotina e entregar mais valor aos seus participantes.'
+      copyright: '© Copyright 2025 Palestra+ | Todos os direitos reservados'

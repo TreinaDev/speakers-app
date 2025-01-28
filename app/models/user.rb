@@ -7,6 +7,12 @@ class User < ApplicationRecord
   before_create :api_auth_user
   has_many :event_contents
   has_many :event_tasks
+  has_one :profile
+  has_many :social_networks, through: :profile
+
+  def full_name
+    first_name + ' ' + last_name
+  end
 
   private
 
