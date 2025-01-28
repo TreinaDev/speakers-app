@@ -1,0 +1,12 @@
+<h1>Adicionar conteúdo ao currículo:</h1>
+
+<%= form_with model: [ @curriculum, @curriculum_content ] do |f| %>
+  <div>
+    <%= f.label :event_content_id %>
+    <%= f.collection_select :event_content_id, @event_contents, :id, :title %>
+  </div>
+
+  <div>
+    <%= f.submit 'Adicionar' %>
+  </div>
+<% end %>

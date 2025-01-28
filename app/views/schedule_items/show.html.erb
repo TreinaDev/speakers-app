@@ -4,3 +4,21 @@
   <h2 class='heading-2'> Descrição </h2>
   <p> <%= @schedule_item.description %> </p>
 </div>
+
+<%= link_to 'Adicionar conteúdo', new_curriculum_curriculum_content_path(@curriculum) %>
+
+<div>
+  <h2> Conteúdos </h2>
+  <% if @curriculum.curriculum_contents.any? %>
+    <% @curriculum.curriculum_contents.each do |content| %>
+      <div>
+        <%= content.event_content.title %>
+      </div>
+    <% end %>
+
+  <% else %>
+    <div>
+     <p> Nenhum conteúdo cadastrado para essa programação. <%= link_to 'Clique aqui para adicionar seu primeiro conteúdo', new_curriculum_curriculum_content_path(@curriculum) %> </p>
+    </div>
+  <% end %>
+</div>

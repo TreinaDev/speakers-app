@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      curriculum_content: Conteúdo
+    attributes:
+      curriculum_content:
+        event_contents: Conteúdos
+        event_content_id: Conteúdos
+        curriculum: Currículo
+        curriculum_id: Currículo

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_28_182425) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_28_194827) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -47,6 +47,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_28_182425) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "curriculum_contents", force: :cascade do |t|
+    t.integer "curriculum_id", null: false
+    t.integer "event_content_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["curriculum_id"], name: "index_curriculum_contents_on_curriculum_id"
+    t.index ["event_content_id"], name: "index_curriculum_contents_on_event_content_id"
   end
 
   create_table "curriculums", force: :cascade do |t|
@@ -120,6 +129,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_28_182425) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "curriculum_contents", "curriculums"
+  add_foreign_key "curriculum_contents", "event_contents"
   add_foreign_key "curriculums", "users"
   add_foreign_key "event_contents", "users"
   add_foreign_key "event_task_contents", "event_contents"
