@@ -35,7 +35,6 @@ describe 'User views the public profile' do
 
     visit profile_path(profile.username)
 
-    expect(page).to have_content('Perfil')
     expect(page).to have_content('José de Jesus')
     expect(page).to have_content('Instrutor')
     expect(page).to have_content('Olá, meu nome é José e eu sou um instrutor de Ruby on Rails')

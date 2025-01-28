@@ -19,6 +19,26 @@
     <%= f.text_area :about_me, class: 'text-area' %>
   </div>
 
+  <div class="field">
+    <%= f.label :pronoun, class: 'label-primary'  %>
+    <%= f.text_area :pronoun, class: 'text-area' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city, class: 'label-primary'  %>
+    <%= f.text_area :city, class: 'text-area' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birth, class: 'label-primary'  %>
+    <%= f.date_field :birth %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gender, class: 'label-primary'  %>
+    <%= f.text_area :gender, class: 'text-area'%>
+  </div>
+
   <div class="my-3">
     <%= f.label :profile_picture %>
     <%= f.file_field :profile_picture %>

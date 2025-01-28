@@ -27,7 +27,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:title, :about_me, :profile_picture)
+    params.require(:profile).permit(:title, :about_me, :profile_picture, :pronoun, :city, :birth, :gender)
   end
 
   def check_if_have_an_existing_profile

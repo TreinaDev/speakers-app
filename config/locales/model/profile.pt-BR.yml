@@ -9,4 +9,8 @@ pt-BR:
         profile_picture: 'Foto de Perfil'
         my_site: 'Meu site'
         github: 'GitHub'
-        social_networks: Rede Social
+        social_networks: 'Rede Social'
+        pronoun: 'Pronome'
+        city: 'Cidade'
+        birth: 'Data de Nascimento'
+        gender: 'Gênero'
