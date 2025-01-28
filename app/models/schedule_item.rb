@@ -23,4 +23,8 @@ class ScheduleItem
   def self.delete_all
     @@instances = []
   end
+
+  def participants
+    ExternalParticipantApi::ListParticipantsService.call(id)
+  end
 end
