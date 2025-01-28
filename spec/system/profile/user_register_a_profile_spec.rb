@@ -22,10 +22,11 @@ describe 'User register a profile' do
     click_on 'Cadastrar'
     fill_in 'Título', with: 'Instrutor / Desenvolvedor'
     fill_in 'Sobre mim', with: 'Sou João, desenvolvedor Ruby com foco em Ruby on Rails.'
-    fill_in 'Pronome', with: 'Ele / Dele'
+    select('Ele/Dele', from: 'Pronome')
     fill_in 'Cidade', with: 'Florianópolis'
     fill_in 'Data de Nascimento', with: '1999-01-25'
-    fill_in 'Gênero', with: 'Masculino'
+    select('Outro:', from: 'Gênero')
+    fill_in 'Outro Gênero', with: 'Transgênero'
     attach_file('Foto de Perfil',  Rails.root.join('spec/fixtures/puts.png'))
     fill_in 'Meu site', with: 'https://www.joaotutoriais.com/'
     fill_in 'Youtube', with: 'https://www.youtube.com/@JoãoTutoriais'
@@ -40,10 +41,10 @@ describe 'User register a profile' do
     expect(page).to have_content('Perfil cadastrado com sucesso.')
     expect(profile_test.title).to eq('Instrutor / Desenvolvedor')
     expect(profile_test.about_me).to eq('Sou João, desenvolvedor Ruby com foco em Ruby on Rails.')
-    expect(profile_test.pronoun).to eq('Ele / Dele')
+    expect(profile_test.pronoun).to eq('Ele/Dele')
     expect(profile_test.city).to eq('Florianópolis')
     expect(profile_test.birth.strftime('%d/%m/%Y')).to eq('25/01/1999')
-    expect(profile_test.gender).to eq('Masculino')
+    expect(profile_test.gender).to eq('Transgênero')
     expect(profile_test.profile_picture.attached?).to eq(true)
     expect(networks.length).to eq(5)
     expect(networks.find_by(url: 'https://www.youtube.com/@JoãoTutoriais').present?).to eq(true)

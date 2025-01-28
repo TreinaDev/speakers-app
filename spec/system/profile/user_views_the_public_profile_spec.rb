@@ -26,7 +26,7 @@ describe 'User views the public profile' do
     user = create(:user, first_name: 'José', last_name: 'de Jesus')
     image = fixture_file_upload(Rails.root.join('spec/fixtures/puts.png'))
     profile = create(:profile, title: 'Instrutor', about_me: 'Olá, meu nome é José e eu sou um instrutor de Ruby on Rails',
-                     user: user, profile_picture: image)
+                     user: user, profile_picture: image, pronoun: 'Ele/Dele', city: 'Florianópolis', birth: '1999-01-02', gender: 'Masculino')
     create(:social_network, url: 'https://www.youtube.com/@JoséTutoriais', social_network_type: 1, profile: profile)
     create(:social_network, url: 'https://www.josetutoriais.com/', social_network_type: :my_site, profile: profile)
     create(:social_network, url: 'https://x.com/jose', social_network_type: :x, profile: profile)
@@ -38,6 +38,10 @@ describe 'User views the public profile' do
     expect(page).to have_content('José de Jesus')
     expect(page).to have_content('Instrutor')
     expect(page).to have_content('Olá, meu nome é José e eu sou um instrutor de Ruby on Rails')
+    expect(page).to have_content('Ele/Dele')
+    expect(page).to have_content('Florianópolis')
+    expect(page).to have_content('02/01/1999')
+    expect(page).to have_content('Masculino')
     expect(page).to have_css("img[src*='puts.png']")
     expect(page).to have_link('Youtube')
     expect(page).to have_link('Meu Site')
@@ -53,7 +57,7 @@ describe 'User views the public profile' do
     user = create(:user, first_name: 'José', last_name: 'de Jesus')
     image = fixture_file_upload(Rails.root.join('spec/fixtures/puts.png'))
     profile = create(:profile, title: 'Instrutor', about_me: 'Olá, meu nome é José e eu sou um instrutor de Ruby on Rails',
-                     user: user, profile_picture: image)
+                     user: user, profile_picture: image, pronoun: 'Ele/Dele', city: 'Florianópolis', birth: '1999-01-02', gender: 'Masculino')
     create(:social_network, profile: profile)
 
     login_as user

@@ -14,6 +14,8 @@ class ProfilesController < ApplicationController
 
   def create
     @profile = current_user.build_profile(profile_params)
+    @profile.pronoun = params[:profile][:other_pronoun] if params[:profile][:other_pronoun] && profile_params[:pronouns] == 'Outro:'
+    @profile.gender = params[:profile][:other_gender] if params[:profile][:other_gender] && profile_params[:gender] == 'Outro:'
     create_networks(params[:profile][:social_networks])
 
     if @profile.save

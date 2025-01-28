@@ -38,6 +38,8 @@ pt-BR:
       my_events: 'Meus Eventos'
       about_me: 'Sobre mim'
       dont_exist_event: 'Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.'
+      gender: 'Gênero'
+      pronoun: 'Pronomes'
   events: 
     show:
       schedule_items_title: 'Suas Agendas'

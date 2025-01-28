@@ -21,7 +21,9 @@
 
   <div class="field">
     <%= f.label :pronoun, class: 'label-primary'  %>
-    <%= f.text_area :pronoun, class: 'text-area' %>
+    <%= f.select :pronoun, options_for_select(['Ela/Dela','Ele/Dele', 'Elu/Delu', 'Prefiro não informar', 'Outro:']) %>
+    <%= f.label :other_pronoun, class: 'label-primary'  %>
+    <%= f.text_field :other_pronoun, class: 'field-primary' %>
   </div>
 
   <div class="field">
@@ -36,7 +38,9 @@
 
   <div class="field">
     <%= f.label :gender, class: 'label-primary'  %>
-    <%= f.text_area :gender, class: 'text-area'%>
+    <%= f.select :gender, options_for_select(['Masculino','Feminino', 'Não-binário', 'Prefiro não responder', 'Outro:'])%>    
+    <%= f.label :other_gender, class: 'label-primary'  %>
+    <%= f.text_field :other_gender, class: 'field-primary' %>
   </div>
 
   <div class="my-3">
