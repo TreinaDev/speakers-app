@@ -3,6 +3,7 @@ class ScheduleItemsController < ApplicationController
 
   def show
     @schedule_item = ScheduleItem.find(params[:id], current_user.email)
-    redirect_to events_path, alert: t('.not_found') unless @schedule_item
+    redirect_to events_path, alert: t('.not_found') if @schedule_item.nil?
+    @participants = @schedule_item&.participants
   end
 end
