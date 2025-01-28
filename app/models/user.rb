@@ -11,7 +11,7 @@ class User < ApplicationRecord
   private
 
   def api_auth_user
-    unless ExternalEventApi::UserFindEmailService.new(self.email).find_email
+    unless ExternalEventApi::UserFindEmailService.new(email: self.email).call
       errors.add(:base, "Algo deu errado, contate o responsável.")
       throw(:abort)
     end

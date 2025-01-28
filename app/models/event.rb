@@ -42,7 +42,7 @@ class Event
   end
 
   def self.find(id)
-    ExternalEventApi::FindEventService.call(id)
+    ExternalEventApi::FindEventService.call(id: id)
   end
 
   def self.count

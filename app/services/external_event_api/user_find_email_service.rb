@@ -1,23 +1,13 @@
-class ExternalEventApi::UserFindEmailService
-  def initialize(email)
-    @email = email
-  end
-
-  def self.find_email(email)
-    new(email).find_email
-  end
-
-  def find_email
+class ExternalEventApi::UserFindEmailService < ApplicationService
+  def call
     presence_fetch_api_email?
   end
 
   private
 
-  attr_reader :email
-
   def presence_fetch_api_email?
     begin
-      Faraday.get("http://localhost:3001/events/speakers?email=#{ email }").success?
+      Faraday.get("http://localhost:3001/events/speakers?email=#{ kwargs[:email] }").success?
     rescue StandardError => error
       Rails.logger.error(error)
       false
