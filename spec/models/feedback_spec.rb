@@ -10,7 +10,7 @@ describe Feedback do
       event_feedbacks = [build(:feedback, name: 'João', title: 'Muito bom!', description: 'Gostei muito'),
                          build(:feedback, name: 'Anônimo', title: 'Podia ser melhor', description: 'Faltou café'),
                          build(:feedback, name: 'Joaquim', title: 'Parabéns você foi selecionado', description: 'Esta mensagem foi marcada como Spam')]
-      allow(Feedback).to receive(:event).and_return(event_feedbacks)
+      allow(ExternalParticipantApi::GetEventFeedbacksService).to receive(:call).and_return(event_feedbacks)
 
       feedbacks = Feedback.event(event_id: event.id, speaker: user.email)
 
@@ -31,7 +31,7 @@ describe Feedback do
       event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
               start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
               event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
-      allow(Feedback).to receive(:event).and_return([])
+      allow(ExternalParticipantApi::GetEventFeedbacksService).to receive(:call).and_return([])
 
       feedbacks = Feedback.event(event_id: event.id, speaker: user.email)
 
