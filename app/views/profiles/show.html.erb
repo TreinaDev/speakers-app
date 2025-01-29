@@ -26,7 +26,7 @@
             <h3 class="text-xl font-bold"><%= t('.gender') %></h3>
             <p class="mt-7"><%= @profile.gender %></p>
             <h3 class="text-xl font-bold"><%= t('.birth') %></h3>
-            <p class="mt-7"><%= @profile.birth.strftime('%d/%m/%Y') %></p>
+            <p class="mt-7"><%= @profile.birth&.strftime('%d/%m/%Y') %></p>
             <h3 class="text-xl font-bold"><%= t('.city') %></h3>
             <p class="mt-7"><%= @profile.city %></p>
         </div>

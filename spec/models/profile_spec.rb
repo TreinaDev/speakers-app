@@ -5,6 +5,10 @@ RSpec.describe Profile, type: :model do
     subject { create(:profile) }
     it { validate_presence_of(:title) }
     it { should validate_presence_of(:about_me) }
+    it { should validate_presence_of(:pronoun) }
+    it { should validate_presence_of(:gender) }
+    it { should validate_presence_of(:birth) }
+    it { should validate_presence_of(:city) }
     it { should have_one_attached(:profile_picture) }
     it { should belong_to(:user) }
     it { should have_many(:social_networks) }
