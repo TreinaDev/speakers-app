@@ -1,12 +1,27 @@
 <h1>Adicionar conteúdo ao currículo:</h1>
 
 <%= form_with model: [ @curriculum, @curriculum_content ] do |f| %>
-  <div>
-    <%= f.label :event_content_id %>
-    <%= f.collection_select :event_content_id, @event_contents, :id, :title %>
-  </div>
 
-  <div>
-    <%= f.submit 'Adicionar' %>
-  </div>
+  <% if @event_contents.any? %>
+    <div>
+      <%= f.label :event_content_id %>
+      <%= f.collection_select :event_content_id, @event_contents, :id, :title %>
+    </div>
+
+    <div>
+      <%= f.submit 'Adicionar' %>
+      <%= link_to 'Cancelar', schedule_item_path(@curriculum.schedule_item_code) %>
+    </div>
+  <% else %>
+    <div>
+      <b>Não existem conteúdos disponíveis.</b>
+    </div>
+    
+    <div>
+      <%= link_to 'Clique aqui para cadastrar um conteúdo', new_event_content_path %>
+    </div>
+    <div>
+      <%= link_to 'Voltar', schedule_item_path(@curriculum.schedule_item_code) %>
+    </div>
+  <% end %>
 <% end %>
