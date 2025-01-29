@@ -39,6 +39,96 @@ describe Event do
     end
   end
 
+  context '.find' do
+    it 'should return an event if present in instances' do
+      Event.delete_all
+      json = [
+        {
+          "id": 1,
+          "name": "Event1",
+          "url": "",
+          "description": "Event1 description",
+          "start_date": "14-01-2025",
+          "end_date": "16-01-2025",
+          "event_type": "in-person",
+          "location": "Palhoça",
+          "participant_limit": 20,
+          "status": "published"
+        },
+        {
+          "id": 2,
+          "name": "Event2",
+          "url": "",
+          "description": "Event2 description",
+          "start_date": "15-01-2025",
+          "end_date": "17-01-2025",
+          "event_type": "in-person",
+          "location": "Florianópolis",
+          "participant_limit": 20,
+          "status": "draft"
+        }
+      ]
+      response_all = double('faraday_response', body: json.to_json, success?: true)
+      allow(Faraday).to receive(:get).and_return(response_all)
+
+      Event.all('teste@email.com')
+      event = Event.find(1)
+
+      expect(Event.count).to eq 2
+      expect(event.id).to eq 1
+      expect(event.name).to eq 'Event1'
+      expect(event.url).to eq ''
+      expect(event.description).to eq 'Event1 description'
+      expect(event.start_date).to eq '14-01-2025'
+      expect(event.end_date).to eq '16-01-2025'
+      expect(event.event_type).to eq 'in-person'
+      expect(event.location).to eq 'Palhoça'
+      expect(event.participant_limit).to eq 20
+      expect(event.status).to eq 'published'
+    end
+
+    it 'should perform a GET request to locate the event if not found in the instances' do
+      Event.delete_all
+      json = {
+              "id": 1,
+              "name": "Event1",
+              "url": "",
+              "description": "Event1 description",
+              "start_date": "14-01-2025",
+              "end_date": "16-01-2025",
+              "event_type": "in-person",
+              "location": "Palhoça",
+              "participant_limit": 20,
+              "status": "published"
+            }
+      response_find = double('faraday_response', body: json.to_json, success?: true)
+      allow(Event).to receive(:find_instance).and_return(nil)
+      allow(Faraday).to receive(:get).and_return(response_find)
+
+      event = Event.find(1)
+
+      expect(event.id).to eq 1
+      expect(event.name).to eq 'Event1'
+      expect(event.url).to eq ''
+      expect(event.description).to eq 'Event1 description'
+      expect(event.start_date).to eq '14-01-2025'
+      expect(event.end_date).to eq '16-01-2025'
+      expect(event.event_type).to eq 'in-person'
+      expect(event.location).to eq 'Palhoça'
+      expect(event.participant_limit).to eq 20
+      expect(event.status).to eq 'published'
+    end
+
+    it 'should return nil if not found' do
+      Event.delete_all
+
+      event = Event.find(99999)
+
+      expect(Event.count).to eq 0
+      expect(event).to be_nil
+    end
+  end
+
   context '#schedule_items' do
     it 'should get all schedules items associated with event' do
       event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',

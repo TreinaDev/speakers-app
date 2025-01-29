@@ -19,6 +19,7 @@ describe 'User see schedule item details', type: :request do
   end
 
   it 'must be same speaker email' do
+    ScheduleItem.delete_all
     first_user = create(:user, email: 'joao@email.com')
     first_schedule_item = build(:schedule_item, speaker_email: first_user.email)
     other_user = create(:user, email: 'other@email.com')

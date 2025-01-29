@@ -1,6 +1,4 @@
-class Event
-  extend ActiveModel::Translation
-
+class Event < ApplicationModel
   attr_accessor :id, :name, :url, :description, :start_date, :end_date, :event_type, :location, :participant_limit, :status
 
   @@instances = []
@@ -20,14 +18,21 @@ class Event
 
 
   def self.all(email)
+    Event.delete_all
     ExternalEventApi::GetAllEventsService.call(email: email)
   end
 
   def self.find(id)
-    ExternalEventApi::FindEventService.call(id: id)
+    event = find_instance(@@instances, id)
+    if event.nil?
+      ExternalEventApi::FindEventService.call(id: id)
+    else
+      event
+    end
   end
 
   def schedule_items(email)
+    ScheduleItem.delete_all
     ExternalEventApi::ScheduleItemsService.call(event_id: id, email: email)
   end
 

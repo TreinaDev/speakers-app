@@ -2,11 +2,27 @@ require 'rails_helper'
 
 describe ScheduleItem do
   context '.find' do
-    it 'should return a schedule item' do
+    it 'should return an schedule item if present in instances' do
       ScheduleItem.delete_all
       user = create(:user, email: 'joao@email.com')
       schedule_item_instance = build(:schedule_item, title: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD', speaker_email: user.email, length: 100)
-      allow(ScheduleItem).to receive(:find).and_return(schedule_item_instance)
+      allow(ScheduleItem).to receive(:find_instance).and_return(schedule_item_instance)
+
+      schedule_item = ScheduleItem.find(schedule_item_id: schedule_item_instance.id, email: user.email)
+
+      expect(ScheduleItem.count).to eq 1
+      expect(schedule_item.title).to eq 'Entrevista com João'
+      expect(schedule_item.description).to eq 'Aprenda sobre RoR e TDD'
+      expect(schedule_item.speaker_email).to eq 'joao@email.com'
+      expect(schedule_item.length).to eq 100
+    end
+
+    it 'should perform a GET request to locate the schedule item if not found in the instances' do
+      ScheduleItem.delete_all
+      user = create(:user, email: 'joao@email.com')
+      schedule_item_instance = build(:schedule_item, title: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD', speaker_email: user.email, length: 100)
+      allow(ScheduleItem).to receive(:find_instance).and_return(nil)
+      allow(ExternalEventApi::FindScheduleItemService).to receive(:call).and_return(schedule_item_instance)
 
       schedule_item = ScheduleItem.find(schedule_item_id: schedule_item_instance.id, email: user.email)
 
