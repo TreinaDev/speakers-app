@@ -1,27 +1,34 @@
-<h1>Adicionar conteúdo ao currículo:</h1>
+<%= turbo_frame_tag 'modal' do %>
+ <div class="modal">
+    <h2 class='heading-2'>Adicionar conteúdo ao currículo:</h2>
 
-<%= form_with model: [ @curriculum, @curriculum_content ] do |f| %>
+    <%= form_with model: [ @curriculum, @curriculum_content ] do |f| %>
 
-  <% if @event_contents.any? %>
-    <div>
-      <%= f.label :event_content_id %>
-      <%= f.collection_select :event_content_id, @event_contents, :id, :title %>
-    </div>
+      <% if @event_contents.any? %>
+        <div>
+          <%= f.label :event_content_id, class: 'label-primary' %>
+          <%= f.collection_select :event_content_id, @event_contents, :id, :title, class: 'field-primary' %>
+        </div>
 
-    <div>
-      <%= f.submit 'Adicionar' %>
-      <%= link_to 'Cancelar', schedule_item_path(@curriculum.schedule_item_code) %>
-    </div>
-  <% else %>
-    <div>
-      <b>Não existem conteúdos disponíveis.</b>
-    </div>
-    
-    <div>
-      <%= link_to 'Clique aqui para cadastrar um conteúdo', new_event_content_path %>
-    </div>
-    <div>
-      <%= link_to 'Voltar', schedule_item_path(@curriculum.schedule_item_code) %>
-    </div>
-  <% end %>
+        <div class="mt-5">
+          <%= f.submit 'Adicionar', class: 'btn-primary' %>
+        </div>
+      <% else %>
+        <div>
+          <b>Não existem conteúdos disponíveis.</b>
+        </div>
+        
+        <div>
+          <%= link_to 'Clique aqui para cadastrar um conteúdo', new_event_content_path, class: 'link-primary', data: { turbo: false } %>
+        </div>
+      <% end %>
+      
+      <div class="mt-5">
+        <%= link_to 'Cancelar', "#", data: {
+            controller: 'modals',
+            action: 'modals#close'
+        }, class: 'btn-primary' %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
