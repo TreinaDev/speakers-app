@@ -6,11 +6,16 @@ class ExternalEventApi::UserFindEmailService < ApplicationService
   private
 
   def presence_fetch_api_email?
+    token = nil
     begin
-      Faraday.get("http://localhost:3001/events/speakers", { email: kwargs[:email] }).success?
+      response = Faraday.post('http://localhost:3001/api/v1/speakers', { email: kwargs[:email] })
+      if response.success?
+        json_response = JSON.parse(response.body)
+        token = json_response['token']
+      end
     rescue StandardError => error
       Rails.logger.error(error)
-      false
     end
+    token
   end
 end
