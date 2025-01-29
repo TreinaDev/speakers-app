@@ -1,34 +1,38 @@
 <%= turbo_frame_tag 'modal' do %>
- <div class="modal">
-    <h2 class='heading-2'>Adicionar conteúdo ao currículo:</h2>
+  <div class="modal">
+    <div class='flex justify-end'> 
+      <div>
+        <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: 'Fechar' do %>
+          <%= image_tag 'close_icon.png', id: 'close_icon', class: 'icon' %>
+        <% end %>
+      </div>
+    </div>
+
+    <h2 class='heading-3'><%= t('.title') %></h2>
 
     <%= form_with model: [ @curriculum, @curriculum_content ] do |f| %>
 
       <% if @event_contents.any? %>
         <div>
-          <%= f.label :event_content_id, class: 'label-primary' %>
-          <%= f.collection_select :event_content_id, @event_contents, :id, :title, class: 'field-primary' %>
-        </div>
+          <%= f.label :event_content_id, class: "label-primary" %>
+          <%= f.collection_select :event_content_id, @event_contents, :id, :title, {}, 
+            { class: "mt-1 block w-full border-2 rounded-lg border-gray-300 shadow-sm bg-white text-gray-900 
+                      focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-300 dark:text-gray-900 
+                      dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
+      </div>
 
-        <div class="mt-5">
-          <%= f.submit 'Adicionar', class: 'btn-primary' %>
+        <div class="mt-5 flex justify-end">
+          <%= f.submit t('.save'), class: 'btn-primary' %>
         </div>
       <% else %>
         <div>
-          <b>Não existem conteúdos disponíveis.</b>
+          <b><%= t('.no_content') %></b>
         </div>
         
         <div>
-          <%= link_to 'Clique aqui para cadastrar um conteúdo', new_event_content_path, class: 'link-primary', data: { turbo: false } %>
+          <%= link_to t('.new_content_link'), new_event_content_path, class: 'link-primary', data: { turbo: false } %>
         </div>
       <% end %>
-      
-      <div class="mt-5">
-        <%= link_to 'Cancelar', "#", data: {
-            controller: 'modals',
-            action: 'modals#close'
-        }, class: 'btn-primary' %>
-      </div>
     <% end %>
-  </div>
+ </div>
 <% end %>

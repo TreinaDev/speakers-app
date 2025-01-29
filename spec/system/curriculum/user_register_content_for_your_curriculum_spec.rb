@@ -20,7 +20,7 @@ describe 'User register content for your schedule item curriculum', type: :syste
     click_on 'Ruby on Rails'
     click_on 'TDD com Rails'
     click_on 'Adicionar conteúdo'
-    select 'Desenvolvimento', from: 'Conteúdos'
+    select 'Desenvolvimento', from: 'Selecionar conteúdo'
     click_on 'Adicionar'
 
     expect(CurriculumContent.count).to eq 1
@@ -39,8 +39,8 @@ describe 'User register content for your schedule item curriculum', type: :syste
     login_as user
     visit new_curriculum_curriculum_content_path(curriculum)
 
-    expect(page).to have_no_select 'Conteúdos', with_options: [ 'Introdução' ]
-    expect(page).to have_select 'Conteúdos', with_options: [ 'Desenvolvimento' ]
+    expect(page).to have_no_select 'Selecionar conteúdo', with_options: [ 'Introdução' ]
+    expect(page).to have_select 'Selecionar conteúdo', with_options: [ 'Desenvolvimento' ]
   end
 
   it 'and must display message when no event content is available' do

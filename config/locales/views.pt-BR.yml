@@ -44,7 +44,17 @@ pt-BR:
       no_schedule_items: 'Você não possui agendas disponíveis para esse evento. Se você acha que isso é um erro, entre em contato com o organizador.'
   schedule_items:
     show:
+      estimated_participants: 'Número estimado de participantes:'
       not_found: 'Essa Programação não existe'
+      curriculum_content_title: 'Conteúdos da programação'
+      no_curriculum_content: 'Nenhum conteúdo cadastrado para essa programação.'
+      new_curriculum_content_button: 'Adicionar conteúdo'
+  curriculum_contents:
+    new:
+      title: 'Adicionar conteúdo a programação:'
+      no_content: 'Não existem conteúdos disponíveis.'
+      save: 'Adicionar'
+      new_content_link: 'Clique aqui para cadastrar um conteúdo.'
   home:
     index:
       register: 'Cadastre-se Agora'
