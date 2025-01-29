@@ -40,6 +40,8 @@ pt-BR:
       dont_exist_event: 'Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.'
       gender: 'Gênero'
       pronoun: 'Pronomes'
+      birth: 'Data de Nascimento'
+      city: 'Cidade'
   events: 
     show:
       schedule_items_title: 'Suas Agendas'

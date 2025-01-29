@@ -16,3 +16,7 @@ pt-BR:
         birth: 'Data de Nascimento'
         gender: 'Gênero'
         other_gender: 'Outro Gênero'
+        display_pronoun: 'Exibir Pronome'
+        display_gender: 'Exibir Gênero'
+        display_city: 'Exibir Cidade'
+        display_birth: 'Exibir Data de Nascimento'

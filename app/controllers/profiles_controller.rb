@@ -43,7 +43,8 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    filtered_params = params.require(:profile).permit(:title, :about_me, :profile_picture, :pronoun, :city, :birth, :gender)
+    filtered_params = params.require(:profile).permit(:title, :about_me, :profile_picture, :pronoun, :city, :birth,
+                                                      :gender, :display_birth, :display_city, :display_gender, :display_pronoun)
     filtered_params[:pronoun] = params[:profile][:other_pronoun] if filtered_params[:pronoun] == t('profiles.pronoun_options.other')
     filtered_params[:gender] = params[:profile][:other_gender] if filtered_params[:gender] == t('profiles.gender_options.other')
     filtered_params

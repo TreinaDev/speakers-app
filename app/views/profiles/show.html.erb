@@ -21,14 +21,22 @@
         <div>
             <h3 class="text-xl font-bold"><%= t('.about_me') %></h3>
             <p class="mt-7"><%= @profile.about_me %></p>
-            <h3 class="text-xl font-bold"><%= t('.pronoun') %></h3>
-            <p class="mt-7"><%= @profile.pronoun %></p>
-            <h3 class="text-xl font-bold"><%= t('.gender') %></h3>
-            <p class="mt-7"><%= @profile.gender %></p>
-            <h3 class="text-xl font-bold"><%= t('.birth') %></h3>
-            <p class="mt-7"><%= @profile.birth&.strftime('%d/%m/%Y') %></p>
-            <h3 class="text-xl font-bold"><%= t('.city') %></h3>
-            <p class="mt-7"><%= @profile.city %></p>
+            <% if @profile.display_pronoun %>
+                <h3 class="text-xl font-bold"><%= t('.pronoun') %></h3>
+                <p class="mt-7"><%= @profile.pronoun %></p>
+            <% end %>
+            <% if @profile.display_gender %>
+                <h3 class="text-xl font-bold"><%= t('.gender') %></h3>
+                <p class="mt-7"><%= @profile.gender %></p>
+            <% end %>
+            <% if @profile.display_birth %>
+                <h3 class="text-xl font-bold"><%= t('.birth') %></h3>
+                <p class="mt-7"><%= @profile.birth&.strftime('%d/%m/%Y') %></p>
+            <% end %>
+            <% if @profile.display_city %>
+                <h3 class="text-xl font-bold"><%= t('.city') %></h3>
+                <p class="mt-7"><%= @profile.city %></p>
+            <% end %>
         </div>
     </div>
 

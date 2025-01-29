@@ -24,16 +24,22 @@
     <%= f.select :pronoun, @pronoun_list, { include_blank: "" } %>
     <%= f.label :other_pronoun, class: 'label-primary'  %>
     <%= f.text_field :other_pronoun, class: 'field-primary' %>
+    <%= f.label :display_pronoun, class: 'label-primary'  %>
+    <%= f.check_box :display_pronoun %>
   </div>
 
   <div class="field">
     <%= f.label :city, class: 'label-primary'  %>
     <%= f.text_area :city, class: 'text-area' %>
+    <%= f.label :display_city, class: 'label-primary'  %>
+    <%= f.check_box :display_city %>
   </div>
 
   <div class="field">
     <%= f.label :birth, class: 'label-primary'  %>
     <%= f.date_field :birth %>
+    <%= f.label :display_birth, class: 'label-primary'  %>
+    <%= f.check_box :display_birth %>
   </div>
 
   <div class="field">
@@ -41,6 +47,8 @@
     <%= f.select :gender, @gender_list, { include_blank: "" } %>    
     <%= f.label :other_gender, class: 'label-primary'  %>
     <%= f.text_field :other_gender, class: 'field-primary' %>
+    <%= f.label :display_gender, class: 'label-primary' %>
+    <%= f.check_box :display_gender %>
   </div>
 
   <div class="my-3">

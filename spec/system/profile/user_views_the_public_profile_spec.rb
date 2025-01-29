@@ -89,4 +89,25 @@ describe 'User views the public profile' do
     expect(current_path).to eq(events_path)
     expect(page).to have_content('O usuário Thiago não existe.')
   end
+
+  it 'and set private fields' do
+    user = create(:user, first_name: 'José', last_name: 'de Jesus')
+    image = fixture_file_upload(Rails.root.join('spec/fixtures/puts.png'))
+    create(:profile, title: 'Instrutor', about_me: 'Olá, meu nome é José e eu sou um instrutor de Ruby on Rails',
+                     user: user, profile_picture: image, pronoun: 'Ele/Dele', city: 'Florianópolis', birth: '1999-01-02', gender: 'Masculino',
+                     display_gender: false, display_pronoun: false, display_city: false, display_birth: false)
+
+    login_as user
+    visit events_path
+    click_on 'Meu Perfil'
+
+    expect(page).not_to have_content('Pronomes')
+    expect(page).not_to have_content('Ele/Dele')
+    expect(page).not_to have_content('Cidade')
+    expect(page).not_to have_content('Florianópolis')
+    expect(page).not_to have_content('Birth')
+    expect(page).not_to have_content('02/01/1999')
+    expect(page).not_to have_content('Gênero')
+    expect(page).not_to have_content('Masculino')
+  end
 end

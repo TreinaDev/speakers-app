@@ -9,7 +9,7 @@
 #   end
 User.skip_callback(:create, :before, :api_auth_user)
 user = User.create!(first_name: 'João', last_name: 'Campus', email: 'joao@email.com', password: '123456')
-user_2 = User.create!(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456')
+User.create!(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456')
 User.set_callback(:create, :before, :api_auth_user)
 
 profile = Profile.create!(title: 'Instrutor / Desenvolvedor',
@@ -23,9 +23,8 @@ profile = Profile.create!(title: 'Instrutor / Desenvolvedor',
                           Minha motivação vem da possibilidade de resolver problemas reais, criando sistemas que otimizem processos,
                           melhorem a experiência dos usuários e tragam impacto positivo para as empresas. Fora do mundo do código, gosto
                             de compartilhar conhecimento, aprender com a comunidade e me desafiar constantemente a ser um profissional melhor.',
-                          user: user, profile_picture: { io: File.open(Rails.root.join('spec/fixtures/puts.png')),
-                                                         filename: 'puts.png',
-                                                         content_type: 'image/png' })
+                          user: user, profile_picture: { io: File.open(Rails.root.join('spec/fixtures/puts.png')), filename: 'puts.png',
+                          content_type: 'image/png' }, gender: 'Masculino', pronoun: 'Ele/Dele', city: 'Salvador', birth: '1999-01-25')
 profile.social_networks.create(url: 'https://www.joaotutoriais.com/', social_network_type: :my_site)
 profile.social_networks.create(url: 'https://www.youtube.com/@JoãoTutoriais', social_network_type: :youtube)
 profile.social_networks.create(url: 'https://x.com/joao', social_network_type: :x)
