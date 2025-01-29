@@ -19,36 +19,44 @@
     <%= f.text_area :about_me, class: 'text-area' %>
   </div>
 
-  <div class="field">
+  <div class="field border-2 border-black p-4">
     <%= f.label :pronoun, class: 'label-primary'  %>
-    <%= f.select :pronoun, @pronoun_list, { include_blank: "" } %>
+    <%= f.select :pronoun, @pronoun_list, { include_blank: "" }, class: 'field-primary border border-gray' %>
     <%= f.label :other_pronoun, class: 'label-primary'  %>
     <%= f.text_field :other_pronoun, class: 'field-primary' %>
-    <%= f.label :display_pronoun, class: 'label-primary'  %>
-    <%= f.check_box :display_pronoun %>
+    <div class="flex my-6 items-center">
+      <%= f.check_box :display_pronoun, class: 'mr-4' %>
+      <%= f.label :display_pronoun %>
+    </div>
   </div>
 
   <div class="field">
     <%= f.label :city, class: 'label-primary'  %>
     <%= f.text_area :city, class: 'text-area' %>
-    <%= f.label :display_city, class: 'label-primary'  %>
-    <%= f.check_box :display_city %>
+    <div class="flex my-6 items-center">
+      <%= f.check_box :display_city, class: 'mr-4' %>
+      <%= f.label :display_city %>
+    </div>
   </div>
 
-  <div class="field">
+  <div class="">
     <%= f.label :birth, class: 'label-primary'  %>
-    <%= f.date_field :birth %>
-    <%= f.label :display_birth, class: 'label-primary'  %>
-    <%= f.check_box :display_birth %>
+    <%= f.date_field :birth, class: 'field-primary border mt-3'  %>
+    <div class="flex my-6 items-center">
+      <%= f.check_box :display_birth, class: 'mr-4' %>
+      <%= f.label :display_birth  %>
+    </div>
   </div>
 
-  <div class="field">
+  <div class="field  border-2 border-black p-4">
     <%= f.label :gender, class: 'label-primary'  %>
-    <%= f.select :gender, @gender_list, { include_blank: "" } %>    
+    <%= f.select :gender, @gender_list, { include_blank: "" }, class: 'field-primary border border-gray' %>    
     <%= f.label :other_gender, class: 'label-primary'  %>
     <%= f.text_field :other_gender, class: 'field-primary' %>
-    <%= f.label :display_gender, class: 'label-primary' %>
-    <%= f.check_box :display_gender %>
+    <div class="flex my-6 items-center">
+      <%= f.check_box :display_gender, class: 'mr-4' %>
+      <%= f.label :display_gender %>
+    </div>
   </div>
 
   <div class="my-3">
