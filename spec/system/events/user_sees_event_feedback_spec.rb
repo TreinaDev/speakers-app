@@ -8,11 +8,11 @@ describe 'User can view feedback for an event' do
               start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
               event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
       allow(Event).to receive(:find).and_return(event)
-      event_feedbacks = [build(:feedback, name: 'João', title: 'Muito bom!', description: 'Gostei muito'),
+      event_feedbacks = [ build(:feedback, name: 'João', title: 'Muito bom!', description: 'Gostei muito'),
                          build(:feedback, name: 'Anônimo', title: 'Podia ser melhor', description: 'Faltou café'),
-                         build(:feedback, name: 'Joaquim', title: 'Parabéns você foi selecionado', description: 'Esta mensagem foi marcada como Spam')]
+                         build(:feedback, name: 'Joaquim', title: 'Parabéns você foi selecionado', description: 'Esta mensagem foi marcada como Spam') ]
       allow(Feedback).to receive(:event).with(event_id: event.id, speaker: user.email).and_return(event_feedbacks)
-  
+
       login_as user, scope: :user
       visit event_path(event.id)
       expect(page).not_to have_selector('.modal', visible: true)
@@ -38,11 +38,11 @@ describe 'User can view feedback for an event' do
         start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
         event_type: 'In-person', location: 'Juiz de Fora', participant_limit: 100, status: 'Published')
       allow(Event).to receive(:find).and_return(event)
-      event_feedbacks = [build(:feedback, name: 'João', title: 'Very good!', description: 'I liked it a lot'),
+      event_feedbacks = [ build(:feedback, name: 'João', title: 'Very good!', description: 'I liked it a lot'),
            build(:feedback, name: 'Anonymous', title: 'Could be better', description: 'No coffee'),
-           build(:feedback, name: 'Joaquim', title: 'Congratulations, you were selected', description: 'This message was marked as Spam')]
+           build(:feedback, name: 'Joaquim', title: 'Congratulations, you were selected', description: 'This message was marked as Spam') ]
       allow(Feedback).to receive(:event).with(event_id: event.id, speaker: user.email).and_return(event_feedbacks)
-    
+
       login_as user, scope: :user
       visit event_path(event.id)
 
@@ -60,7 +60,7 @@ describe 'User can view feedback for an event' do
               event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
       allow(Event).to receive(:find).and_return(event)
       allow(Feedback).to receive(:event).with(event_id: event.id, speaker: user.email).and_return([])
-  
+
       login_as user, scope: :user
       visit event_path(event.id)
 
