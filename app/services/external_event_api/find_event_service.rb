@@ -1,24 +1,14 @@
-class ExternalEventApi::FindEventService
-  def initialize(id)
-    @id = id
-  end
-
-  def self.call(id)
-    new(id).call
-  end
-
+class ExternalEventApi::FindEventService < ApplicationService
   def call
     find
   end
 
   private
 
-  attr_reader :id
-
   def find
     event = nil
     begin
-      response = Faraday.get("http://localhost:3001/api/v1/events/#{ id }")
+      response = Faraday.get("http://localhost:3001/api/v1/events/#{ kwargs[:id] }")
       if response.success?
         json_response = JSON.parse(response.body)
         event = Event.new(id: json_response['id'], name: json_response['name'], url: json_response['url'], description: json_response['description'],

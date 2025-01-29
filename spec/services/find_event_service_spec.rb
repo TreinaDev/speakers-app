@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe ExternalEventApi::FindEventService do
-  context '#find' do
+  context '#call' do
     it 'when API return success' do
       json_event =   {
         "id": 1,
@@ -15,7 +15,7 @@ describe ExternalEventApi::FindEventService do
         "participant_limit": 20,
         "status": "published"
       }
-      service = ExternalEventApi::FindEventService.new(json_event['id'])
+      service = ExternalEventApi::FindEventService.new(id: json_event['id'])
       response = instance_double(Faraday::Response, success?: true, body: json_event.to_json)
       allow(Faraday).to receive(:get).and_return(response)
 
@@ -33,7 +33,7 @@ describe ExternalEventApi::FindEventService do
     end
 
     it 'when API return not found' do
-      service = ExternalEventApi::FindEventService.new(999999)
+      service = ExternalEventApi::FindEventService.new(id: 999999)
       response = instance_double(Faraday::Response, success?: false, body: {})
       allow(Faraday).to receive(:get).and_return(response)
 
@@ -41,7 +41,7 @@ describe ExternalEventApi::FindEventService do
     end
 
     it 'when Connection Failed exception happens' do
-      service = ExternalEventApi::FindEventService.new(1)
+      service = ExternalEventApi::FindEventService.new(id: 1)
       allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
       expect(Rails.logger).to receive(:error).with(instance_of(Faraday::ConnectionFailed))
       expect(service.call).to be_nil

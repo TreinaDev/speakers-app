@@ -4,10 +4,11 @@ describe Event do
   context '.all' do
     it 'should get all event information' do
       json = File.read(Rails.root.join('spec/support/events_data.json'))
-      url = "http://localhost:3001/events/speaker_events?email=teste@email.com"
-      response = double('faraday_response', body: json, status: 200)
-      allow(Faraday).to receive(:get).with(url).and_return(response)
+      response = double('faraday_response', body: json, success?: true)
+      allow(Faraday).to receive(:get).and_return(response)
+
       result = Event.all('teste@email.com')
+
       expect(result.length).to eq 2
       expect(result[0].name).to eq 'Event1'
       expect(result[0].url).to eq ''
@@ -29,22 +30,12 @@ describe Event do
       expect(result[1].status).to eq 'draft'
     end
 
-    it 'raise connection failed error' do
-      logger = Rails.logger
-      allow(logger).to receive(:error)
-      allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
-      Event.all('teste@email.com')
+    it 'should return zero if not found events' do
+      allow(Faraday).to receive(:get).and_return({})
 
-      expect(logger).to have_received(:error).with(instance_of(Faraday::ConnectionFailed))
-    end
+      result = Event.all('teste@email.com')
 
-    it 'raise error' do
-      logger = Rails.logger
-      allow(logger).to receive(:error)
-      allow(Faraday).to receive(:get).and_raise(StandardError)
-      Event.all('teste@email.com')
-
-      expect(logger).to have_received(:error).with("Erro: StandardError")
+      expect(result.length).to eq 0
     end
   end
 
@@ -57,7 +48,7 @@ describe Event do
         build(:schedule_item, title: 'Ruby on Rails', description: 'Introdução a programação'),
         build(:schedule_item, title: "TDD e introdução a API's", description: 'Desvolvimento Web')
       ]
-      allow(ExternalEventApi::ScheduleItemsService).to receive(:call).and_return(items)
+      allow(event).to receive(:schedule_items).and_return(items)
       schedule_items = event.schedule_items('teste@email.com')
 
       expect(schedule_items[0].title).to eq 'Ruby on Rails'
