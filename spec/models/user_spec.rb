@@ -9,14 +9,14 @@ RSpec.describe User, type: :model do
 
   context '#api_auth_user' do
     it 'with success' do
-      allow_any_instance_of(ExternalEventApi::UserFindEmailService).to receive(:find_email).and_return(true)
+      allow_any_instance_of(ExternalEventApi::UserFindEmailService).to receive(:call).and_return(true)
       user = User.new(email: 'joao@email.com', first_name: 'João', last_name: 'Almeida', password: '123456')
 
       expect { user.save }.to change(User, :count).by(1)
     end
 
     it 'dont find email' do
-      allow_any_instance_of(ExternalEventApi::UserFindEmailService).to receive(:find_email).and_return(false)
+      allow_any_instance_of(ExternalEventApi::UserFindEmailService).to receive(:call).and_return(false)
       user = User.new(email: 'joao@email.com', first_name: 'João', last_name: 'Almeida', password: '123456')
 
       expect { user.save }.to change(User, :count).by(0)

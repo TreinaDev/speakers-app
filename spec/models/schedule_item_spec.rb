@@ -8,7 +8,7 @@ describe ScheduleItem do
       schedule_item_instance = build(:schedule_item, title: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD', speaker_email: user.email, length: 100)
       allow(ScheduleItem).to receive(:find).and_return(schedule_item_instance)
 
-      schedule_item = ScheduleItem.find(schedule_item_instance.id, user.email)
+      schedule_item = ScheduleItem.find(schedule_item_id: schedule_item_instance.id, email: user.email)
 
       expect(ScheduleItem.count).to eq 1
       expect(schedule_item.title).to eq 'Entrevista com João'
@@ -21,7 +21,7 @@ describe ScheduleItem do
       ScheduleItem.delete_all
       allow(ScheduleItem).to receive(:find).and_return(nil)
 
-      schedule_item = ScheduleItem.find(999999, 'something@email.com')
+      schedule_item = ScheduleItem.find(schedule_item_id: 999999, email: 'something@email.com')
 
       expect(ScheduleItem.count).to eq 0
       expect(schedule_item).to be_nil
@@ -51,6 +51,30 @@ describe ScheduleItem do
       end
 
       expect { ScheduleItem.delete_all }.to change(ScheduleItem, :count).by(-10)
+    end
+  end
+
+  context '#participants' do
+    it 'should return all list participants' do
+      user = create(:user, email: 'joao@email.com')
+      schedule_item = build(:schedule_item, title: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD', speaker_email: user.email, length: 100)
+      participants = []
+      10.times do
+        participants << build(:participant)
+      end
+      allow(schedule_item).to receive(:participants).and_return(participants)
+      participants = schedule_item.participants
+
+      expect(participants.count).to eq 10
+    end
+
+    it 'should return zero if not found participants' do
+      user = create(:user, email: 'joao@email.com')
+      schedule_item = build(:schedule_item, title: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD', speaker_email: user.email, length: 100)
+      allow(schedule_item).to receive(:participants).and_return([])
+      participants = schedule_item.participants
+
+      expect(participants.count).to eq 0
     end
   end
 end

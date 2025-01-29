@@ -12,8 +12,8 @@ class ScheduleItem
     @@instances << self
   end
 
-  def self.find(id, email)
-    ExternalEventApi::FindScheduleItemService.call(id, email)
+  def self.find(schedule_item_id:, email:)
+    ExternalEventApi::FindScheduleItemService.call(email: email, schedule_item_id: schedule_item_id)
   end
 
   def self.count
@@ -22,5 +22,9 @@ class ScheduleItem
 
   def self.delete_all
     @@instances = []
+  end
+
+  def participants
+    ExternalParticipantApi::ListParticipantsService.call(schedule_item_id: id)
   end
 end
