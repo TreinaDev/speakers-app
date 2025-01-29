@@ -1,0 +1,28 @@
+<div id="feedbacks" data-controller="modal">
+  <% if feedbacks&.any? %>
+    <button class="btn-success" style="width: 9rem;" data-action="click->modal#showModal">Ver Feedbacks</button>
+    <dialog data-modal-target="modal" class="modal">
+      <div class="modal-header">
+        <h2>Feedbacks</h2>
+        <button class="close-btn" data-action="click->modal#closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <% feedbacks.each do |feedback| %>
+          <div class="feedback-card">
+            <div class="feedback-header">
+              <span>Usuário: <%= feedback.name %></span>
+              <strong><%= feedback.title %></strong>
+            </div>
+            <div class="feedback-body">
+              <span>
+                <%= feedback.description %>
+              </span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </dialog>
+  <% else %>
+    <p>Nenhum Feedback disponível</p>
+  <% end %>
+</div>
