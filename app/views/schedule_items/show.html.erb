@@ -1,3 +1,5 @@
+<% turbo_page_requires_reload %>
+
 <div class='border rounded p-3'>
   <h1 class='heading-1'> <%= @schedule_item.title %> </h1>
   <span> Número estimado de participantes: <%= @schedule_item.length %> </span>
@@ -6,6 +8,7 @@
 </div>
 
 <%= link_to 'Adicionar conteúdo', new_curriculum_curriculum_content_path(@curriculum), data: { turbo_frame: 'modal' } %>
+
 
 <div>
   <h2> Conteúdos </h2>
@@ -18,7 +21,7 @@
 
   <% else %>
     <div>
-     <p> Nenhum conteúdo cadastrado para essa programação. <%= link_to 'Clique aqui para adicionar seu primeiro conteúdo', new_curriculum_curriculum_content_path(@curriculum) %> </p>
+    <p> Nenhum conteúdo cadastrado para essa programação. <%= link_to 'Clique aqui para adicionar seu primeiro conteúdo', new_curriculum_curriculum_content_path(@curriculum) %> </p>
     </div>
   <% end %>
 </div>

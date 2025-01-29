@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User register content for your schedule item curriculum', type: :system do
+describe 'User register content for your schedule item curriculum', type: :system, js: true do
   it 'with success' do
     user = create(:user)
     event =  [ build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
