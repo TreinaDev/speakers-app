@@ -18,11 +18,13 @@ class User < ApplicationRecord
   private
 
   def api_auth_user
-    token = ExternalEventApi::UserFindEmailService.new(email: self.email).call
-    unless token.present?
-      errors.add(:base, "Algo deu errado, contate o responsável.")
+    response = ExternalEventApi::UserFindEmailService.new(email: self.email).call
+    if response.present? && response.include?("error")
+      errors.add(:base, response["error"])
+    elsif response.present?
+      self.token = response
     else
-      self.token = token
+      errors.add(:base, "Algo deu errado, contate o responsável.")
     end
   end
 end

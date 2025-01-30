@@ -9,9 +9,9 @@ describe ExternalEventApi::UserFindEmailService do
       connection = instance_double(Faraday::Connection)
       allow(Faraday).to receive(:new).and_return(connection)
       allow(connection).to receive(:post).and_return(response)
-    
+
       service = ExternalEventApi::UserFindEmailService.new(email: email)
-    
+
       expect(service.call).to eq('ABCD1234')
     end
 
@@ -22,10 +22,11 @@ describe ExternalEventApi::UserFindEmailService do
       connection = instance_double(Faraday::Connection)
       allow(Faraday).to receive(:new).and_return(connection)
       allow(connection).to receive(:post).and_return(response)
-      
-      service = ExternalEventApi::UserFindEmailService.new(email: email)
 
-      expect(service.call).to be_nil
+      service = ExternalEventApi::UserFindEmailService.new(email: email)
+      error = { "error"=> "Palestrante não encontrado." }
+
+      expect(service.call).to eq error
     end
 
     it 'when Connection Failed exception happens' do
