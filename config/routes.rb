@@ -24,5 +24,6 @@ Rails.application.routes.draw do
   resources :profiles, only: %i[ show new create ], param: :username
   resources :curriculums, only: [] do
     resources :curriculum_contents, only: %i[ new create ]
+    resources :curriculum_tasks, only: %i[ new create ]
   end
 end
