@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :first_name, :last_name, :token, presence: true
   validates :token, uniqueness: true
-  before_create :api_auth_user
+  before_validation :api_auth_user
   has_many :event_contents
   has_many :event_tasks
   has_one :profile
@@ -18,14 +18,10 @@ class User < ApplicationRecord
   private
 
   def api_auth_user
-    puts 'começo'
     token = ExternalEventApi::UserFindEmailService.new(email: self.email).call
-    unless token
-      puts 'error'
+    unless token.present?
       errors.add(:base, "Algo deu errado, contate o responsável.")
-      throw(:abort)
     else
-      puts token
       self.token = token
     end
   end

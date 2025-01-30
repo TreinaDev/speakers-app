@@ -8,7 +8,12 @@ class ExternalEventApi::UserFindEmailService < ApplicationService
   def presence_fetch_api_email?
     token = nil
     begin
-      response = Faraday.post('http://localhost:3001/api/v1/speakers', { email: kwargs[:email] })
+      connection = Faraday.new do |conn|
+        conn.adapter Faraday.default_adapter
+        conn.headers['Content-Type'] = 'application/json'
+      end
+      email = { email: kwargs[:email] }
+      response = connection.post('http://localhost:3001/api/v1/speakers', email.to_json)
       if response.success?
         json_response = JSON.parse(response.body)
         token = json_response['token']
