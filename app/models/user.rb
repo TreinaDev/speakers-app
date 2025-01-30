@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :event_tasks
   has_one :profile
   has_many :social_networks, through: :profile
+  has_many :curriculums
 
   def full_name
     first_name + ' ' + last_name
