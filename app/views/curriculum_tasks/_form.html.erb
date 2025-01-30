@@ -1,6 +1,7 @@
 
 <%= turbo_frame_tag 'modal' do %>
   <div class="modal">
+    <%= render 'shared/flash' %>
     <div class='flex justify-end'> 
       <div>
         <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: 'Fechar' do %>

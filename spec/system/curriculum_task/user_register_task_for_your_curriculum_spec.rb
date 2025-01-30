@@ -53,6 +53,7 @@ describe 'User register task for your schedule item curriculum', type: :system, 
     click_on 'Adicionar'
 
     expect(CurriculumTask.count).to eq 0
+    expect(page).to have_content 'Falha ao adicionar tarefa.'
     expect(page).to have_content 'Título não pode ficar em branco'
     expect(page).to have_content 'Descrição não pode ficar em branco'
   end
