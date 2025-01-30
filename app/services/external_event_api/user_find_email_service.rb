@@ -14,12 +14,7 @@ class ExternalEventApi::UserFindEmailService < ApplicationService
       end
       email = { email: kwargs[:email] }
       response = connection.post('http://localhost:3001/api/v1/speakers', email.to_json)
-      if response.success?
-        json_response = JSON.parse(response.body)
-        result = json_response['token']
-      else
-        result = JSON.parse(response.body)
-      end
+      result = JSON.parse(response.body)
     rescue StandardError => error
       Rails.logger.error(error)
     end

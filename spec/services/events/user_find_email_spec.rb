@@ -12,7 +12,7 @@ describe ExternalEventApi::UserFindEmailService do
 
       service = ExternalEventApi::UserFindEmailService.new(email: email)
 
-      expect(service.call).to eq('ABCD1234')
+      expect(service.call).to eq(token)
     end
 
     it 'when API return not found' do

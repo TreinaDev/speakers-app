@@ -21,8 +21,8 @@ class User < ApplicationRecord
     response = ExternalEventApi::UserFindEmailService.new(email: self.email).call
     if response.present? && response.include?("error")
       errors.add(:base, response["error"])
-    elsif response.present?
-      self.token = response
+    elsif response.present? && response.include?("token")
+      self.token = response["token"]
     else
       errors.add(:base, "Algo deu errado, contate o responsável.")
     end

@@ -10,7 +10,8 @@ describe 'User register a profile' do
 
   it 'with success' do
     service = ExternalEventApi::UserFindEmailService
-    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return("ABCD1234")
+    token = { "token" => "ABCD1234" }
+    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return(token)
 
     visit root_path
     click_on 'Criar conta'
