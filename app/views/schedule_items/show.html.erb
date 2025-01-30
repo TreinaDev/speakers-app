@@ -1,6 +1,10 @@
 <div class='border rounded p-3'>
   <h1 class='heading-1'> <%= @schedule_item.title %> </h1>
-  <span> Número estimado de participantes: <%= @schedule_item.length %> </span>
+  <h3 class='heading-3 font-bold inline'> Data/Hora:</h3>
+  <h3 class='heading-3 inline'> <%= l(@schedule_item.start_time.to_datetime, format: :brazilian) %> </h3>
+  <span class= 'block'></span>
+  <p class= 'font-bold inline'> Número estimado de participantes:</p>
+  <p class= 'inline'> <%= @schedule_item.length %> </p>
   <h2 class='heading-2'> Descrição </h2>
   <p> <%= @schedule_item.description %> </p>
 </div>
