@@ -4,29 +4,44 @@ describe ExternalEventApi::UserFindEmailService do
   context '#call' do
     it 'when API return success' do
       email = 'test@email.com'
-      response = instance_double(Faraday::Response, success?: true)
-      allow(Faraday).to receive(:get).and_return(response)
-      service = ExternalEventApi::UserFindEmailService.call(email: email)
+      token = { "token" => "ABCD1234" }
+      response = instance_double(Faraday::Response, success?: true, body: token.to_json)
+      connection = instance_double(Faraday::Connection)
+      allow(Faraday).to receive(:new).and_return(connection)
+      allow(connection).to receive(:post).and_return(response)
 
-      expect(service).to eq(true)
+      service = ExternalEventApi::UserFindEmailService.new(email: email)
+
+      expect(service.call).to eq('ABCD1234')
     end
 
     it 'when API return not found' do
       email = 'test@email.com'
-      service = ExternalEventApi::UserFindEmailService.new(email: email)
-      response = instance_double(Faraday::Response, success?: false)
-      allow(Faraday).to receive(:get).and_return(response)
+      error = { error: "Palestrante não encontrado." }
+      response = instance_double(Faraday::Response, success?: false, body: error.to_json)
+      connection = instance_double(Faraday::Connection)
+      allow(Faraday).to receive(:new).and_return(connection)
+      allow(connection).to receive(:post).and_return(response)
 
-      expect(service.call).to eq(false)
+      service = ExternalEventApi::UserFindEmailService.new(email: email)
+      error = { "error"=> "Palestrante não encontrado." }
+
+      expect(service.call).to eq error
     end
 
     it 'when Connection Failed exception happens' do
       email = 'test@email.com'
-      service = ExternalEventApi::UserFindEmailService.new(email: email)
-      allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
+      logger = Rails.logger
+      allow(logger).to receive(:error)
+      connection = instance_double(Faraday::Connection)
+      allow(Faraday).to receive(:new).and_return(connection)
+      allow(connection).to receive(:post).and_raise(Faraday::ConnectionFailed)
 
-      expect(Rails.logger).to receive(:error).with(instance_of(Faraday::ConnectionFailed))
-      expect(service.call).to eq(false)
+      service = ExternalEventApi::UserFindEmailService.new(email: email)
+      token = service.call
+
+      expect(logger).to have_received(:error).with(instance_of(Faraday::ConnectionFailed))
+      expect(token).to be_nil
     end
   end
 end

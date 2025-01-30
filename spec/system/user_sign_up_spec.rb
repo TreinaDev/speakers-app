@@ -2,8 +2,11 @@ require 'rails_helper'
 
 describe 'Speacker create account', type: :system do
   it 'and must be previusly registred' do
-    response = double('response', status: 404, success?: false)
-    allow(Faraday).to receive(:get).and_return(response)
+    error = { "error"=> "Palestrante não encontrado." }
+    response = double('response', status: 404, success?: false, body: error.to_json)
+    connection = instance_double(Faraday::Connection)
+    allow(Faraday).to receive(:new).and_return(connection)
+    allow(connection).to receive(:post).and_return(response)
 
     visit root_path
     click_on 'Criar conta'
@@ -15,12 +18,13 @@ describe 'Speacker create account', type: :system do
     click_on 'Cadastrar'
 
     expect(User.count).to eq 0
-    expect(page).to have_content 'Algo deu errado, contate o responsável.'
+    expect(page).to have_content 'Palestrante não encontrado.'
+    expect(page).to have_content 'Token não pode ficar em branco'
   end
 
   it 'with success' do
     service = ExternalEventApi::UserFindEmailService
-    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return(true)
+    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return("ABCD1234")
 
     visit root_path
     click_on 'Criar conta'
@@ -51,7 +55,9 @@ describe 'Speacker create account', type: :system do
   end
 
   it 'and fails when API do not work' do
-    allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
+    connection = instance_double(Faraday::Connection)
+    allow(Faraday).to receive(:new).and_return(connection)
+    allow(connection).to receive(:post).and_return(Faraday::ConnectionFailed)
 
     visit root_path
     click_on 'Criar conta'
