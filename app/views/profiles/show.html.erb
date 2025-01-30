@@ -1,11 +1,10 @@
 <section>
-    <h2 class="heading-2"><%= t('.title') %></h2>
-
     <div>
         <div class="mt-10 flex items-center justify-start">
             <div class="w-2/3">
-                <p class="tracking-wider text-blue-600 text-2xl"><%= @profile.title %></p>
-                <h3 class="font-bold text-2xl"><%= @profile.user.full_name %></h3>
+                <h2 class="heading-2"><%= @profile.user.full_name %></h2>
+                <p class="tracking-wider text-2xl"><%= @profile.title %></p>
+                <h3 class="font-bold text-2xl"></h3>
                 <div class="nav_social_network_container">
                     <% @profile.social_networks.each do |network| %>
                             <%= link_to(network.url, class: 'container_link', target: "_blank") do %>
@@ -22,6 +21,22 @@
         <div>
             <h3 class="text-xl font-bold"><%= t('.about_me') %></h3>
             <p class="mt-7"><%= @profile.about_me %></p>
+            <% if @profile.display_pronoun %>
+                <h3 class="text-xl font-bold mt-4"><%= t('.pronoun') %></h3>
+                <p class="my-2"><%= @profile.pronoun %></p>
+            <% end %>
+            <% if @profile.display_gender %>
+                <h3 class="text-xl font-bold"><%= t('.gender') %></h3>
+                <p class="my-2"><%= @profile.gender %></p>
+            <% end %>
+            <% if @profile.display_birth %>
+                <h3 class="text-xl font-bold"><%= t('.birth') %></h3>
+                <p class="my-2"><%= @profile.birth&.strftime('%d/%m/%Y') %></p>
+            <% end %>
+            <% if @profile.display_city %>
+                <h3 class="text-xl font-bold"><%= t('.city') %></h3>
+                <p class="my-2"><%= @profile.city %></p>
+            <% end %>
         </div>
     </div>
 

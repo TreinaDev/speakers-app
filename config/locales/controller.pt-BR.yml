@@ -6,3 +6,15 @@ pt-BR:
       success: 'Perfil cadastrado com sucesso.'
       error: 'Falha ao registrar o perfil.'
     check_if_have_an_existing_profile: 'Só é possível cadastrar um perfil.'
+    pronoun_options:
+      he_him: 'Ele/Dele'
+      she_her: 'Ela/Dela'
+      they_them: 'Elu/Delu'
+      prefer_not_inform: 'Prefiro não informar'
+      other: 'Outro'
+    gender_options:
+      male: 'Masculino'
+      female: 'Feminino'
+      not_binary: 'Não-binário'
+      prefer_not_answer: 'Prefiro não responder'
+      other: 'Outro'

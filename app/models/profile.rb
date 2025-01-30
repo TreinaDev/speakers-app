@@ -2,7 +2,7 @@ class Profile < ApplicationRecord
   belongs_to :user
   has_one_attached :profile_picture
   has_many :social_networks
-  validates :title, :about_me, :profile_picture, presence: true
+  validates :title, :about_me, :profile_picture, :city, :gender, :pronoun, :birth, presence: true
   validates :username, uniqueness: true
   before_create :generate_unique_username
 
