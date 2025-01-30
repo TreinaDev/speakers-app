@@ -21,7 +21,7 @@ describe 'User sees schedule item details' do
 
     expect(page).to have_content 'Entrevista com João'
     expect(page).to have_content 'Aprenda sobre RoR e TDD'
-    expect(page).to have_content 'Número estimado de participantes: 100'
+    expect(page).to have_content 'Número estimado de participantes:100'
     expect(page).to have_content "Data/Hora: #{I18n.l(seven_days, format: :brazilian)}"
     expect(page).not_to have_content 'Agenda 1'
     expect(page).not_to have_content 'Agenda 2'

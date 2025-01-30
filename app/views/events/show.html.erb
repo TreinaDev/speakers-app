@@ -7,6 +7,7 @@
   <span><b><%= Event.human_attribute_name(:end_date) %>:</b> <%= formatted_date(@event.end_date) %></span>
   <span><b><%= Event.human_attribute_name(:location) %>:</b> <%= @event.location %></span>
   <span><b><%= Event.human_attribute_name(:status) %>:</b> <%= @event.status %></span>
+  <%= render 'shared/feedback_area', feedbacks: @feedbacks %>
 </div>
 
 <h2 class="heading-2 mt-3"><%= t('.schedule_items_title') %></h2>
