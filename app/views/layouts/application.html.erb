@@ -24,6 +24,7 @@
   </head>
 
   <body>
+    <%= turbo_frame_tag 'modal' %>
     <%= render "shared/navbar" %>
     <% if request.path != root_path %>
       <main class="container">

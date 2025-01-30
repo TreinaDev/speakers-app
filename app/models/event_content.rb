@@ -2,6 +2,8 @@ class EventContent < ApplicationRecord
   belongs_to :user
   has_many :event_task_contents
   has_many :event_tasks, through: :event_task_contents
+  has_many :curriculum_contents
+  has_many :curriculums, through: :curriculum_contents
   has_many_attached :files
   validate :must_have_less_than_five_files
   validate :valid_file_size
