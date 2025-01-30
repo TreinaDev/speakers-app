@@ -1,6 +1,6 @@
 class CurriculumContentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_curriculum, only: %i[ new create ]
+  before_action :set_curriculum
   before_action :set_event_contents, only: %i[ new ]
   def new
     @curriculum_content = @curriculum.curriculum_contents.build
@@ -11,6 +11,10 @@ class CurriculumContentsController < ApplicationController
     return redirect_to schedule_item_path(@curriculum.schedule_item_code), notice: 'Conteúdo adicionado com sucesso!' if @curriculum_content.save
 
     redirect_to events_path, alert: 'Falha ao adicionar conteúdo.'
+  end
+
+  def show
+    @curriculum_content = @curriculum.curriculum_contents.find(params[:id])
   end
 
   private

@@ -17,7 +17,7 @@
     <% if @curriculum.curriculum_contents.any? %>
       <% @curriculum.curriculum_contents.each do |content| %>
         <div>
-          <%= content.event_content.title %>
+          <%= link_to content.event_content.title, curriculum_curriculum_content_path(@curriculum, content.id), class: 'link-primary' %>
         </div>
       <% end %>
     <% else %>
