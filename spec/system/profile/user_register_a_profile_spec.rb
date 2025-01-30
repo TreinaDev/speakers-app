@@ -10,7 +10,8 @@ describe 'User register a profile' do
 
   it 'with success' do
     service = ExternalEventApi::UserFindEmailService
-    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return(true)
+    token = { "token" => "ABCD1234" }
+    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return(token)
 
     visit root_path
     click_on 'Criar conta'
@@ -55,6 +56,8 @@ describe 'User register a profile' do
 
   it 'with other gender and pronoun' do
     user = create(:user, first_name: 'João')
+    service = ExternalEventApi::UserFindEmailService
+    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return("ABCD1234")
 
     login_as user
     visit events_path
@@ -125,6 +128,8 @@ describe 'User register a profile' do
 
   it 'with invalid network' do
     user = create(:user, first_name: 'João')
+    service = ExternalEventApi::UserFindEmailService
+    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return("ABCD1234")
 
     login_as user
     visit events_path

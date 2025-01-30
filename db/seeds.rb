@@ -7,10 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-User.skip_callback(:create, :before, :api_auth_user)
-user = User.create!(first_name: 'João', last_name: 'Campus', email: 'joao@email.com', password: '123456')
-User.create!(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456')
-User.set_callback(:create, :before, :api_auth_user)
+
+User.skip_callback(:validation, :before, :api_auth_user)
+user = User.create!(first_name: 'João', last_name: 'Campus', email: 'joao@email.com', password: '123456', token: 'ABCD1234')
+user_2 = User.create!(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456', token: 'ASDF4567')
+User.set_callback(:validation, :before, :api_auth_user)
 
 profile = Profile.create!(title: 'Instrutor / Desenvolvedor',
                           about_me: 'Sou João, desenvolvedor Ruby apaixonado por criar soluções eficientes e bem estruturadas.
