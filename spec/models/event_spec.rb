@@ -82,6 +82,39 @@ describe Event do
     end
   end
 
+  context '#participants' do
+    it 'should return a list of all participants' do
+      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
+              start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
+              event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      participants = [
+        build(:participant, name: 'João'),
+        build(:participant, name: 'Pedro'),
+        build(:participant, name: 'Jeremias')
+      ]
+      allow_any_instance_of(ExternalParticipantApi::EventListParticipantsService).to receive(:call).and_return(participants)
+
+      list = event.participants
+
+      expect(list.count).to eq 3
+      expect(list[0].name).to eq 'João'
+      expect(list[1].name).to eq 'Pedro'
+      expect(list[2].name).to eq 'Jeremias'
+    end
+
+    it 'must return zero if not found participants' do
+      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
+              start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
+              event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      participants = []
+      allow_any_instance_of(ExternalParticipantApi::EventListParticipantsService).to receive(:call).and_return(participants)
+
+      list = event.participants
+
+      expect(list.count).to eq 0
+    end
+  end
+
   context '.count' do
     it 'should return a count of all instances' do
       Event.delete_all

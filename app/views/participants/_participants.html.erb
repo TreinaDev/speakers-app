@@ -1,0 +1,10 @@
+<div id="participant_list">
+  <% if participants.present? %>
+    <h3>Lista de Participantes</h3>
+    <% participants.each do |participant| %>
+      <strong>Nome: </strong><p><%= participant.name %></p>
+    <% end %>
+  <% else %>
+    <p>Não foram localizados Participantes até o momento</p>
+  <% end %>
+</div>
