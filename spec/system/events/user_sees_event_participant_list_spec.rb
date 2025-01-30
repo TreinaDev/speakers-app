@@ -37,7 +37,7 @@ describe 'User sees participant list' do
     visit event_path(event.id)
 
     within '#participant_list' do
-      expect(page).to have_content 'Não foram localizado participantes até o momento'
+      expect(page).to have_content 'Não foram localizados Participantes até o momento'
     end
   end
 end
