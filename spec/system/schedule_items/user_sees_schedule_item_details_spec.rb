@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User sees schedule item details' do
+describe 'User sees schedule item details', type: :system do
   it 'with success' do
     user = create(:user, first_name: 'João', email: 'joão@email.com')
     event = [ build(:event, name: 'Dev week') ]
@@ -21,8 +21,8 @@ describe 'User sees schedule item details' do
 
     expect(page).to have_content 'Entrevista com João'
     expect(page).to have_content 'Aprenda sobre RoR e TDD'
-    expect(page).to have_content 'Número estimado de participantes:100'
-    expect(page).to have_content "Data/Hora: #{I18n.l(seven_days, format: :brazilian)}"
+    expect(page).to have_content 'Número estimado de participantes: 100', normalize_ws: true
+    expect(page).to have_content "Data/Hora: #{I18n.l(seven_days, format: :brazilian)}", normalize_ws: true
     expect(page).not_to have_content 'Agenda 1'
     expect(page).not_to have_content 'Agenda 2'
     expect(page).not_to have_content 'Agenda 3'

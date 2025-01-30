@@ -6,7 +6,7 @@
   <h3 class='inline'> <%= l(@schedule_item.start_time.to_datetime, format: :brazilian) %> </h3>
   <span class= 'block'></span>
   <p class= 'font-bold inline'> <%= t('.estimated_participants') %></p>
-  <p class= 'inline'> <%= @schedule_item.length %> </p>
+  <span class= 'inline'> <%= @schedule_item.length %> </span>
   <h2 class='heading-2'> <%= ScheduleItem.human_attribute_name(:description) %> </h2>
   <p> <%= @schedule_item.description %> </p>
 
