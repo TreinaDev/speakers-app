@@ -54,4 +54,30 @@ describe 'User register content for your curriculum', type: :request  do
     expect(response).to redirect_to events_path
     expect(flash[:alert]).to eq('Conteúdo indisponível!')
   end
+
+  it 'and must be the event content owner' do
+    first_user = create(:user)
+    create(:event_content, id: 11, user: first_user)
+    second_user = create(:user)
+    curriculum = create(:curriculum, id: 1, user: second_user, schedule_item_code: 99)
+
+    login_as second_user
+    post curriculum_curriculum_contents_path(curriculum), params: { curriculum_content: { event_content_id: 11 } }
+
+    expect(CurriculumContent.count).to eq 0
+    expect(response).to redirect_to events_path
+    expect(flash[:alert]).to eq('Falha ao adicionar conteúdo.')
+  end
+
+  it 'and event content doesnt exists' do
+    user = create(:user)
+    curriculum = create(:curriculum, id: 1, user: user, schedule_item_code: 99)
+
+    login_as user
+    post curriculum_curriculum_contents_path(curriculum), params: { curriculum_content: { event_content_id: 999 } }
+
+    expect(CurriculumContent.count).to eq 0
+    expect(response).to redirect_to events_path
+    expect(flash[:alert]).to eq('Falha ao adicionar conteúdo.')
+  end
 end
