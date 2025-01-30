@@ -35,20 +35,22 @@ describe 'User see event details', type: :system do
     event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
             start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
             event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+    seven_days = 7.days.from_now
+    eight_days = 8.days.from_now
+    nine_days = 9.days.from_now
     schedule_items =
-      [ build(:schedule_item, title: 'Ruby on Rails', description: 'Introdução a programação'),
-        build(:schedule_item, title: "TDD e introdução a API's", description: 'Desvolvimento Web'),
-        build(:schedule_item, title: 'Python', description: 'Aprendizado de Máquina') ]
-
+      [ build(:schedule_item, title: 'Ruby on Rails', description: 'Introdução a programação', start_time: seven_days),
+        build(:schedule_item, title: "TDD e introdução a API's", description: 'Desvolvimento Web', start_time: eight_days),
+        build(:schedule_item, title: 'Python', description: 'Aprendizado de Máquina', start_time: nine_days) ]
     allow(Event).to receive(:find).and_return(event)
     allow(event).to receive(:schedule_items).and_return(schedule_items)
 
     login_as user, scope: :user
     visit event_path(event.id)
 
-    expect(page).to have_content 'Ruby on Rails'
-    expect(page).to have_content "TDD e introdução a API's"
-    expect(page).to have_content 'Python'
+    expect(page).to have_content I18n.l(seven_days, format: :brazilian)
+    expect(page).to have_content I18n.l(eight_days, format: :brazilian)
+    expect(page).to have_content I18n.l(nine_days, format: :brazilian)
   end
 
   it 'and should see a message when doesnt have schedule items' do

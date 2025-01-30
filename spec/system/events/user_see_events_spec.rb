@@ -8,7 +8,7 @@ describe 'user visit home and see list of events', type: :system do
     visit root_path
 
     expect(current_path).to eq events_path
-    expect(page).to have_content 'Lista de Eventos'
+    expect(page).to have_content 'Meus Eventos'
   end
 
   it 'with success' do
@@ -39,7 +39,7 @@ describe 'user visit home and see list of events', type: :system do
     login_as user, scope: :user
     visit events_path
 
-    expect(page).to have_content 'Lista de Eventos'
+    expect(page).to have_content 'Meus Eventos'
     expect(page).to have_content('Event1')
     expect(page).to have_content('Event2')
     expect(page).to have_content('Event1 description')
@@ -55,7 +55,7 @@ describe 'user visit home and see list of events', type: :system do
     login_as user, scope: :user
     visit events_path
 
-    expect(page).to have_content 'Lista de Eventos'
+    expect(page).to have_content 'Meus Eventos'
     expect(page).to have_content('Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.')
   end
 

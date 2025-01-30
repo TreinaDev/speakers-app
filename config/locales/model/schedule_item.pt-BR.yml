@@ -6,3 +6,4 @@ pt-BR:
       schedule_item:
         title: 'Título'
         description: 'Descrição'
+        start_time: 'Data e hora de início'
