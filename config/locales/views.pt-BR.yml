@@ -53,12 +53,19 @@ pt-BR:
       curriculum_content_title: 'Conteúdos da programação'
       no_curriculum_content: 'Nenhum conteúdo cadastrado para essa programação.'
       new_curriculum_content_button: 'Adicionar conteúdo'
+      curriculum_task_title: 'Tarefas da programação'
+      no_curriculum_task: 'Nenhuma tarefa cadastrada para essa programação.'
+      new_curriculum_task_button: 'Adicionar tarefa'
   curriculum_contents:
     new:
       title: 'Adicionar conteúdo a programação:'
       no_content: 'Não existem conteúdos disponíveis.'
       save: 'Adicionar'
       new_content_link: 'Clique aqui para cadastrar um conteúdo.'
+  curriculum_tasks:
+    form:
+      title: 'Adicionar tarefa a programação:'
+      save: 'Adicionar'
   home:
     index:
       register: 'Cadastre-se Agora'

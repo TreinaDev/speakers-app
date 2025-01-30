@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      curriculum_task: Tarefa
+    attributes:
+      curriculum_task:
+        title: 'Título'
+        description: 'Descrição'
+        certificate_requirement: 'Obrigatória para emissão de certificado'
+        certificate_requirements: 
+          mandatory: 'Obrigatória'
+          optional: 'Opcional'
