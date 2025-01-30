@@ -1,5 +1,8 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_filter 'jobs'
+  add_filter 'mailers'
+ end
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
@@ -47,15 +50,15 @@ RSpec.configure do |config|
     driven_by :rack_test
   end
 
-  # config.before(:each, type: :system) do
-  #   driven_by(:cuprite, screen_size: [ 1440, 810 ], options: {
-  #     js_errors: false,
-  #     headless: %w[0],
-  #     process_timeout: 15,
-  #     timeout: 10,
-  #     browser_options: { "no-sandbox" => nil }
-  #   })
-  # end
+  config.before(:each, type: :system, js: true) do
+    driven_by(:cuprite, screen_size: [ 1440, 810 ], options: {
+      js_errors: false,
+      headless: %w[0],
+      process_timeout: 15,
+      timeout: 10,
+      browser_options: { "no-sandbox" => nil }
+    })
+  end
 
   config.before(type: :system, js: true) do
     driven_by(:cuprite)
