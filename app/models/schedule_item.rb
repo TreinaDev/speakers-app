@@ -1,14 +1,16 @@
 class ScheduleItem
   extend ActiveModel::Translation
 
-  attr_accessor :id, :title, :speaker_email, :description, :length
+  attr_accessor :id, :title, :speaker_email, :description, :length, :start_time, :end_time
   @@instances = []
-  def initialize(id:, title:, speaker_email:, description:, length:)
+  def initialize(id:, title:, speaker_email:, description:, length:, start_time:, end_time:)
     @id = id
     @title = title
     @speaker_email = speaker_email
     @description = description
     @length = length
+    @start_time = start_time
+    @end_time = end_time
     @@instances << self
   end
 

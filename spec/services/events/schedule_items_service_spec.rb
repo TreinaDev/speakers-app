@@ -15,6 +15,7 @@ describe ExternalEventApi::ScheduleItemsService do
             {
               "id": 1,
               "start_time": "2000-01-01T11:00:00.000Z",
+              "end_time": "2025-02-07 14:57:52 UTC",
               "lenght": 45,
               "title": "Title 1",
               "description": "Something 1",
@@ -26,6 +27,7 @@ describe ExternalEventApi::ScheduleItemsService do
             {
               "id": 2,
               "start_time": "2000-01-01T14:00:00.000Z",
+              "end_time": "2025-02-07 14:57:52 UTC",
               "lenght": 90,
               "title": "Title 2",
               "description": "Something 2",
@@ -37,6 +39,7 @@ describe ExternalEventApi::ScheduleItemsService do
             {
               "id": 3,
               "start_time": "2000-01-01T11:00:00.000Z",
+              "end_time": "2025-02-07 14:57:52 UTC",
               "lenght": 120,
               "title": "Title 3",
               "description": "Something 3",

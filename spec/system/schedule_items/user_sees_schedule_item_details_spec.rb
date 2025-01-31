@@ -1,10 +1,12 @@
 require 'rails_helper'
 
-describe 'User sees schedule item details' do
+describe 'User sees schedule item details', type: :system do
   it 'with success' do
     user = create(:user, first_name: 'João', email: 'joão@email.com')
     event = [ build(:event, name: 'Dev week') ]
-    schedule_items = [ build(:schedule_item, title: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD', speaker_email: user.email, length: 100) ]
+    seven_days = 7.days.from_now
+    schedule_items = [ build(:schedule_item, title: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD',
+                             speaker_email: user.email, length: 100, start_time: seven_days, end_time: seven_days + 3600) ]
     3.times do |n|
       schedule_items << build(:schedule_item, title: "Agenda #{ n + 1 }")
     end
@@ -20,7 +22,9 @@ describe 'User sees schedule item details' do
 
     expect(page).to have_content 'Entrevista com João'
     expect(page).to have_content 'Aprenda sobre RoR e TDD'
-    expect(page).to have_content 'Número estimado de participantes: 100'
+    expect(page).to have_content 'Número estimado de participantes: 100', normalize_ws: true
+    expect(page).to have_content "Data/Hora Início: #{I18n.l(seven_days, format: :brazilian)}", normalize_ws: true
+    expect(page).to have_content "Hora Fim: #{I18n.l(seven_days + 3600, format: :brazilian_hour)}", normalize_ws: true
     expect(page).not_to have_content 'Agenda 1'
     expect(page).not_to have_content 'Agenda 2'
     expect(page).not_to have_content 'Agenda 3'

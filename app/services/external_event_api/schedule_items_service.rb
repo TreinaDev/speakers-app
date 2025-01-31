@@ -12,7 +12,8 @@ class ExternalEventApi::ScheduleItemsService < ApplicationService
       if response.success?
         schedule_items = JSON.parse(response.body)
         result = schedule_items['schedule_items'].map do |item|
-          ScheduleItem.new(id: item['id'], title: item['title'], description: item['description'], speaker_email: item['speaker_email'], length: item['length'])
+          ScheduleItem.new(id: item['id'], title: item['title'], description: item['description'], speaker_email: item['speaker_email'],
+                           length: item['length'], start_time: item['start_time'], end_time: item['end_time'])
         end
       end
     rescue Faraday::ConnectionFailed => e
