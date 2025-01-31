@@ -8,9 +8,9 @@ class CurriculumTasksController < ApplicationController
 
   def create
     @curriculum_task = @curriculum.curriculum_tasks.build(set_curriculum_task_params)
-    return redirect_to schedule_item_path(@curriculum.schedule_item_code), notice: 'Tarefa adicionada com sucesso!' if @curriculum_task.save
+    return redirect_to schedule_item_path(@curriculum.schedule_item_code), notice: t('curriculum_tasks.create.success') if @curriculum_task.save
 
-    flash.now[:alert] = 'Falha ao adicionar tarefa.'
+    flash.now[:alert] = t('curriculum_tasks.create.error')
     render :new, status: :unprocessable_entity
   end
 
@@ -18,7 +18,7 @@ class CurriculumTasksController < ApplicationController
 
   def set_curriculum
     @curriculum = current_user.curriculums.find_by(id: params[:curriculum_id])
-    redirect_to events_path, alert: "Conteúdo indisponível!" unless @curriculum
+    redirect_to events_path, alert: t('curriculum_tasks.set_curriculum.error') unless @curriculum
   end
 
   def set_curriculum_task_params

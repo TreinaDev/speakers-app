@@ -18,3 +18,15 @@ pt-BR:
       not_binary: 'Não-binário'
       prefer_not_answer: 'Prefiro não responder'
       other: 'Outro'
+  curriculum_contents:
+    create:
+      success: 'Conteúdo adicionado com sucesso!'
+      error: 'Falha ao adicionar conteúdo.'
+    set_curriculum:
+      error: 'Conteúdo indisponível!'
+  curriculum_tasks:
+    create:
+      success: 'Tarefa adicionada com sucesso!'
+      error: 'Falha ao adicionar tarefa.'
+    set_curriculum:
+      error: 'Conteúdo indisponível!'
