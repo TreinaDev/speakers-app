@@ -37,7 +37,7 @@
     <% if @curriculum.curriculum_tasks.any? %>
       <% @curriculum.curriculum_tasks.each do |task| %>
         <div>
-          <%= task.title %>
+          <%= link_to task.title, curriculum_curriculum_task_path(@curriculum, task.id), class: 'link-primary' %>
         </div>
       <% end %>
     <% else %>
