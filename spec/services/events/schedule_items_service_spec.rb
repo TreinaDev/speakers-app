@@ -3,11 +3,9 @@ require 'rails_helper'
 describe ExternalEventApi::ScheduleItemsService do
   context '#where' do
     it 'when API return success' do
-      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-                    start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-                    event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      event = build(:event, name: 'Ruby on Rails')
       email = 'test@email.com'
-      service = ExternalEventApi::ScheduleItemsService.new(event_id: event.id, email: email)
+      service = ExternalEventApi::ScheduleItemsService.new(event_code: event.code, email: email)
       json_response =
 
         {
@@ -19,7 +17,7 @@ describe ExternalEventApi::ScheduleItemsService do
               "title": "Title 1",
               "description": "Something 1",
               "speaker_email": "speaker0@email.com",
-              "schedule_id": 1,
+              "schedule_code": 1,
               "created_at": "2025-01-22T19:04:25.408Z",
               "updated_at": "2025-01-22T19:04:25.408Z"
             },
@@ -30,7 +28,7 @@ describe ExternalEventApi::ScheduleItemsService do
               "title": "Title 2",
               "description": "Something 2",
               "speaker_email": "speaker0@email.com",
-              "schedule_id": 1,
+              "schedule_code": 1,
               "created_at": "2025-01-22T19:04:25.416Z",
               "updated_at": "2025-01-22T19:04:25.416Z"
             },
@@ -41,7 +39,7 @@ describe ExternalEventApi::ScheduleItemsService do
               "title": "Title 3",
               "description": "Something 3",
               "speaker_email": "speaker0@email.com",
-              "schedule_id": 2,
+              "schedule_code": 2,
               "created_at": "2025-01-22T19:04:25.422Z",
               "updated_at": "2025-01-22T19:04:25.422Z"
             }
@@ -63,7 +61,7 @@ describe ExternalEventApi::ScheduleItemsService do
 
     it 'when API return not found' do
       ScheduleItem.delete_all
-      service = ExternalEventApi::ScheduleItemsService.new(event_id: 999999, email: 'abc@email.com')
+      service = ExternalEventApi::ScheduleItemsService.new(event_code: 999999, email: 'abc@email.com')
       response = instance_double(Faraday::Response, success?: false, body: {})
       allow(Faraday).to receive(:get).and_return(response)
 
@@ -75,7 +73,7 @@ describe ExternalEventApi::ScheduleItemsService do
       logger = Rails.logger
       allow(logger).to receive(:error)
       allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
-      service = ExternalEventApi::ScheduleItemsService.new(event_id: 1, email: 'abc@email.com')
+      service = ExternalEventApi::ScheduleItemsService.new(event_code: 1, email: 'abc@email.com')
       service.call
 
       expect(logger).to have_received(:error).with(instance_of(Faraday::ConnectionFailed))

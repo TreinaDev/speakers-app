@@ -9,7 +9,7 @@ pt-BR:
         event_type: 'Modalidade'
         start_date: 'Data de início'
         end_date: 'Encerramento'
-        location: 'Localização'
+        address: 'Localização'
         participant_limit: 'Obrigatória'
         status: 'Status'
         url: 'Url'

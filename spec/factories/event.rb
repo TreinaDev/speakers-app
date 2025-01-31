@@ -15,7 +15,8 @@ FactoryBot.define do
 
     initialize_with {
       new(name: name, url: url, description: description, start_date: start_date,
-       end_date: end_date, event_type: event_type, location: location, participants_limit: participants_limit, status: status, created_at: created_at, updated_at: updated_at, code: code)
+       end_date: end_date, event_type: event_type, location: location, participants_limit: participants_limit,
+       status: status, created_at: created_at, updated_at: updated_at, code: code)
     }
   end
 end

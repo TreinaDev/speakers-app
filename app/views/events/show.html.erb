@@ -6,7 +6,7 @@
     <span><b><%= Event.human_attribute_name(:event_type) %>:</b> <%= @event.event_type %></span>
     <span><b><%= Event.human_attribute_name(:start_date) %>:</b> <%= formatted_date(@event.start_date) %></span>
     <span><b><%= Event.human_attribute_name(:end_date) %>:</b> <%= formatted_date(@event.end_date) %></span>
-    <span><b><%= Event.human_attribute_name(:location) %>:</b> <%= @event.location %></span>
+    <span><b><%= Event.human_attribute_name(:address) %>:</b> <%= @event.address %></span>
     <span><b><%= Event.human_attribute_name(:status) %>:</b> <%= @event.status %></span>
   </div>
 

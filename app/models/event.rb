@@ -5,6 +5,7 @@ class Event
 
   attribute :name, :string
   attribute :event_type, :string
+  attribute :description, :string
   attribute :address, :string
   attribute :participants_limit, :integer
   attribute :url, :string
@@ -26,12 +27,12 @@ class Event
     ExternalEventApi::GetAllEventsService.call(token: token)
   end
 
-  def self.find(id)
-    ExternalEventApi::FindEventService.call(id: id)
+  def self.find(code)
+    ExternalEventApi::FindEventService.call(code: code)
   end
 
   def schedule_items(email)
-    ExternalEventApi::ScheduleItemsService.call(event_id: code, email: email)
+    ExternalEventApi::ScheduleItemsService.call(event_code: code, email: email)
   end
 
   def self.count
