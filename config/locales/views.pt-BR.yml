@@ -62,6 +62,12 @@ pt-BR:
       no_content: 'Não existem conteúdos disponíveis.'
       save: 'Adicionar'
       new_content_link: 'Clique aqui para cadastrar um conteúdo.'
+    show:
+      attached_to_tasks: 'Tarefas que utilizam este conteúdo:'
+      task: 'Tarefa'
+      no_tasks_attached: 'Esse conteúdo não foi associado a nenhuma tarefa.'
+      no_files_attached: 'Não há arquivos anexados a esse conteúdo.'
+      view_pdf: 'Visualizar PDF:'
   curriculum_tasks:
     form:
       title: 'Adicionar tarefa a programação:'

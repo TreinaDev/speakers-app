@@ -14,6 +14,7 @@
       <h2 class='heading-3'> <%= t('.curriculum_content_title')%> </h2>
       <%= link_to t('.new_curriculum_content_button'), new_curriculum_curriculum_content_path(@curriculum), data: { turbo_frame: 'modal' }, class: 'btn-primary' %>
     </div>
+    
     <% if @curriculum.curriculum_contents.any? %>
       <% @curriculum.curriculum_contents.each do |content| %>
         <div>
@@ -44,7 +45,6 @@
       </div>
     <% end %>
   </div>
-
 </div>
 
 <div>
