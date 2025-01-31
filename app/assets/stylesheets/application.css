@@ -132,10 +132,28 @@
   flex-direction: column;
  }
 
- .not-found-feedback {
+ .not-found-feedback, .not-found-participants {
   color: rgb(189, 25, 25);
   border: solid 1px #aaa;
   padding: 1rem;
   border-radius: 5px;
   text-align: center;
+  margin-top: 1rem;
+ }
+
+ .event-card {
+  display: grid;
+  grid-template-columns: 2fr;
+ }
+
+ .event-header {
+  display: flex;
+  flex-direction: column;
+ }
+
+ .participant-list {
+  padding: 1rem;
+  border: solid 1px #aaa;
+  height: 12rem;
+  overflow-y: auto;
  }

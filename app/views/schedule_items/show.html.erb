@@ -1,23 +1,30 @@
 <% turbo_page_requires_reload %>
 
-<div class='border-2 rounded-3xl p-3'>
+<div class='border rounded p-3'>
   <div>
     <h1 class='heading-1'> <%= @schedule_item.title %> </h1>
-    <span> <%= t('.estimated_participants') %> <%= @schedule_item.length %> </span>
-    <h2 class='heading-2'> <%= ScheduleItem.human_attribute_name(:description) %>  </h2>
+    <h3 class='font-bold inline'> Data/Hora Início:</h3>
+    <h3 class='inline'> <%= l(@schedule_item.start_time.to_datetime, format: :brazilian) %> </h3>
+    <h3 class='font-bold inline'> Hora Fim:</h3>
+    <h3 class='inline'> <%= l(@schedule_item.end_time.to_datetime, format: :brazilian_hour) %> </h3>
+    <span class= 'block'></span>
+    <p class= 'font-bold inline'> <%= t('.estimated_participants') %></p>
+    <span class= 'inline'> <%= @schedule_item.length %> </span>
+    <h2 class='heading-2'> <%= ScheduleItem.human_attribute_name(:description) %> </h2>
     <p> <%= @schedule_item.description %> </p>
+    <%= render 'participants/participants', participants: @participants %>
   </div>
-
-
+  
   <div>
     <div class='flex items-center justify-between mt-2'>
       <h2 class='heading-3'> <%= t('.curriculum_content_title')%> </h2>
       <%= link_to t('.new_curriculum_content_button'), new_curriculum_curriculum_content_path(@curriculum), data: { turbo_frame: 'modal' }, class: 'btn-primary' %>
     </div>
+    
     <% if @curriculum.curriculum_contents.any? %>
       <% @curriculum.curriculum_contents.each do |content| %>
         <div>
-          <%= content.event_content.title %>
+          <%= link_to content.event_content.title, curriculum_curriculum_content_path(@curriculum, content.id), class: 'link-primary' %>
         </div>
       <% end %>
     <% else %>
@@ -26,15 +33,22 @@
       </div>
     <% end %>
   </div>
-</div>
 
-<div>
-  <% if @participants.present? %>
-    <h3><%= t('.participants_list') %></h3>
-    <% @participants.each do |participant| %>
-      <strong><% t('.name') %>: </strong><p><%= participant.name %></p>
+  <div>
+    <div class='flex items-center justify-between mt-2'>
+      <h2 class='heading-3'> <%= t('.curriculum_task_title')%> </h2>
+      <%= link_to t('.new_curriculum_task_button'), new_curriculum_curriculum_task_path(@curriculum), data: { turbo_frame: 'modal' } , class: 'btn-primary' %>
+    </div>
+    <% if @curriculum.curriculum_tasks.any? %>
+      <% @curriculum.curriculum_tasks.each do |task| %>
+        <div>
+          <%= link_to task.title, curriculum_curriculum_task_path(@curriculum, task.id), class: 'link-primary' %>
+        </div>
+      <% end %>
+    <% else %>
+      <div>
+        <p><%= t('.no_curriculum_task') %></p>
+      </div>
     <% end %>
-  <% else %>
-    <p><%= t('.empty_participants_list') %></p>
-  <% end %>
+  </div>
 </div>

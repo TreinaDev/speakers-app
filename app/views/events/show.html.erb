@@ -1,25 +1,33 @@
 <h2 class='heading-2'><%= Event.model_name.human %>: <%= @event.name %></h2>
 <div class="event-card">
-  <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= @event.description %></span>
-  <span><%= @event.url %></span>
-  <span><b><%= Event.human_attribute_name(:event_type) %>:</b> <%= @event.event_type %></span>
-  <span><b><%= Event.human_attribute_name(:start_date) %>:</b> <%= formatted_date(@event.start_date) %></span>
-  <span><b><%= Event.human_attribute_name(:end_date) %>:</b> <%= formatted_date(@event.end_date) %></span>
-  <span><b><%= Event.human_attribute_name(:location) %>:</b> <%= @event.location %></span>
-  <span><b><%= Event.human_attribute_name(:status) %>:</b> <%= @event.status %></span>
-  <%= render 'shared/feedback_area', feedbacks: @feedbacks %>
+  <div class="event-header">
+    <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= @event.description %></span>
+    <span><%= @event.url %></span>
+    <span><b><%= Event.human_attribute_name(:event_type) %>:</b> <%= @event.event_type %></span>
+    <span><b><%= Event.human_attribute_name(:start_date) %>:</b> <%= formatted_date(@event.start_date) %></span>
+    <span><b><%= Event.human_attribute_name(:end_date) %>:</b> <%= formatted_date(@event.end_date) %></span>
+    <span><b><%= Event.human_attribute_name(:location) %>:</b> <%= @event.location %></span>
+    <span><b><%= Event.human_attribute_name(:status) %>:</b> <%= @event.status %></span>
+  </div>
+
+  <div>
+    <%= render 'participants/participants', participants: @participants %>
+    <%= render 'feedbacks/feedback_area', feedbacks: @feedbacks %>
+  </div>
 </div>
 
 <h2 class="heading-2 mt-3"><%= t('.schedule_items_title') %></h2>
 <% if @schedule_items&.empty? %>
   <p><%= t('.no_schedule_items') %></p>
 <% else %>
-  <div class="grid grid-cols-4 gap-1">
+  <div class="grid grid-cols-2 gap-1">
     <% @schedule_items&.each do |item | %>
       <%= link_to schedule_item_path(item.id) do %>
-        <div class="schedule_items-card grid grid-col-1 p-2 border w-80 mb-2">
+        <div class="schedule_items-card grid p-2 border mb-2">
           <span> <b> <%= ScheduleItem.human_attribute_name(:title) %>:</b> <%= item.title %></span>
-          <span class='truncate'> <b><%= ScheduleItem.human_attribute_name(:description) %>:</b> <%= item.description %></span>
+          <span class='truncate'> <b><%= ScheduleItem.human_attribute_name(:start_time) %>:</b>
+          <%= l(item.start_time.to_datetime, format: :brazilian) %> -
+          <%= l(item.end_time.to_datetime, format: :brazilian_hour) %></span>
         </div>
       <% end %>
     <% end %>

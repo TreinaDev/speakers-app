@@ -64,8 +64,19 @@ pt-BR:
       schedule_items_title: 'Suas Agendas'
       no_schedule_items: 'Você não possui agendas disponíveis para esse evento. Se você acha que isso é um erro, entre em contato com o organizador.'
     index:
-      event_list: 'Lista de Eventos'
+      event_list: 'Meus Eventos'
       no_event: 'Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.'
+  participants:
+    participants:
+      no_participants: 'Não foram localizados Participantes até o momento'
+      participant_list: 'Lista de Participantes'
+  feedbacks:
+    feedback_area:
+      see_feedback: 'Ver Feedbacks'
+      feedback: 'Feedback'
+      no_feedback: 'Nenhum Feedback disponível'
+      see_feedbacks: 'Ver Feedbacks'
+      user: 'Usuário'
   schedule_items:
     show:
       estimated_participants: 'Número estimado de participantes:'
@@ -76,6 +87,9 @@ pt-BR:
       participants_list: 'Lista de Participantes'
       name: 'Nome'
       empty_participants_list: 'Não foram localizados Participantes para está agenda'
+      curriculum_task_title: 'Tarefas da programação'
+      no_curriculum_task: 'Nenhuma tarefa cadastrada para essa programação.'
+      new_curriculum_task_button: 'Adicionar tarefa'
   curriculum_contents:
     new:
       title: 'Adicionar conteúdo a programação:'
@@ -99,6 +113,18 @@ pt-BR:
       my_profile: 'Meu Perfil'
       tasks: 'Tarefas'
       log_out: 'Sair'
+    show:
+      attached_to_tasks: 'Tarefas que utilizam este conteúdo:'
+      task: 'Tarefa'
+      no_tasks_attached: 'Esse conteúdo não foi associado a nenhuma tarefa.'
+      no_files_attached: 'Não há arquivos anexados a esse conteúdo.'
+      view_pdf: 'Visualizar PDF:'
+  curriculum_tasks:
+    form:
+      title: 'Adicionar tarefa a programação:'
+      save: 'Adicionar'
+    show:
+      task: 'Tarefa'
   home:
     index:
       register: 'Cadastre-se Agora'

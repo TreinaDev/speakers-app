@@ -1,6 +1,6 @@
 class CurriculumContentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_curriculum, only: %i[ new create ]
+  before_action :set_curriculum
   before_action :set_event_contents, only: %i[ new ]
   def new
     @curriculum_content = @curriculum.curriculum_contents.build
@@ -9,8 +9,11 @@ class CurriculumContentsController < ApplicationController
   def create
     @curriculum_content = @curriculum.curriculum_contents.build(set_curriculum_content_params)
     return redirect_to schedule_item_path(@curriculum.schedule_item_code), notice: t('curriculum_contents.create.success') if @curriculum_content.save
-
     redirect_to events_path, alert:  t('curriculum_contents.create.fail')
+  end
+
+  def show
+    @curriculum_content = @curriculum.curriculum_contents.find(params[:id])
   end
 
   private

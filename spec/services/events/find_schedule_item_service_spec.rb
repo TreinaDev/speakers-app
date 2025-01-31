@@ -9,7 +9,9 @@ describe ExternalEventApi::FindScheduleItemService do
         "title": "Ruby on Rails",
         "description": "Testes e TDD",
         "speaker_email": "joao@email.com",
-        "length": 100
+        "length": 100,
+        "start_time": "2025-02-07 13:57:52 UTC",
+        "end_time": "2025-02-07 14:57:52 UTC"
       }
       service = ExternalEventApi::FindScheduleItemService.new(schedule_item_id: json_schedule_item['id'], email: json_schedule_item['speaker_email'])
       response = instance_double(Faraday::Response, success?: true, body: json_schedule_item.to_json)

@@ -1,4 +1,6 @@
 class Feedback
+  extend ActiveModel::Translation
+
   attr_accessor :id, :name, :title, :description
 
   def initialize(id:, name:, title:, description:)
