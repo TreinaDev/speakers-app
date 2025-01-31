@@ -1,16 +1,16 @@
 <div id="feedbacks" data-controller="modal">
   <% if feedbacks&.any? %>
-    <button class="btn-success" style="width: 9rem;" data-action="click->modal#showModal">Ver Feedbacks</button>
+    <button class="btn-success" style="width: 9rem;" data-action="click->modal#showModal"> <%= t('.see_feedback') %></button>
     <dialog data-modal-target="modal" class="modal">
       <div class="modal-header">
-        <h2>Feedbacks</h2>
+        <h2><%= t('.feedback') %></h2>
         <button class="close-btn" data-action="click->modal#closeModal">&times;</button>
       </div>
       <div class="modal-body">
         <% feedbacks.each do |feedback| %>
           <div class="feedback-card">
             <div class="feedback-header">
-              <span>Usuário: <%= feedback.name %></span>
+              <span><%= t('.user') %>: <%= feedback.name %></span>
               <strong><%= feedback.title %></strong>
             </div>
             <div class="feedback-body">
@@ -23,6 +23,6 @@
       </div>
     </dialog>
   <% else %>
-    <p class="not-found-feedback" >Nenhum Feedback disponível</p>
+    <p class="not-found-feedback" ><%= t('.feedback_unavailable') %></p>
   <% end %>
 </div>

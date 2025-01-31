@@ -1,5 +1,5 @@
 <div> 
-      <h1 class="mb-4 text-4xl font-semibold text-gray-900 md:text-5xl lg:text-6xl "> Lista de Eventos </h1>
+      <h1 class="mb-4 text-4xl font-semibold text-gray-900 md:text-5xl lg:text-6xl "> <%= t('.event_list') %> </h1>
       <% if @events.any? %>
         <ul class="flex flex-wrap gap-6">
           <% @events.each do |event| %>
@@ -12,6 +12,6 @@
           <% end %>
         </ul>
       <% else %>
-        <p>Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.</p>
+        <p> <%= t('.no_event') %></p>
       <% end %>
 </div>

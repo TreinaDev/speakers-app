@@ -13,9 +13,9 @@ class SocialNetwork < ApplicationRecord
   def validate_url_type
     valid_url = [ 'www.facebook.com', 'www.youtube.com', 'x.com', 'github.com' ]
     if social_network_type == 'my_site'
-      errors.add(:url, 'inválida para ' + translated_social_network_type(social_network_type)) unless valid_my_site_domain?
+      errors.add(:url, I18n.t('activerecord.errors.messages.invalid_for') + translated_social_network_type(social_network_type)) unless valid_my_site_domain?
     else
-      errors.add(:url, 'inválida para ' +
+      errors.add(:url, I18n.t('activerecord.errors.messages.invalid_for') +
                 translated_social_network_type((social_network_type))
                 ) if !valid_url.any? { |validation| url.present? && url.include?(validation) } && social_network_type.present?
     end

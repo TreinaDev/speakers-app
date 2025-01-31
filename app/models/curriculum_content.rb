@@ -9,7 +9,7 @@ class CurriculumContent < ApplicationRecord
 
   def must_be_event_content_owner
     return if event_content&.user == curriculum&.user
-    errors.add(:base, "Conteúdo indisponível")
+    errors.add(:base, I18n.t("activerecord.errors.messages.must_be_event_content_owner"))
     throw(:abort)
   end
 end
