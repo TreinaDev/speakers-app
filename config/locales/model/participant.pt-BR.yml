@@ -1,0 +1,7 @@
+pt-BR:
+  activemodel:
+    models:
+      participant: Participante
+    attributes:
+      participant:
+        name: Nome

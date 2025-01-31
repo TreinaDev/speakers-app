@@ -6,6 +6,7 @@
     <span> <%= t('.estimated_participants') %> <%= @schedule_item.length %> </span>
     <h2 class='heading-2'> <%= ScheduleItem.human_attribute_name(:description) %>  </h2>
     <p> <%= @schedule_item.description %> </p>
+    <%= render 'participants/participants', participants: @participants %>
   </div>
 
 
@@ -47,13 +48,4 @@
 
 </div>
 
-<div>
-  <% if @participants.present? %>
-    <h3>Lista de Participantes</h3>
-    <% @participants.each do |participant| %>
-      <strong>Nome: </strong><p><%= participant.name %></p>
-    <% end %>
-  <% else %>
-    <p>Não foram localizados Participantes para está agenda</p>
-  <% end %>
-</div>
+
