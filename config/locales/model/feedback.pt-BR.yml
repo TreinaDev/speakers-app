@@ -1,0 +1,9 @@
+pt-BR:
+  activemodel:
+    models:
+      feedback: 
+        one: Feedback
+        other: Feedbacks
+    attributes:
+      feedback:
+        name: Nome

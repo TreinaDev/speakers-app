@@ -1,4 +1,6 @@
 class Participant
+  extend ActiveModel::Translation
+
   attr_accessor :id, :name
 
   def initialize(id:, name:)

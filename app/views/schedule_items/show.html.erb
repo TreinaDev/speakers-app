@@ -1,15 +1,18 @@
 <% turbo_page_requires_reload %>
 
 <div class='border rounded p-3'>
-  <h1 class='heading-1'> <%= @schedule_item.title %> </h1>
-  <h3 class='font-bold inline'> Data/Hora:</h3>
-  <h3 class='inline'> <%= l(@schedule_item.start_time.to_datetime, format: :brazilian) %> </h3>
-  <span class= 'block'></span>
-  <p class= 'font-bold inline'> <%= t('.estimated_participants') %></p>
-  <span class= 'inline'> <%= @schedule_item.length %> </span>
-  <h2 class='heading-2'> <%= ScheduleItem.human_attribute_name(:description) %> </h2>
-  <p> <%= @schedule_item.description %> </p>
-
+  <div>
+    <h1 class='heading-1'> <%= @schedule_item.title %> </h1>
+    <h3 class='font-bold inline'> Data/Hora:</h3>
+    <h3 class='inline'> <%= l(@schedule_item.start_time.to_datetime, format: :brazilian) %> </h3>
+    <span class= 'block'></span>
+    <p class= 'font-bold inline'> <%= t('.estimated_participants') %></p>
+    <span class= 'inline'> <%= @schedule_item.length %> </span>
+    <h2 class='heading-2'> <%= ScheduleItem.human_attribute_name(:description) %> </h2>
+    <p> <%= @schedule_item.description %> </p>
+    <%= render 'participants/participants', participants: @participants %>
+  </div>
+  
   <div>
     <div class='flex items-center justify-between mt-2'>
       <h2 class='heading-3'> <%= t('.curriculum_content_title')%> </h2>
@@ -47,13 +50,4 @@
   </div>
 </div>
 
-<div>
-  <% if @participants.present? %>
-    <h3>Lista de Participantes</h3>
-    <% @participants.each do |participant| %>
-      <strong>Nome: </strong><p><%= participant.name %></p>
-    <% end %>
-  <% else %>
-    <p>Não foram localizados Participantes para está agenda</p>
-  <% end %>
-</div>
+

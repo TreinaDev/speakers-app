@@ -42,4 +42,8 @@ class Event
   def self.delete_all
     @@instances = []
   end
+
+  def participants
+    ExternalParticipantApi::EventListParticipantsService.new(event_id: id).call
+  end
 end

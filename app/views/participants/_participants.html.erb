@@ -1,0 +1,15 @@
+<div id="participant_list">
+  <% if participants.present? %>
+    <h3 class="heading-2"><%= t('.participant_list') %></h3>
+    <div class="participant-list">
+      <% participants.each do |participant| %>
+        <strong><%= Participant.human_attribute_name(:name) %>: </strong><p><%= participant.name %></p>
+      <% end %>
+    </div>
+  <% else %>
+
+  <div class="not-found-participants">
+    <p><%= t('.no_participants') %></p>
+  </div>
+  <% end %>
+</div>

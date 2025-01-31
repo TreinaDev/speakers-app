@@ -46,6 +46,6 @@ describe 'User sees list of participants' do
     click_on 'Dev week'
     click_on 'Entrevista com João'
 
-    expect(page).to have_content 'Não foram localizados Participantes para está agenda'
+    expect(page).to have_content 'Não foram localizados Participantes até o momento'
   end
 end
