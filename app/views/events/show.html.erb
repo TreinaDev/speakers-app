@@ -1,6 +1,6 @@
 <h2 class='heading-2'><%= Event.model_name.human %>: <%= @event.name %></h2>
-<div class="event-card">
-  <div class="event-header">
+<div class="event_card">
+  <div class="event_card__heading">
     <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= @event.description %></span>
     <span><%= @event.url %></span>
     <span><b><%= Event.human_attribute_name(:event_type) %>:</b> <%= @event.event_type %></span>

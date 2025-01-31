@@ -1,20 +1,20 @@
 <%= form_with model: event_task, data: { turbo: false } do |f| %>
   <div>
-    <%= f.label :name, class: 'label-primary' %>
-    <%= f.text_field :name, class: 'field-primary' %>
+    <%= f.label :name, class: 'label_primary' %>
+    <%= f.text_field :name, class: 'field_primary' %>
     <% if event_task.errors[:name].any? %>
       <span class="text-red-500 text-sm"><%= event_task.errors.full_messages_for(:name).first %></span>
     <% end %>
   </div>
   <div>
-    <%= f.label :description, class: 'label-primary' %>
-    <%= f.text_area :description, class: 'text-area' %>
+    <%= f.label :description, class: 'label_primary' %>
+    <%= f.text_area :description, class: 'text_area' %>
     <% if event_task.errors[:description].any? %> 
       <span class="text-red-500 text-sm"><%= event_task.errors.full_messages_for(:description).first %></span>
     <% end %>
   </div>
   <div>
-    <%= f.label :certificate_requirement, class: 'label-primary' %>
+    <%= f.label :certificate_requirement, class: 'label_primary' %>
     <%= f.collection_radio_buttons :certificate_requirement, EventTask.certificate_requirements.keys.map { |key| [EventTask.human_enum_name(:certificate_requirement, key), key] }, :second, :first do |b| %>
       <div>
         <%= b.radio_button %>
@@ -37,7 +37,7 @@
           <% end %>
       </div>
   <div>
-    <%= f.submit t('.save'), class: 'btn-primary'%>
-    <%= link_to 'Cancelar', event_task, class: 'btn-primary' %>
+    <%= f.submit t('.save'), class: 'btn_primary'%>
+    <%= link_to 'Cancelar', event_task, class: 'btn_primary' %>
   </div>
 <% end %>

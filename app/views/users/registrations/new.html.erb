@@ -1,6 +1,6 @@
 <div class="h-14"></div>
 <div class="flex items-center justify-center relative py-40 px-5">
-  <div class="img-container">
+  <div class="mr-12">
     <h2 class="heading-2 flex justify-center">Crie sua conta</h2>
     <% unless resource.errors.any? %>
       <%= image_tag 'sign_up.png', class: 'w-96' %>
@@ -13,38 +13,38 @@
     </div>
   </div>
 
-  <div class="form">
-    <%= image_tag 'background-form.png', class: 'form-background' %>
+  <div class="flex justify-center mt-12">
+    <%= image_tag 'background-form.png', class: 'form_background' %>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <div class="field">
-        <%= f.label :first_name, class: 'label-primary' %><br />
-        <%= f.text_field :first_name, autofocus: true, class: 'field-primary' %>
+        <%= f.label :first_name, class: 'label_primary' %><br />
+        <%= f.text_field :first_name, autofocus: true, class: 'field_primary' %>
       </div>
 
       <div class="field">
-        <%= f.label :last_name, class: 'label-primary' %><br />
-        <%= f.text_field :last_name, class: 'field-primary' %>
+        <%= f.label :last_name, class: 'label_primary' %><br />
+        <%= f.text_field :last_name, class: 'field_primary' %>
       </div>
 
       <div class="field">
-        <%= f.label :email, class: 'label-primary' %><br />
-        <%= f.email_field :email, autocomplete: "email", class: 'field-primary' %>
+        <%= f.label :email, class: 'label_primary' %><br />
+        <%= f.email_field :email, autocomplete: "email", class: 'field_primary' %>
       </div>
 
       <div class="field">
-        <%= f.label :password, class: 'label-primary' %>
+        <%= f.label :password, class: 'label_primary' %>
         <% if @minimum_password_length %>
           <em style = "font-size: 12px;">(<%= @minimum_password_length %> caracteres mínimos)</em>
         <% end %>
-        <%= f.password_field :password, autocomplete: "new-password", class: 'field-primary' %>
+        <%= f.password_field :password, autocomplete: "new-password", class: 'field_primary' %>
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation, class: 'label-primary' %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'field-primary' %>
+        <%= f.label :password_confirmation, class: 'label_primary' %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'field_primary' %>
       </div>
 
-      <%= f.submit "Cadastrar", class: 'btn-success' %>
+      <%= f.submit "Cadastrar", class: 'btn--success' %>
     <% end %>
   </div>
 </div>

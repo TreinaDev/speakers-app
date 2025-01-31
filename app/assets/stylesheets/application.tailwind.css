@@ -2,24 +2,128 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: 'Poppins';
+    src: url('Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    src: url('Poppins-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Piedra';
+    src: url('Piedra-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  html {
+    scroll-behavior: smooth !important;
+  }
+
+  body {
+    @apply font-poppins;
+  }
+}
+
 @layer components {
-  .btn-primary {
+  .btn--success {
+    @apply w-full  text-white font-semibold mt-2 rounded-md h-12 bg-second-primary;
+    transition: background ease-in-out 0.2s;
+  }
+
+  .btn--success:hover {
+    @apply cursor-pointer bg-dark-second-primary;
+  }
+
+  .form_background {
+    @apply w-10 absolute top-0 my-0 mx-auto opacity-50;   
+    transform: translateX(-30%);
+    z-index: -1;
+  }
+
+  .icon {
+    @apply w-6;
+   }
+
+  .field{
+    @apply grid grid-cols-1 mb-1;
+    line-height: 0.6rem;
+  }
+
+  .field input {
+    @apply border border-gray-300;
+  }
+
+  .event_card {
+    @apply grid grid-cols-1 gap-2;
+  }
+
+  .event_card__heading {
+    @apply flex flex-col;
+  }
+
+  .participant_list {
+    @apply p-4 h-48 overflow-y-auto;
+    border: solid 1px #aaa;
+  }
+
+  .modal__header {
+    @apply w-full flex p-4 items-end justify-between;
+    height: 10%;
+    font-size: 2rem;
+  }
+
+  .modal__body {
+    @apply overflow-y-auto p-8;
+  }
+
+  #feedbacks dialog {
+    @apply rounded-md;
+    width: 30%;
+  }
+
+  .feedback_card {
+    @apply grid grid-cols-1 m-4;
+    border-bottom: rgb(24, 23, 23) solid 1px;
+  }
+
+  .feedback-header {
+    @apply flex flex-col;
+  }
+
+  .not_found_feedback,
+  .not-found-participants {
+    @apply p-1 rounded-md text-center mt-4;
+    color: rgb(189, 25, 25);
+    border: solid 1px #aaa;
+    padding: 1rem;
+  }
+
+  .btn_primary {
     @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2;
   }
 
-  .label-primary {
+  .label_primary {
     @apply block text-sm font-medium text-gray-900;
   }
 
-  .field-primary {
+  .field_primary {
     @apply bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-5 py-3;
   }
 
-  .text-area {
+  .text_area {
     @apply block text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 px-5 py-3;
   }
 
-  .link-primary {
+  .link_primary {
     @apply font-medium text-blue-500 hover:underline;
   }
 
@@ -32,17 +136,16 @@
     transition: all .5s ease 0s;
   }
 
-  .navbar.navbar--actived{
-    @apply fixed top-0 pt-4 w-full z-10;
+  .navbar.navbar--actived {
+    @apply fixed top-0 pt-4 w-full z-10 bg-primary;
     border-radius: 0 0 60px 60px;
-    background-color: #7A6AD8
   }
 
-  .navbar_content{
+  .navbar_content {
     @apply flex justify-between w-full pb-4 px-36;
   }
 
-  .nav-link-primary {
+  .nav_link_primary {
     @apply text-lg font-bold text-white hover:dark:bg-gray-700 rounded-lg px-2 h-10 flex items-center;
   }
 
@@ -50,9 +153,8 @@
     @apply text-5xl font-semibold text-blue-500 mb-2;
   }
 
-  .logo{
-    @apply text-white text-4xl;
-    font-family: "Piedra", serif;
+  .logo {
+    @apply text-white text-4xl font-piedra;
   }
 
   .heading-2 {
@@ -68,117 +170,112 @@
   }
 
   .alert {
-    @apply p-4 mb-4 text-sm  rounded-lg bg-red-200 text-red-500;
+    @apply p-4 mb-4 text-sm rounded-lg bg-red-200 text-red-500;
   }
 
-  .card_container{
+  .card_container {
     @apply flex flex-wrap p-10 rounded-lg bg-gray-100 gap-y-10 mt-10;
   }
 
-  .card{
+  .card {
     @apply p-2 border border-solid rounded-lg bg-white border-gray-900 shadow-md hover:shadow-xl hover:border-gray-500 mx-4 max-h-28 overflow-hidden;
     width: 30%;
   }
 
-  .card_title{
+  .card__title {
     @apply font-bold text-lg;
   }
 
-  .card_title_2{
+  .card__title--2 {
     @apply text-xs tracking-widest text-blue-600;
-  }
-
-  .card_description{
-    @apply font-serif;
   }
 
   .errors {
     @apply p-4 mb-1 text-sm rounded-lg bg-red-200 text-red-500;
   }
 
-  .container{
+  .container {
     @apply mt-40 px-40 mb-36;
   }
 
-  .container_link{
+  .container__link {
     @apply border inline-flex font-semibold text-indigo-600 border-indigo-600 rounded-lg py-2 px-6 items-center;
   }
 
-  .container_link .link_icon{
+  .container__link .link_icon {
     @apply fill-indigo-600 mr-1 w-5 h-5;
   }
 
-  .container_link .icon_size{
+  .container__link .icon_size {
     @apply w-5 h-5 mr-1;
   }
 
-  .container_link .link_icon_my_site{
+  .container__link .link_icon_my_site {
     @apply stroke-indigo-600;
   }
 
-  .nav_social_network_container{
+  .nav_social_network_container {
     @apply flex flex-wrap gap-4 flex-row mt-6;
   }
 
-  .banner_container{
+  .banner_container {
     height: 90vh;
     background-image: url('banner-bg.jpg');
     background-size: cover;
     border-end-end-radius: 260px;
   }
 
-  .banner_content{
+  .banner_content {
     @apply h-2/3 relative w-2/3 flex items-center text-white;
     background: url('banner_content.jpg');
     background-size: cover;
     border-radius: 70px;
   }
 
-  .banner_overlay{
+  .banner_overlay {
     @apply w-full h-full absolute z-0;
     background-color: rgba(0, 0, 0, 0.548);
     border-radius: 70px;
   }
 
-  .banner_container_text{
+  .banner_container_text {
     @apply ml-32 w-2/3 flex flex-col items-start;
     z-index: 1;
   }
 
-  .title_banner{
+  .title_banner {
     @apply font-bold text-4xl mb-8;
   }
 
-  .register_button{
+  .register_button {
     @apply py-4 px-8 text-black mt-8 rounded-2xl;
     background-color: #E9E1FB;
   }
 
-  .register_button:hover{
+  .register_button:hover {
     background-color: #bea2fd;
     box-shadow: 2px 2px 4px rgb(46, 46, 46);
   }
 
-  .landing_card{
+  .landing_card {
     @apply relative pt-10;
     width: 22%;
   }
 
-  .landing_card_content{
+  .landing_card_content {
     @apply p-9 rounded-3xl mt-3 mr-3 h-full flex flex-col justify-center;
     background-color: #E9E1FB;
   }
 
-  .landing_card_content h3{
+  .landing_card_content h3 {
     @apply font-bold;
   }
 
-  .landing_card_icon{
-    @apply inline-flex items-center justify-center p-4 rounded-full absolute right-0 top-0;
-    background-color: #7A6AD8;
+  .landing_card_icon {
+    @apply inline-flex items-center justify-center p-4 rounded-full absolute right-0 top-0 bg-primary;
   }
 
-  .how_works{
+  .how_works {
     @apply p-20 pb-24 text-white;
     background-image: url('bg_como_funciona.jpg');
     background-attachment: fixed;
@@ -188,66 +285,64 @@
     font-family: "Piedra", serif;
   }
 
-  .how_works h2{
+  .how_works h2 {
     @apply text-4xl mx-auto w-full text-center;
   }
 
-  .how_works_count{
+  .how_works_count {
     @apply flex flex-col items-center mr-20;
   }
 
-  .how_works_count_number{
+  .how_works_count_number {
     @apply py-3 px-6 text-5xl;
     border: 10px solid white;
     border-radius: 50%;
     width: 95px;
   }
 
-  .how_works_count_bar{
+  .how_works_count_bar {
     @apply bg-white;
     width: 10px;
     height: 150px;
   }
 
-  .how_works_content{
+  .how_works_content {
     @apply p-14;
     background-color: rgba(0, 0, 0, 0.685);
     border-radius: 40px;
   }
 
-  .how_works_text{
+  .how_works_text {
     @apply mt-4;
     font-family: "Poppins", serif;
   }
 
-  .call_action{
+  .call_action {
     @apply w-full relative bg-cover;
     height: 80vh;
     background-image: url('modern-office.jpg');
   }
 
-  .call_action_overlay{
+  .call_action_overlay {
     @apply w-full h-full absolute z-0;
     background-color: rgba(0, 0, 0, 0.548);
   }
 
-  .call_action_content{
+  .call_action_content {
     @apply text-white flex flex-col items-center px-14;
     z-index: 1;
   }
-  
-  .call_action_content h2{
+
+  .call_action_content h2 {
     @apply text-6xl mb-7;
     font-family: "Piedra", serif;
   }
 
-  .footer{
-    @apply w-full;
-    background-color: #7A6AD8;
+  .footer {
+    @apply w-full bg-primary;
   }
 
   .modal {
     @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white border-2 rounded-3xl shadow-lg z-50;
-    background-color: rgb(255, 255, 255);
   }
 }

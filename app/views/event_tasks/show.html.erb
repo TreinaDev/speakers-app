@@ -25,8 +25,8 @@
         <% @event_task.event_contents.each do |content| %>
           <%= link_to(content, class: "card") do %>
             <div>
-              <p class="card_title_2"><%= t('.content') %></p>
-              <h3 class="card_title"><%= content.title %></h3>
+              <p class="card__title--2"><%= t('.content') %></p>
+              <h3 class="card__title"><%= content.title %></h3>
             </div>
           <% end %>
         <% end %>

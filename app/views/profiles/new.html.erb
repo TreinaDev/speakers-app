@@ -10,20 +10,20 @@
 
 <%= form_with(model: @profile) do |f| %>
   <div class="field">
-    <%= f.label :title, class: 'label-primary' %>
-    <%= f.text_field :title, class: 'field-primary' %>
+    <%= f.label :title, class: 'label_primary' %>
+    <%= f.text_field :title, class: 'field_primary' %>
   </div>
 
   <div class="field">
-    <%= f.label :about_me, class: 'label-primary'  %>
-    <%= f.text_area :about_me, class: 'text-area' %>
+    <%= f.label :about_me, class: 'label_primary'  %>
+    <%= f.text_area :about_me, class: 'text_area' %>
   </div>
 
   <div class="field border-2 border-black p-4">
-    <%= f.label :pronoun, class: 'label-primary'  %>
-    <%= f.select :pronoun, @pronoun_list, { include_blank: "" }, class: 'field-primary border border-gray' %>
-    <%= f.label :other_pronoun, class: 'label-primary'  %>
-    <%= f.text_field :other_pronoun, class: 'field-primary' %>
+    <%= f.label :pronoun, class: 'label_primary'  %>
+    <%= f.select :pronoun, @pronoun_list, { include_blank: "" }, class: 'field_primary border border-gray' %>
+    <%= f.label :other_pronoun, class: 'label_primary'  %>
+    <%= f.text_field :other_pronoun, class: 'field_primary' %>
     <div class="flex my-6 items-center">
       <%= f.check_box :display_pronoun, class: 'mr-4' %>
       <%= f.label :display_pronoun %>
@@ -31,8 +31,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :city, class: 'label-primary'  %>
-    <%= f.text_area :city, class: 'text-area' %>
+    <%= f.label :city, class: 'label_primary'  %>
+    <%= f.text_area :city, class: 'text_area' %>
     <div class="flex my-6 items-center">
       <%= f.check_box :display_city, class: 'mr-4' %>
       <%= f.label :display_city %>
@@ -40,8 +40,8 @@
   </div>
 
   <div class="">
-    <%= f.label :birth, class: 'label-primary'  %>
-    <%= f.date_field :birth, class: 'field-primary border mt-3'  %>
+    <%= f.label :birth, class: 'label_primary'  %>
+    <%= f.date_field :birth, class: 'field_primary border mt-3'  %>
     <div class="flex my-6 items-center">
       <%= f.check_box :display_birth, class: 'mr-4' %>
       <%= f.label :display_birth  %>
@@ -49,10 +49,10 @@
   </div>
 
   <div class="field  border-2 border-black p-4">
-    <%= f.label :gender, class: 'label-primary'  %>
-    <%= f.select :gender, @gender_list, { include_blank: "" }, class: 'field-primary border border-gray' %>    
-    <%= f.label :other_gender, class: 'label-primary'  %>
-    <%= f.text_field :other_gender, class: 'field-primary' %>
+    <%= f.label :gender, class: 'label_primary'  %>
+    <%= f.select :gender, @gender_list, { include_blank: "" }, class: 'field_primary border border-gray' %>    
+    <%= f.label :other_gender, class: 'label_primary'  %>
+    <%= f.text_field :other_gender, class: 'field_primary' %>
     <div class="flex my-6 items-center">
       <%= f.check_box :display_gender, class: 'mr-4' %>
       <%= f.label :display_gender %>
@@ -67,35 +67,35 @@
   <h3 class='heading-2 text-2xl'><%= t('.social_networks') %></h3>
 
   <div class="field">
-    <%= f.label :my_site, class: 'label-primary' %>
-    <%= f.text_field :my_site, name: 'profile[social_networks][network_1][url]', class: 'field-primary' %>
-    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_1][social_network_type]', value: '0', class: 'field-primary' %>
+    <%= f.label :my_site, class: 'label_primary' %>
+    <%= f.text_field :my_site, name: 'profile[social_networks][network_1][url]', class: 'field_primary' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_1][social_network_type]', value: '0', class: 'field_primary' %>
   </div>
 
   <div class="field">
-    <%= f.label :youtube, class: 'label-primary' %>
-    <%= f.text_field :youtube, name: 'profile[social_networks][network_2][url]', class: 'field-primary' %>
-    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_2][social_network_type]', value: '1', class: 'field-primary' %>
+    <%= f.label :youtube, class: 'label_primary' %>
+    <%= f.text_field :youtube, name: 'profile[social_networks][network_2][url]', class: 'field_primary' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_2][social_network_type]', value: '1', class: 'field_primary' %>
   </div>
 
   <div class="field">
-    <%= f.label :twitter, class: 'label-primary' %>
-    <%= f.text_field :twitter, name: 'profile[social_networks][network_3][url]', class: 'field-primary' %>
-    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_3][social_network_type]', value: '2', class: 'field-primary' %>
+    <%= f.label :twitter, class: 'label_primary' %>
+    <%= f.text_field :twitter, name: 'profile[social_networks][network_3][url]', class: 'field_primary' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_3][social_network_type]', value: '2', class: 'field_primary' %>
   </div>
 
   <div class="field">
-    <%= f.label :github, class: 'label-primary' %>
-    <%= f.text_field :github, name: 'profile[social_networks][network_4][url]', class: 'field-primary' %>
-    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_4][social_network_type]', value: '3', class: 'field-primary' %>
+    <%= f.label :github, class: 'label_primary' %>
+    <%= f.text_field :github, name: 'profile[social_networks][network_4][url]', class: 'field_primary' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_4][social_network_type]', value: '3', class: 'field_primary' %>
   </div>
 
   <div class="field">
-    <%= f.label :facebook, class: 'label-primary' %>
-    <%= f.text_field :facebook, name: 'profile[social_networks][network_5][url]', class: 'field-primary' %>
-    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_5][social_network_type]', value: '4', class: 'field-primary' %>
+    <%= f.label :facebook, class: 'label_primary' %>
+    <%= f.text_field :facebook, name: 'profile[social_networks][network_5][url]', class: 'field_primary' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_5][social_network_type]', value: '4', class: 'field_primary' %>
   </div>
 
 
-  <%= f.submit 'Criar perfil', class: 'btn-primary' %>
+  <%= f.submit 'Criar perfil', class: 'btn_primary' %>
 <% end %>

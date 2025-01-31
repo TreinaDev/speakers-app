@@ -13,13 +13,13 @@
   <div>
     <div class='flex items-center justify-between mt-2'>
       <h2 class='heading-3'> <%= t('.curriculum_content_title')%> </h2>
-      <%= link_to t('.new_curriculum_content_button'), new_curriculum_curriculum_content_path(@curriculum), data: { turbo_frame: 'modal' }, class: 'btn-primary' %>
+      <%= link_to t('.new_curriculum_content_button'), new_curriculum_curriculum_content_path(@curriculum), data: { turbo_frame: 'modal' }, class: 'btn_primary' %>
     </div>
     
     <% if @curriculum.curriculum_contents.any? %>
       <% @curriculum.curriculum_contents.each do |content| %>
         <div>
-          <%= link_to content.event_content.title, curriculum_curriculum_content_path(@curriculum, content.id), class: 'link-primary' %>
+          <%= link_to content.event_content.title, curriculum_curriculum_content_path(@curriculum, content.id), class: 'link_primary' %>
         </div>
       <% end %>
     <% else %>
@@ -32,7 +32,7 @@
   <div>
     <div class='flex items-center justify-between mt-2'>
       <h2 class='heading-3'> <%= t('.curriculum_task_title')%> </h2>
-      <%= link_to t('.new_curriculum_task_button'), new_curriculum_curriculum_task_path(@curriculum), data: { turbo_frame: 'modal' } , class: 'btn-primary' %>
+      <%= link_to t('.new_curriculum_task_button'), new_curriculum_curriculum_task_path(@curriculum), data: { turbo_frame: 'modal' } , class: 'btn_primary' %>
     </div>
     <% if @curriculum.curriculum_tasks.any? %>
       <% @curriculum.curriculum_tasks.each do |task| %>

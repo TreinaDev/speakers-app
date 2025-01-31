@@ -1,15 +1,15 @@
 <%= form_with(model: event_content, data: { turbo: false }) do |f| %>
   <div class="field">
-    <%= f.label :title, class: 'label-primary' %>
-    <%= f.text_field :title, class: 'field-primary' %>
+    <%= f.label :title, class: 'label_primary' %>
+    <%= f.text_field :title, class: 'field_primary' %>
     <% if event_content.errors[:title].any? %> 
       <span class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:title).first %></span>
     <% end %>
   </div>
 
   <div>
-    <%= f.label :description, class: 'label-primary'  %>
-    <%= f.rich_textarea :description, class: 'text-area' %>
+    <%= f.label :description, class: 'label_primary'  %>
+    <%= f.rich_textarea :description, class: 'text_area' %>
   </div>
 
   <div class="mt-5 mb-5">
@@ -35,7 +35,7 @@
     <% end %>
   </div>
   
-  <%= f.submit class: 'btn-primary' %>
-  <%= link_to 'Cancelar', event_content, class: 'btn-primary' %>
+  <%= f.submit class: 'btn_primary' %>
+  <%= link_to 'Cancelar', event_content, class: 'btn_primary' %>
 <% end %>
 

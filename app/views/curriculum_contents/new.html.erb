@@ -14,7 +14,7 @@
 
       <% if @event_contents.any? %>
         <div>
-          <%= f.label :event_content_id, class: "label-primary" %>
+          <%= f.label :event_content_id, class: "label_primary" %>
           <%= f.collection_select :event_content_id, @event_contents, :id, :title, {}, 
             { class: "mt-1 block w-full border-2 rounded-lg border-gray-300 shadow-sm bg-white text-gray-900 
                       focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-300 dark:text-gray-900 
@@ -22,7 +22,7 @@
       </div>
 
         <div class="mt-5 flex justify-end">
-          <%= f.submit t('.save'), class: 'btn-primary' %>
+          <%= f.submit t('.save'), class: 'btn_primary' %>
         </div>
       <% else %>
         <div>
@@ -30,7 +30,7 @@
         </div>
         
         <div>
-          <%= link_to t('.new_content_link'), new_event_content_path, class: 'link-primary', data: { turbo: false } %>
+          <%= link_to t('.new_content_link'), new_event_content_path, class: 'link_primary', data: { turbo: false } %>
         </div>
       <% end %>
     <% end %>

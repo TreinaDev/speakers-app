@@ -44,8 +44,8 @@
         <% @event_content.event_tasks.each do |task| %>
           <%= link_to(task, class: "card") do %>
             <div>
-              <p class="card_title_2"> <%= t('.task') %> </p>
-              <h3 class="card_title"><%= task.name %></h3>
+              <p class="card__title--2"> <%= t('.task') %> </p>
+              <h3 class="card__title"><%= task.name %></h3>
             </div>
           <% end %>
         <% end %>
