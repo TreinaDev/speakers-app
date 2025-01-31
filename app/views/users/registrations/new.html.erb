@@ -34,7 +34,7 @@
       <div class="field">
         <%= f.label :password, class: 'label-primary' %>
         <% if @minimum_password_length %>
-          <em style = "font-size: 12px;">(<%= @minimum_password_length %> caracteres mínimos)</em>
+          <em style = "font-size: 12px;">(<%= @minimum_password_length %> <%= I18n.t('.devise.registrations.new.minimun_characters')%>)</em>
         <% end %>
         <%= f.password_field :password, autocomplete: "new-password", class: 'field-primary' %>
       </div>
@@ -44,7 +44,7 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'field-primary' %>
       </div>
 
-      <%= f.submit "Cadastrar", class: 'btn-success' %>
+      <%= f.submit  I18n.t('.devise.registrations.new.new_sign_up'), class: 'btn-success' %>
     <% end %>
   </div>
 </div>
