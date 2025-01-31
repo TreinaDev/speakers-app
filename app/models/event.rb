@@ -15,6 +15,9 @@ class Event
   attribute :code, :string
   attribute :start_date, :datetime
   attribute :end_date, :datetime
+  attribute :logo_url, :string
+  attribute :banner_url, :string
+  attribute :event_owner, :string
 
   @@instances = []
   def initialize(**params)

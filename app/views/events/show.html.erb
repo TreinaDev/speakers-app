@@ -2,12 +2,10 @@
 <div class="event-card">
   <div class="event-header">
     <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= @event.description %></span>
-    <span><%= @event.url %></span>
-    <span><b><%= Event.human_attribute_name(:event_type) %>:</b> <%= @event.event_type %></span>
+    <span><b><%= t('.event_page') %>:</b> <%= @event.url.presence || t('.no_event_page') %></span>
     <span><b><%= Event.human_attribute_name(:start_date) %>:</b> <%= formatted_date(@event.start_date) %></span>
     <span><b><%= Event.human_attribute_name(:end_date) %>:</b> <%= formatted_date(@event.end_date) %></span>
     <span><b><%= Event.human_attribute_name(:address) %>:</b> <%= @event.address %></span>
-    <span><b><%= Event.human_attribute_name(:status) %>:</b> <%= @event.status %></span>
   </div>
 
   <div>

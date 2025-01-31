@@ -22,9 +22,7 @@ describe 'User see event details', type: :system do
     end_date = 14.days.from_now.strftime('%d/%m/%Y')
     expect(page).to have_content 'Ruby on Rails'
     expect(page).to have_content 'Introdução ao Rails com TDD'
-    expect(page).to have_content 'Modalidade: Presencial'
     expect(page).to have_content 'Localização: Juiz de Fora'
-    expect(page).to have_content 'Status: Publicado'
     expect(page).to have_content "Data de início: #{ start_date }"
     expect(page).to have_content "Encerramento: #{ end_date }"
     expect(page).to have_content 'www.meuevento.com/eventos/Ruby-on-Rails'
