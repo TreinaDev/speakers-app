@@ -81,6 +81,8 @@ pt-BR:
     form:
       title: 'Adicionar tarefa a programação:'
       save: 'Adicionar'
+    show:
+      task: 'Tarefa'
   home:
     index:
       register: 'Cadastre-se Agora'

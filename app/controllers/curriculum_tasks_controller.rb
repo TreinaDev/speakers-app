@@ -14,6 +14,10 @@ class CurriculumTasksController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
+  def show
+    @task = @curriculum.curriculum_tasks.find_by(id: params[:id])
+  end
+
   private
 
   def set_curriculum
@@ -22,6 +26,6 @@ class CurriculumTasksController < ApplicationController
   end
 
   def set_curriculum_task_params
-    params.require(:curriculum_task).permit(:title, :description, :cestificate_requirement)
+    params.require(:curriculum_task).permit(:title, :description, :certificate_requirement)
   end
 end
