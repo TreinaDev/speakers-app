@@ -42,6 +42,18 @@
         <% end %>
       </div>
 
+      <div class="col-span-2 mt-2">
+      <%= f.label :curriculum_content_ids, class: "label-primary" %>
+        <% if curriculum_contents.blank? %>
+          <p class="mt-2"> <%= t('.no_contents') %></p>
+        <% else %>
+          <%= f.collection_check_boxes(:curriculum_content_ids, curriculum_contents, :id, :title) do |b| %>
+              <%= b.check_box %>
+              <%= b.label(class: "text-sm text-gray-900 mr-2") %>
+          <% end %>
+        <% end %>
+    </div>
+
       <div class="mt-5 flex justify-end">
         <%= f.submit t('.save'), class: 'btn-primary'%>
       </div>

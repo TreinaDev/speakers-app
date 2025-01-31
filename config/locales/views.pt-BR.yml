@@ -81,8 +81,10 @@ pt-BR:
     form:
       title: 'Adicionar tarefa a programação:'
       save: 'Adicionar'
+      no_contents: 'Não existem conteúdos disponíveis'
     show:
       task: 'Tarefa'
+      attached_contents: 'Material de apoio'
   home:
     index:
       register: 'Cadastre-se Agora'
