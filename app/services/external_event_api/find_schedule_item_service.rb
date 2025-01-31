@@ -13,7 +13,7 @@ class ExternalEventApi::FindScheduleItemService < ApplicationService
         json_response = JSON.parse(response.body)
         schedule_item = ScheduleItem.new(id: json_response['id'], title: json_response['title'],
                           speaker_email: json_response['speaker_email'], description: json_response['description'],
-                          length: json_response['length'], start_time: json_response['start_time'])
+                          length: json_response['length'], start_time: json_response['start_time'], end_time: json_response['end_time'])
       end
     rescue StandardError => error
       Rails.logger.error(error)

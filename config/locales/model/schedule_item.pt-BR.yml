@@ -7,3 +7,4 @@ pt-BR:
         title: 'Título'
         description: 'Descrição'
         start_time: 'Data e hora de início'
+        end_time: 'Hora Fim'
