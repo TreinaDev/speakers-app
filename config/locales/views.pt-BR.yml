@@ -46,6 +46,9 @@ pt-BR:
     show:
       schedule_items_title: 'Suas Agendas'
       no_schedule_items: 'Você não possui agendas disponíveis para esse evento. Se você acha que isso é um erro, entre em contato com o organizador.'
+    index:
+      my_events: 'Meus Eventos'
+      no_events: 'Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.'
   participants:
     participants:
       no_participants: 'Não foram localizados Participantes até o momento'

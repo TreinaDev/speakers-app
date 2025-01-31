@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @events = Event.all(current_user.email)
+    @events = Event.all(current_user.token)
   end
 
   def show

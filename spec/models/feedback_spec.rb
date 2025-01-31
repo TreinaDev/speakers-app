@@ -4,15 +4,13 @@ describe Feedback do
   context '.event' do
     it 'must return all feedbacks the Event' do
       user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
-      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-              start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-              event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      event = build(:event, name: 'Ruby on Rails')
       event_feedbacks = [ build(:feedback, name: 'João', title: 'Muito bom!', description: 'Gostei muito'),
                          build(:feedback, name: 'Anônimo', title: 'Podia ser melhor', description: 'Faltou café'),
                          build(:feedback, name: 'Joaquim', title: 'Parabéns você foi selecionado', description: 'Esta mensagem foi marcada como Spam') ]
       allow(ExternalParticipantApi::GetEventFeedbacksService).to receive(:call).and_return(event_feedbacks)
 
-      feedbacks = Feedback.event(event_id: event.id, speaker: user.email)
+      feedbacks = Feedback.event(event_code: event.code, speaker: user.email)
 
       expect(feedbacks.count).to eq 3
       expect(feedbacks[0].name).to eq 'João'
@@ -28,12 +26,10 @@ describe Feedback do
 
     it 'must return zero if not found Feedbacks' do
       user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
-      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-              start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-              event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      event = build(:event, name: 'Ruby on Rails')
       allow(ExternalParticipantApi::GetEventFeedbacksService).to receive(:call).and_return([])
 
-      feedbacks = Feedback.event(event_id: event.id, speaker: user.email)
+      feedbacks = Feedback.event(event_code: event.code, speaker: user.email)
 
       expect(feedbacks.count).to eq 0
     end

@@ -1,26 +1,29 @@
 class Event
   extend ActiveModel::Translation
+  include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attr_accessor :id, :name, :url, :description, :start_date, :end_date, :event_type, :location, :participant_limit, :status
+  attribute :name, :string
+  attribute :event_type, :string
+  attribute :address, :string
+  attribute :participants_limit, :integer
+  attribute :url, :string
+  attribute :status, :string
+  attribute :created_at, :datetime
+  attribute :updated_at, :datetime
+  attribute :code, :string
+  attribute :start_date, :datetime
+  attribute :end_date, :datetime
 
   @@instances = []
-  def initialize(id:, name:, url:, description:, start_date:, end_date:, event_type:, location:, participant_limit:, status:)
-    @id = id
-    @name = name
-    @url = url
-    @description = description
-    @start_date = start_date
-    @end_date = end_date
-    @event_type = event_type
-    @location = location
-    @participant_limit = participant_limit
-    @status = status
+  def initialize(**params)
+    super(event_permited_params(params))
     @@instances << self
   end
 
 
-  def self.all(email)
-    ExternalEventApi::GetAllEventsService.call(email: email)
+  def self.all(token)
+    ExternalEventApi::GetAllEventsService.call(token: token)
   end
 
   def self.find(id)
@@ -28,7 +31,7 @@ class Event
   end
 
   def schedule_items(email)
-    ExternalEventApi::ScheduleItemsService.call(event_id: id, email: email)
+    ExternalEventApi::ScheduleItemsService.call(event_id: code, email: email)
   end
 
   def self.count
@@ -44,6 +47,12 @@ class Event
   end
 
   def participants
-    ExternalParticipantApi::EventListParticipantsService.new(event_id: id).call
+    ExternalParticipantApi::EventListParticipantsService.new(event_code: code).call
+  end
+
+  private
+
+  def event_permited_params(params)
+    ActionController::Parameters.new(params).permit(Event.attribute_names)
   end
 end
