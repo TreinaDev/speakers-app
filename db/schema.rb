@@ -62,7 +62,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_30_140852) do
     t.integer "curriculum_id", null: false
     t.string "title"
     t.text "description"
-    t.integer "certificate_requirement", default: 0, null: false
+    t.integer "certificate_requirement", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["curriculum_id"], name: "index_curriculum_tasks_on_curriculum_id"

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User sees participant list' do
+describe 'User sees participant list', js: true do
   it 'with success' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
     event = build(:event, name: 'Ruby on Rails')
@@ -14,6 +14,9 @@ describe 'User sees participant list' do
 
     login_as user, scope: :user
     visit event_path(event.code)
+    expect(page).not_to have_selector('#participant_list', visible: true)
+    click_on 'Lista de Participantes'
+    expect(page).to have_selector('#participant_list', visible: true)
 
     within '#participant_list' do
       expect(page).to have_content 'João'
@@ -31,6 +34,9 @@ describe 'User sees participant list' do
 
     login_as user, scope: :user
     visit event_path(event.code)
+    expect(page).not_to have_selector('#participant_list', visible: true)
+    click_on 'Lista de Participantes'
+    expect(page).to have_selector('#participant_list', visible: true)
 
     within '#participant_list' do
       expect(page).to have_content 'Não foram localizados Participantes até o momento'
