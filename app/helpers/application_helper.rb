@@ -5,7 +5,7 @@ module ApplicationHelper
       content_tag(:span, 'VOLTAR', class: 'text-[#6e487c]')
     end
   end
-  
+
   def event_card(event, img, width = "w-96")
     content_tag :li, id: event.code, class: "border border-gray-200 w-96 p-6 rounded-lg shadow flex-column items-center" do
       image_tag(img, class: "#{ width } h-48 w-full object-cover rounded-lg mr-6") +
