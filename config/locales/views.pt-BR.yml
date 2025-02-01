@@ -1,4 +1,6 @@
 pt-BR:
+  application:
+    lecture: 'Palestra'
   event_tasks:
     new:
       title: 'Cadastrar Tarefa'
@@ -17,22 +19,37 @@ pt-BR:
       no_content_attetched: 'Nenhum conteúdo vinculado.'
       attached_contents: 'Conteúdos vinculados:'
       content: 'Conteúdo'
+      edit: 'Editar'
     form:
       no_contents: 'Nenhum conteúdo cadastrado'
       save: 'Salvar'
+      cancel: 'Cancelar'
   event_contents:
     form:
       files_attached: 'Arquivos anexados a este conteúdo:'
+      files: 'Arquivos'
     show:
       attached_to_tasks: 'Tarefas que utilizam este conteúdo:'
       task: 'Tarefa'
       no_tasks_attached: 'Esse conteúdo não foi associado a nenhuma tarefa.'
       no_files_attached: 'Não há arquivos anexados a esse conteúdo.'
       view_pdf: 'Visualizar PDF:'
+      edit: 'Editar'
+      file: 'Arquivo'
+    event_content:
+      content: 'Conteúdo'
+    edit:
+      edit: 'Edite'
+    index:
+      my_contents: 'Meus Conteúdos'
+      new_content: 'Cadastrar Conteúdo'
+    new:
+      register_new_content: 'Cadastre seus conteúdos'
   profiles:
     new:
       title: 'Cadastre seu perfil'
       social_networks: 'Redes Socias'
+      create_profile: 'Criar perfil'
     show:
       title: 'Perfil'
       my_events: 'Meus Eventos'
@@ -57,6 +74,8 @@ pt-BR:
       participant_list: 'Lista de Participantes'
   feedbacks:
     feedback_area:
+      see_feedback: 'Ver Feedbacks'
+      feedback: 'Feedback'
       no_feedback: 'Nenhum Feedback disponível'
       see_feedbacks: 'Ver Feedbacks'
       user: 'Usuário'
@@ -67,12 +86,47 @@ pt-BR:
       curriculum_content_title: 'Conteúdos da programação'
       no_curriculum_content: 'Nenhum conteúdo cadastrado para essa programação.'
       new_curriculum_content_button: 'Adicionar conteúdo'
+      participants_list: 'Lista de Participantes'
+      name: 'Nome'
+      empty_participants_list: 'Não foram localizados Participantes para está agenda'
+      curriculum_task_title: 'Tarefas da programação'
+      no_curriculum_task: 'Nenhuma tarefa cadastrada para essa programação.'
+      new_curriculum_task_button: 'Adicionar tarefa'
   curriculum_contents:
     new:
       title: 'Adicionar conteúdo a programação:'
       no_content: 'Não existem conteúdos disponíveis.'
       save: 'Adicionar'
       new_content_link: 'Clique aqui para cadastrar um conteúdo.'
+      close: 'Fechar'
+  shared:
+    feedback_area:
+      see_feedback: 'Ver Feedbacks'
+      feedback: 'Feedbacks'
+      user: 'Usuário'
+      feedback_unavailable: 'Nenhum Feedback disponível'
+    navbar:
+      lecture: 'Palestra'
+      how_work: 'Como Funciona?'
+      create_account: 'Criar conta'
+      access_account: 'Acesse sua conta'
+      my_contents: 'Meus Conteúdos'
+      create_profile: 'Cadastrar Perfil'
+      my_profile: 'Meu Perfil'
+      tasks: 'Tarefas'
+      log_out: 'Sair'
+    show:
+      attached_to_tasks: 'Tarefas que utilizam este conteúdo:'
+      task: 'Tarefa'
+      no_tasks_attached: 'Esse conteúdo não foi associado a nenhuma tarefa.'
+      no_files_attached: 'Não há arquivos anexados a esse conteúdo.'
+      view_pdf: 'Visualizar PDF:'
+  curriculum_tasks:
+    form:
+      title: 'Adicionar tarefa a programação:'
+      save: 'Adicionar'
+    show:
+      task: 'Tarefa'
   home:
     index:
       register: 'Cadastre-se Agora'

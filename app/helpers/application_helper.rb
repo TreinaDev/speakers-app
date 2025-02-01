@@ -1,4 +1,11 @@
 module ApplicationHelper
+  def go_back_button(path)
+    link_to path, class: 'flex border-2 rounded-3xl p-3 mb-3 w-32' do
+      image_tag('arrow_back_icon.png', class: 'icon') +
+      content_tag(:span, 'VOLTAR', class: 'text-[#6e487c]')
+    end
+  end
+  
   def event_card(event, img, width = "w-96")
     content_tag :li, id: event.code, class: "border border-gray-200 w-96 p-6 rounded-lg shadow flex-column items-center" do
       image_tag(img, class: "#{ width } h-48 w-full object-cover rounded-lg mr-6") +
