@@ -27,12 +27,15 @@
     <%= turbo_frame_tag 'modal' %>
     <%= render "shared/navbar" %>
     <% if request.path != root_path %>
-      <main class="container">
+      <main class="section">
       <%= render "shared/flash" %>
     <% else %>
       <main>
     <% end %>
       <%= yield %>
     </main>
+    <footer class="section-x">
+      <p class="text-center text-white py-8"><%= t('copyright') %></p>
+    </footer>
   </body>
 </html>

@@ -5,9 +5,9 @@
                 <h2 class="heading-2"><%= @profile.user.full_name %></h2>
                 <p class="tracking-wider text-2xl"><%= @profile.title %></p>
                 <h3 class="font-bold text-2xl"></h3>
-                <div class="nav_social_network_container">
+                <div class="profiles__social_network">
                     <% @profile.social_networks.each do |network| %>
-                            <%= link_to(network.url, class: 'container__link', target: "_blank") do %>
+                            <%= link_to(network.url, class: 'profiles__link', target: "_blank") do %>
                                 <%= raw File.read(Rails.root.join("app", "assets", "images", network.social_network_type + ".svg")) %>
                                 <p><%= network.translated_social_network_type(network.social_network_type) %></p>
                             <% end %>

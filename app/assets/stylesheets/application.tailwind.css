@@ -31,9 +31,24 @@
   body {
     @apply font-poppins;
   }
+
+  .section{
+    width: 100%;
+    padding: 14vh 10vw;
+  }
+
+  .section-x{
+    width: 100%;
+    padding: 0 10vw;
+  }
+
+  footer {
+    @apply w-full bg-primary;
+  }
 }
 
 @layer components {
+
   .btn--success {
     @apply w-full  text-white font-semibold mt-2 rounded-md h-12 bg-second-primary;
     transition: background ease-in-out 0.2s;
@@ -127,28 +142,6 @@
     @apply font-medium text-blue-500 hover:underline;
   }
 
-  .navbar {
-    @apply absolute top-8 border-white w-full;
-    border-bottom: 1px solid white;
-    -webkit-transition: all .5s ease 0s;
-    -moz-transition: all .5s ease 0s;
-    -o-transition: all .5s ease 0s;
-    transition: all .5s ease 0s;
-  }
-
-  .navbar.navbar--actived {
-    @apply fixed top-0 pt-4 w-full z-10 bg-primary;
-    border-radius: 0 0 60px 60px;
-  }
-
-  .navbar_content {
-    @apply flex justify-between w-full pb-4 px-36;
-  }
-
-  .nav_link_primary {
-    @apply text-lg font-bold text-white hover:dark:bg-gray-700 rounded-lg px-2 h-10 flex items-center;
-  }
-
   .heading-1 {
     @apply text-5xl font-semibold text-blue-500 mb-2;
   }
@@ -194,29 +187,56 @@
     @apply p-4 mb-1 text-sm rounded-lg bg-red-200 text-red-500;
   }
 
-  .container {
-    @apply mt-40 px-40 mb-36;
+  /* NavBar */
+
+  .navbar {
+    @apply absolute top-8 border-white;
+    border-bottom: 1px solid white;
+    -webkit-transition: all .5s ease 0s;
+    -moz-transition: all .5s ease 0s;
+    -o-transition: all .5s ease 0s;
+    transition: all .5s ease 0s;
   }
 
-  .container__link {
+  .navbar.navbar--actived {
+    @apply fixed top-0 pt-4 w-full z-10 bg-primary;
+    border-radius: 0 0 60px 60px;
+  }
+
+  .navbar_content {
+    @apply flex justify-between w-full pb-4;
+  }
+
+  .nav_link_primary {
+    @apply text-lg font-bold text-white hover:dark:bg-gray-700 rounded-lg px-2 h-10 flex items-center;
+  }
+
+  .profiles__link {
     @apply border inline-flex font-semibold text-indigo-600 border-indigo-600 rounded-lg py-2 px-6 items-center;
   }
 
-  .container__link .link_icon {
+  .profiles__link .link_icon {
     @apply fill-indigo-600 mr-1 w-5 h-5;
   }
 
-  .container__link .icon_size {
+  .profiles__link .icon_size {
     @apply w-5 h-5 mr-1;
   }
 
-  .container__link .link_icon_my_site {
+  .profiles__link .link_icon_my_site {
     @apply stroke-indigo-600;
   }
 
-  .nav_social_network_container {
+  .profiles__social_network {
     @apply flex flex-wrap gap-4 flex-row mt-6;
   }
+
+  .modal {
+    @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white border-2 rounded-3xl shadow-lg z-50;
+  }
+
+
+  /* Início da Home Page */
 
   .banner_container {
     height: 90vh;
@@ -226,7 +246,8 @@
   }
 
   .banner_content {
-    @apply h-2/3 relative w-2/3 flex items-center text-white;
+    @apply h-full relative w-5/6 flex items-center text-white;
+    min-height: 170px;
     background: url('banner_content.jpg');
     background-size: cover;
     border-radius: 70px;
@@ -276,17 +297,16 @@
   }
 
   .how_works {
-    @apply p-20 pb-24 text-white;
+    @apply p-20 pb-24 text-white w-5/6;
     background-image: url('bg_como_funciona.jpg');
     background-attachment: fixed;
     background-size: cover;
     border-radius: 100px;
-    width: 65vw;
     font-family: "Piedra", serif;
   }
 
   .how_works h2 {
-    @apply text-4xl mx-auto w-full text-center;
+    @apply text-5xl mx-auto w-full text-center;
   }
 
   .how_works_count {
@@ -319,17 +339,17 @@
 
   .call_action {
     @apply w-full relative bg-cover;
-    height: 80vh;
+    height: 70vh;
     background-image: url('modern-office.jpg');
   }
 
   .call_action_overlay {
-    @apply w-full h-full absolute z-0;
+    @apply w-full h-full absolute z-0 top-0 left-0;
     background-color: rgba(0, 0, 0, 0.548);
   }
 
   .call_action_content {
-    @apply text-white flex flex-col items-center px-14;
+    @apply text-white flex flex-col items-center;
     z-index: 1;
   }
 
@@ -337,12 +357,5 @@
     @apply text-6xl mb-7;
     font-family: "Piedra", serif;
   }
-
-  .footer {
-    @apply w-full bg-primary;
-  }
-
-  .modal {
-    @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white border-2 rounded-3xl shadow-lg z-50;
-  }
+  /* Fim da Home Page */
 }
