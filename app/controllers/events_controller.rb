@@ -6,7 +6,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:code])
-    return redirect_to events_path, alert: 'Evento não localizado!' unless @event
+    return redirect_to events_path, alert: 'Página indisponível' unless @event
 
     @schedule_items = @event&.schedule_items(current_user.email)
     @feedbacks = Feedback.event(event_code: @event&.code, speaker: current_user.email)

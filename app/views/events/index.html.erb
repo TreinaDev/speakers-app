@@ -3,12 +3,8 @@
   <% if @events.any? %>
     <ul class="flex flex-wrap gap-6">
       <% @events.each do |event| %>
-        <%= link_to event_path(event.code) do %>
-          <li class="border border-gray-200 w-96 p-6 rounded-lg shadow flex-column items-center">
-            <%= image_tag "default_image.jpeg", class: "w-96 h-48 w-full object-cover rounded-lg mr-6" %>
-            <h2 class="text-2xl font-bold text-indigo-700 hover:text-indigo-900 mb-2"><%= event.name %></h2>
-            <p><%= Event.human_attribute_name(:start_date) %> <%= formatted_date(event.start_date) %></p>
-          </li>
+        <%= link_to_if event.status == 'published', published(event), event_path(event.code) do %>
+          <%= unpublished(event) %>
         <% end %>
       <% end %>
     </ul>

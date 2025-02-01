@@ -6,7 +6,7 @@ describe 'User see event details', type: :system do
     events = [
       build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
       start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-      event_type: 'Presencial', address: 'Juiz de Fora', participants_limit: 100, status: 'Publicado')
+      event_type: 'Presencial', address: 'Juiz de Fora', participants_limit: 100, status: 'published')
     ]
     20.times do |n|
       events << build(:event, name: "Event #{n}")
@@ -26,6 +26,25 @@ describe 'User see event details', type: :system do
     expect(page).to have_content "Data de início: #{ start_date }"
     expect(page).to have_content "Encerramento: #{ end_date }"
     expect(page).to have_content 'www.meuevento.com/eventos/Ruby-on-Rails'
+  end
+
+  it 'but must be published' do
+    user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+    events = [
+      build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
+      start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
+      event_type: 'Presencial', address: 'Juiz de Fora', participants_limit: 100, status: 'draft')
+    ]
+    20.times do |n|
+      events << build(:event, name: "Event #{n}")
+    end
+    allow(Event).to receive(:all).and_return(events)
+
+    login_as user, scope: :user
+    visit root_path
+
+    expect(page).to have_content 'Ruby on Rails'
+    expect(page).not_to have_link "##{events.first.code}"
   end
 
   it 'and sees your schedules items' do
@@ -73,7 +92,7 @@ describe 'User see event details', type: :system do
     login_as user, scope: :user
     visit event_path(100)
 
-    expect(page).to have_content 'Evento não localizado!'
+    expect(page).to have_content 'Página indisponível'
     expect(current_path).to eq events_path
   end
 

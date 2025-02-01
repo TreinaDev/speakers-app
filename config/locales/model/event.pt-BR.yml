@@ -13,3 +13,5 @@ pt-BR:
         participant_limit: 'Obrigatória'
         status: 'Status'
         url: 'Url'
+        draft: 'Não Publicado'
+        published: 'Publicado'

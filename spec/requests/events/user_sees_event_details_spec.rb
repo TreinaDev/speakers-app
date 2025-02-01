@@ -22,4 +22,17 @@ describe 'User sees Event details', type: :request do
 
     expect(response).to redirect_to events_path
   end
+
+  it 'and event doesnt published' do
+    user = create(:user)
+    event = build(:event, code: 'ABC123', name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
+            start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
+            event_type: 'Presencial', address: 'Juiz de Fora', participants_limit: 100, status: 'draft')
+
+    login_as user, scope: :user
+    get event_path(event.code)
+
+    expect(response).to redirect_to events_path
+    expect(flash[:alert]).to eq 'Página indisponível'
+  end
 end
