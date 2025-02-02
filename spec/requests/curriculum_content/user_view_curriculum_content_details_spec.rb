@@ -16,6 +16,7 @@ describe 'User view a curriculum content', type: :request do
   it 'and must be the owner' do
     first_user = create(:user)
     second_user = create(:user)
+    create(:profile, user: second_user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     content = first_user.event_contents.create(title: 'Arquivos TDD', description: 'Apresentação sobre TDD')
     curriculum = create(:curriculum, user: first_user, schedule_item_code: schedule_item.id)

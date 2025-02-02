@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User register a new task to a curriculum', type: :request do
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
     curriculum = create(:curriculum, user: user)
 
     login_as user
@@ -29,6 +30,7 @@ describe 'User register a new task to a curriculum', type: :request do
     first_user = create(:user)
     curriculum = create(:curriculum, user: first_user)
     second_user = create(:user)
+    create(:profile, user: second_user)
 
     login_as second_user
     post curriculum_curriculum_tasks_path(curriculum), params: { curriculum_task: { title: 'Tarefa 01', description: 'Descrição', certificate_requirement: :optional } }

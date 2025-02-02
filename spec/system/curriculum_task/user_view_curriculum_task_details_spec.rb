@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User view curriculum task details', type: :system do
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
     event =  [ build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
                   start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
                   event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado') ]
@@ -41,6 +42,7 @@ describe 'User view curriculum task details', type: :system do
   it 'and must be the curriculum task owner' do
     user = create(:user)
     second_user = create(:user)
+    create(:profile, user: second_user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)
@@ -54,6 +56,7 @@ describe 'User view curriculum task details', type: :system do
 
   it 'and go back to previous page' do
     user = create(:user)
+    create(:profile, user: user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)

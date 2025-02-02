@@ -10,6 +10,7 @@ describe 'User register a content', type: :system, js: true do
 
   it 'with success' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
 
     login_as user
     visit root_path
@@ -35,6 +36,7 @@ describe 'User register a content', type: :system, js: true do
 
   it 'failure with more than 5 files' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user
     visit root_path
@@ -64,6 +66,7 @@ describe 'User register a content', type: :system, js: true do
 
   it 'failure with file larger than 50mb' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user
     visit root_path
@@ -83,6 +86,7 @@ describe 'User register a content', type: :system, js: true do
 
   it 'failure if title is empty' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user
     visit root_path
@@ -99,6 +103,7 @@ describe 'User register a content', type: :system, js: true do
 
   it 'and cancels' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
 
     login_as user
     visit root_path

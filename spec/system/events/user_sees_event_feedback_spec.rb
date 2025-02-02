@@ -1,9 +1,10 @@
 require 'rails_helper'
 
-describe 'User can view feedback for an event' do
+describe 'User can view feedback for an event', type: :system do
   context 'from the event details page' do
     it 'with success', js: true do
       user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+      create(:profile, user: user)
       event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
               start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
               event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
@@ -34,6 +35,7 @@ describe 'User can view feedback for an event' do
 
     it 'closes the modal after opening', js: true do
       user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+      create(:profile, user: user)
       event = build(:event, name: 'Ruby on Rails', description: 'Introduction to Rails with TDD',
         start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
         event_type: 'In-person', location: 'Juiz de Fora', participant_limit: 100, status: 'Published')
@@ -55,6 +57,7 @@ describe 'User can view feedback for an event' do
 
     it 'and not found feedbacks for event' do
       user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+      create(:profile, user: user)
       event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
               start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
               event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')

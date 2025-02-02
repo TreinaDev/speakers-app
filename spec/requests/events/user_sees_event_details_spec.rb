@@ -14,6 +14,7 @@ describe 'User sees Event details', type: :request do
 
   it 'and event doesnt exists' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user, scope: :user
     get event_path(99999)

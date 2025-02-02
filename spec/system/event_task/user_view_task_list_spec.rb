@@ -13,6 +13,7 @@ describe 'user view task list', type: :system do
 
   it 'with success' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     create(:event_task, name: 'Tarefas iniciais básicas rails', user: user)
     create(:event_task, name: 'Revisão rails 8.0', user: user)
 
@@ -29,6 +30,7 @@ describe 'user view task list', type: :system do
     first_user = create(:user, first_name: 'João')
     create(:event_task, name: 'Revisão rails 8.0', user: first_user)
     second_user = create(:user, first_name: 'Roberto')
+    create(:profile, user: second_user)
     create(:event_task, name: 'Tarefas iniciais básicas rails', user: second_user)
 
     login_as second_user
@@ -40,6 +42,7 @@ describe 'user view task list', type: :system do
 
   it 'and dont have task previusly registered' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
 
     login_as user
     visit root_path

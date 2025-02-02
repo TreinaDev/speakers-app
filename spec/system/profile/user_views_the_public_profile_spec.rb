@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User views the public profile' do
+describe 'User views the public profile', type: :system do
   it 'with success' do
     events = [ Event.new(id: 1,
                           name: 'Event1',
@@ -62,10 +62,9 @@ describe 'User views the public profile' do
 
     login_as user
     visit events_path
+    click_on 'José de Jesus'
     click_on 'Meu Perfil'
 
-    expect(page).to have_content('Perfil')
-    expect(page).not_to have_link('Cadastrar Perfil')
     expect(page).to have_content('José de Jesus')
     expect(page).to have_content('Instrutor')
     expect(page).to have_content('Olá, meu nome é José e eu sou um instrutor de Ruby on Rails')
@@ -82,6 +81,7 @@ describe 'User views the public profile' do
 
   it 'that does not exist. (Authenticated user)' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
 
     login_as user
     visit profile_path('Thiago')
@@ -99,6 +99,7 @@ describe 'User views the public profile' do
 
     login_as user
     visit events_path
+    click_on 'José de Jesus'
     click_on 'Meu Perfil'
 
     expect(page).not_to have_content('Pronomes')

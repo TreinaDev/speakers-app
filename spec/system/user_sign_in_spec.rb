@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe 'User sign-in', type: :system do
   it 'with success' do
-    create(:user, first_name: 'João', last_name: 'Almeida', email: 'joao@campuscode.com', password: 'password')
+    user = create(:user, first_name: 'João', last_name: 'Almeida', email: 'joao@campuscode.com', password: 'password')
+    create(:profile, user: user)
 
     visit root_path
     click_on 'Acesse sua conta'
@@ -15,7 +16,8 @@ describe 'User sign-in', type: :system do
   end
 
   it 'and then log out' do
-    create(:user, first_name: 'João', last_name: 'Almeida', email: 'joao@campuscode.com', password: 'password')
+    user = create(:user, first_name: 'João', last_name: 'Almeida', email: 'joao@campuscode.com', password: 'password')
+    create(:profile, user: user)
 
     visit root_path
     click_on 'Acesse sua conta'
@@ -38,5 +40,18 @@ describe 'User sign-in', type: :system do
 
     expect(current_path).to eq new_user_session_path
     expect(page).to have_content 'E-mail ou senha inválidos.'
+  end
+
+  it 'and should be redirected to register profile if doesnt have profile' do
+    create(:user, first_name: 'João', last_name: 'Almeida', email: 'joao@campuscode.com', password: 'password')
+
+    visit root_path
+    click_on 'Acesse sua conta'
+    fill_in 'E-mail', with: 'joao@campuscode.com'
+    fill_in 'Senha', with: 'password'
+    click_on 'Entrar'
+
+    expect(current_path).to eq new_profile_path
+    expect(page).to have_content 'É necessário registrar seu perfil antes de prosseguir.'
   end
 end

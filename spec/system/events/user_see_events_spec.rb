@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'user visit home and see list of events', type: :system do
   it 'is redirected to list of events page' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+    create(:profile, user: user)
 
     login_as user, scope: :user
     visit root_path
@@ -35,6 +36,7 @@ describe 'user visit home and see list of events', type: :system do
 
     allow(Event).to receive(:all).and_return(events)
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+    create(:profile, user: user)
 
     login_as user, scope: :user
     visit events_path
@@ -51,6 +53,7 @@ describe 'user visit home and see list of events', type: :system do
   it 'and dont exists events for him' do
     allow(Event).to receive(:all).and_return({})
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+    create(:profile, user: user)
 
     login_as user, scope: :user
     visit events_path

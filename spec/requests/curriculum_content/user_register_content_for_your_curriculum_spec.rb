@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User register content for your curriculum', type: :request  do
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
     create(:event_content, id: 11, user: user)
     curriculum = create(:curriculum, id: 1, user: user, schedule_item_code: 99)
 
@@ -17,6 +18,7 @@ describe 'User register content for your curriculum', type: :request  do
 
   it 'and content is already attached' do
     user = create(:user)
+    create(:profile, user: user)
     event_content = create(:event_content, id: 11, user: user)
     curriculum = create(:curriculum, id: 1, user: user, schedule_item_code: 99)
     create(:curriculum_content, curriculum: curriculum, event_content: event_content)
@@ -46,6 +48,7 @@ describe 'User register content for your curriculum', type: :request  do
     create(:event_content, id: 11, user: first_user)
     curriculum = create(:curriculum, id: 1, user: first_user, schedule_item_code: 99)
     second_user = create(:user)
+    create(:profile, user: second_user)
 
     login_as second_user
     post curriculum_curriculum_contents_path(curriculum), params: { curriculum_content: { event_content_id: 11 } }
@@ -59,6 +62,7 @@ describe 'User register content for your curriculum', type: :request  do
     first_user = create(:user)
     create(:event_content, id: 11, user: first_user)
     second_user = create(:user)
+    create(:profile, user: second_user)
     curriculum = create(:curriculum, id: 1, user: second_user, schedule_item_code: 99)
 
     login_as second_user
@@ -71,6 +75,7 @@ describe 'User register content for your curriculum', type: :request  do
 
   it 'and event content doesnt exists' do
     user = create(:user)
+    create(:profile, user: user)
     curriculum = create(:curriculum, id: 1, user: user, schedule_item_code: 99)
 
     login_as user
