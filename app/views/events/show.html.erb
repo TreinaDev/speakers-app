@@ -1,4 +1,4 @@
-<h2 class='heading-2'><%= Event.model_name.human %>: <%= @event.name %></h2>
+<h2><%= Event.model_name.human %>: <%= @event.name %></h2>
 <div class="event_card">
   <div class="event_card__heading">
     <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= @event.description %></span>
@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<h2 class="heading-2 mt-3"><%= t('.schedule_items_title') %></h2>
+<h2 class="mt-3"><%= t('.schedule_items_title') %></h2>
 <% if @schedule_items&.empty? %>
   <p><%= t('.no_schedule_items') %></p>
 <% else %>

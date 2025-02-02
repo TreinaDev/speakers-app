@@ -1,10 +1,10 @@
 <% turbo_page_requires_reload %>
 
-<div class='border-2 rounded-3xl p-3'>
+<div class='border-2 rounded-3xl px-10 py-20'>
   <div>
-    <h1 class='heading-1'> <%= @schedule_item.title %> </h1>
+    <h1> <%= @schedule_item.title %> </h1>
     <span> <%= t('.estimated_participants') %> <%= @schedule_item.length %> </span>
-    <h2 class='heading-2'> <%= ScheduleItem.human_attribute_name(:description) %>  </h2>
+    <h2 class="mb-8 mt-4"> <%= ScheduleItem.human_attribute_name(:description) %>  </h2>
     <p> <%= @schedule_item.description %> </p>
     <%= render 'participants/participants', participants: @participants %>
   </div>

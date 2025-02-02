@@ -25,11 +25,12 @@
   }
 
   html {
+    @apply h-full;
     scroll-behavior: smooth !important;
   }
 
   body {
-    @apply font-poppins;
+    @apply font-poppins flex flex-col h-full;
   }
 
   .section{
@@ -40,6 +41,30 @@
   .section-x{
     width: 100%;
     padding: 0 10vw;
+  }
+
+  h1, h2, h3 {
+    @apply font-semibold text-blue-500 mb-2;
+  }
+
+  h1 {
+    @apply text-5xl;
+  }
+
+  h2 {
+    @apply text-4xl;
+  }
+
+  h3 {
+    @apply text-3xl;
+  }
+
+  label {
+    @apply block text-gray-900 font-bold text-lg;
+  }
+
+  textarea {
+    @apply block text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 px-5 py-3;
   }
 
   footer {
@@ -54,14 +79,23 @@
     transition: background ease-in-out 0.2s;
   }
 
+  .label_primary{
+    @apply font-normal inline;
+  }
+
   .btn--success:hover {
     @apply cursor-pointer bg-dark-second-primary;
   }
 
   .form_background {
-    @apply w-10 absolute top-0 my-0 mx-auto opacity-50;   
-    transform: translateX(-30%);
+    @apply absolute top-0 my-0 mx-auto opacity-50;
+    width: 45rem;
+    transform: translateY(-10%);
     z-index: -1;
+  }
+
+  .form_model{
+    @apply w-1/2;
   }
 
   .icon {
@@ -69,12 +103,12 @@
    }
 
   .field{
-    @apply grid grid-cols-1 mb-1;
+    @apply grid grid-cols-1 my-8;
     line-height: 0.6rem;
   }
 
   .field input {
-    @apply border border-gray-300;
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-5 py-3;
   }
 
   .event_card {
@@ -123,15 +157,8 @@
   }
 
   .btn_primary {
-    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2;
-  }
-
-  .label_primary {
-    @apply block text-sm font-medium text-gray-900;
-  }
-
-  .field_primary {
-    @apply bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-5 py-3;
+    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mr-4 mt-4 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2;
+    font-size: 1.01rem;
   }
 
   .text_area {
@@ -139,23 +166,11 @@
   }
 
   .link_primary {
-    @apply font-medium text-blue-500 hover:underline;
-  }
-
-  .heading-1 {
-    @apply text-5xl font-semibold text-blue-500 mb-2;
+    @apply font-medium text-primary hover:underline;
   }
 
   .logo {
     @apply text-white text-4xl font-piedra;
-  }
-
-  .heading-2 {
-    @apply text-4xl font-semibold text-blue-500 mb-2;
-  }
-
-  .heading-3 {
-    @apply text-3xl font-semibold text-blue-500 mb-2;
   }
 
   .notice {
@@ -176,7 +191,7 @@
   }
 
   .card__title {
-    @apply font-bold text-lg;
+    @apply font-bold text-lg text-black;
   }
 
   .card__title--2 {
@@ -185,6 +200,11 @@
 
   .errors {
     @apply p-4 mb-1 text-sm rounded-lg bg-red-200 text-red-500;
+  }
+
+  .form_register{
+    @apply flex justify-center mt-12;
+    background-image: url('background-form.png');
   }
 
   /* NavBar */
@@ -265,7 +285,7 @@
   }
 
   .title_banner {
-    @apply font-bold text-4xl mb-8;
+    @apply font-bold text-4xl mb-8 text-white;
   }
 
   .register_button {
@@ -289,7 +309,7 @@
   }
 
   .landing_card_content h3 {
-    @apply font-bold;
+    @apply font-bold text-black text-lg;
   }
 
   .landing_card_icon {
@@ -354,7 +374,7 @@
   }
 
   .call_action_content h2 {
-    @apply text-6xl mb-7;
+    @apply text-6xl mb-7 text-white font-medium;
     font-family: "Piedra", serif;
   }
   /* Fim da Home Page */

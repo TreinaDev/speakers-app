@@ -23,7 +23,7 @@
 
       <div class="mt-2">
         <%= f.label :description, class: 'label_primary' %>
-        <%= f.text_area :description, class: 'text_area' %>
+        <%= f.text_area :description %>
         <% if  curriculum_task.errors[:description].any? %> 
         <span class="text-red-500 text-sm"><%=  curriculum_task.errors.full_messages_for(:description).first %></span>
         <% end %>

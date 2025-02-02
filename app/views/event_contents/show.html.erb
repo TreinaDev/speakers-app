@@ -8,7 +8,7 @@
 </div>
 
 <div>
-  <div>
+  <div class="mt-8">
     <%= @event_content.description %>
   </div>
   <% if @event_content.files.attached? %>
@@ -39,7 +39,7 @@
 <div>
   <% if @event_content.event_tasks.any? %>
     <div>
-      <strong><%= t('.attached_to_tasks') %></strong>
+      <strong class="text-lg"><%= t('.attached_to_tasks') %></strong>
       <div class="card_container mb-10">
         <% @event_content.event_tasks.each do |task| %>
           <%= link_to(task, class: "card") do %>
@@ -52,6 +52,8 @@
       </div>
     </div>
   <% else %>
-    <div> <%=t('.no_tasks_attached')%> </div>
+    <div>
+      <p class="mt-10 font-bold text-lg"><%=t('.no_tasks_attached')%></p>
+    </div>
   <% end %>
 </div>

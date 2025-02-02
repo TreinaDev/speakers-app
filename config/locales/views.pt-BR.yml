@@ -21,6 +21,8 @@ pt-BR:
       no_contents: 'Nenhum conteúdo cadastrado'
       save: 'Salvar'
   event_contents:
+    index:
+      no_content: 'Não há conteúdos cadastrados!'
     form:
       files_attached: 'Arquivos anexados a este conteúdo:'
     show:

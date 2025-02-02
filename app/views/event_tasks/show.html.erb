@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div class="mb-3">
+<div class="mb-3 mt-8">
   <%= @event_task.description %>
 </div>
 
@@ -20,7 +20,7 @@
 <div class="mt-5">
   <% if @event_task.event_contents.any? %>
     <div>
-      <strong><%= t('.attached_contents') %></strong>
+      <strong class="text-lg"><%= t('.attached_contents') %></strong>
       <div class="card_container">
         <% @event_task.event_contents.each do |content| %>
           <%= link_to(content, class: "card") do %>
