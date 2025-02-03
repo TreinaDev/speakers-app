@@ -249,7 +249,20 @@
 
   .modal__content{
     @apply border-2 w-1/2 rounded-3xl shadow-lg bg-white z-10 px-6 py-10 flex flex-col;
+    transform: translateY(-20%);
+    animation: to_emerge 200ms linear forwards;
     max-height: 75%;
+  }
+
+  @keyframes to_emerge{
+    from{
+      transform: translateY(-20%) ;
+      opacity: 0;
+    }
+    to{
+      transform: translateY(0) ;
+      opacity: 1;
+    }
   }
 
   #feedbacks dialog{
