@@ -72,6 +72,7 @@ pt-BR:
       no_events: 'Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.'
   participants:
     participants:
+      participant_number: 'Número de Participantes'
       no_participants: 'Não foram localizados Participantes até o momento'
       participant_list: 'Lista de Participantes'
   feedbacks:
