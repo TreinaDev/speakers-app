@@ -10,3 +10,4 @@ pt-BR:
         certificate_requirements: 
           mandatory: 'Obrigatória'
           optional: 'Opcional'
+        curriculum_content_ids: 'Anexar Conteúdos:'

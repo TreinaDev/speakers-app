@@ -59,12 +59,14 @@ pt-BR:
       pronoun: 'Pronomes'
       birth: 'Data de Nascimento'
       city: 'Cidade'
-  events: 
+  events:
     show:
+      my_schedules: 'Minhas agendas'
+      participant_list: 'Lista de Participantes'
+      feedbacks: 'Feedbacks do Evento'
+    event:
       event_page: 'Site do Evento'
       no_event_page: 'Página inexistente'
-      schedule_items_title: 'Suas Agendas'
-      no_schedule_items: 'Você não possui agendas disponíveis para esse evento. Se você acha que isso é um erro, entre em contato com o organizador.'
     index:
       my_events: 'Meus Eventos'
       no_events: 'Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.'
@@ -81,6 +83,9 @@ pt-BR:
       see_feedbacks: 'Ver Feedbacks'
       user: 'Usuário'
   schedule_items:
+    schedule_items:
+      schedule_items_title: 'Suas Agendas'
+      no_schedule_items: 'Você não possui agendas disponíveis para esse evento. Se você acha que isso é um erro, entre em contato com o organizador.'
     show:
       estimated_participants: 'Número estimado de participantes:'
       not_found: 'Essa Programação não existe'
@@ -126,8 +131,10 @@ pt-BR:
     form:
       title: 'Adicionar tarefa a programação:'
       save: 'Adicionar'
+      no_contents: 'Não existem conteúdos disponíveis'
     show:
       task: 'Tarefa'
+      attached_contents: 'Material de apoio'
   home:
     index:
       register: 'Cadastre-se Agora'
