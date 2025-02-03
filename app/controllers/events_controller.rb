@@ -9,17 +9,7 @@ class EventsController < ApplicationController
     return redirect_to events_path, alert: 'Evento não localizado!' unless @event
 
     @schedule_items = @event&.schedule_items(current_user.email)
-    # @feedbacks = Feedback.event(event_id: @event&.id, speaker: current_user.email)
-    # @participants = @event&.participants
-    @feedbacks = []
-    @participants = []
-
-    10.times do
-      @participants << FactoryBot.build(:participant)
-    end
-
-    10.times do
-      @feedbacks << FactoryBot.build(:feedback)
-    end
+    @feedbacks = Feedback.event(event_id: @event&.id, speaker: current_user.email)
+    @participants = @event&.participants
   end
 end

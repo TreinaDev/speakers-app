@@ -1,99 +1,118 @@
-<%= render 'shared/errors', object: @profile %>
-
 <% if @profile.social_networks.any? %>
   <% @profile.social_networks.each do |network| %>
     <%= render 'shared/errors', object: network %>
   <% end %>
 <% end %>
 
-<h2 class='heading-2'><%= t('.title') %></h2>
+<h2><%= t('.title') %></h2>
 
-<%= form_with(model: @profile) do |f| %>
+<%= form_with(model: @profile, class: 'form_model') do |f| %>
   <div class="field">
-    <%= f.label :title, class: 'label_primary' %>
+    <%= f.label :title %>
     <%= f.text_field :title, class: 'field_primary' %>
+    <% if @profile.errors[:title].any? %> 
+      <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:title).first %></span>
+    <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :about_me, class: 'label_primary'  %>
+    <%= f.label :about_me  %>
     <%= f.text_area :about_me %>
+    <% if @profile.errors[:about_me].any? %> 
+      <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:about_me).first %></span>
+    <% end %>
   </div>
 
-  <div class="field border-2 border-black p-4">
-    <%= f.label :pronoun, class: 'label_primary'  %>
-    <%= f.select :pronoun, @pronoun_list, { include_blank: "" }, class: 'field_primary border border-gray' %>
-    <%= f.label :other_pronoun, class: 'label_primary'  %>
-    <%= f.text_field :other_pronoun, class: 'field_primary' %>
-    <div class="flex my-6 items-center">
+  <div class="field border-t border-b border-gray-400 py-4">
+    <%= f.label :pronoun %>
+    <%= f.select :pronoun, @pronoun_list, { include_blank: "" }, class: 'select_primary' %>
+    <% if @profile.errors[:pronoun].any? %> 
+      <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:pronoun).first %></span>
+    <% end %>
+    <%= f.label :other_pronoun, class: 'my-2' %>
+    <%= f.text_field :other_pronoun %>
+    <div class="flex mt-6 items-center">
       <%= f.check_box :display_pronoun, class: 'mr-4' %>
-      <%= f.label :display_pronoun %>
+      <%= f.label :display_pronoun, class: 'label_primary' %>
     </div>
   </div>
 
   <div class="field">
-    <%= f.label :city, class: 'label_primary'  %>
-    <%= f.text_area :city %>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+    <% if @profile.errors[:city].any? %> 
+      <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:city).first %></span>
+    <% end %>
     <div class="flex my-6 items-center">
       <%= f.check_box :display_city, class: 'mr-4' %>
-      <%= f.label :display_city %>
+      <%= f.label :display_city, class: 'label_primary' %>
     </div>
   </div>
 
-  <div class="">
-    <%= f.label :birth, class: 'label_primary'  %>
-    <%= f.date_field :birth, class: 'field_primary border mt-3'  %>
+  <div class="field">
+    <%= f.label :birth %>
+    <%= f.date_field :birth, class: 'w-96' %>
+    <% if @profile.errors[:birth].any? %> 
+      <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:birth).first %></span>
+    <% end %>
     <div class="flex my-6 items-center">
       <%= f.check_box :display_birth, class: 'mr-4' %>
-      <%= f.label :display_birth  %>
+      <%= f.label :display_birth, class: 'label_primary'  %>
     </div>
   </div>
 
-  <div class="field  border-2 border-black p-4">
-    <%= f.label :gender, class: 'label_primary'  %>
-    <%= f.select :gender, @gender_list, { include_blank: "" }, class: 'field_primary border border-gray' %>    
-    <%= f.label :other_gender, class: 'label_primary'  %>
-    <%= f.text_field :other_gender, class: 'field_primary' %>
-    <div class="flex my-6 items-center">
+  <div class="field border-t border-b border-gray-400 py-4">
+    <%= f.label :gender %>
+    <%= f.select :gender, @gender_list, { include_blank: "" }, class: 'select_primary' %>
+    <% if @profile.errors[:gender].any? %> 
+      <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:gender).first %></span>
+    <% end %> 
+    <%= f.label :other_gender %>
+    <%= f.text_field :other_gender %>
+    <div class="flex mt-6 items-center">
       <%= f.check_box :display_gender, class: 'mr-4' %>
-      <%= f.label :display_gender %>
+      <%= f.label :display_gender, class: 'label_primary' %>
     </div>
   </div>
 
   <div class="my-3">
-    <%= f.label :profile_picture %>
+    <%= f.label :profile_picture, class: 'mb-2' %>
     <%= f.file_field :profile_picture %>
+    <% if @profile.errors[:profile_picture].any? %> 
+      <span class="text-red-500 text-sm block"><%= @profile.errors.full_messages_for(:profile_picture).first %></span>
+    <% end %>
   </div>
 
-  <h3 class='heading-2 text-2xl'><%= t('.social_networks') %></h3>
+  <h3 class="mt-4"><%= t('.social_networks') %></h3>
 
   <div class="field">
-    <%= f.label :my_site, class: 'label_primary' %>
-    <%= f.text_field :my_site, name: 'profile[social_networks][network_1][url]', class: 'field_primary' %>
-    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_1][social_network_type]', value: '0', class: 'field_primary' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :youtube, class: 'label_primary' %>
-    <%= f.text_field :youtube, name: 'profile[social_networks][network_2][url]', class: 'field_primary' %>
-    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_2][social_network_type]', value: '1', class: 'field_primary' %>
+    <%= f.label :my_site %>
+    <%= f.text_field :my_site, name: 'profile[social_networks][network_1][url]' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_1][social_network_type]', value: '0' %>
   </div>
 
   <div class="field">
-    <%= f.label :twitter, class: 'label_primary' %>
-    <%= f.text_field :twitter, name: 'profile[social_networks][network_3][url]', class: 'field_primary' %>
-    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_3][social_network_type]', value: '2', class: 'field_primary' %>
+    <%= f.label :youtube %>
+    <%= f.text_field :youtube, name: 'profile[social_networks][network_2][url]' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_2][social_network_type]', value: '1' %>
   </div>
 
   <div class="field">
-    <%= f.label :github, class: 'label_primary' %>
-    <%= f.text_field :github, name: 'profile[social_networks][network_4][url]', class: 'field_primary' %>
-    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_4][social_network_type]', value: '3', class: 'field_primary' %>
+    <%= f.label :twitter %>
+    <%= f.text_field :twitter, name: 'profile[social_networks][network_3][url]' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_3][social_network_type]', value: '2' %>
   </div>
 
   <div class="field">
-    <%= f.label :facebook, class: 'label_primary' %>
-    <%= f.text_field :facebook, name: 'profile[social_networks][network_5][url]', class: 'field_primary' %>
-    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_5][social_network_type]', value: '4', class: 'field_primary' %>
+    <%= f.label :github %>
+    <%= f.text_field :github, name: 'profile[social_networks][network_4][url]' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_4][social_network_type]', value: '3' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :facebook %>
+    <%= f.text_field :facebook, name: 'profile[social_networks][network_5][url]' %>
+    <%= f.hidden_field :social_networks, name: 'profile[social_networks][network_5][social_network_type]', value: '4' %>
   </div>
 
 

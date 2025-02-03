@@ -87,6 +87,10 @@
     @apply cursor-pointer bg-dark-second-primary;
   }
 
+  .select_primary{
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-5 py-3;
+  }
+
   .form_background {
     @apply absolute top-0 my-0 mx-auto opacity-50;
     width: 45rem;

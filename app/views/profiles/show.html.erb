@@ -2,7 +2,13 @@
     <div>
         <div class="mt-10 flex items-center justify-start">
             <div class="w-2/3">
-                <h2 class="heading-2"><%= @profile.user.full_name %></h2>
+                <div class="flex items-center">
+                    <h2><%= @profile.user.full_name %></h2>
+
+                     <% if @profile.display_pronoun %>
+                        <p class="text-2xl ml-4 font-light text-gray-700"><%= @profile.pronoun %></p>
+                    <% end %>
+                </div>
                 <p class="tracking-wider text-2xl"><%= @profile.title %></p>
                 <h3 class="font-bold text-2xl"></h3>
                 <div class="profiles__social_network">
@@ -14,29 +20,34 @@
                     <% end %>
                 </div>
             </div>
-            <div class="w-1/3 flex justify-end">
+            <div class="w-1/3 h-1/3 flex justify-end">
                 <%= image_tag @profile.profile_picture, width: 300, height: 200, class: 'rounded-full' %>
             </div>
         </div>
         <div>
             <h3 class="text-xl font-bold"><%= t('.about_me') %></h3>
             <p class="mt-7"><%= @profile.about_me %></p>
-            <% if @profile.display_pronoun %>
-                <h3 class="text-xl font-bold mt-4"><%= t('.pronoun') %></h3>
-                <p class="my-2"><%= @profile.pronoun %></p>
-            <% end %>
-            <% if @profile.display_gender %>
-                <h3 class="text-xl font-bold"><%= t('.gender') %></h3>
-                <p class="my-2"><%= @profile.gender %></p>
-            <% end %>
-            <% if @profile.display_birth %>
-                <h3 class="text-xl font-bold"><%= t('.birth') %></h3>
-                <p class="my-2"><%= @profile.birth&.strftime('%d/%m/%Y') %></p>
-            <% end %>
-            <% if @profile.display_city %>
-                <h3 class="text-xl font-bold"><%= t('.city') %></h3>
-                <p class="my-2"><%= @profile.city %></p>
-            <% end %>
+
+           <div class="flex gap-11 mt-10">
+                <% if @profile.display_gender %>
+                    <div>
+                        <h3 class="text-xl font-bold text-black"><%= t('.gender') %></h3>
+                        <p class="my-2"><%= @profile.gender %></p>
+                    </div>
+                <% end %>
+                <% if @profile.display_birth %>
+                    <div>
+                        <h3 class="text-xl font-bold text-black"><%= t('.birth') %></h3>
+                        <p class="my-2"><%= @profile.birth&.strftime('%d/%m/%Y') %></p>
+                    </div>
+                <% end %>
+                <% if @profile.display_city %>
+                    <div>
+                        <h3 class="text-xl font-bold text-black"><%= t('.city') %></h3>
+                        <p class="my-2"><%= @profile.city %></p>
+                    </div>
+                <% end %>
+           </div>
         </div>
     </div>
 

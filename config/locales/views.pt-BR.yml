@@ -33,7 +33,7 @@ pt-BR:
       view_pdf: 'Visualizar PDF:'
   profiles:
     new:
-      title: 'Cadastre seu perfil'
+      title: 'Cadastre seu perfil público'
       social_networks: 'Redes Socias'
     show:
       title: 'Perfil'
