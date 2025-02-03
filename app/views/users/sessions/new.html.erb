@@ -1,5 +1,5 @@
 <section class="flex items-center justify-center flex-col w-ful h-full">
-  <h2 class="flex justify-center">Realize seu login</h2>
+  <h2 class="flex justify-center"><%= I18n.t('.devise.sessions.new.new_log_in')%></h2>
 
   <div class="flex items-center justify-center w-full mt-24">
     <div class="mr-32 w-1/4">
@@ -25,12 +25,10 @@
         </div>
         <% end %>
 
-
-        <%= f.submit "Entrar", class: 'btn--success mb-8' %>
+        <%= f.submit I18n.t('.devise.sessions.new.log_in'), class: 'btn--success mb-8' %>
       <% end %>
       <div>
         <%= render "users/shared/links" %>
       </div>
-    </div>
   </div>
 </section>

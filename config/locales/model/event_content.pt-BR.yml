@@ -1,8 +1,13 @@
 pt-BR:
   activerecord:
+    errors:
+      messages:
+        must_have_less_than_five_files: 'Não é possível enviar mais que 5 arquivos.'
+        valid_file_size: 'Não é possível enviar arquivos com mais de 50mb.'
     models:
       event_content: Conteúdo
     attributes:
       event_content:
         title: 'Título'
         description: 'Descrição'
+        external_video_url: 'URL do seu vídeo'

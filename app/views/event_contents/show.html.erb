@@ -1,39 +1,5 @@
-<div class="flex">
-  <h2 class="heading-2"><%= @event_content.title %></h2>
-  <div class="ml-5 pt-2">
-    <%= link_to edit_event_content_path(@event_content), data: { turbo: false }, title: 'Editar' do %>
-      <%= image_tag 'pencil_edit.png', id: 'pencil_edit', class: 'icon' %>
-    <% end %>
-  </div>
-</div>
-
 <div>
-  <div class="mt-8">
-    <%= @event_content.description %>
-  </div>
-  <% if @event_content.files.attached? %>
-    <div class="card_container p-20 mb-20 rounded-3xl">
-      <% @event_content.files.each do |file| %>
-        <% if file.content_type.starts_with?('image/') %>
-          <%= image_tag file, width: 300, height: 200, class: 'card max-h-96' %>
-        <% elsif file.content_type.starts_with?('video/') %>
-          <%= video_tag url_for(file), controls: true, class: 'card max-h-96' %>
-        <% elsif file.content_type == 'application/pdf' %>
-          <%= link_to(url_for(file), target: '_blank', class: 'card max-h-96 flex flex-col justify-center items-center' ) do %>
-            <%= image_tag("pdf.png", class: 'w-2/3 h-2/3') %>
-            <p><%= t('.view_pdf') %> <%= "#{file.filename.to_s}" %></p>
-          <% end %>
-        <% else %>
-          <%= link_to "Arquivo #{file.filename.to_s}", url_for(file), target: '_blank', class: 'card max-h-96' %>
-        <% end %>
-      <% end %>
-    </div>
-
-  <% else %>
-    <div class="mt-10">
-      <strong><%=t('.no_files_attached')%></strong>
-    </div>
-  <% end %>
+  <%= render 'shared/event_content_details', content: @event_content%>
 </div>
 
 <div>

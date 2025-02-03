@@ -12,6 +12,14 @@
     <%= f.rich_textarea :description, class: 'text_area' %>
   </div>
 
+  <div class="field mt-2">
+    <%= f.label :external_video_url, class: 'label-primary' %>
+    <%= f.text_field :external_video_url, class: 'field-primary', placeholder: 'Compartilhe seu vídeo diretamente do youtube ou vimeo' %>
+     <% if event_content.errors[:external_video_url].any? %> 
+      <span class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:external_video_url).first %></span>
+    <% end %>
+  </div>
+
   <div class="mt-5 mb-5">
     <% if event_content.files.any? { |file| file.persisted? } %>
       <strong class="text-lg"><%= t('.files_attached') %></strong>
@@ -28,7 +36,7 @@
   </div>
 
   <div class="mb-3">
-    <%= f.label :files, 'Arquivos' %>
+    <%= f.label :files, t('.files') %>
     <%= f.file_field :files, multiple: true %>
     <% if event_content.errors[:base].any? %> 
       <div class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:base).first %></div>

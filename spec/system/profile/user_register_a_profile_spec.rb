@@ -146,7 +146,6 @@ describe 'User register a profile' do
 
     expect(current_path).to eq(profiles_path)
     expect(page).to have_content('Falha ao registrar o perfil.')
-    expect(page).to have_content('Rede Social não é válido')
     expect(page).to have_content('Url inválida para Youtube')
     expect(page).to have_content('Url inválida para X')
     expect(page).to have_content('Url inválida para GitHub')

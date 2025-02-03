@@ -14,9 +14,7 @@ describe 'User register task for your schedule item curriculum', type: :system, 
 
   it 'with success' do
     user = create(:user)
-    event =  [ build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-                  start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-                  event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado') ]
+    event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule_items = [ build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD') ]
 
     allow(Event).to receive(:all).and_return(event)
@@ -36,6 +34,34 @@ describe 'User register task for your schedule item curriculum', type: :system, 
 
     expect(CurriculumTask.count).to eq 1
     expect(current_path).to eq schedule_item_path(schedule_items.first.id)
+    expect(page).to have_content 'Tarefa adicionada com sucesso!'
+    expect(page).to have_content 'Tarefa 01'
+  end
+
+  it 'and attach an content to task' do
+    user = create(:user)
+    schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
+    curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
+    first_content = create(:event_content, user: user, title: 'Workshop Stimulus')
+    second_content = create(:event_content, user: user, title: 'Ruby para Iniciantes')
+    create(:curriculum_content, curriculum: curriculum, event_content: first_content)
+    create(:curriculum_content, curriculum: curriculum, event_content: second_content)
+
+    allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+
+    login_as user
+    visit schedule_item_path(schedule_item.id)
+    click_on 'Adicionar tarefa'
+    fill_in 'Título', with: 'Tarefa 01'
+    fill_in 'Descrição', with: 'Lorem ipsum'
+    choose 'Obrigatória'
+    check 'Workshop Stimulus'
+    check 'Ruby para Iniciantes'
+    click_on 'Adicionar'
+
+    expect(CurriculumTask.count).to eq 1
+    expect(CurriculumTaskContent.count).to eq 2
+    expect(current_path).to eq schedule_item_path(schedule_item.id)
     expect(page).to have_content 'Tarefa adicionada com sucesso!'
     expect(page).to have_content 'Tarefa 01'
   end

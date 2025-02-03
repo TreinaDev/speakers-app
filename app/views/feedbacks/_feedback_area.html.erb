@@ -1,27 +1,22 @@
-<div id="feedbacks" data-controller="modal">
+<div id="feedbacks">
   <% if feedbacks&.any? %>
-    <button class="btn--success mt-6" style="width: 9rem;" data-action="click->modal#showModal"><%= t('.see_feedbacks') %></button>
-    <dialog data-modal-target="modal">
-      <div class="modal__header">
-        <h2><%= Feedback.model_name.plural.capitalize %></h2>
-        <button class="close-btn" data-action="click->modal#closeModal"><%= image_tag 'close_icon.png', class: 'modal__icon' %></button>
-      </div>
-      <div class="modal__body">
-        <% feedbacks.each do |feedback| %>
-          <div class="feedback_card">
-            <div class="feedback-header">
-              <span><%= t('.user') %>: <%= feedback.name %></span>
-              <strong><%= feedback.title %></strong>
-            </div>
-            <div class="feedback-body">
-              <span>
-                <%= feedback.description %>
-              </span>
-            </div>
+    <h2><%= t('.see_feedbacks') %></h2>
+    <h2><%= Feedback.model_name.plural.capitalize %></h2>
+    <div class="modal-body">
+      <% feedbacks.each do |feedback| %>
+        <div class="feedback-card">
+          <div class="feedback-header">
+            <span><%= t('.user') %>: <%= feedback.name %></span>
+            <strong><%= feedback.title %></strong>
           </div>
-        <% end %>
-      </div>
-    </dialog>
+          <div class="feedback-body">
+            <span>
+              <%= feedback.description %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    </div>
   <% else %>
     <p class="not_found_feedback" ><%= t('.no_feedback') %></p>
   <% end %>

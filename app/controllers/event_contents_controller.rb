@@ -17,9 +17,9 @@ class EventContentsController < ApplicationController
     @event_content = current_user.event_contents.build(event_content_params)
     @event_content.files = params[:event_content][:files]
     if @event_content.save
-      redirect_to @event_content, notice: "Conteúdo registrado com sucesso."
+      redirect_to @event_content, notice: t('event_contents.create.success')
     else
-      flash.now[:alert] = "Falha ao registrar o conteúdo."
+      flash.now[:alert] = t('event_contents.create.fail')
       render :new, status: :unprocessable_entity
     end
   end
@@ -29,9 +29,9 @@ class EventContentsController < ApplicationController
   def update
     @event_content.files = params[:event_content][:files]
     if @event_content.update(event_content_params)
-      redirect_to @event_content, notice: "Conteúdo atualizado com sucesso!"
+      redirect_to @event_content, notice: t('event_contents.update.success')
     else
-      flash.now[:alert] = "Não foi possível atualizar seu Conteúdo."
+      flash.now[:alert] = t('event_contents.update.fail')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -39,14 +39,14 @@ class EventContentsController < ApplicationController
   private
 
   def event_content_params
-    params.require(:event_content).permit(:title, :description)
+    params.require(:event_content).permit(:title, :description, :external_video_url)
   end
 
   def set_event_content
     begin
       @event_content = current_user.event_contents.find(params[:id])
     rescue
-      redirect_to events_path, notice: "Conteúdo Indisponível!"
+      redirect_to events_path, notice: t('event_contents.set_event_content.content_unavailable')
     end
   end
 

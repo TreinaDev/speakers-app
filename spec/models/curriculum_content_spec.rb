@@ -10,6 +10,8 @@ RSpec.describe CurriculumContent, type: :model do
     it { should validate_uniqueness_of(:curriculum_id).scoped_to(:event_content_id) }
     it { should belong_to(:curriculum) }
     it { should belong_to(:event_content) }
+    it { should have_many(:curriculum_task_contents) }
+    it { should have_many(:curriculum_tasks).through(:curriculum_task_contents) }
   end
 
   context '.must_be_event_content_owner' do
@@ -21,6 +23,17 @@ RSpec.describe CurriculumContent, type: :model do
       curriculum_content = CurriculumContent.new(curriculum: curriculum, event_content: first_user_event_content)
 
       expect(curriculum_content).not_to be_valid
+    end
+  end
+
+  context '.title' do
+    it 'must return the event content title' do
+      user = create(:user)
+      event_content = create(:event_content, title: 'Conteudo teste', user: user)
+      curriculum = create(:curriculum, user: user)
+      curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: event_content)
+
+      expect(curriculum_content.title).to eq 'Conteudo teste'
     end
   end
 end

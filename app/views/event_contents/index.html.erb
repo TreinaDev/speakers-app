@@ -1,6 +1,6 @@
-<h2 class="heading-2">Meus Conteúdos</h2>
+<h2> <%= t('.my_contents') %> </h2>
 
-<%= link_to 'Cadastrar Conteúdo', new_event_content_path, data: { turbo: false }, class: 'link_primary' %>
+<%= link_to t('.new_content'), new_event_content_path, data: { turbo: false }, class: 'link_primary' %>
 
 <% if @event_contents.any? %>
     <div class="card_container">
@@ -8,6 +8,6 @@
     </div>
 <% else %>
     <div>
-        <p class="mt-10 font-bold"><%= t('.no_content')%></p>
+        <p class="mt-10 font-bold"><%= t('.no_content') %></p>
     </div>
 <% end %>

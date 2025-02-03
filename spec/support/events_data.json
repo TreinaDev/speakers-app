@@ -1,26 +1,28 @@
 [
   {
-    "id": 1,
-    "name": "Event1",
-    "url": "",
-    "description": "Event1 description",
-    "start_date": "14-01-2025",
-    "end_date": "16-01-2025",
-    "event_type": "in-person",
-    "location": "Palhoça",
-    "participant_limit": 20,
-    "status": "published"
+    "name": "Tech Conference",
+    "event_type": "inperson",
+    "address": "Main Street",
+    "participants_limit": 50,
+    "url": "www.techconf.com",
+    "status": "draft",
+    "created_at": "2025-01-31T16:24:11.521-03:00",
+    "updated_at": "2025-01-31T16:24:11.534-03:00",
+    "code": "ABC123XYZ",
+    "start_date": "2025-02-01T14:00:00.000-03:00",
+    "end_date": "2025-02-05T14:00:00.000-03:00"
   },
   {
-    "id": 2,
-    "name": "Event2",
-    "url": "",
-    "description": "Event2 description",
-    "start_date": "15-01-2025",
-    "end_date": "17-01-2025",
-    "event_type": "in-person",
-    "location": "Florianópolis",
-    "participant_limit": 20,
-    "status": "draft"
+    "name": "Developer Summit",
+    "event_type": "online",
+    "address": "Virtual",
+    "participants_limit": 100,
+    "url": "www.dev-summit.com",
+    "status": "published",
+    "created_at": "2025-01-31T16:24:11.521-03:00",
+    "updated_at": "2025-01-31T16:24:11.534-03:00",
+    "code": "XYZ789ABC",
+    "start_date": "2025-03-01T10:00:00.000-03:00",
+    "end_date": "2025-03-03T18:00:00.000-03:00"
   }
 ]

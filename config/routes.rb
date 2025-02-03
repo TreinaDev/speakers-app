@@ -17,13 +17,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  resources :events, only: %i[ index show ]
+  resources :events, only: %i[ index show ], param: :code
   resources :event_contents, only: %i[ index show new create edit update ]
   resources :event_tasks, only: %i[ index show new create edit update ]
   resources :schedule_items, only: %i[ show ]
   resources :profiles, only: %i[ show new create ], param: :username
   resources :curriculums, only: [] do
     resources :curriculum_contents, only: %i[ new create show ]
-    resources :curriculum_tasks, only: %i[ new create ]
+    resources :curriculum_tasks, only: %i[ new create show ]
   end
 end

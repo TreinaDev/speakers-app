@@ -2,26 +2,24 @@ require 'rails_helper'
 
 describe 'User views the public profile' do
   it 'with success' do
-    events = [ Event.new(id: 1,
-                          name: 'Event1',
-                          url: '',
-                          description: 'Event1 description',
-                          start_date: '14-01-2025',
-                          end_date: '16-01-2025',
-                          event_type: 'in-person',
-                          location: 'Palhoça',
-                          participant_limit: 20,
-                          status: 'published'),
-                Event.new(id: 2,
-                          name: 'Event2',
-                          url: '',
-                          description: 'Event2 description',
-                          start_date: '15-01-2025',
-                          end_date: '17-01-2025',
-                          event_type: 'in-person',
-                          location: 'Florianópolis',
-                          participant_limit: 20,
-                          status: 'draft') ]
+    events = [ build(:event, name: 'Event1',
+                             url: '',
+                             description: 'Event1 description',
+                             start_date: '14-01-2025',
+                             end_date: '16-01-2025',
+                             event_type: 'in-person',
+                             address: 'Palhoça',
+                             participants_limit: 20,
+                             status: 'published'),
+               build(:event, name: 'Event2',
+                             url: '',
+                             description: 'Event2 description',
+                             start_date: '15-01-2025',
+                             end_date: '17-01-2025',
+                             event_type: 'in-person',
+                             address: 'Florianópolis',
+                             participants_limit: 20,
+                             status: 'draft') ]
     allow(Event).to receive(:all).and_return(events)
     user = create(:user, first_name: 'José', last_name: 'de Jesus')
     image = fixture_file_upload(Rails.root.join('spec/fixtures/puts.png'))

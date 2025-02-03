@@ -5,7 +5,7 @@
       <div class="modal__header">
         <h3><%= t('.title') %></h3>
         
-        <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: 'Fechar', class: 'self-end' do %>
+        <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: t('.close'), class: 'self-end' do %>
           <%= image_tag 'close_icon.png', id: 'close_icon', class: 'modal__icon' %>
         <% end %>
       </div>

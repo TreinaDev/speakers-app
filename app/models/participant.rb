@@ -1,10 +1,20 @@
 class Participant
   extend ActiveModel::Translation
+  include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attr_accessor :id, :name
+  attribute :name, :string
+  attribute :last_name, :string
+  attribute :email, :string
+  attribute :cpf, :string
 
-  def initialize(id:, name:)
-    @id = id
-    @name = name
+  def initialize(**params)
+    super(participant_permited_params(params))
+  end
+
+  private
+
+  def participant_permited_params(params)
+    ActionController::Parameters.new(params).permit(Participant.attribute_names)
   end
 end

@@ -429,4 +429,16 @@
     font-family: "Piedra", serif;
   }
   /* Fim da Home Page */
+
+  .tab__btn--active {
+    @apply bg-gray-900 text-gray-100 px-5;
+  }
+
+  .tab__btn--unactive {
+    @apply bg-gray-500 text-gray-100 px-5;
+  }
+
+  .tab__combo-btn {
+    @apply flex gap-1 mt-6;
+  }
 }

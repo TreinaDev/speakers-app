@@ -18,7 +18,7 @@
       <%= form_with model: [ curriculum, curriculum_task ] do |f| %>
         <div class="field">
           <%= f.label :title %>
-          <%= f.text_field :title, class: 'field_primary' %>
+          <%= f.text_field :title %>
           <% if  curriculum_task.errors[:title].any? %>
           <span class="text-red-500 text-sm"><%=  curriculum_task.errors.full_messages_for(:title).first %></span>
           <% end %>
@@ -43,6 +43,18 @@
           <% if  curriculum_task.errors[:certificate_requirement].any? %> 
             <span class="text-red-500 text-sm"><%=  curriculum_task.errors.full_messages_for(:certificate_requirement).first %></span>
           <% end %>
+        </div>
+
+        <div class="col-span-2 mt-2">
+          <%= f.label :curriculum_content_ids, class: "label-primary" %>
+            <% if curriculum_contents.blank? %>
+              <p class="mt-2"> <%= t('.no_contents') %></p>
+            <% else %>
+              <%= f.collection_check_boxes(:curriculum_content_ids, curriculum_contents, :id, :title) do |b| %>
+                  <%= b.check_box %>
+                  <%= b.label(class: "text-sm text-gray-900 mr-2") %>
+              <% end %>
+            <% end %>
         </div>
 
         <div class="mt-5 flex justify-end">

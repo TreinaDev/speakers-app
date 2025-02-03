@@ -1,4 +1,5 @@
 pt-BR:
+  lecture: 'Palestra'
   event_tasks:
     new:
       title: 'Cadastrar Tarefa'
@@ -17,24 +18,38 @@ pt-BR:
       no_content_attetched: 'Nenhum conteúdo vinculado.'
       attached_contents: 'Conteúdos vinculados:'
       content: 'Conteúdo'
+      edit: 'Editar'
     form:
       no_contents: 'Nenhum conteúdo cadastrado'
       save: 'Salvar'
+      cancel: 'Cancelar'
   event_contents:
-    index:
-      no_content: 'Não há conteúdos cadastrados!'
     form:
       files_attached: 'Arquivos anexados a este conteúdo:'
+      files: 'Arquivos'
     show:
       attached_to_tasks: 'Tarefas que utilizam este conteúdo:'
       task: 'Tarefa'
       no_tasks_attached: 'Esse conteúdo não foi associado a nenhuma tarefa.'
       no_files_attached: 'Não há arquivos anexados a esse conteúdo.'
       view_pdf: 'Visualizar PDF:'
+      edit: 'Editar'
+      file: 'Arquivo'
+    event_content:
+      content: 'Conteúdo'
+    edit:
+      edit: 'Edite'
+    index:
+      my_contents: 'Meus Conteúdos'
+      new_content: 'Cadastrar Conteúdo'
+      no_content: 'Não há conteúdos cadastrados!'
+    new:
+      register_new_content: 'Cadastre seus conteúdos'
   profiles:
     new:
       title: 'Cadastre seu perfil público'
       social_networks: 'Redes Socias'
+      create_profile: 'Criar perfil'
     show:
       title: 'Perfil'
       my_events: 'Meus Eventos'
@@ -44,26 +59,42 @@ pt-BR:
       pronoun: 'Pronomes'
       birth: 'Data de Nascimento'
       city: 'Cidade'
-  events: 
+  events:
     show:
-      schedule_items_title: 'Suas Agendas'
-      no_schedule_items: 'Você não possui agendas disponíveis para esse evento. Se você acha que isso é um erro, entre em contato com o organizador.'
+      my_schedules: 'Minhas agendas'
+      participant_list: 'Lista de Participantes'
+      feedbacks: 'Feedbacks do Evento'
+    event:
+      event_page: 'Site do Evento'
+      no_event_page: 'Página inexistente'
+    index:
+      my_events: 'Meus Eventos'
+      no_events: 'Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.'
   participants:
     participants:
+      participant_number: 'Número de Participantes'
       no_participants: 'Não foram localizados Participantes até o momento'
       participant_list: 'Lista de Participantes'
   feedbacks:
     feedback_area:
+      see_feedback: 'Ver Feedbacks'
+      feedback: 'Feedback'
       no_feedback: 'Nenhum Feedback disponível'
       see_feedbacks: 'Ver Feedbacks'
       user: 'Usuário'
   schedule_items:
+    schedule_items:
+      schedule_items_title: 'Suas Agendas'
+      no_schedule_items: 'Você não possui agendas disponíveis para esse evento. Se você acha que isso é um erro, entre em contato com o organizador.'
     show:
       estimated_participants: 'Número estimado de participantes:'
       not_found: 'Essa Programação não existe'
       curriculum_content_title: 'Conteúdos da programação'
       no_curriculum_content: 'Nenhum conteúdo cadastrado para essa programação.'
       new_curriculum_content_button: 'Adicionar conteúdo'
+      participants_list: 'Lista de Participantes'
+      name: 'Nome'
+      empty_participants_list: 'Não foram localizados Participantes para está agenda'
       curriculum_task_title: 'Tarefas da programação'
       no_curriculum_task: 'Nenhuma tarefa cadastrada para essa programação.'
       new_curriculum_task_button: 'Adicionar tarefa'
@@ -73,6 +104,26 @@ pt-BR:
       no_content: 'Não existem conteúdos disponíveis.'
       save: 'Adicionar'
       new_content_link: 'Clique aqui para cadastrar um conteúdo.'
+      close: 'Fechar'
+  shared:
+    event_content_details:
+      no_files_attached: 'Não há arquivos anexados a esse conteúdo.'
+      view_pdf: 'Visualizar PDF:'
+    feedback_area:
+      see_feedback: 'Ver Feedbacks'
+      feedback: 'Feedbacks'
+      user: 'Usuário'
+      feedback_unavailable: 'Nenhum Feedback disponível'
+    navbar:
+      lecture: 'Palestra'
+      how_work: 'Como Funciona?'
+      create_account: 'Criar conta'
+      access_account: 'Acesse sua conta'
+      my_contents: 'Meus Conteúdos'
+      create_profile: 'Cadastrar Perfil'
+      my_profile: 'Meu Perfil'
+      tasks: 'Tarefas'
+      log_out: 'Sair'
     show:
       attached_to_tasks: 'Tarefas que utilizam este conteúdo:'
       task: 'Tarefa'
@@ -83,6 +134,10 @@ pt-BR:
     form:
       title: 'Adicionar tarefa a programação:'
       save: 'Adicionar'
+      no_contents: 'Não existem conteúdos disponíveis'
+    show:
+      task: 'Tarefa'
+      attached_contents: 'Material de apoio'
   home:
     index:
       register: 'Cadastre-se Agora'

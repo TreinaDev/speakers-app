@@ -8,12 +8,9 @@ class ExternalEventApi::FindEventService < ApplicationService
   def find
     event = nil
     begin
-      response = Faraday.get("http://localhost:3001/api/v1/events/#{ kwargs[:id] }")
+      response = Faraday.get("http://localhost:3001/api/v1/events/#{ kwargs[:code] }")
       if response.success?
-        json_response = JSON.parse(response.body)
-        event = Event.new(id: json_response['id'], name: json_response['name'], url: json_response['url'], description: json_response['description'],
-                start_date: json_response['start_date'], end_date: json_response['end_date'], event_type: json_response['event_type'],
-                location: json_response['location'], participant_limit: json_response['participant_limit'], status: json_response['status'])
+        event = Event.new(**JSON.parse(response.body))
       end
     rescue StandardError => error
       Rails.logger.error(error)
