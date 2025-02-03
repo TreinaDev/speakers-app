@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User see event details', type: :system do
   it 'with success' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+    create(:profile, user: user)
     events = [
       build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
       start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
@@ -30,6 +31,7 @@ describe 'User see event details', type: :system do
 
   it 'but must be published' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+    create(:profile, user: user)
     events = [
       build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
       start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
@@ -49,6 +51,7 @@ describe 'User see event details', type: :system do
 
   it 'and sees your schedules items' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+    create(:profile, user: user)
     event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
             start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
             event_type: 'Presencial', location: 'Juiz de Fora', participants_limit: 100, status: 'Publicado')
@@ -73,6 +76,7 @@ describe 'User see event details', type: :system do
 
   it 'and should see a message when doesnt have schedule items' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+    create(:profile, user: user)
     event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
             start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
             event_type: 'Presencial', location: 'Juiz de Fora', participants_limit: 100, status: 'Publicado')
@@ -89,6 +93,7 @@ describe 'User see event details', type: :system do
 
   it 'and event doesnt exists' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+    create(:profile, user: user)
     response = instance_double(Faraday::Response, success?: false)
     allow(Event).to receive(:find).and_return(nil)
 

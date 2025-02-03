@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User access contents list', type: :system do
   it 'and view registered contents' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     user.event_contents.create(title: 'Introdução', description: 'Apresentação')
     user.event_contents.create(title: 'Desenvolvimento', description: 'Lógica de Programação')
     user.event_contents.create(title: 'Avançado', description: 'POO')
@@ -19,6 +20,7 @@ describe 'User access contents list', type: :system do
   it 'and view your own registered contents' do
     firt_user = create(:user, first_name: 'João')
     second_user = create(:user, first_name: 'Matheus')
+    create(:profile, user: second_user)
     firt_user.event_contents.create(title: 'Introdução', description: 'Apresentação')
     firt_user.event_contents.create(title: 'Desenvolvimento', description: 'Lógica de Programação')
     second_user.event_contents.create(title: 'Avançado', description: 'POO')

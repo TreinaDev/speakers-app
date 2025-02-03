@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User view curriculum task details', type: :system do
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
     event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule_items = [ build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD') ]
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_items.first.id)
@@ -31,6 +32,7 @@ describe 'User view curriculum task details', type: :system do
 
   it 'and have contents attached' do
     user = create(:user)
+    create(:profile, user: user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
     content = create(:event_content, user: user, title: 'Conteúdo Rails')
@@ -63,6 +65,7 @@ describe 'User view curriculum task details', type: :system do
   it 'and must be the curriculum task owner' do
     user = create(:user)
     second_user = create(:user)
+    create(:profile, user: second_user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)
@@ -76,6 +79,7 @@ describe 'User view curriculum task details', type: :system do
 
   it 'and go back to previous page' do
     user = create(:user)
+    create(:profile, user: user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)

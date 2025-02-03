@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User register content for your schedule item curriculum', type: :system, js: true do
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
     event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule_items = [ build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD') ]
     user.event_contents.create(title: 'Introdução', description: 'Apresentação')
@@ -28,6 +29,7 @@ describe 'User register content for your schedule item curriculum', type: :syste
 
   it 'and must not show a event content already attached to the schedule item curriculum' do
     user = create(:user)
+    create(:profile, user: user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     first_content = user.event_contents.create(title: 'Introdução', description: 'Apresentação')
     user.event_contents.create(title: 'Desenvolvimento', description: 'Lógica de Programação')
@@ -43,6 +45,7 @@ describe 'User register content for your schedule item curriculum', type: :syste
 
   it 'and must display message when no event content is available' do
     user = create(:user)
+    create(:profile, user: user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
 
@@ -67,6 +70,7 @@ describe 'User register content for your schedule item curriculum', type: :syste
 
   it 'and should redirect to events path when curriculum doesnt exists' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user
     visit new_curriculum_curriculum_content_path(9999)
@@ -80,6 +84,8 @@ describe 'User register content for your schedule item curriculum', type: :syste
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: first_user, schedule_item_code: schedule_item.id)
     secont_user = create(:user)
+    create(:profile, user: secont_user)
+
 
     login_as secont_user
     visit new_curriculum_curriculum_content_path(curriculum)

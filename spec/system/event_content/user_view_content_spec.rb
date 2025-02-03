@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-describe 'User view a content' do
+describe 'User view a content', type: :system do
   it 'with success' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     pdf_1 = fixture_file_upload(Rails.root.join('spec/fixtures/nota-ufjf.pdf'))
     image_1 = fixture_file_upload(Rails.root.join('spec/fixtures/mark_zuckerberg.jpeg'))
     image_2 = fixture_file_upload(Rails.root.join('spec/fixtures/capi.png'))
@@ -30,6 +31,7 @@ describe 'User view a content' do
     first_user = create(:user, first_name: 'João')
     event_content = first_user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
     second_user = create(:user, first_name: 'Luiz')
+    create(:profile, user: second_user)
 
     login_as second_user
     visit event_content_path(event_content)
@@ -49,6 +51,7 @@ describe 'User view a content' do
 
   it 'and view all tasks where this content is used' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     event_content = user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
     task = user.event_tasks.create!(name: 'Tarefa inicial', description: 'Desafio para iniciantes')
     EventTaskContent.create!(event_content: event_content, event_task: task)
@@ -65,6 +68,7 @@ describe 'User view a content' do
 
   it 'and access task details' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     event_content = user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
     task = user.event_tasks.create!(name: 'Tarefa inicial', description: 'Desafio para iniciantes')
     EventTaskContent.create!(event_content: event_content, event_task: task)
@@ -78,6 +82,7 @@ describe 'User view a content' do
 
   it 'and not see tasks for this content' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     event_content = user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
 
     login_as user

@@ -12,6 +12,7 @@ describe 'A curriculum is generated for user schedule item', type: :system do
 
   it 'when access your schedule item page for the first time' do
     user = create(:user, id: 99)
+    create(:profile, user: user)
     event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule_items = [ build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD') ]
 
@@ -32,6 +33,7 @@ describe 'A curriculum is generated for user schedule item', type: :system do
 
   it 'and should not create curriculum when schedule item does not exist' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user, scope: :user
     visit schedule_item_path(9999)

@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-describe 'User sees participant list', js: true do
+describe 'User sees participant list', type: :system, js: true do
   it 'with success' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+    create(:profile, user: user)
     event = build(:event, name: 'Ruby on Rails')
     participants = [
       build(:participant, name: 'João'),
@@ -29,6 +30,7 @@ describe 'User sees participant list', js: true do
 
   it 'and not found participants' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+    create(:profile, user: user)
     event = build(:event, name: 'Ruby on Rails')
     participants = []
     allow(Event).to receive(:find).and_return(event)

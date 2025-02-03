@@ -1,23 +1,42 @@
 <nav class="navbar section-x <%= 'navbar--actived' if request.path != root_path %>">
   <div class="navbar_content">
-    <p class="logo"><%= t('.lecture') %> +</p>
+    <%= link_to "#{t('.lecture')} +", root_path, class: 'logo' %>
+
     <div class="flex">
-      <%= link_to 'Home', root_path, class: 'nav_link_primary' %>
-      <% if request.path == root_path %>
-      <a href="#how_works" class="nav_link_primary"><%= t('.how_work') %></a>
-      <% end %>
-      <% unless user_signed_in? %>
+      <%= link_to t('.home'), root_path, class: 'nav_link_primary' %>
+      <%= link_to t('.how_work'), "#how_works", class: "nav_link_primary" if request.path == root_path %>
+
+      <% if user_signed_in? %>
+        <%= link_to t('.my_contents'), event_contents_path, class: 'nav_link_primary' %>
+        <%= link_to  t('.tasks'), event_tasks_path, data: { turbo: false }, class: 'nav_link_primary' %>
+        
+        <div class="relative inline-block text-left" data-controller="dropdown">
+          <%= button_tag class: "nav_link_primary gap-1", data: { action: "click->dropdown#toggle" } do %>
+            <%= "Olá, #{current_user.full_name}" %> 
+            <%= image_tag 'down_arrow.svg', class: 'w-3' %>
+          <% end %>
+
+          <div data-dropdown-target="menu" class="absolute right-0 w-48 bg-white border border-gray-300 rounded shadow-lg text-left hidden">
+           <% if current_user.profile&.username.present? %>
+              <%= link_to profile_path(username: current_user.profile.username), class: 'inline-block px-4 py-2 text-gray-700 hover:bg-gray-100 w-full' do %>
+                <div class='flex items-center gap-1'>
+                  <%= image_tag 'profile_icon.png', class: 'w-4' %>
+                  <%= t('.my_profile') %>
+                </div>
+              <% end %>
+              <hr class="border-gray-300">
+            <% end %>
+            <%= button_to destroy_user_session_path, method: :delete, class: 'inline-block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100' do %>
+              <div class='flex items-center gap-1'>
+                <%= image_tag 'exit_icon.png', class: 'w-4'%>
+                <%= t('.log_out') %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
         <%= link_to t('.create_account'), new_user_registration_path, class: 'nav_link_primary' %>
         <%= link_to t('.access_account'), new_user_session_path, class: 'nav_link_primary' %>
-      <% else %>
-        <%= link_to t('.my_contents'), event_contents_path, class: 'nav_link_primary' %>
-        <% if current_user.profile.nil? || !current_user.profile.persisted? %>
-          <%= link_to t('.create_profile'), new_profile_path, class: 'nav_link_primary' %>
-        <% elsif current_user.profile.persisted? %>
-          <%= link_to t('.my_profile'), profile_path(username: current_user&.profile.username), class: 'nav_link_primary' %>
-        <% end %>
-        <%= link_to t('.tasks'), event_tasks_path, data:{turbo: false}, class: 'nav_link_primary' %>
-        <%= button_to t('.log_out'), destroy_user_session_path, method: :delete, class: 'nav_link_primary' %>
       <% end %>
     </div>
   </div>

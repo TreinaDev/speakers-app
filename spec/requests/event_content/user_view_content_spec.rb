@@ -14,6 +14,7 @@ describe 'User view a content', type: :request do
     first_user = create(:user, first_name: 'João')
     event_content = first_user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
     second_user = create(:user, first_name: 'Luiz')
+    create(:profile, user: second_user)
 
     login_as second_user
     get event_content_path(event_content)

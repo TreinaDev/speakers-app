@@ -116,6 +116,7 @@ pt-BR:
       feedback_unavailable: 'Nenhum Feedback disponível'
     navbar:
       lecture: 'Palestra'
+      home: 'Início'
       how_work: 'Como Funciona?'
       create_account: 'Criar conta'
       access_account: 'Acesse sua conta'
