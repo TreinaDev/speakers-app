@@ -16,6 +16,8 @@ describe 'User sees participant list' do
     visit event_path(event.code)
 
     within '#participant_list' do
+      expect(page).to have_content 'Lista de Participantes'
+      expect(page).to have_content 'Número de Participantes: 3'
       expect(page).to have_content 'João'
       expect(page).to have_content 'Pedro'
       expect(page).to have_content 'Jeremias'

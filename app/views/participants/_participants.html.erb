@@ -2,7 +2,7 @@
   <% if participants.present? %>
   <div class="mb-3">
     <h3 class="heading-2"><%= t('.participant_list') %></h3>
-    <small><%= t('.participant_number') %> <%= participants.count %></small>
+    <small><%= t('.participant_number') %>: <%= participants.count %></small>
   </div>
     <div class="participant-list">
       <% participants.each do |participant| %>
