@@ -36,6 +36,7 @@ describe 'User register a content', type: :system, js: true do
 
   it 'and adds an external video from youtube' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user
     visit new_event_content_path
@@ -54,6 +55,7 @@ describe 'User register a content', type: :system, js: true do
 
   it 'and adds an external video from vimeo' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user
     visit new_event_content_path
@@ -72,6 +74,7 @@ describe 'User register a content', type: :system, js: true do
 
   it 'and external video url must be valid' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user
     visit events_path

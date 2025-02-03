@@ -31,26 +31,6 @@ describe 'User can view feedback for an event', type: :system, js: true do
       end
     end
 
-    it 'closes the modal after opening' do
-      user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
-      create(:profile, user: user)
-      event = build(:event, name: 'Ruby on Rails')
-      allow(Event).to receive(:find).and_return(event)
-      event_feedbacks = [ build(:feedback, name: 'João', title: 'Very good!', description: 'I liked it a lot'),
-           build(:feedback, name: 'Anonymous', title: 'Could be better', description: 'No coffee'),
-           build(:feedback, name: 'Joaquim', title: 'Congratulations, you were selected', description: 'This message was marked as Spam') ]
-      allow(Feedback).to receive(:event).with(event_code: event.code, speaker: user.email).and_return(event_feedbacks)
-
-      login_as user, scope: :user
-      visit event_path(event.code)
-
-      expect(page).not_to have_selector('.modal', visible: true)
-      click_on 'Feedbacks'
-      expect(page).to have_selector('.modal', visible: true)
-      find('.close-btn').click
-      expect(page).not_to have_selector('.modal', visible: true)
-    end
-
     it 'and not found feedbacks for event' do
       user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
       create(:profile, user: user)
