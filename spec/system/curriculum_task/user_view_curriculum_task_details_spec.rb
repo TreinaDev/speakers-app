@@ -3,12 +3,14 @@ require 'rails_helper'
 describe 'User view curriculum task details', type: :system do
   it 'with success' do
     user = create(:user)
-    event =  [ build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-                  start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-                  event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado') ]
+    event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule_items = [ build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD') ]
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_items.first.id)
-    create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)
+    content = create(:event_content, user: user, title: 'Conteúdo Rails')
+    curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: content)
+    task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)
+    create(:curriculum_task_content, curriculum_task: task, curriculum_content: curriculum_content)
+
 
     allow(Event).to receive(:all).and_return(event)
     allow(Event).to receive(:find).and_return(event.first)
@@ -24,6 +26,26 @@ describe 'User view curriculum task details', type: :system do
     expect(page).to have_content 'Exercício Rails'
     expect(page).to have_content 'Seu primeiro exercício'
     expect(page).to have_content 'Opcional'
+    expect(page).to have_content 'Conteúdo Rails'
+  end
+
+  it 'and have contents attached' do
+    user = create(:user)
+    schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
+    curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
+    content = create(:event_content, user: user, title: 'Conteúdo Rails')
+    curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: content)
+    task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)
+    create(:curriculum_task_content, curriculum_task: task, curriculum_content: curriculum_content)
+
+
+    login_as user, scope: :user
+    visit curriculum_curriculum_task_path(curriculum, task)
+
+    expect(page).to have_content 'Exercício Rails'
+    expect(page).to have_content 'Seu primeiro exercício'
+    expect(page).to have_content 'Opcional'
+    expect(page).to have_content 'Conteúdo Rails'
   end
 
   it 'and must be authenticated' do

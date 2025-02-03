@@ -10,6 +10,7 @@ describe 'User see schedule item details', type: :request do
 
   it 'must redirect to events_path when schedule item not found' do
     user = create(:user)
+    allow(ScheduleItem).to receive(:find).and_return(nil)
 
     login_as user, scope: :user
     get schedule_item_path(9999999)

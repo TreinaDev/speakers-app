@@ -21,6 +21,32 @@ pt-BR:
   curriculum_contents:
     create:
       success: 'Conteúdo adicionado com sucesso!'
+      fail: 'Falha ao adicionar conteúdo.'
+    set_curriculum: 
+      content_unavailable: "Conteúdo indisponível!"
+  event_contents:
+    create:
+      success: "Conteúdo registrado com sucesso."
+      fail: "Falha ao registrar o conteúdo."
+    update:
+      success: "Conteúdo atualizado com sucesso!"
+      fail: "Não foi possível atualizar seu Conteúdo."
+    set_event_content:
+      content_unavailable: "Conteúdo Indisponível!"
+  event_tasks:
+    create:
+      success: "Tarefa cadastrada com sucesso!" 
+      fail: "Falha ao criar tarefa."
+    update:
+      success: Tarefa atualizada com sucesso!"
+      fail: "Não foi possível atualizar sua tarefa."
+    set_event_task:
+      unauthorized_access: "Acesso não autorizado."
+    check_event_content_owner:
+      content_unavailable: "Conteúdo Indisponível!"
+  event:
+    show:
+      event_not_find: 'Página indisponível'
       error: 'Falha ao adicionar conteúdo.'
     set_curriculum:
       error: 'Conteúdo indisponível!'

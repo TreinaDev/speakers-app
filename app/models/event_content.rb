@@ -15,7 +15,7 @@ class EventContent < ApplicationRecord
 
   def must_have_less_than_five_files
     return if self.files.count <= 5
-    errors.add(:base, "Não é possível enviar mais que 5 arquivos.")
+    errors.add(:base, I18n.t("activerecord.errors.messages.must_have_less_than_five_files"))
     throw(:abort)
   end
 
@@ -24,7 +24,7 @@ class EventContent < ApplicationRecord
 
     files.each do |file|
       unless file.blob.byte_size <= 50.megabyte
-        errors.add(:base, "Não é possível enviar arquivos com mais de 50mb.")
+        errors.add(:base, I18n.t("activerecord.errors.messages.valid_file_size"))
       end
     end
   end

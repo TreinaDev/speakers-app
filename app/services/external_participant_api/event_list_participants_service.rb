@@ -8,7 +8,7 @@ class ExternalParticipantApi::EventListParticipantsService < ApplicationService
   def get_event_participant_list
     participants = []
     begin
-      response = Faraday.get('http://localhost:3002/events/participants', { event_id: kwargs[:event_id] })
+      response = Faraday.get('http://localhost:3002/events/participants', { event_code: kwargs[:event_code] })
       if response.success?
         json_response = JSON.parse(response.body)
         json_response.each do |participant|

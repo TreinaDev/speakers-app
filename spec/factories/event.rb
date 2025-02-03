@@ -1,25 +1,24 @@
 FactoryBot.define do
   factory :event do
-    id { generate :id }
-    name { "Event #{ id }" }
-    url { "localhost:3001/events/#{ id }" }
+    name { "Tech Conference" }
+    url { "www.techconf.com" }
     description { "Something" }
-    start_date { start_time_rand }
+    start_date { "2025-02-01T14:00:00.000-03:00" }
     end_date { end_time_rand }
-    event_type { "in-person" }
-    location { "Toowoomba" }
-    participant_limit { 30 }
-    status { "draft" }
+    event_type { "inperson" }
+    location { "Main Street" }
+    participants_limit { 50 }
+    status { "published" }
+    created_at { "2025-01-31T16:24:11.521-03:00" }
+    updated_at { "2025-01-31T16:24:11.534-03:00" }
+    code { "ABC123XYZ" }
 
     initialize_with {
-      new(id: id, name: name, url: url, description: description, start_date: start_date,
-       end_date: end_date, event_type: event_type, location: location, participant_limit: participant_limit, status: status)
+      new(name: name, url: url, description: description, start_date: start_date,
+       end_date: end_date, event_type: event_type, location: location, participants_limit: participants_limit,
+       status: status, created_at: created_at, updated_at: updated_at, code: code)
     }
   end
-end
-
-def start_time_rand
-  rand(1..10).day.from_now
 end
 
 def end_time_rand
