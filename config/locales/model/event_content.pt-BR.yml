@@ -10,3 +10,4 @@ pt-BR:
       event_content:
         title: 'Título'
         description: 'Descrição'
+        external_video_url: 'URL do seu vídeo'
