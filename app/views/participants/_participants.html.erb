@@ -1,10 +1,10 @@
 <div id="participant_list">
   <% if participants.present? %>
   <div class="mb-3">
-    <h3 class="heading-2"><%= t('.participant_list') %></h3>
+    <h3><%= t('.participant_list') %></h3>
     <small><%= t('.participant_number') %>: <%= participants.count %></small>
   </div>
-    <div class="participant-list">
+    <div class="participant_list">
       <% participants.each do |participant| %>
       <div class="flex gap-2">
         <%= image_tag 'participant.svg', class: 'icon' %>

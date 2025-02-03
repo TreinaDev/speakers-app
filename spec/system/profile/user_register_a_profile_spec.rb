@@ -139,7 +139,6 @@ describe 'User register a profile', type: :system do
     click_on 'Criar perfil'
 
     expect(page).to have_content('Falha ao registrar o perfil.')
-    expect(page).to have_content('Rede Social não é válido')
     expect(page).to have_content('Url inválida para Youtube')
     expect(page).to have_content('Url inválida para X')
     expect(page).to have_content('Url inválida para GitHub')

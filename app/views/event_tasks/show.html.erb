@@ -1,5 +1,5 @@
 <div class="flex">
-  <h2 class="heading-2"><%= @event_task.name %></h2>
+  <h2><%= @event_task.name %></h2>
   <div class="ml-5 pt-2">
     <%= link_to edit_event_task_path(@event_task), data: { turbo: false }, title: t('.edit') do %>
       <%= image_tag 'pencil_edit.png', id: 'pencil_edit', class: 'icon' %>
@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div class="mb-3">
+<div class="mb-3 mt-8">
   <%= @event_task.description %>
 </div>
 
@@ -20,13 +20,13 @@
 <div class="mt-5">
   <% if @event_task.event_contents.any? %>
     <div>
-      <strong><%= t('.attached_contents') %></strong>
+      <strong class="text-lg"><%= t('.attached_contents') %></strong>
       <div class="card_container">
         <% @event_task.event_contents.each do |content| %>
           <%= link_to(content, class: "card") do %>
             <div>
-              <p class="card_title_2"><%= t('.content') %></p>
-              <h3 class="card_title"><%= content.title %></h3>
+              <p class="card__title--2"><%= t('.content') %></p>
+              <h3 class="card__title"><%= content.title %></h3>
             </div>
           <% end %>
         <% end %>

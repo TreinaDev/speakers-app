@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "#{t('.lecture')} +" %></title>
+    <title><%= content_for(:title) || "#{t('lecture')} +" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -27,12 +27,15 @@
     <%= turbo_frame_tag 'modal' %>
     <%= render "shared/navbar" %>
     <% if request.path != root_path %>
-      <main class="container">
+      <main class="section flex-grow">
       <%= render "shared/flash" %>
     <% else %>
       <main>
     <% end %>
       <%= yield %>
     </main>
+    <footer class="section-x">
+      <p class="text-center text-white py-8"><%= t('copyright') %></p>
+    </footer>
   </body>
 </html>

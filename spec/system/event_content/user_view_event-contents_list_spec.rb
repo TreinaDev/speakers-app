@@ -39,4 +39,16 @@ describe 'User access contents list', type: :system do
 
     expect(page).not_to have_link 'Meus Conteúdos'
   end
+
+  it 'and dont have content previusly registered' do
+    user = create(:user, first_name: 'João')
+    create(:profile, user: user)
+
+    login_as user
+    visit root_path
+    click_on 'Meus Conteúdos'
+
+    expect(page).to have_content 'Não há conteúdos cadastrados!'
+    expect(current_path).to eq event_contents_path
+  end
 end

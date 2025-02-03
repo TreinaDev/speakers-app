@@ -2,17 +2,17 @@
 
 <div class='border rounded p-3'>
   <div>
-    <h1 class='heading-1'> <%= @schedule_item.title %> </h1>
-    <h3 class='font-bold inline'> Data:</h3>
-    <h3 class='inline'> <%= l(@schedule_item.start_time.to_date, format: :default) %> </h3>
+    <h1> <%= @schedule_item.title %> </h1>
+    <p class='font-bold inline'> Data:</p>
+    <p class='inline'> <%= l(@schedule_item.start_time.to_date, format: :default) %> </p>
     <span class= 'block'></span>
-    <h3 class='font-bold inline'> Horário:</h3>
-    <h3 class='inline'> <%= l(@schedule_item.start_time.to_datetime, format: :brazilian_hour) %> - </h3>
-    <h3 class='inline'> <%= l(@schedule_item.end_time.to_datetime, format: :brazilian_hour) %> </h3>
+    <p class='font-bold inline'> Horário:</p>
+    <p class='inline'> <%= l(@schedule_item.start_time.to_datetime, format: :brazilian_hour) %> - </p>
+    <p class='inline'> <%= l(@schedule_item.end_time.to_datetime, format: :brazilian_hour) %> </p>
     <span class= 'block'></span>
     <p class= 'font-bold inline'> <%= t('.estimated_participants') %></p>
     <span class= 'inline'> <%= @schedule_item.length %> </span>
-    <h2 class='heading-2'> <%= ScheduleItem.human_attribute_name(:description) %> </h2>
+    <h2> <%= ScheduleItem.human_attribute_name(:description) %> </h2>
     <p> <%= @schedule_item.description %> </p>
     <%= render 'participants/participants', participants: @participants %>
   </div>
@@ -20,13 +20,13 @@
   <div>
     <div class='flex items-center justify-between mt-2'>
       <h2 class='heading-3'> <%= t('.curriculum_content_title')%> </h2>
-      <%= link_to t('.new_curriculum_content_button'), new_curriculum_curriculum_content_path(@curriculum), data: { turbo_frame: 'modal' }, class: 'btn-primary' %>
+      <%= link_to t('.new_curriculum_content_button'), new_curriculum_curriculum_content_path(@curriculum), data: { turbo_frame: 'modal' }, class: 'btn_primary' %>
     </div>
     
     <% if @curriculum.curriculum_contents.any? %>
       <% @curriculum.curriculum_contents.each do |content| %>
         <div>
-          <%= link_to content.event_content.title, curriculum_curriculum_content_path(@curriculum, content.id), class: 'link-primary' %>
+          <%= link_to content.event_content.title, curriculum_curriculum_content_path(@curriculum, content.id), class: 'link_primary' %>
         </div>
       <% end %>
     <% else %>
@@ -39,7 +39,7 @@
   <div>
     <div class='flex items-center justify-between mt-2'>
       <h2 class='heading-3'> <%= t('.curriculum_task_title')%> </h2>
-      <%= link_to t('.new_curriculum_task_button'), new_curriculum_curriculum_task_path(@curriculum), data: { turbo_frame: 'modal' } , class: 'btn-primary' %>
+      <%= link_to t('.new_curriculum_task_button'), new_curriculum_curriculum_task_path(@curriculum), data: { turbo_frame: 'modal' } , class: 'btn_primary' %>
     </div>
     <% if @curriculum.curriculum_tasks.any? %>
       <% @curriculum.curriculum_tasks.each do |task| %>

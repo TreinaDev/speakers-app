@@ -11,6 +11,13 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        poppins: ['Poppins', 'serif'],
+        piedra: ['Piedra', 'serif']
+      },
+      colors: {
+        'primary': '#7A6AD8',
+        'second-primary': '#4e4eb1',
+        'dark-second-primary': '#35358d',
       },
     },
   },

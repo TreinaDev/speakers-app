@@ -5,19 +5,21 @@
 <div>
   <% if @event_content.event_tasks.any? %>
     <div>
-      <strong><%= t('.attached_to_tasks') %></strong>
+      <strong class="text-lg"><%= t('.attached_to_tasks') %></strong>
       <div class="card_container mb-10">
         <% @event_content.event_tasks.each do |task| %>
           <%= link_to(task, class: "card") do %>
             <div>
-              <p class="card_title_2"> <%= t('.task') %> </p>
-              <h3 class="card_title"><%= task.name %></h3>
+              <p class="card__title--2"> <%= t('.task') %> </p>
+              <h3 class="card__title"><%= task.name %></h3>
             </div>
           <% end %>
         <% end %>
       </div>
     </div>
   <% else %>
-    <div> <%=t('.no_tasks_attached')%> </div>
+    <div>
+      <p class="mt-10 font-bold text-lg"><%=t('.no_tasks_attached')%></p>
+    </div>
   <% end %>
 </div>

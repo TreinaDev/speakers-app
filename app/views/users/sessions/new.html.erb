@@ -1,34 +1,34 @@
-<h2 class="heading-2 flex justify-center mt-56"><%= I18n.t('.devise.sessions.new.new_log_in')%></h2>
+<section class="flex items-center justify-center flex-col w-ful h-full">
+  <h2 class="flex justify-center"><%= I18n.t('.devise.sessions.new.new_log_in')%></h2>
 
-<div class="flex items-center justify-center">
-  <div class="img-container">
-    <%= image_tag 'login.jpg', class: 'w-96' %>
-  </div>
-
-  <div>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'w-full' }) do |f| %>
-      <div class="field">
-      <%= f.label :email, class: 'label-primary' %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'field-primary' %>
-      </div>
-
-      <div class="field">
-      <%= f.label :password, class: 'label-primary' %><br />
-      <%= f.password_field :password, autocomplete: "current-password", class: 'field-primary' %>
-      </div>
-
-      <% if devise_mapping.rememberable? %>
-      <div>
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
-      <% end %>
-
-
-      <%= f.submit I18n.t('.devise.sessions.new.log_in'), class: 'btn-success' %>
-    <% end %>
-    <div>
-      <%= render "users/shared/links" %>
+  <div class="flex items-center justify-center w-full mt-24">
+    <div class="mr-32 w-1/4">
+      <%= image_tag 'login.jpg', class: 'w-96' %>
     </div>
+
+    <div class="w-1/4">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'w-full' }) do |f| %>
+        <div class="field">
+        <%= f.label :email, class: 'label_primary' %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'field_primary' %>
+        </div>
+
+        <div class="field">
+        <%= f.label :password, class: 'label_primary' %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: 'field_primary' %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+        <div>
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, class: 'label_primary inline' %>
+        </div>
+        <% end %>
+
+        <%= f.submit I18n.t('.devise.sessions.new.log_in'), class: 'btn--success mb-8' %>
+      <% end %>
+      <div>
+        <%= render "users/shared/links" %>
+      </div>
   </div>
-</div>
+</section>

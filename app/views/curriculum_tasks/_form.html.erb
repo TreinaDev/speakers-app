@@ -1,62 +1,66 @@
 
 <%= turbo_frame_tag 'modal' do %>
   <div class="modal">
-    <%= render 'shared/flash' %>
-    <div class='flex justify-end'> 
-      <div>
-        <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: 'Fechar' do %>
-          <%= image_tag 'close_icon.png', id: 'close_icon', class: 'icon' %>
-        <% end %>
-      </div>
-    </div>
+    <div class="modal__overlay"></div>
+    <div class="modal__content">
 
-    <h2 class='heading-3'><%= t('.title') %></h2>
-
-    <%= form_with model: [ curriculum, curriculum_task ] do |f| %>
-      <div>
-        <%= f.label :title, class: 'label-primary' %>
-        <%= f.text_field :title, class: 'field-primary' %>
-        <% if  curriculum_task.errors[:title].any? %>
-        <span class="text-red-500 text-sm"><%=  curriculum_task.errors.full_messages_for(:title).first %></span>
+      <div class="modal__header">
+        <h3><%= t('.title') %></h3>
+        
+        <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: 'Fechar', class: 'self-end' do %>
+          <%= image_tag 'close_icon.png', id: 'close_icon', class: 'modal__icon' %>
         <% end %>
       </div>
 
-      <div class="mt-2">
-        <%= f.label :description, class: 'label-primary' %>
-        <%= f.text_area :description, class: 'text-area' %>
-        <% if  curriculum_task.errors[:description].any? %> 
-        <span class="text-red-500 text-sm"><%=  curriculum_task.errors.full_messages_for(:description).first %></span>
-        <% end %>
-      </div>
+      
+      <%= render 'shared/flash' %>
 
-      <div class="mt-2">
-        <%= f.label :certificate_requirement, class: 'label-primary' %>
-        <%= f.collection_radio_buttons :certificate_requirement, CurriculumTask.certificate_requirements.keys.map { |key| [CurriculumTask.human_enum_name(:certificate_requirement, key), key] }, :second, :first do |b| %>
-          <div>
-            <%= b.radio_button %>
-            <%= b.label %>
-          </div>
-        <% end %>
-        <% if  curriculum_task.errors[:certificate_requirement].any? %> 
-          <span class="text-red-500 text-sm"><%=  curriculum_task.errors.full_messages_for(:certificate_requirement).first %></span>
-        <% end %>
-      </div>
-
-      <div class="col-span-2 mt-2">
-      <%= f.label :curriculum_content_ids, class: "label-primary" %>
-        <% if curriculum_contents.blank? %>
-          <p class="mt-2"> <%= t('.no_contents') %></p>
-        <% else %>
-          <%= f.collection_check_boxes(:curriculum_content_ids, curriculum_contents, :id, :title) do |b| %>
-              <%= b.check_box %>
-              <%= b.label(class: "text-sm text-gray-900 mr-2") %>
+      <%= form_with model: [ curriculum, curriculum_task ] do |f| %>
+        <div class="field">
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+          <% if  curriculum_task.errors[:title].any? %>
+          <span class="text-red-500 text-sm"><%=  curriculum_task.errors.full_messages_for(:title).first %></span>
           <% end %>
-        <% end %>
-    </div>
+        </div>
 
-      <div class="mt-5 flex justify-end">
-        <%= f.submit t('.save'), class: 'btn-primary'%>
-      </div>
-    <% end %>
+        <div class="field">
+          <%= f.label :description %>
+          <%= f.text_area :description %>
+          <% if  curriculum_task.errors[:description].any? %> 
+          <span class="text-red-500 text-sm"><%=  curriculum_task.errors.full_messages_for(:description).first %></span>
+          <% end %>
+        </div>
+
+        <div class="mt-4">
+          <%= f.label :certificate_requirement %>
+          <%= f.collection_radio_buttons :certificate_requirement, CurriculumTask.certificate_requirements.keys.map { |key| [CurriculumTask.human_enum_name(:certificate_requirement, key), key] }, :second, :first do |b| %>
+            <div>
+              <%= b.radio_button%>
+              <%= b.label class: 'label_primary ml-2'%>
+            </div>
+          <% end %>
+          <% if  curriculum_task.errors[:certificate_requirement].any? %> 
+            <span class="text-red-500 text-sm"><%=  curriculum_task.errors.full_messages_for(:certificate_requirement).first %></span>
+          <% end %>
+        </div>
+
+        <div class="col-span-2 mt-2">
+          <%= f.label :curriculum_content_ids, class: "label-primary" %>
+            <% if curriculum_contents.blank? %>
+              <p class="mt-2"> <%= t('.no_contents') %></p>
+            <% else %>
+              <%= f.collection_check_boxes(:curriculum_content_ids, curriculum_contents, :id, :title) do |b| %>
+                  <%= b.check_box %>
+                  <%= b.label(class: "text-sm text-gray-900 mr-2") %>
+              <% end %>
+            <% end %>
+        </div>
+
+        <div class="mt-5 flex justify-end">
+          <%= f.submit t('.save'), class: 'btn_primary'%>
+        </div>
+      <% end %>
+    </div>
   </div>
 <% end %>
