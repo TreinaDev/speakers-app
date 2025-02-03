@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_30_140852) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_02_203346) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -58,6 +58,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_30_140852) do
     t.index ["event_content_id"], name: "index_curriculum_contents_on_event_content_id"
   end
 
+  create_table "curriculum_task_contents", force: :cascade do |t|
+    t.integer "curriculum_task_id", null: false
+    t.integer "curriculum_content_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["curriculum_content_id"], name: "index_curriculum_task_contents_on_curriculum_content_id"
+    t.index ["curriculum_task_id"], name: "index_curriculum_task_contents_on_curriculum_task_id"
+  end
+
   create_table "curriculum_tasks", force: :cascade do |t|
     t.integer "curriculum_id", null: false
     t.string "title"
@@ -81,6 +90,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_30_140852) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.string "external_video_url"
     t.index ["user_id"], name: "index_event_contents_on_user_id"
   end
 
@@ -150,6 +160,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_30_140852) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "curriculum_contents", "curriculums"
   add_foreign_key "curriculum_contents", "event_contents"
+  add_foreign_key "curriculum_task_contents", "curriculum_contents"
+  add_foreign_key "curriculum_task_contents", "curriculum_tasks"
   add_foreign_key "curriculum_tasks", "curriculums"
   add_foreign_key "curriculums", "users"
   add_foreign_key "event_contents", "users"
