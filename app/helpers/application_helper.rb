@@ -6,7 +6,6 @@ module ApplicationHelper
     end
   end
 
-
   def render_external_video(url)
     if url.include?('youtube.com')
       video_code = url.split('=').last
@@ -35,5 +34,4 @@ module ApplicationHelper
   def published(event)
     event_card(event, "default_image.jpeg")
   end
-
 end
