@@ -46,7 +46,7 @@ pt-BR:
       content_unavailable: "Conteúdo Indisponível!"
   event:
     show:
-      event_not_find: 'Evento não localizado!'
+      event_not_find: 'Página indisponível'
       error: 'Falha ao adicionar conteúdo.'
     set_curriculum:
       error: 'Conteúdo indisponível!'

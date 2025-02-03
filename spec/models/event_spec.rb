@@ -3,31 +3,30 @@ require 'rails_helper'
 describe Event do
   context '.all' do
     it 'should get all event information' do
+      user = create(:user)
       json = File.read(Rails.root.join('spec/support/events_data.json'))
       response = double('faraday_response', body: json, success?: true)
       allow(Faraday).to receive(:get).and_return(response)
 
-      result = Event.all('teste@email.com')
+      result = Event.all(user.token)
 
       expect(result.length).to eq 2
-      expect(result[0].name).to eq 'Event1'
-      expect(result[0].url).to eq ''
-      expect(result[0].description).to eq 'Event1 description'
-      expect(result[0].start_date).to eq '14-01-2025'
-      expect(result[0].end_date).to eq '16-01-2025'
-      expect(result[0].event_type).to eq 'in-person'
-      expect(result[0].location).to eq 'Palhoça'
-      expect(result[0].participant_limit).to eq 20
-      expect(result[0].status).to eq 'published'
-      expect(result[1].name).to eq 'Event2'
-      expect(result[1].url).to eq ''
-      expect(result[1].description).to eq 'Event2 description'
-      expect(result[1].start_date).to eq '15-01-2025'
-      expect(result[1].end_date).to eq '17-01-2025'
-      expect(result[1].event_type).to eq 'in-person'
-      expect(result[1].location).to eq 'Florianópolis'
-      expect(result[1].participant_limit).to eq 20
-      expect(result[1].status).to eq 'draft'
+      expect(result[0].name).to eq 'Tech Conference'
+      expect(result[0].url).to eq 'www.techconf.com'
+      expect(result[0].start_date).to eq '2025-02-01T14:00:00.000-03:00'
+      expect(result[0].end_date).to eq '2025-02-05T14:00:00.000-03:00'
+      expect(result[0].event_type).to eq 'inperson'
+      expect(result[0].address).to eq 'Main Street'
+      expect(result[0].participants_limit).to eq 50
+      expect(result[0].status).to eq 'draft'
+      expect(result[1].name).to eq 'Developer Summit'
+      expect(result[1].url).to eq 'www.dev-summit.com'
+      expect(result[1].start_date).to eq '2025-03-01T10:00:00.000-03:00'
+      expect(result[1].end_date).to eq '2025-03-03T18:00:00.000-03:00'
+      expect(result[1].event_type).to eq 'online'
+      expect(result[1].address).to eq 'Virtual'
+      expect(result[1].participants_limit).to eq 100
+      expect(result[1].status).to eq 'published'
     end
 
     it 'should return zero if not found events' do
@@ -41,9 +40,7 @@ describe Event do
 
   context '#schedule_items' do
     it 'should get all schedules items associated with event' do
-      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-              start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-              event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      event = build(:event, name: 'Ruby on Rails')
       items = [
         build(:schedule_item, title: 'Ruby on Rails', description: 'Introdução a programação'),
         build(:schedule_item, title: "TDD e introdução a API's", description: 'Desvolvimento Web')
@@ -58,9 +55,7 @@ describe Event do
     end
 
     it 'raise connection failed error' do
-      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-              start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-              event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      event = build(:event, name: 'Ruby on Rails')
       logger = Rails.logger
       allow(logger).to receive(:error)
       allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
@@ -70,9 +65,7 @@ describe Event do
     end
 
     it 'raise error' do
-      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-                    start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-                    event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      event = build(:event, name: 'Ruby on Rails')
       logger = Rails.logger
       allow(logger).to receive(:error)
       allow(Faraday).to receive(:get).and_raise(StandardError)
@@ -84,9 +77,7 @@ describe Event do
 
   context '#participants' do
     it 'should return a list of all participants' do
-      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-              start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-              event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      event = build(:event, name: 'Ruby on Rails')
       participants = [
         build(:participant, name: 'João'),
         build(:participant, name: 'Pedro'),
@@ -103,9 +94,7 @@ describe Event do
     end
 
     it 'must return zero if not found participants' do
-      event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-              start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-              event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+      event = build(:event, name: 'Ruby on Rails')
       participants = []
       allow_any_instance_of(ExternalParticipantApi::EventListParticipantsService).to receive(:call).and_return(participants)
 
@@ -135,16 +124,16 @@ describe Event do
     it 'must return the last instance' do
       Event.delete_all
       4.times do |n|
-        build(:event, name: "Dev show #{n}", description: "Take #{n}")
+        build(:event, name: "Dev show #{n}", address: "Street #{n}")
       end
-      build(:event, name: 'Tech Week', description: 'Desenvolvimento guiado por testes.')
+      build(:event, name: 'Tech Week', address: 'Rua Fulano de Tal')
 
       last_event = Event.last
 
       expect(last_event.name).to eq 'Tech Week'
-      expect(last_event.description).to eq 'Desenvolvimento guiado por testes.'
+      expect(last_event.address).to eq 'Rua Fulano de Tal'
       expect(last_event.inspect).not_to include 'Dev show'
-      expect(last_event.inspect).not_to include 'Take'
+      expect(last_event.inspect).not_to include 'Street'
     end
 
     it 'should return nil if there are no instances' do
@@ -156,7 +145,7 @@ describe Event do
   context '.delete_all' do
     it 'must be delete all instances' do
       4.times do |n|
-        build(:event, name: "Dev show #{n}", description: "Take #{n}")
+        build(:event, name: "Dev show #{n}")
       end
       Event.delete_all
 

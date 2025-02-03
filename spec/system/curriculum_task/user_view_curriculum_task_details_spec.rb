@@ -3,9 +3,7 @@ require 'rails_helper'
 describe 'User view curriculum task details', type: :system do
   it 'with success' do
     user = create(:user)
-    event =  [ build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-                  start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-                  event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado') ]
+    event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule_items = [ build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD') ]
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_items.first.id)
     content = create(:event_content, user: user, title: 'Conteúdo Rails')
