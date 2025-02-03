@@ -1,10 +1,10 @@
 <div id="feedbacks" data-controller="modal">
   <% if feedbacks&.any? %>
-    <button class="btn--success" style="width: 9rem;" data-action="click->modal#showModal"><%= t('.see_feedbacks') %></button>
-    <dialog data-modal-target="modal" class="modal">
+    <button class="btn--success mt-6" style="width: 9rem;" data-action="click->modal#showModal"><%= t('.see_feedbacks') %></button>
+    <dialog data-modal-target="modal">
       <div class="modal__header">
         <h2><%= Feedback.model_name.plural.capitalize %></h2>
-        <button class="close-btn" data-action="click->modal#closeModal">&times;</button>
+        <button class="close-btn" data-action="click->modal#closeModal"><%= image_tag 'close_icon.png', class: 'modal__icon' %></button>
       </div>
       <div class="modal__body">
         <% feedbacks.each do |feedback| %>

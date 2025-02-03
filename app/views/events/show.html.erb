@@ -10,7 +10,7 @@
     <span><b><%= Event.human_attribute_name(:status) %>:</b> <%= @event.status %></span>
   </div>
 
-  <div>
+  <div class="mt-4">
     <%= render 'participants/participants', participants: @participants %>
     <%= render 'feedbacks/feedback_area', feedbacks: @feedbacks %>
   </div>

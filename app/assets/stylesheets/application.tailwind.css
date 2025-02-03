@@ -98,10 +98,6 @@
     @apply w-1/2;
   }
 
-  .icon {
-    @apply w-6;
-   }
-
   .field{
     @apply grid grid-cols-1 my-8;
     line-height: 0.6rem;
@@ -124,38 +120,6 @@
     border: solid 1px #aaa;
   }
 
-  .modal__header {
-    @apply w-full flex p-4 items-end justify-between;
-    height: 10%;
-    font-size: 2rem;
-  }
-
-  .modal__body {
-    @apply overflow-y-auto p-8;
-  }
-
-  #feedbacks dialog {
-    @apply rounded-md;
-    width: 30%;
-  }
-
-  .feedback_card {
-    @apply grid grid-cols-1 m-4;
-    border-bottom: rgb(24, 23, 23) solid 1px;
-  }
-
-  .feedback-header {
-    @apply flex flex-col;
-  }
-
-  .not_found_feedback,
-  .not-found-participants {
-    @apply p-1 rounded-md text-center mt-4;
-    color: rgb(189, 25, 25);
-    border: solid 1px #aaa;
-    padding: 1rem;
-  }
-
   .btn_primary {
     @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mr-4 mt-4 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2;
     font-size: 1.01rem;
@@ -166,7 +130,12 @@
   }
 
   .link_primary {
-    @apply font-medium text-primary hover:underline;
+    @apply font-medium text-primary hover:underline hover:text-dark-second-primary;
+    font-size: 1.01rem
+  }
+
+  .icon{
+    @apply w-7;
   }
 
   .logo {
@@ -231,6 +200,10 @@
     @apply text-lg font-bold text-white hover:dark:bg-gray-700 rounded-lg px-2 h-10 flex items-center;
   }
 
+  /* Fim da NavBar */
+
+  /* Profile */
+
   .profiles__link {
     @apply border inline-flex font-semibold text-indigo-600 border-indigo-600 rounded-lg py-2 px-6 items-center;
   }
@@ -251,10 +224,71 @@
     @apply flex flex-wrap gap-4 flex-row mt-6;
   }
 
+  /* Fim do Profile */
+
+  /* Modal */
+
   .modal {
-    @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white border-2 rounded-3xl shadow-lg z-50;
+    @apply w-full h-full fixed z-20 flex justify-center items-center;
   }
 
+  .modal__overlay{
+    @apply w-full h-full absolute;
+    background-color: rgba(0, 0, 0, 0.418);
+  }
+
+  .modal__header {
+    @apply w-full flex items-center justify-between;
+    height: 10%;
+    font-size: 2rem;
+  }
+
+  .modal__content{
+    @apply border-2 w-1/2 rounded-3xl shadow-lg bg-white z-10 px-6 py-10 flex flex-col;
+    max-height: 75%;
+  }
+
+  #feedbacks dialog{
+    @apply w-1/2 backdrop:bg-black backdrop:opacity-50 bg-white rounded-3xl shadow-lg px-6 py-10 overflow-hidden;
+    max-height: 75%;
+  }
+
+  .modal__content h3{
+    @apply m-0;
+  }
+
+  .modal__icon{
+    @apply w-12 self-end hover:shadow-lg hover:border;
+  }
+
+  .model__select{
+    @apply mt-4 w-full border-2 rounded-lg border-gray-500 shadow-md bg-white text-gray-900 
+    focus:border-blue-500 py-3 px-3;
+  }
+
+  .modal__body {
+    @apply overflow-y-auto p-8 mt-5;
+    max-height: 60vh;
+  }
+
+  .feedback_card {
+    @apply grid grid-cols-1 m-4;
+    border-bottom: rgb(24, 23, 23) solid 1px;
+  }
+
+  .feedback-header {
+    @apply flex flex-col;
+  }
+
+  .not_found_feedback,
+  .not-found-participants {
+    @apply p-1 rounded-md text-center mt-4;
+    color: rgb(189, 25, 25);
+    border: solid 1px #aaa;
+    padding: 1rem;
+  }
+
+  /* Fim do Modal */
 
   /* Início da Home Page */
 
