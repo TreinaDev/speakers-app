@@ -1,4 +1,5 @@
 class ApplicationService
+  include ApiHelper
   def initialize(**kwargs)
     @kwargs = kwargs
   end

@@ -3,23 +3,33 @@ require 'rails_helper'
 describe ExternalParticipantApi::EventListParticipantsService do
   context '#call' do
   it 'when Api return success' do
-    json = [
-      {
-        id: 1,
-        name: 'Bruno'
-      },
-      {
-        id: 2,
-        name: 'Thiago'
-      },
-      {
-        id: 3,
-        name: 'Pedro'
-      }
-    ]
+    json = {
+      "id": "TEQUR4L7",
+      "sold_tickets": 3,
+      "participants": [
+        {
+          "name": "Bruno",
+          "last_name": "Herculano",
+          "email": "herculano@gmail.com",
+          "cpf": "11111111111"
+        },
+        {
+          "name": "Thiago",
+          "last_name": "Gois",
+          "email": "thiago@gmail.com",
+          "cpf": "22222222222"
+        },
+        {
+          "name": "Pedro",
+          "last_name": "Dias",
+          "email": "pedro@gmail.com",
+          "cpf": "33333333333"
+        }
+      ]
+    }
     response = instance_double(Faraday::Response, success?: true, body: json.to_json)
     allow(Faraday).to receive(:get).and_return(response)
-    service = ExternalParticipantApi::EventListParticipantsService.new(event_id: 1)
+    service = ExternalParticipantApi::EventListParticipantsService.new(event_code: 1)
 
     participants = service.call
 
