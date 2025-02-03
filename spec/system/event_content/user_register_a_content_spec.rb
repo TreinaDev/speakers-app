@@ -34,6 +34,60 @@ describe 'User register a content', type: :system, js: true do
     expect(current_path).to eq event_content_path(EventContent.last)
   end
 
+  it 'and adds an external video from youtube' do
+    user = create(:user)
+
+    login_as user
+    visit new_event_content_path
+    fill_in 'Título', with: 'Ruby para iniciantes'
+    fill_in_rich_text_area 'Descrição', with: 'Seu primeiro contato com o melhor amigo dos programadores.'
+    fill_in 'URL do seu vídeo', with: 'https://www.youtube.com/watch?v=PbxBtQH5R_o'
+    click_on 'Criar Conteúdo'
+
+    expect(current_path).to eq event_content_path(EventContent.last)
+    expect(EventContent.count).to eq 1
+    expect(EventContent.last.external_video_url.present?).to eq true
+    expect(page).to have_content 'Conteúdo registrado com sucesso.'
+    expect(page).to have_css "iframe#external-video"
+    expect(page).to have_css "iframe[src='https://www.youtube.com/embed/PbxBtQH5R_o']"
+  end
+
+  it 'and adds an external video from vimeo' do
+    user = create(:user)
+
+    login_as user
+    visit new_event_content_path
+    fill_in 'Título', with: 'Ruby para iniciantes'
+    fill_in_rich_text_area 'Descrição', with: 'Seu primeiro contato com o melhor amigo dos programadores.'
+    fill_in 'URL do seu vídeo', with: 'https://vimeo.com/1047790821'
+    click_on 'Criar Conteúdo'
+
+    expect(current_path).to eq event_content_path(EventContent.last)
+    expect(EventContent.count).to eq 1
+    expect(EventContent.last.external_video_url.present?).to eq true
+    expect(page).to have_content 'Conteúdo registrado com sucesso.'
+    expect(page).to have_css "iframe#external-video"
+    expect(page).to have_css "iframe[src='https://player.vimeo.com/video/1047790821']"
+  end
+
+  it 'and external video url must be valid' do
+    user = create(:user)
+
+    login_as user
+    visit events_path
+    click_on 'Meus Conteúdos'
+    click_on 'Cadastrar Conteúdo'
+    fill_in 'Título', with: 'Ruby para iniciantes'
+    fill_in_rich_text_area 'Descrição', with: 'Seu primeiro contato com o melhor amigo dos programadores.'
+    fill_in 'URL do seu vídeo', with: 'google.com'
+    click_on 'Criar Conteúdo'
+
+    expect(EventContent.count).to eq 0
+    expect(page).to have_content 'Falha ao registrar o conteúdo.'
+    expect(page).to have_field 'URL do seu vídeo'
+      expect(page).to have_content 'URL do seu vídeo é inválida.'
+  end
+
   it 'failure with more than 5 files' do
     user = create(:user)
     create(:profile, user: user)

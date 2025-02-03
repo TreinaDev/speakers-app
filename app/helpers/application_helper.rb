@@ -6,6 +6,16 @@ module ApplicationHelper
     end
   end
 
+  def render_external_video(url)
+    if url.include?('youtube.com')
+      video_code = url.split('=').last
+      "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/#{video_code}' frameborder='0' allowfullscreen></iframe>".html_safe
+    elsif url.include?('vimeo.com')
+      video_code = url.split('/').last
+      "<iframe id='external-video' width='800' height='450' src='https://player.vimeo.com/video/#{video_code}' frameborder='0' allowfullscreen></iframe>".html_safe
+    end
+  end
+
   def event_card(event, img, width = "w-96")
     content_tag :li, id: event.code, class: "border border-gray-200 w-96 p-6 rounded-lg shadow flex-column items-center" do
       image_tag(img, class: "#{ width } h-48 w-full object-cover rounded-lg mr-6") +

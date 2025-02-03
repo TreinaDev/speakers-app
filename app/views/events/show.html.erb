@@ -1,33 +1,23 @@
-<h2 class='heading-2'><%= Event.model_name.human %>: <%= @event.name %></h2>
-<div class="event-card">
-  <div class="event-header">
-    <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= raw @event.description %></span>
-    <span><b><%= t('.event_page') %>:</b> <%= @event.url.presence || t('.no_event_page') %></span>
-    <span><b><%= Event.human_attribute_name(:start_date) %>:</b> <%= formatted_date(@event.start_date) %></span>
-    <span><b><%= Event.human_attribute_name(:end_date) %>:</b> <%= formatted_date(@event.end_date) %></span>
-    <span><b><%= Event.human_attribute_name(:address) %>:</b> <%= @event.address %></span>
-  </div>
+<div>
+  <%= render 'event', event: @event %>
 
-  <div>
-    <%= render 'participants/participants', participants: @participants %>
-    <%= render 'feedbacks/feedback_area', feedbacks: @feedbacks %>
+  <div data-controller="tabs" data-tabs-active-class="tab__btn--active" data-tabs-unactive-class="tab__btn--unactive" data-tabs-default-tab-value="tab1">
+    <div class="tab__combo-btn">
+      <button id="tab1" data-tabs-target="btn" data-action="click->tabs#select"><%= t('.my_schedules') %></button>
+      <button id="tab2" data-tabs-target="btn" data-action="click->tabs#select"><%= t('.participant_list') %></button>
+      <button id="tab3" data-tabs-target="btn" data-action="click->tabs#select"><%= t('.feedbacks') %></button>
+    </div>
+
+    <div data-tabs-target="tab" id="tab1">
+      <%= render 'schedule_items/schedule_items', schedule_items: @schedule_items %>
+    </div>
+
+    <div data-tabs-target="tab" id="tab2">
+      <%= render 'participants/participants', participants: @participants %>
+    </div>
+
+    <div data-tabs-target="tab" id="tab3">
+      <%= render 'feedbacks/feedback_area', feedbacks: @feedbacks %>
+    </div>
   </div>
 </div>
-
-<h2 class="heading-2 mt-3"><%= t('.schedule_items_title') %></h2>
-<% if @schedule_items&.empty? %>
-  <p><%= t('.no_schedule_items') %></p>
-<% else %>
-  <div class="grid grid-cols-2 gap-1">
-    <% @schedule_items&.each do |item | %>
-      <%= link_to schedule_item_path(item.id) do %>
-        <div class="schedule_items-card grid p-2 border mb-2">
-          <span> <b> <%= ScheduleItem.human_attribute_name(:title) %>:</b> <%= item.title %></span>
-          <span class='truncate'> <b><%= ScheduleItem.human_attribute_name(:start_time) %>:</b>
-          <%= l(item.start_time.to_datetime, format: :brazilian) %> -
-          <%= l(item.end_time.to_datetime, format: :brazilian_hour) %></span>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-<% end %>

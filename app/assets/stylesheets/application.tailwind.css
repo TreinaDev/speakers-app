@@ -254,4 +254,16 @@
     @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white border-2 rounded-3xl shadow-lg z-50;
     background-color: rgb(255, 255, 255);
   }
+
+  .tab__btn--active {
+    @apply bg-gray-900 text-gray-100 px-5;
+  }
+
+  .tab__btn--unactive {
+    @apply bg-gray-500 text-gray-100 px-5;
+  }
+
+  .tab__combo-btn {
+    @apply flex gap-1 mt-2;
+  }
 }

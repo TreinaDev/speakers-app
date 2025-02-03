@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'User can view feedback for an event', type: :system do
+describe 'User can view feedback for an event', type: :system, js: true do
   context 'from the event details page' do
-    it 'with success', js: true do
+    it 'with success' do
       user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
       create(:profile, user: user)
       event = build(:event, name: 'Ruby on Rails')
@@ -14,9 +14,9 @@ describe 'User can view feedback for an event', type: :system do
 
       login_as user, scope: :user
       visit event_path(event.code)
-      expect(page).not_to have_selector('.modal', visible: true)
-      click_on 'Feedbacks'
-      expect(page).to have_selector('.modal', visible: true)
+      expect(page).not_to have_selector('#feedbacks', visible: true)
+      click_on 'Feedbacks do Evento'
+      expect(page).to have_selector('#feedbacks', visible: true)
 
       within '#feedbacks' do
         expect(page).to have_content 'Usuário: João'
@@ -31,7 +31,7 @@ describe 'User can view feedback for an event', type: :system do
       end
     end
 
-    it 'closes the modal after opening', js: true do
+    it 'closes the modal after opening' do
       user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
       create(:profile, user: user)
       event = build(:event, name: 'Ruby on Rails')
@@ -60,6 +60,9 @@ describe 'User can view feedback for an event', type: :system do
 
       login_as user, scope: :user
       visit event_path(event.code)
+      expect(page).not_to have_selector('#feedbacks', visible: true)
+      click_on 'Feedbacks do Evento'
+      expect(page).to have_selector('#feedbacks', visible: true)
 
       within '#feedbacks' do
         expect(page).to have_content 'Nenhum Feedback disponível'

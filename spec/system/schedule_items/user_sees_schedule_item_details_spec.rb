@@ -24,8 +24,8 @@ describe 'User sees schedule item details', type: :system do
     expect(page).to have_content 'Entrevista com João'
     expect(page).to have_content 'Aprenda sobre RoR e TDD'
     expect(page).to have_content 'Número estimado de participantes: 100', normalize_ws: true
-    expect(page).to have_content "Data/Hora Início: #{I18n.l(seven_days, format: :brazilian)}", normalize_ws: true
-    expect(page).to have_content "Hora Fim: #{I18n.l(seven_days + 3600, format: :brazilian_hour)}", normalize_ws: true
+    expect(page).to have_content "Data: #{I18n.l(seven_days.to_date, format: :default)}", normalize_ws: true
+    expect(page).to have_content "Horário: #{I18n.l(seven_days.to_datetime, format: :brazilian_hour)} - #{I18n.l((seven_days + 3600).to_datetime, format: :brazilian_hour)}", normalize_ws: true
     expect(page).not_to have_content 'Agenda 1'
     expect(page).not_to have_content 'Agenda 2'
     expect(page).not_to have_content 'Agenda 3'

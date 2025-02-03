@@ -1,35 +1,7 @@
 <%= go_back_button(schedule_item_path(@curriculum.schedule_item_code)) %>
 
 <div class='border-2 rounded-3xl p-3'> 
-  <div class="flex">
-    <h2 class="heading-2"><%= @curriculum_content.event_content.title %></h2>
-  </div>
   <div>
-    <%= @curriculum_content.event_content.description %>
-  </div>
-
-  <div>
-    <% if @curriculum_content.event_content.files.attached? %>
-      <div class="card_container p-20 rounded-3xl">
-        <% @curriculum_content.event_content.files.each do |file| %>
-          <% if file.content_type.starts_with?('image/') %>
-            <%= image_tag file, width: 300, height: 200, class: 'card max-h-96' %>
-          <% elsif file.content_type.starts_with?('video/') %>
-            <%= video_tag url_for(file), controls: true, class: 'card max-h-96' %>
-          <% elsif file.content_type == 'application/pdf' %>
-            <%= link_to(url_for(file), target: '_blank', class: 'card max-h-96 flex flex-col justify-center items-center' ) do %>
-              <%= image_tag("pdf.png", class: 'w-2/3 h-2/3') %>
-              <p><%= t('.view_pdf') %> <%= "#{file.filename.to_s}" %></p>
-            <% end %>
-          <% else %>
-            <%= link_to "Arquivo #{file.filename.to_s}", url_for(file), target: '_blank', class: 'card max-h-96' %>
-          <% end %>
-        <% end %>
-      </div>
-    <% else %>
-      <div class="mt-10">
-        <strong><%=t('.no_files_attached')%></strong>
-      </div>
-    <% end %>
+    <%= render 'shared/event_content_details', content: @curriculum_content.event_content%>
   </div>
 </div>
