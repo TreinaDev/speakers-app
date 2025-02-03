@@ -1,8 +1,9 @@
 <div id="feedbacks" data-controller="modal">
   <% if feedbacks&.any? %>
-    <button class="btn-success" style="width: 9rem;" data-action="click->modal#showModal"><%= t('.see_feedbacks') %></button>
+    <button class="btn-success" style="width: 9rem;" data-action="click->modal#showModal"> <%= t('.see_feedback') %></button>
     <dialog data-modal-target="modal" class="modal">
       <div class="modal-header">
+        <h2><%= t('.see_feedbacks') %></h2>
         <h2><%= Feedback.model_name.plural.capitalize %></h2>
         <button class="close-btn" data-action="click->modal#closeModal">&times;</button>
       </div>

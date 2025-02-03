@@ -28,7 +28,7 @@
   </div>
 
   <div class="mb-3">
-    <%= f.label :files, 'Arquivos' %>
+    <%= f.label :files, t('.files') %>
     <%= f.file_field :files, multiple: true %>
     <% if event_content.errors[:base].any? %> 
       <div class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:base).first %></div>

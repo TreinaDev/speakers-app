@@ -2,7 +2,7 @@
   <div class="modal">
     <div class='flex justify-end'> 
       <div>
-        <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: 'Fechar' do %>
+        <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: t('.close') do %>
           <%= image_tag 'close_icon.png', id: 'close_icon', class: 'icon' %>
         <% end %>
       </div>

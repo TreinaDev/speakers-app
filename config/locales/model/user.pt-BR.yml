@@ -1,0 +1,5 @@
+pt-BR:
+  activerecord:
+    errors:
+      messages:
+        error_contact_manager: "Algo deu errado, contate o responsável."
