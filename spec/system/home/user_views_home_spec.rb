@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User views the home page' do
+describe 'User views the home page', type: :system do
   it 'with success' do
     visit root_path
 

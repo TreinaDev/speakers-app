@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User access curriculum content details', type: :system do
   it 'and must be authenticated' do
     user = create(:user)
+    create(:profile, user: user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     content = user.event_contents.create(title: 'Arquivos TDD', description: 'Apresentação sobre TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
@@ -16,6 +17,7 @@ describe 'User access curriculum content details', type: :system do
 
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
     event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule_items = [ build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD') ]
     image_1 = fixture_file_upload(Rails.root.join('spec/fixtures/capi.png'))
@@ -44,6 +46,7 @@ describe 'User access curriculum content details', type: :system do
   it 'and must be the curriculum content owner' do
     first_user = create(:user)
     second_user = create(:user)
+    create(:profile, user: second_user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     content = first_user.event_contents.create(title: 'Arquivos TDD', description: 'Apresentação sobre TDD')
     curriculum = create(:curriculum, user: first_user, schedule_item_code: schedule_item.id)
@@ -58,6 +61,7 @@ describe 'User access curriculum content details', type: :system do
 
   it 'and go back to previous page' do
     user = create(:user)
+    create(:profile, user: user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     content = user.event_contents.create(title: 'Arquivos TDD', description: 'Apresentação sobre TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)

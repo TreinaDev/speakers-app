@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User register tasks' do
+describe 'User register tasks', type: :system do
   it 'must be authenticated' do
     visit new_event_task_path
 
@@ -10,6 +10,7 @@ describe 'User register tasks' do
 
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
     create(:event_content, title: 'My content', description: 'My own content', user: user)
 
     login_as user
@@ -28,6 +29,7 @@ describe 'User register tasks' do
 
   it 'with success without content' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user
     visit new_event_task_path
@@ -44,6 +46,7 @@ describe 'User register tasks' do
 
   it 'and shouldnt see other users content' do
     user = create(:user)
+    create(:profile, user: user)
     create(:event_content, title: 'My content', description: 'My own content', user: user)
     other_user = create(:user, first_name: 'other', email: 'other_user@email.com')
     create(:event_content, title: 'Other user content', description: 'The other user content', user: other_user)
@@ -59,6 +62,7 @@ describe 'User register tasks' do
 
   it 'and not fill mandatory fields ' do
     user = create(:user)
+    create(:profile, user: user)
     create(:event_content, title: 'My content', description: 'My own content', user: user)
 
     login_as user
@@ -72,6 +76,7 @@ describe 'User register tasks' do
 
   it 'and optional should be checked by default' do
     user = create(:user)
+    create(:profile, user: user)
     create(:event_content, title: 'My content', description: 'My own content', user: user)
 
     login_as user
@@ -82,6 +87,7 @@ describe 'User register tasks' do
 
   it 'and cancel' do
     user = create(:user)
+    create(:profile, user: user)
     create(:event_content, title: 'My content', description: 'My own content', user: user)
 
     login_as user

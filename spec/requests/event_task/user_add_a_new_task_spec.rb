@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User add a new task', type: :request do
   it 'with success' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     first_event_content = user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
     user.event_contents.create!(title: 'Ruby Introduction', description: 'Resumo do livro "Ruby: Aprenda a programar')
 
@@ -37,6 +38,7 @@ describe 'User add a new task', type: :request do
 
   it 'and shouldnt save if use other user content' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
     other_user = create(:user, first_name: 'Other')
     other_user_content = other_user.event_contents.create!(title: 'Ruby Introduction', description: 'Resumo do livro "Ruby: Aprenda a programar')

@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-describe 'User delete attached file', type: :system, js: true do
+describe 'User delete attached file', type: :system do
   it 'with sucess' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     files = [ Rails.root.join('spec/fixtures/mark_zuckerberg.jpeg'),
               Rails.root.join('spec/fixtures/capi.png'),
               Rails.root.join('spec/fixtures/puts.png')

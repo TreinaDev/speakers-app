@@ -14,6 +14,7 @@ describe 'User sees Event details', type: :request do
 
   it 'and event doesnt exists' do
     user = create(:user)
+    create(:profile, user: user)
     response = instance_double(Faraday::Response, success?: false)
     allow(Faraday).to receive(:get).and_return(response)
 
@@ -25,6 +26,7 @@ describe 'User sees Event details', type: :request do
 
   it 'and event doesnt published' do
     user = create(:user)
+    create(:profile, user: user)
     event = build(:event, code: 'ABC123', name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
             start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
             event_type: 'Presencial', address: 'Juiz de Fora', participants_limit: 100, status: 'draft')

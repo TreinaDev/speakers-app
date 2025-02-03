@@ -14,6 +14,7 @@ describe 'User register task for your schedule item curriculum', type: :system, 
 
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
     event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule_items = [ build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD') ]
 
@@ -40,6 +41,7 @@ describe 'User register task for your schedule item curriculum', type: :system, 
 
   it 'and attach an content to task' do
     user = create(:user)
+    create(:profile, user: user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
     first_content = create(:event_content, user: user, title: 'Workshop Stimulus')
@@ -68,6 +70,7 @@ describe 'User register task for your schedule item curriculum', type: :system, 
 
   it 'and must fill all required fields' do
     user = create(:user)
+    create(:profile, user: user)
     schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
 
@@ -88,6 +91,7 @@ describe 'User register task for your schedule item curriculum', type: :system, 
     first_user = create(:user)
     first_user_curriculum = create(:curriculum, id: 1, user: first_user, schedule_item_code: 99)
     second_user = create(:user)
+    create(:profile, user: second_user)
 
     login_as second_user, scope: :user
     visit new_curriculum_curriculum_task_path(first_user_curriculum)

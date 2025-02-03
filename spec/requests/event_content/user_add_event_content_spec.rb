@@ -8,6 +8,7 @@ describe 'user add event content', type: :request  do
 
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user
 

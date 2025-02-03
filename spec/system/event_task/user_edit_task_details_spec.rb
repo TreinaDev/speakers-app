@@ -13,6 +13,7 @@ describe 'user edit task', type: :system, js: true do
 
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
     content = create(:event_content, title: 'My content', description: 'My own content', user: user)
     task = user.event_tasks.create!(name: 'Tarefa inicial', description: 'Desafio para iniciantes')
     EventTaskContent.create!(event_content: content, event_task: task)
@@ -40,6 +41,7 @@ describe 'user edit task', type: :system, js: true do
 
   it 'failure if title or description are empty' do
     user = create(:user)
+    create(:profile, user: user)
     task = user.event_tasks.create!(name: 'Tarefa inicial', description: 'Desafio para iniciantes')
 
     login_as user
@@ -56,6 +58,7 @@ describe 'user edit task', type: :system, js: true do
 
   it 'and must be the owner' do
     user = create(:user)
+    create(:profile, user: user)
     user.event_tasks.create!(name: 'Tarefa inicial', description: 'Desafio para iniciantes')
     user2 = create(:user)
     task2 = user2.event_tasks.create!(name: 'Tarefa Ruby Básica', description: 'Principios TDD')
@@ -69,6 +72,7 @@ describe 'user edit task', type: :system, js: true do
 
   it 'click on edit and cancel' do
     user = create(:user)
+    create(:profile, user: user)
     content = create(:event_content, title: 'My content', description: 'My own content', user: user)
     task = user.event_tasks.create!(name: 'Tarefa inicial', description: 'Desafio para iniciantes')
     EventTaskContent.create!(event_content: content, event_task: task)
