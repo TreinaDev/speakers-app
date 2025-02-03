@@ -42,6 +42,7 @@ describe 'User access contents list', type: :system do
 
   it 'and dont have content previusly registered' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
 
     login_as user
     visit root_path
