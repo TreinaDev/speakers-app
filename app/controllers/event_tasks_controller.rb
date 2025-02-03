@@ -14,9 +14,9 @@ class EventTasksController < ApplicationController
 
   def create
     @event_task = current_user.event_tasks.build(event_task_params)
-    return redirect_to event_tasks_path, notice: "Tarefa cadastrada com sucesso!" if @event_task.save
+    return redirect_to event_tasks_path, notice: t('event_tasks.create.success') if @event_task.save
 
-    flash.now["alert"] = "Falha ao criar tarefa."
+    flash.now["alert"] = t('event_tasks.create.fail')
     render :new, status: :unprocessable_entity
   end
 
@@ -26,9 +26,9 @@ class EventTasksController < ApplicationController
 
   def update
     if @event_task.update(event_task_params)
-      redirect_to @event_task, notice: "Tarefa atualizada com sucesso!"
+      redirect_to @event_task, notice: t('event_tasks.update.success')
     else
-      flash.now[:alert] = "Não foi possível atualizar sua tarefa."
+      flash.now[:alert] = t('event_tasks.update.fail')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -43,7 +43,7 @@ class EventTasksController < ApplicationController
     begin
       @event_task = current_user.event_tasks.find(params[:id])
     rescue
-      redirect_to events_path, alert: "Acesso não autorizado."
+      redirect_to events_path, alert: t('event_tasks.set_event_task.unauthorized_access')
     end
   end
 
@@ -56,7 +56,7 @@ class EventTasksController < ApplicationController
     contents = params[:event_task][:event_content_ids].reject(&:blank?)
     contents.each do |content|
       unless current_user.event_contents.find_by(id: content)
-        flash.now["alert"] = "Conteúdo indisponível"
+        flash.now["alert"] = t('.event_tasks.check_event_content_owner.content_unavailable')
         redirect_to event_tasks_path
       end
     end

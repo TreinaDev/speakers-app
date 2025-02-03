@@ -1,5 +1,8 @@
 pt-BR:
   activerecord:
+    errors:
+      messages:
+        must_be_event_content_owner: 'Conteúdo indisponível'
     models:
       curriculum_content: Conteúdo
     attributes:

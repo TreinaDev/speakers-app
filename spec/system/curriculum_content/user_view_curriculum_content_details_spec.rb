@@ -18,9 +18,7 @@ describe 'User access curriculum content details', type: :system do
   it 'with success' do
     user = create(:user)
     create(:profile, user: user)
-    event =  [ build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-                  start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-                  event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado') ]
+    event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule_items = [ build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD') ]
     image_1 = fixture_file_upload(Rails.root.join('spec/fixtures/capi.png'))
     image_2 = fixture_file_upload(Rails.root.join('spec/fixtures/puts.png'))

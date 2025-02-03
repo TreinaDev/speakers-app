@@ -1,14 +1,14 @@
 <nav class="navbar <%= 'navbar--actived' if request.path != root_path %>">
   <div class="navbar_content">
-    <%= link_to 'Palestra +', root_path, class: 'logo' %>
+    <%= link_to "#{t('.lecture')} +", root_path, class: 'logo' %>
 
     <div class="flex">
       <%= link_to 'Início', root_path, class: 'nav-link-primary' %>
-      <%= link_to "Como Funciona?", "#how_works", class: "nav-link-primary" if request.path == root_path %>
+      <%= link_to t('.how_work'), "#how_works", class: "nav-link-primary" if request.path == root_path %>
 
       <% if user_signed_in? %>
-        <%= link_to 'Meus Conteúdos', event_contents_path, class: 'nav-link-primary' %>
-        <%= link_to 'Tarefas', event_tasks_path, data: { turbo: false }, class: 'nav-link-primary' %>
+        <%= link_to t('.my_contents'), event_contents_path, class: 'nav-link-primary' %>
+        <%= link_to  t('.tasks'), event_tasks_path, data: { turbo: false }, class: 'nav-link-primary' %>
         
         <div class="relative inline-block text-left" data-controller="dropdown">
           <%= button_tag class: "nav-link-primary gap-1", data: { action: "click->dropdown#toggle" } do %>
@@ -21,7 +21,7 @@
               <%= link_to profile_path(username: current_user.profile.username), class: 'inline-block px-4 py-2 text-gray-700 hover:bg-gray-100' do %>
                 <div class='flex items-center gap-1'>
                   <%= image_tag 'profile_icon.png', class: 'w-4' %>
-                  Meu Perfil
+                  <%= t('.my_profile') %>
                 </div>
               <% end %>
               <hr class="border-gray-300">
@@ -29,14 +29,14 @@
             <%= button_to destroy_user_session_path, method: :delete, class: 'inline-block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100' do %>
               <div class='flex items-center gap-1'>
                 <%= image_tag 'exit_icon.png', class: 'w-4'%>
-                Sair
+                <%= t('.log_out') %>
               </div>
             <% end %>
           </div>
         </div>
       <% else %>
-        <%= link_to 'Criar conta', new_user_registration_path, class: 'nav-link-primary' %>
-        <%= link_to 'Acesse sua conta', new_user_session_path, class: 'nav-link-primary' %>
+        <%= link_to t('.create_account'), new_user_registration_path, class: 'nav-link-primary' %>
+        <%= link_to t('.access_account'), new_user_session_path, class: 'nav-link-primary' %>
       <% end %>
     </div>
   </div>

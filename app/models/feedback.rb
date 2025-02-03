@@ -10,7 +10,7 @@ class Feedback
     @description = description
   end
 
-  def self.event(event_id:, speaker:)
-    ExternalParticipantApi::GetEventFeedbacksService.call(event_id: event_id, speaker: speaker)
+  def self.event(event_code:, speaker:)
+    ExternalParticipantApi::GetEventFeedbacksService.call(event_code: event_code, speaker: speaker)
   end
 end

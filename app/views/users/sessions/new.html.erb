@@ -1,4 +1,4 @@
-<h2 class="heading-2 flex justify-center mt-56">Realize seu login</h2>
+<h2 class="heading-2 flex justify-center mt-56"><%= I18n.t('.devise.sessions.new.new_log_in')%></h2>
 
 <div class="flex items-center justify-center">
   <div class="img-container">
@@ -25,7 +25,7 @@
       <% end %>
 
 
-      <%= f.submit "Entrar", class: 'btn-success' %>
+      <%= f.submit I18n.t('.devise.sessions.new.log_in'), class: 'btn-success' %>
     <% end %>
     <div>
       <%= render "users/shared/links" %>

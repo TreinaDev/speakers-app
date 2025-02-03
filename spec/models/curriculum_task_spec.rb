@@ -10,5 +10,7 @@ RSpec.describe CurriculumTask, type: :model do
     it { should define_enum_for(:certificate_requirement).with_default(:optional) }
     subject { create(:curriculum_task) }
     it { validate_uniqueness_of(:title).scoped_to(:curriculum_id) }
+    it { should have_many(:curriculum_task_contents) }
+    it { should have_many(:curriculum_contents).through(:curriculum_task_contents) }
   end
 end

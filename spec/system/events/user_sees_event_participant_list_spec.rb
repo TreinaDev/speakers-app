@@ -4,9 +4,7 @@ describe 'User sees participant list', type: :system do
   it 'with success' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
     create(:profile, user: user)
-    event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-            start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-            event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+    event = build(:event, name: 'Ruby on Rails')
     participants = [
       build(:participant, name: 'João'),
       build(:participant, name: 'Pedro'),
@@ -16,7 +14,7 @@ describe 'User sees participant list', type: :system do
     allow(event).to receive(:participants).and_return(participants)
 
     login_as user, scope: :user
-    visit event_path(event.id)
+    visit event_path(event.code)
 
     within '#participant_list' do
       expect(page).to have_content 'João'
@@ -28,15 +26,13 @@ describe 'User sees participant list', type: :system do
   it 'and not found participants' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
     create(:profile, user: user)
-    event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-            start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-            event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado')
+    event = build(:event, name: 'Ruby on Rails')
     participants = []
     allow(Event).to receive(:find).and_return(event)
     allow(event).to receive(:participants).and_return(participants)
 
     login_as user, scope: :user
-    visit event_path(event.id)
+    visit event_path(event.code)
 
     within '#participant_list' do
       expect(page).to have_content 'Não foram localizados Participantes até o momento'

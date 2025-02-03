@@ -4,9 +4,7 @@ describe 'User register content for your schedule item curriculum', type: :syste
   it 'with success' do
     user = create(:user)
     create(:profile, user: user)
-    event =  [ build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-                  start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-                  event_type: 'Presencial', location: 'Juiz de Fora', participant_limit: 100, status: 'Publicado') ]
+    event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule_items = [ build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD') ]
     user.event_contents.create(title: 'Introdução', description: 'Apresentação')
     user.event_contents.create(title: 'Desenvolvimento', description: 'Lógica de Programação')
