@@ -5,10 +5,10 @@ describe 'User sees schedule item details', type: :system do
     user = create(:user, first_name: 'João', email: 'joão@email.com')
     event = [ build(:event, name: 'Dev week') ]
     seven_days = 7.days.from_now
-    schedule_items = [ build(:schedule_item, title: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD',
-                             speaker_email: user.email, length: 100, start_time: seven_days, end_time: seven_days + 3600) ]
+    schedule_items = [ build(:schedule_item, name: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD',
+                       responsible_email: user.email, length: 100, start_time: seven_days, end_time: seven_days + 3600) ]
     3.times do |n|
-      schedule_items << build(:schedule_item, title: "Agenda #{ n + 1 }")
+      schedule_items << build(:schedule_item, name: "Agenda #{ n + 1 }")
     end
     allow(Event).to receive(:all).and_return(event)
     allow(Event).to receive(:find).and_return(event.first)

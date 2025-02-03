@@ -1,19 +1,29 @@
 <div id="schedule_items">
   <h2 class="heading-2 mt-3"><%= t('.schedule_items_title') %></h2>
-  <% if @schedule_items&.empty? %>
+  
+  <% if schedules&.empty? %>
     <p><%= t('.no_schedule_items') %></p>
   <% else %>
-    <div class="grid grid-cols-2 gap-1">
-    <% schedule_items.each do |schedule_item| %>
-      <%= link_to schedule_item_path(schedule_item.id) do %>
-        <div class="schedule_schedule_items-card grid p-2 border mb-2">
-          <span><b><%= ScheduleItem.human_attribute_name(:title) %>:</b> <%= schedule_item.title %></span>
-          <span class='truncate'><b><%= ScheduleItem.human_attribute_name(:start_time) %>:</b>
-          <%= l(schedule_item.start_time.to_datetime, format: :brazilian) %> -
-          <%= l(schedule_item.end_time.to_datetime, format: :brazilian_hour) %></span>
+    <div class="grid grid-cols-3 gap-1">
+      <% schedules.each do |schedule, data| %>
+        <div class="schedule-item__card">
+          <h2 class="schedule-item__card-title"><%= formatted_date(schedule.date) %></h2>
+          
+          <% data.each do |item_data| %>
+            <% item_data[:schedule_items].each do |item| %>
+              <%= link_to schedule_item_path(item.responsible_email) do %>
+                <div class="schedule_schedule_items-card">
+                  <span><%= item.name %></span>
+                  <span><b><%= ScheduleItem.human_attribute_name(:time) %>:</b>
+                    <%= item.start_time.strftime("%H:%M") %> -
+                    <%= item.end_time.strftime("%H:%M") %>
+                  </span>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
-    <% end %>
     </div>
   <% end %>
 </div>

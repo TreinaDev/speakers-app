@@ -1,16 +1,19 @@
 class ScheduleItem
   extend ActiveModel::Translation
+  include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attr_accessor :id, :title, :speaker_email, :description, :length, :start_time, :end_time
+  attribute :name, :string
+  attribute :description, :string
+  attribute :start_time, :time
+  attribute :end_time, :time
+  attribute :responsible_name, :string
+  attribute :responsible_email, :string
+  attribute :schedule_type, :string
+
   @@instances = []
-  def initialize(id:, title:, speaker_email:, description:, length:, start_time:, end_time:)
-    @id = id
-    @title = title
-    @speaker_email = speaker_email
-    @description = description
-    @length = length
-    @start_time = start_time
-    @end_time = end_time
+  def initialize(**params)
+    super(schedule_item_parmited_params(params))
     @@instances << self
   end
 
@@ -28,5 +31,11 @@ class ScheduleItem
 
   def participants
     ExternalParticipantApi::ListParticipantsService.call(schedule_item_id: id)
+  end
+
+  private
+
+  def schedule_item_parmited_params(params)
+    ActionController::Parameters.new(params).permit(ScheduleItem.attribute_names)
   end
 end

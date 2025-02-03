@@ -34,8 +34,8 @@ class Event
     ExternalEventApi::FindEventService.call(code: code)
   end
 
-  def schedule_items(email)
-    ExternalEventApi::ScheduleItemsService.call(event_code: code, email: email)
+  def schedule_items(token)
+    ExternalEventApi::ScheduleItemsService.call(event_code: code, token: token)
   end
 
   def self.count

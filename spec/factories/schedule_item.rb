@@ -1,15 +1,15 @@
 FactoryBot.define do
   factory :schedule_item do
-    id { generate :id }
-    title { "Schedule #{ id }" }
+    name { "Schedule" }
     description { "Something" }
-    speaker_email { generate :email }
-    length { rand(45..120) }
+    responsible_name { Faker::Name.name }
+    responsible_email { generate :email }
+    schedule_type { 'in-person' }
     start_time { 1.days.from_now }
     end_time { 2.days.from_now }
 
     initialize_with {
-      new(id: id, title: title, speaker_email: speaker_email, description: description, length: length, start_time: start_time, end_time: end_time)
+      new(name: name, description: description, responsible_name: responsible_name, responsible_email: responsible_email, schedule_type: schedule_type, start_time: start_time, end_time: end_time)
     }
   end
 end
