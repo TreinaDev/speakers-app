@@ -7,19 +7,16 @@ class CurriculumTask < ApplicationRecord
   validates :code, uniqueness: true
   validates_uniqueness_of :title, scope: :curriculum_id
 
-
-  def translated_certificate_requirement(symbol)
-    I18n.t("activerecord.attributes.curriculum_task.certificate_requirements.#{symbol}")
-  end
-<<<<<<< HEAD
-=======
-
->>>>>>> 0a84d8900a17b83e0cb9282a8fb0d0de57c174e5
   after_initialize :generate_code, if: :new_record?
 
   def to_param
     code
   end
+
+  def translated_certificate_requirement(symbol)
+    I18n.t("activerecord.attributes.curriculum_task.certificate_requirements.#{symbol}")
+  end
+
 
   protected
 
