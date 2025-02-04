@@ -12,10 +12,21 @@ module ApiHelper
   class EventClient
     EVENT_URL = Rails.configuration.event_api['base'].freeze
     SCHEDULE_ITEMS_URL = Rails.configuration.event_api['schedule_items']
+    SPEAKER_AUTH_URL = Rails.configuration.event_api['speakers_auth']
 
     def self.get_schedule_items(token:, event_code:)
       url = "#{EVENT_URL}#{SCHEDULE_ITEMS_URL % { token: token, event_code: event_code }}"
       Faraday.get(url)
+    end
+
+    def self.post_auth_speaker_email_and_return_code(email)
+      connection = Faraday.new do |conn|
+        conn.adapter Faraday.default_adapter
+        conn.headers['Content-Type'] = 'application/json'
+      end
+      url = "#{EVENT_URL}#{SPEAKER_AUTH_URL}"
+      email = { email: email }
+      connection.post(url, email.to_json)
     end
   end
 end

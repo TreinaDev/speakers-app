@@ -24,8 +24,8 @@ describe 'Speacker create account', type: :system do
 
   it 'with success' do
     service = ExternalEventApi::UserFindEmailService
-    token = { "token"=> "ABCD1234" }
-    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return(token)
+    code = { "code"=> "ABCD1234" }
+    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return(code)
 
     visit root_path
     click_on 'Criar conta'
