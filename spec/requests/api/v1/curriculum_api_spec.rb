@@ -38,10 +38,9 @@ describe 'Curriculum API' do
       expect(contents_response[0]['title']).to eq 'Ruby PDF'
       expect(contents_response[0]['description']).to eq 'Descrição Ruby PDF'
       expect(contents_response[0]['external_video_url']).to eq 'https://www.youtube.com/watch?v=idaXF2Er4TU'
-      p contents_response[0]
-      expect(contents_response[0]['files'][0].filename).to eq 'capi.png'
-      expect(contents_response[0]['files'][1].filename).to eq 'nota-ufjf.pdf'
-      expect(contents_response[0]['files'][2].filename).to eq 'joker.mp4'
+      expect(contents_response[0]['files'][0]['filename']).to eq 'capi.png'
+      expect(contents_response[0]['files'][1]['filename']).to eq 'nota-ufjf.pdf'
+      expect(contents_response[0]['files'][2]['filename']).to eq 'joker.mp4'
       expect(contents_response[1]['title']).to eq 'Ruby Video'
       expect(contents_response[1]['description']).to eq 'Apresentação sobre TDD'
       expect(contents_response[1]['external_video_url']).to eq 'https://www.youtube.com/watch?v=2DvrRadXwWY'

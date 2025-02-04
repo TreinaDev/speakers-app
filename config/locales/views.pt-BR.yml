@@ -131,6 +131,10 @@ pt-BR:
       no_tasks_attached: 'Esse conteúdo não foi associado a nenhuma tarefa.'
       no_files_attached: 'Não há arquivos anexados a esse conteúdo.'
       view_pdf: 'Visualizar PDF:'
+  curriculums:
+    show:
+      mandatory: 'Obrigatória'
+      optional: 'Opcional'
   curriculum_tasks:
     form:
       title: 'Adicionar tarefa a programação:'
