@@ -1,38 +1,37 @@
 <%= turbo_frame_tag 'modal' do %>
   <div class="modal">
-    <div class='flex justify-end'> 
-      <div>
-        <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: t('.close') do %>
-          <%= image_tag 'close_icon.png', id: 'close_icon', class: 'icon' %>
+    <div class="modal__overlay"></div>
+    <div class="modal__content">
+      <div class="modal__header">
+        <h3><%= t('.title') %></h3>
+        
+        <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: t('.close'), class: 'self-end' do %>
+          <%= image_tag 'close_icon.png', id: 'close_icon', class: 'modal__icon' %>
         <% end %>
       </div>
-    </div>
 
-    <h2 class='heading-3'><%= t('.title') %></h2>
+      <%= form_with model: [ @curriculum, @curriculum_content ] do |f| %>
 
-    <%= form_with model: [ @curriculum, @curriculum_content ] do |f| %>
-
-      <% if @event_contents.any? %>
-        <div>
-          <%= f.label :event_content_id, class: "label-primary" %>
-          <%= f.collection_select :event_content_id, @event_contents, :id, :title, {}, 
-            { class: "mt-1 block w-full border-2 rounded-lg border-gray-300 shadow-sm bg-white text-gray-900 
-                      focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-300 dark:text-gray-900 
-                      dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
-      </div>
-
-        <div class="mt-5 flex justify-end">
-          <%= f.submit t('.save'), class: 'btn-primary' %>
+        <% if @event_contents.any? %>
+          <div>
+            <%= f.label :event_content_id %>
+            <%= f.collection_select :event_content_id, @event_contents, :id, :title, {}, 
+              { class: "model__select" } %>
         </div>
-      <% else %>
-        <div>
-          <b><%= t('.no_content') %></b>
-        </div>
-        
-        <div>
-          <%= link_to t('.new_content_link'), new_event_content_path, class: 'link-primary', data: { turbo: false } %>
-        </div>
+
+          <div class="mt-5 flex justify-end">
+            <%= f.submit t('.save'), class: 'btn_primary' %>
+          </div>
+        <% else %>
+          <div class="my-4">
+            <b><%= t('.no_content') %></b>
+          </div>
+          
+          <div>
+            <%= link_to t('.new_content_link'), new_event_content_path, class: 'link_primary', data: { turbo: false } %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+      </div>
  </div>
 <% end %>

@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :check_if_have_an_existing_profile, except: :show
+  skip_before_action :check_if_user_has_profile
 
   def show
     @profile = Profile.find_by(username: params[:username])

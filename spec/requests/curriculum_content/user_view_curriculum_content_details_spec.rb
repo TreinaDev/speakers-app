@@ -17,6 +17,8 @@ describe 'User view a curriculum content', type: :request do
     first_user = create(:user)
     second_user = create(:user)
     schedule_item = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
+    create(:profile, user: second_user)
+
     content = first_user.event_contents.create(title: 'Arquivos TDD', description: 'Apresentação sobre TDD')
     curriculum = create(:curriculum, user: first_user, schedule_item_code: schedule_item.code)
     curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: content)

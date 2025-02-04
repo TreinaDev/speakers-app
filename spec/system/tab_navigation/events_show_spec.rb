@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Tab navigation in events show', js: true do
   it 'schedule items should default tab' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+    create(:profile, user: user)
     event = build(:event, name: 'Ruby on Rails')
     allow(Event).to receive(:find).and_return(event)
 
@@ -16,6 +17,7 @@ describe 'Tab navigation in events show', js: true do
 
   it 'selected feedback list' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+    create(:profile, user: user)
     event = build(:event, name: 'Ruby on Rails')
     allow(Event).to receive(:find).and_return(event)
 
@@ -30,6 +32,7 @@ describe 'Tab navigation in events show', js: true do
 
   it 'selected participant list' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+    create(:profile, user: user)
     event = build(:event, name: 'Ruby on Rails')
     allow(Event).to receive(:find).and_return(event)
 

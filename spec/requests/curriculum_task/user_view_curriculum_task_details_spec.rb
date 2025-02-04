@@ -17,6 +17,7 @@ describe 'User view a curriculum task', type: :request do
     second_user = create(:user)
     schedule_item = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: first_user, schedule_item_code: schedule_item.code)
+    create(:profile, user: second_user)
     curriculum_task = create(:curriculum_task, curriculum: curriculum, title: 'Tarefa Teste', description: 'Descrição teste')
 
     login_as second_user

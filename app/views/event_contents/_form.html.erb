@@ -1,26 +1,34 @@
-<%= form_with(model: event_content, data: { turbo: false }) do |f| %>
+<%= form_with(model: event_content, data: { turbo: false }, class: 'form_model') do |f| %>
   <div class="field">
-    <%= f.label :title, class: 'label-primary' %>
-    <%= f.text_field :title, class: 'field-primary' %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
     <% if event_content.errors[:title].any? %> 
       <span class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:title).first %></span>
     <% end %>
   </div>
 
-  <div>
-    <%= f.label :description, class: 'label-primary'  %>
-    <%= f.rich_textarea :description, class: 'text-area' %>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.rich_textarea :description, class: 'text_area' %>
+  </div>
+
+  <div class="field mt-2">
+    <%= f.label :external_video_url, class: 'label-primary' %>
+    <%= f.text_field :external_video_url, class: 'field-primary', placeholder: 'Compartilhe seu vídeo diretamente do youtube ou vimeo' %>
+     <% if event_content.errors[:external_video_url].any? %> 
+      <span class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:external_video_url).first %></span>
+    <% end %>
   </div>
 
   <div class="mt-5 mb-5">
     <% if event_content.files.any? { |file| file.persisted? } %>
-      <strong><%= t('.files_attached') %></strong>
+      <strong class="text-lg"><%= t('.files_attached') %></strong>
       <div>
         <%= f.collection_check_boxes :files, @files, :signed_id, :filename do |file| %>
           <% check_box_id = "check_box_#{file.object.filename}" %>
           <div class="mr-2 ml-4"> 
             <%= file.check_box(class: 'mr-1', checked: true, id: check_box_id) %>
-            <%= file.label(class: 'inline') %>
+            <%= file.label(class: 'label_primary') %>
           </div>
         <% end %>
       </div>
@@ -35,7 +43,7 @@
     <% end %>
   </div>
   
-  <%= f.submit class: 'btn-primary' %>
-  <%= link_to 'Cancelar', event_content, class: 'btn-primary' %>
+  <%= f.submit class: 'btn_primary' %>
+  <%= link_to 'Cancelar', event_content, class: 'btn_primary' %>
 <% end %>
 

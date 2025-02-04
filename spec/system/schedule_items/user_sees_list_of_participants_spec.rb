@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User sees list of participants' do
+describe 'User sees list of participants', type: :system, js: true do
   it 'and must be authenticated' do
     visit schedule_item_path(1)
 
@@ -10,6 +10,7 @@ describe 'User sees list of participants' do
 
   it 'with success' do
     user = create(:user, first_name: 'João', email: 'joão@email.com')
+    create(:profile, user: user)
     event = [ build(:event, name: 'Dev week') ]
     schedule1 = Schedule.new(date: "2025-02-15")
     schedule_items =
@@ -42,6 +43,7 @@ describe 'User sees list of participants' do
 
   it 'does not locate participants' do
     user = create(:user, first_name: 'João', email: 'joão@email.com')
+    create(:profile, user: user)
     event = [ build(:event, name: 'Dev week') ]
     schedule1 = Schedule.new(date: "2025-02-15")
     schedule_items =

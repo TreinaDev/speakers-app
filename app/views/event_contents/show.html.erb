@@ -1,57 +1,25 @@
-<div class="flex">
-  <h2 class="heading-2"><%= @event_content.title %></h2>
-  <div class="ml-5 pt-2">
-    <%= link_to edit_event_content_path(@event_content), data: { turbo: false }, title: t('.edit') do %>
-      <%= image_tag 'pencil_edit.png', id: 'pencil_edit', class: 'icon' %>
-    <% end %>
-  </div>
-</div>
-
 <div>
-  <div>
-    <%= @event_content.description %>
-  </div>
-  <% if @event_content.files.attached? %>
-    <div class="card_container p-20 mb-20 rounded-3xl">
-      <% @event_content.files.each do |file| %>
-        <% if file.content_type.starts_with?('image/') %>
-          <%= image_tag file, width: 300, height: 200, class: 'card max-h-96' %>
-        <% elsif file.content_type.starts_with?('video/') %>
-          <%= video_tag url_for(file), controls: true, class: 'card max-h-96' %>
-        <% elsif file.content_type == 'application/pdf' %>
-          <%= link_to(url_for(file), target: '_blank', class: 'card max-h-96 flex flex-col justify-center items-center' ) do %>
-            <%= image_tag("pdf.png", class: 'w-2/3 h-2/3') %>
-            <p><%= t('.view_pdf') %> <%= "#{file.filename.to_s}" %></p>
-          <% end %>
-        <% else %>
-          <%= link_to "#{t('.file')} #{file.filename.to_s}", url_for(file), target: '_blank', class: 'card max-h-96' %>
-        <% end %>
-      <% end %>
-    </div>
-
-  <% else %>
-    <div class="mt-10">
-      <strong><%=t('.no_files_attached')%></strong>
-    </div>
-  <% end %>
+  <%= render 'shared/event_content_details', content: @event_content%>
 </div>
 
 <div>
   <% if @event_content.event_tasks.any? %>
     <div>
-      <strong><%= t('.attached_to_tasks') %></strong>
+      <strong class="text-lg"><%= t('.attached_to_tasks') %></strong>
       <div class="card_container mb-10">
         <% @event_content.event_tasks.each do |task| %>
           <%= link_to(task, class: "card") do %>
             <div>
-              <p class="card_title_2"> <%= t('.task') %> </p>
-              <h3 class="card_title"><%= task.name %></h3>
+              <p class="card__title--2"> <%= t('.task') %> </p>
+              <h3 class="card__title"><%= task.name %></h3>
             </div>
           <% end %>
         <% end %>
       </div>
     </div>
   <% else %>
-    <div> <%=t('.no_tasks_attached')%> </div>
+    <div>
+      <p class="mt-10 font-bold text-lg"><%=t('.no_tasks_attached')%></p>
+    </div>
   <% end %>
 </div>

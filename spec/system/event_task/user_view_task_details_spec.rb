@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User view task details', type: :system do
   it 'with sucess' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     content = user.event_contents.create!(title: 'Conteúdo de ruby')
     task = user.event_tasks.create!(name: 'Tarefa inicial', description: 'Desafio para iniciantes')
     EventTaskContent.create!(event_content: content, event_task: task)
@@ -34,6 +35,7 @@ describe 'User view task details', type: :system do
     first_user = create(:user, first_name: 'João')
     first_user_task = first_user.event_tasks.create!(name: 'Dev week', description: 'Tarefa inicial para estudo prévio da palestra')
     second_user = create(:user, first_name: 'Luiz')
+    create(:profile, user: second_user)
 
     login_as second_user
     visit event_task_path(first_user_task)

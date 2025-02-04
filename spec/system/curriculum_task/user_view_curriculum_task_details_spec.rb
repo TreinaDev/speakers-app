@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User view curriculum task details', type: :system do
   it 'with success' do
     user = create(:user)
+    create(:profile, user: user)
     event =  [ build(:event, name: 'Ruby on Rails') ]
     schedule1 = Schedule.new(date: "2025-02-15")
     schedule_item1 = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
@@ -38,6 +39,7 @@ describe 'User view curriculum task details', type: :system do
     user = create(:user)
     schedule_item = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+    create(:profile, user: user)
     content = create(:event_content, user: user, title: 'Conteúdo Rails')
     curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: content)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)
@@ -70,6 +72,7 @@ describe 'User view curriculum task details', type: :system do
     second_user = create(:user)
     schedule_item = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+    create(:profile, user: second_user)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)
 
     login_as second_user
@@ -83,6 +86,7 @@ describe 'User view curriculum task details', type: :system do
     user = create(:user)
     schedule_item = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+    create(:profile, user: user)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
 

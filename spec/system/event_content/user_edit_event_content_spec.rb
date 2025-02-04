@@ -14,6 +14,7 @@ describe 'User edit event content', type: :system, js: true do
   it 'and must be the owner' do
     first_user = create(:user)
     second_user = create(:user, first_name: 'Pedro')
+    create(:profile, user: second_user)
     content = first_user.event_contents.create!(title: 'Workshop Rails', description: 'Boas-vindas ao melhor workshop do Brasil!')
 
     login_as second_user
@@ -25,6 +26,7 @@ describe 'User edit event content', type: :system, js: true do
 
   it 'with sucess' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     image_1 = fixture_file_upload(Rails.root.join('spec/fixtures/mark_zuckerberg.jpeg'))
     content = user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01', files: [ image_1 ])
 
@@ -49,6 +51,7 @@ describe 'User edit event content', type: :system, js: true do
 
   it 'failure if title is empty' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
 
     login_as user
@@ -66,6 +69,7 @@ describe 'User edit event content', type: :system, js: true do
 
   it 'and try to add a sixth file' do
     user = create(:user)
+    create(:profile, user: user)
     files = [ Rails.root.join('spec/fixtures/mark_zuckerberg.jpeg'),
               Rails.root.join('spec/fixtures/capi.png'),
               Rails.root.join('spec/fixtures/puts.png'),
@@ -94,6 +98,7 @@ describe 'User edit event content', type: :system, js: true do
 
   it 'and cancels' do
     user = create(:user, first_name: 'João')
+    create(:profile, user: user)
     image_1 = fixture_file_upload(Rails.root.join('spec/fixtures/mark_zuckerberg.jpeg'))
     content = user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01', files: [ image_1 ])
 

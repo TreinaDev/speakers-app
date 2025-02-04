@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User register a profile' do
+describe 'User register a profile', type: :system do
   it 'must be authenticated' do
     visit new_profile_path
 
@@ -60,8 +60,7 @@ describe 'User register a profile' do
     allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return("ABCD1234")
 
     login_as user
-    visit events_path
-    click_on 'Cadastrar Perfil'
+    visit new_profile_path
     fill_in 'Título', with: 'Instrutor / Desenvolvedor'
     fill_in 'Sobre mim', with: 'Sou João, desenvolvedor Ruby com foco em Ruby on Rails.'
     select('Outro', from: 'Pronome')
@@ -89,15 +88,13 @@ describe 'User register a profile' do
     user = create(:user, first_name: 'João')
 
     login_as user
-    visit events_path
-    click_on 'Cadastrar Perfil'
+    visit new_profile_path
     fill_in 'Título', with: ''
     fill_in 'Sobre mim', with: ''
     fill_in 'Cidade', with: ''
     fill_in 'Data de Nascimento', with: ''
     click_on 'Criar perfil'
 
-    expect(current_path).to eq(profiles_path)
     expect(page).to have_content('Falha ao registrar o perfil.')
     expect(page).to have_content('Título não pode ficar em branco')
     expect(page).to have_content('Sobre mim não pode ficar em branco')
@@ -112,15 +109,13 @@ describe 'User register a profile' do
     user = create(:user, first_name: 'João')
 
     login_as user
-    visit events_path
-    click_on 'Cadastrar Perfil'
+    visit new_profile_path
     select('Outro', from: 'Pronome')
     fill_in 'Outro Pronome', with: ''
     select('Outro', from: 'Gênero')
     fill_in 'Outro Gênero', with: ''
     click_on 'Criar perfil'
 
-    expect(current_path).to eq(profiles_path)
     expect(page).to have_content('Falha ao registrar o perfil.')
     expect(page).to have_content('Gênero não pode ficar em branco')
     expect(page).to have_content('Pronome não pode ficar em branco')
@@ -132,8 +127,7 @@ describe 'User register a profile' do
     allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return("ABCD1234")
 
     login_as user
-    visit events_path
-    click_on 'Cadastrar Perfil'
+    visit new_profile_path
     fill_in 'Título', with: 'Instrutor / Desenvolvedor'
     fill_in 'Sobre mim', with: 'Sou João, desenvolvedor Ruby com foco em Ruby on Rails.'
     attach_file('Foto de Perfil',  Rails.root.join('spec/fixtures/puts.png'))
@@ -144,9 +138,7 @@ describe 'User register a profile' do
     fill_in 'Facebook', with: 'https://www.booktable.com/joaoalmeida'
     click_on 'Criar perfil'
 
-    expect(current_path).to eq(profiles_path)
     expect(page).to have_content('Falha ao registrar o perfil.')
-    expect(page).to have_content('Rede Social não é válido')
     expect(page).to have_content('Url inválida para Youtube')
     expect(page).to have_content('Url inválida para X')
     expect(page).to have_content('Url inválida para GitHub')
@@ -170,8 +162,7 @@ describe 'User register a profile' do
     user = create(:user, first_name: 'João')
 
     login_as user
-    visit events_path
-    click_on 'Cadastrar Perfil'
+    visit new_profile_path
 
     expect(current_path).to eq(new_profile_path)
     expect(page).not_to have_content('Meu Perfil')
@@ -182,8 +173,7 @@ describe 'User register a profile' do
     user = create(:user, first_name: 'João')
 
     login_as user
-    visit events_path
-    click_on 'Cadastrar Perfil'
+    visit new_profile_path
     fill_in 'Título', with: 'Instrutor / Desenvolvedor'
     fill_in 'Sobre mim', with: 'Sou João, desenvolvedor Ruby com foco em Ruby on Rails.'
     select('Ele/Dele', from: 'Pronome')

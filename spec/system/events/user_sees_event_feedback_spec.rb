@@ -1,9 +1,10 @@
 require 'rails_helper'
 
-describe 'User can view feedback for an event' do
-  context 'from the event details page', js: true do
+describe 'User can view feedback for an event', type: :system, js: true do
+  context 'from the event details page' do
     it 'with success' do
       user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+      create(:profile, user: user)
       event = build(:event, name: 'Ruby on Rails')
       allow(Event).to receive(:find).and_return(event)
       event_feedbacks = [ build(:feedback, name: 'João', title: 'Muito bom!', description: 'Gostei muito'),
@@ -32,6 +33,7 @@ describe 'User can view feedback for an event' do
 
     it 'and not found feedbacks for event' do
       user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'joao@email.com', password: '123456')
+      create(:profile, user: user)
       event = build(:event, name: 'Ruby on Rails')
       allow(Event).to receive(:find).and_return(event)
       allow(Feedback).to receive(:event).with(event_code: event.code, speaker: user.email).and_return([])

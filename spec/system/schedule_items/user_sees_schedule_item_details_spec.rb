@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'User sees schedule item details', type: :system do
   it 'with success' do
     user = create(:user, first_name: 'João', email: 'joão@email.com')
+    create(:profile, user: user)
     event = [ build(:event, name: 'Dev week') ]
     schedule1 = Schedule.new(date: "2025-02-15")
     schedule_items =
@@ -36,6 +37,7 @@ describe 'User sees schedule item details', type: :system do
 
   it 'and the schedule item doesnt exists' do
     user = create(:user, first_name: 'João', email: 'joão@email.com')
+    create(:profile, user: user)
     allow(ScheduleItem).to receive(:find).and_return(nil)
 
     login_as user, scope: :user

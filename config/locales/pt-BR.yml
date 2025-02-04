@@ -1,5 +1,8 @@
 ---
 pt-BR:
+  edit: 'Editar'
+  file: 'Arquivo'
+  copyright: '© Copyright 2025 Palestra+ | Todos os direitos reservados'
   activerecord:
     errors:
       messages:

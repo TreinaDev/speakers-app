@@ -21,6 +21,7 @@ describe 'A curriculum is generated for user schedule item', type: :system do
         schedule_items: [ schedule_item1 ]
       }
     ]
+    create(:profile, user: user)
     allow(Event).to receive(:all).and_return(event)
     allow(Event).to receive(:find).and_return(event.first)
     allow(event.first).to receive(:schedule_items).and_return(schedules)
@@ -39,6 +40,7 @@ describe 'A curriculum is generated for user schedule item', type: :system do
 
   it 'and should not create curriculum when schedule item does not exist' do
     user = create(:user)
+    create(:profile, user: user)
 
     login_as user, scope: :user
     visit schedule_item_path(9999)

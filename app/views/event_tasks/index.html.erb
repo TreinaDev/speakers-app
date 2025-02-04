@@ -1,6 +1,6 @@
 <h2 class="heading-2"><%= t('.my_tasks') %></h2>
 
-<%= link_to t('.new_task'), new_event_task_path, data: { turbo: false }, class: 'link-primary' %>
+<%= link_to t('.new_task'), new_event_task_path, data: { turbo: false }, class: 'link_primary' %>
 <div>
   <% if @event_tasks.any? %>
     <div class="card_container">
@@ -8,7 +8,7 @@
     </div>
   <% else %>
     <div>
-      <%= t('.no_tasks')%>
+      <p class="mt-10 font-bold"><%= t('.no_tasks')%></p>
     </div>
   <% end %>
 </div>
