@@ -53,7 +53,7 @@ describe 'User access curriculum content details', type: :system do
     curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: content)
 
     login_as second_user
-    visit curriculum_curriculum_content_path(curriculum, curriculum_content.code)
+    visit curriculum_curriculum_content_path(curriculum, curriculum_content)
 
     expect(current_path).to eq events_path
     expect(page).to have_content 'Conteúdo indisponível!'
@@ -69,7 +69,7 @@ describe 'User access curriculum content details', type: :system do
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
 
     login_as user
-    visit curriculum_curriculum_content_path(curriculum, curriculum_content.code)
+    visit curriculum_curriculum_content_path(curriculum, curriculum_content)
     click_on 'VOLTAR'
 
     expect(current_path).to eq schedule_item_path(schedule_item.id)

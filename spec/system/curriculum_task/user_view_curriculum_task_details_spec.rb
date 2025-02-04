@@ -42,7 +42,7 @@ describe 'User view curriculum task details', type: :system do
 
 
     login_as user, scope: :user
-    visit curriculum_curriculum_task_path(curriculum, task.code)
+    visit curriculum_curriculum_task_path(curriculum, task)
 
     expect(page).to have_content 'Exercício Rails'
     expect(page).to have_content 'Seu primeiro exercício'
@@ -56,7 +56,7 @@ describe 'User view curriculum task details', type: :system do
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)
 
-    visit curriculum_curriculum_task_path(curriculum, task.code)
+    visit curriculum_curriculum_task_path(curriculum, task)
 
     expect(current_path).to eq new_user_session_path
     expect(page).to have_content 'Para continuar, faça login ou registre-se'
@@ -71,7 +71,7 @@ describe 'User view curriculum task details', type: :system do
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício', certificate_requirement: :optional)
 
     login_as second_user
-    visit curriculum_curriculum_task_path(curriculum, task.code)
+    visit curriculum_curriculum_task_path(curriculum, task)
 
     expect(current_path).to eq events_path
     expect(page).to have_content 'Conteúdo indisponível!'
@@ -86,7 +86,7 @@ describe 'User view curriculum task details', type: :system do
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
 
     login_as user
-    visit curriculum_curriculum_task_path(curriculum, task.code)
+    visit curriculum_curriculum_task_path(curriculum, task)
     click_on 'VOLTAR'
 
     expect(current_path).to eq schedule_item_path(schedule_item.id)
