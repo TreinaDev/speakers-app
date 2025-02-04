@@ -10,7 +10,7 @@ describe 'Curriculum API' do
       files = [ fixture_file_upload(Rails.root.join('spec/fixtures/capi.png')),
                 fixture_file_upload(Rails.root.join('spec/fixtures/nota-ufjf.pdf')),
                 fixture_file_upload(Rails.root.join('spec/fixtures/joker.mp4')) ]
-      first_content = user.event_contents.create(title: 'Ruby PDF', description: 'Descrição Ruby PDF',
+      first_content = user.event_contents.create(title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>',
                                                  external_video_url: 'https://www.youtube.com/watch?v=idaXF2Er4TU', files: files)
       second_content = user.event_contents.create(title: 'Ruby Video', description: 'Apresentação sobre TDD',
                                                  external_video_url: 'https://www.youtube.com/watch?v=2DvrRadXwWY')
@@ -34,11 +34,10 @@ describe 'Curriculum API' do
       curriculum_response = response.parsed_body['curriculum']
       tasks_response = curriculum_response['curriculum_tasks']
       contents_response = curriculum_response['curriculum_contents']
-      p response.parsed_body
       expect(contents_response.length).to eq 3
       expect(contents_response[0]['code']).to eq 1
       expect(contents_response[0]['title']).to eq 'Ruby PDF'
-      expect(contents_response[0]['description']).to eq 'Descrição Ruby PDF'
+      expect(contents_response[0]['description']).to eq '<strong>Descrição Ruby PDF</strong>'
       expect(contents_response[0]['external_video_url']).to eq 'https://www.youtube.com/watch?v=idaXF2Er4TU'
       expect(contents_response[0]['files'][0]['filename']).to eq 'capi.png'
       expect(contents_response[0]['files'][1]['filename']).to eq 'nota-ufjf.pdf'
@@ -59,6 +58,14 @@ describe 'Curriculum API' do
       expect(tasks_response[1]['title']).to eq 'Exercício Stimulus'
       expect(tasks_response[1]['description']).to eq 'Seu primeiro exercício stimulus'
       expect(tasks_response[1]['certificate_requirement']).to eq 'Opcional'
+    end
+
+    it 'with a schedule item that does not exist' do
+      get "/api/v1/curriculums/55"
+
+      expect(response).to have_http_status :not_found
+      expect(response.content_type).to include('application/json')
+      expect(response.parsed_body['error']).to eq 'Currículo não encontrado!'
     end
   end
 end
