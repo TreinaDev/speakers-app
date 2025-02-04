@@ -22,7 +22,6 @@ describe 'User register content for your schedule item curriculum', type: :syste
 
     login_as user, scope: :user
     visit root_path
-    save_page
     click_on 'Ruby on Rails'
     click_on 'TDD com Rails'
     click_on 'Adicionar conteúdo'
