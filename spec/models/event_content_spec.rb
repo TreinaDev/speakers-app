@@ -8,6 +8,8 @@ RSpec.describe EventContent, type: :model do
     it { should belong_to(:user) }
     it { should have_many(:event_task_contents) }
     it { should have_many(:event_tasks).through(:event_task_contents) }
+    it { validate_presence_of(:code) }
+    it { validate_uniqueness_of(:code) }
   end
 
   context '.must_have_less_than_five_files' do
@@ -44,6 +46,23 @@ RSpec.describe EventContent, type: :model do
                                        external_video_url: 'https://app.campuscode.com.br/')
 
       expect(event_content).not_to be_valid
+    end
+  end
+
+  context '.to_param' do
+    it 'must return the event_content.code' do
+      event_content = create(:event_content, code: 'ABCDE')
+
+      expect(event_content.to_param).to eq 'ABCDE'
+    end
+  end
+
+  context '.generate_code' do
+    it 'must return an unique code' do
+      first_content = create(:event_content)
+      second_content = create(:event_content)
+
+      expect(first_content.code).not_to eq second_content.code
     end
   end
 end
