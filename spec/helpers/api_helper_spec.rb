@@ -27,4 +27,3 @@ describe ApiHelper::EventClient, type: :helper do
     end
   end
 end
-
