@@ -26,4 +26,10 @@ Rails.application.routes.draw do
     resources :curriculum_contents, only: %i[ new create show ]
     resources :curriculum_tasks, only: %i[ new create show ]
   end
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :curriculums, only: %i[ show ], param: :schedule_item_id
+    end
+  end
 end
