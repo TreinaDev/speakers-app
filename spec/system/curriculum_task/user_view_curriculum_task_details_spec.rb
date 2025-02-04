@@ -100,14 +100,14 @@ describe 'User view curriculum task details', type: :system do
   it 'and curriculum task doesnt exists' do
     user = create(:user)
     create(:profile, user: user)
-    schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
-    curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
+    schedule_item = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
+    curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
 
     login_as user
     visit curriculum_curriculum_task_path(curriculum, 'ABCDE')
 
-    expect(current_path).to eq schedule_item_path(schedule_item.id)
+    expect(current_path).to eq schedule_item_path(schedule_item.code)
     expect(page).to have_content 'Conteúdo indisponível!'
   end
 end
