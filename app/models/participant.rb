@@ -9,12 +9,12 @@ class Participant
   attribute :cpf, :string
 
   def initialize(**params)
-    super(participant_permited_params(params))
+    super(participant_permitted_params(params))
   end
 
   private
 
-  def participant_permited_params(params)
+  def participant_permitted_params(params)
     ActionController::Parameters.new(params).permit(Participant.attribute_names)
   end
 end

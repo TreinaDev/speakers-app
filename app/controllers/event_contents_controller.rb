@@ -43,11 +43,8 @@ class EventContentsController < ApplicationController
   end
 
   def set_event_content
-    begin
-      @event_content = current_user.event_contents.find(params[:id])
-    rescue
-      redirect_to events_path, notice: t('event_contents.set_event_content.content_unavailable')
-    end
+      @event_content = current_user.event_contents.find_by(code: params[:code])
+      redirect_to events_path, alert: t('event_contents.set_event_content.content_unavailable') if @event_content.nil?
   end
 
   def set_event_content_files
