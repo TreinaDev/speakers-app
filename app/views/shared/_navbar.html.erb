@@ -8,7 +8,6 @@
 
       <% if user_signed_in? %>
         <%= link_to t('.my_contents'), event_contents_path, class: 'nav_link_primary' %>
-        <%= link_to  t('.tasks'), event_tasks_path, data: { turbo: false }, class: 'nav_link_primary' %>
         
         <div class="relative inline-block text-left" data-controller="dropdown">
           <%= button_tag class: "nav_link_primary gap-1", data: { action: "click->dropdown#toggle" } do %>
