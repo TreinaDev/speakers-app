@@ -7,9 +7,16 @@ class EventContent < ApplicationRecord
   has_many_attached :files
   validate :must_have_less_than_five_files
   validate :valid_file_size
-  validates :title, presence: true
+  validates :title, :code, presence: true
+  validates :code, uniqueness: true
   validate :check_external_video_url
   has_rich_text :description
+
+  after_initialize :generate_code, if: :new_record?
+
+  def to_param
+    code
+  end
 
   protected
 
@@ -34,6 +41,13 @@ class EventContent < ApplicationRecord
       unless external_video_url.include?('youtube.com') || external_video_url.include?('vimeo.com')
         errors.add(:external_video_url, 'é inválida.')
       end
+    end
+  end
+
+  def generate_code
+    loop do
+      self.code = SecureRandom.alphanumeric(8).upcase
+      break unless CurriculumTask.where(code: code).exists?
     end
   end
 end

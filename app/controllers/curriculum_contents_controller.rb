@@ -13,13 +13,14 @@ class CurriculumContentsController < ApplicationController
   end
 
   def show
-    @curriculum_content = @curriculum.curriculum_contents.find(params[:id])
+    @curriculum_content = @curriculum.curriculum_contents.find_by(code: params[:code])
+    redirect_to schedule_item_path(@curriculum.schedule_item_code), alert: t('curriculum_contents.set_curriculum.content_unavailable') if @curriculum_content.nil?
   end
 
   private
 
   def set_curriculum
-    @curriculum = current_user.curriculums.find_by(id: params[:curriculum_id])
+    @curriculum = current_user.curriculums.find_by(code: params[:curriculum_code])
     redirect_to events_path, alert: t('curriculum_contents.set_curriculum.content_unavailable') unless @curriculum
   end
 

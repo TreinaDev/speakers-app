@@ -12,6 +12,8 @@ RSpec.describe CurriculumContent, type: :model do
     it { should belong_to(:event_content) }
     it { should have_many(:curriculum_task_contents) }
     it { should have_many(:curriculum_tasks).through(:curriculum_task_contents) }
+    it { validate_presence_of(:code) }
+    it { validate_uniqueness_of(:code) }
   end
 
   context '.must_be_event_content_owner' do
@@ -34,6 +36,30 @@ RSpec.describe CurriculumContent, type: :model do
       curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: event_content)
 
       expect(curriculum_content.title).to eq 'Conteudo teste'
+    end
+  end
+
+  context '.to_param' do
+    it 'must return the curriculum_content.code' do
+      user = create(:user)
+      event_content = create(:event_content, title: 'Conteudo teste', user: user)
+      curriculum = create(:curriculum, user: user)
+      curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: event_content, code: 'ABCDE')
+
+      expect(curriculum_content.to_param).to eq 'ABCDE'
+    end
+  end
+
+  context '.generate_code' do
+    it 'must return an unique code' do
+      user = create(:user)
+      event_content = create(:event_content, title: 'Conteudo teste', user: user)
+      curriculum = create(:curriculum, user: user)
+      second_curriculum = create(:curriculum, user: user)
+      first_curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: event_content)
+      second_curriculum_content = create(:curriculum_content, curriculum: second_curriculum, event_content: event_content)
+
+      expect(first_curriculum_content.code).not_to eq second_curriculum_content.code
     end
   end
 end
