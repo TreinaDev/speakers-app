@@ -14,7 +14,7 @@ class ScheduleItem
 
   @@instances = []
   def initialize(**params)
-    super(schedule_item_parmitted_params(params))
+    super(schedule_item_permitted_params(params))
     @@instances << self
   end
 
@@ -36,7 +36,7 @@ class ScheduleItem
 
   private
 
-  def schedule_item_parmitted_params(params)
+  def schedule_item_permitted_params(params)
     ActionController::Parameters.new(params).permit(ScheduleItem.attribute_names)
   end
 end
