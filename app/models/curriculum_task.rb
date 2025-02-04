@@ -9,6 +9,12 @@ class CurriculumTask < ApplicationRecord
 
   after_initialize :generate_code, if: :new_record?
 
+  def to_param
+    code
+  end
+
+  protected
+
   def generate_code
     loop do
       self.code = SecureRandom.alphanumeric(8).upcase

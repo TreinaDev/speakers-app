@@ -13,14 +13,18 @@ class CurriculumContent < ApplicationRecord
     event_content.title
   end
 
+  def to_param
+    code
+  end
+  
+  protected
+
   def generate_code
     loop do
       self.code = SecureRandom.alphanumeric(8).upcase
       break unless CurriculumContent.where(code: code).exists?
     end
   end
-
-  protected
 
   def must_be_event_content_owner
     return if event_content&.user == curriculum&.user

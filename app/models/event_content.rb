@@ -10,6 +10,13 @@ class EventContent < ApplicationRecord
   validates :title, presence: true
   validate :check_external_video_url
   has_rich_text :description
+  validates :code, presence: true
+
+  after_initialize :generate_code, if: :new_record?
+
+  def to_param
+    code
+  end
 
   protected
 
@@ -34,6 +41,13 @@ class EventContent < ApplicationRecord
       unless external_video_url.include?('youtube.com') || external_video_url.include?('vimeo.com')
         errors.add(:external_video_url, 'é inválida.')
       end
+    end
+  end
+
+  def generate_code
+    loop do
+      self.code = SecureRandom.alphanumeric(8).upcase
+      break unless CurriculumTask.where(code: code).exists?
     end
   end
 end

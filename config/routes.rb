@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :events, only: %i[ index show ], param: :code
-  resources :event_contents, only: %i[ index show new create edit update ]
+  resources :event_contents, only: %i[ index show new create edit update ], param: :code
   resources :event_tasks, only: %i[ index show new create edit update ]
   resources :schedule_items, only: %i[ show ]
   resources :profiles, only: %i[ show new create ], param: :username
