@@ -1,6 +1,7 @@
 json.curriculum do
   if @curriculum.curriculum_contents.any?
     json.curriculum_contents @curriculum.curriculum_contents do |content|
+      json.code content.id
       json.title content.event_content.title
       json.description content.event_content.description.body
       json.external_video_url content.event_content.external_video_url
@@ -17,7 +18,12 @@ json.curriculum do
     json.curriculum_tasks @curriculum.curriculum_tasks do |task|
       json.title task.title
       json.description task.description
-      json.certificate_requirement task.certificate_requirement
+      json.certificate_requirement task.translated_certificate_requirement(task.certificate_requirement)
+      if task.curriculum_contents.any?
+        json.attached_contents task.curriculum_contents do |content|
+          json.attached_content_code content.id
+        end
+      end
     end
   end
 end
