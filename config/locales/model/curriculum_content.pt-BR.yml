@@ -5,6 +5,7 @@ pt-BR:
         must_be_event_content_owner: 'Conteúdo indisponível'
     models:
       curriculum_content: Conteúdo
+      curriculum: Currículo
     attributes:
       curriculum_content:
         event_contents: Selecionar conteúdo

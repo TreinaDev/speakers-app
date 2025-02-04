@@ -5,15 +5,18 @@ describe 'Curriculum API' do
     it 'with success' do
       user = create(:user)
       build(:event, name: 'Ruby on Rails')
-      schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
-      curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
+      schedule_item = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
+      curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
       files = [ fixture_file_upload(Rails.root.join('spec/fixtures/capi.png')),
                 fixture_file_upload(Rails.root.join('spec/fixtures/nota-ufjf.pdf')),
                 fixture_file_upload(Rails.root.join('spec/fixtures/joker.mp4')) ]
-      first_content = user.event_contents.create(title: 'Ruby PDF', description: 'Descrição Ruby PDF',
-                                                 external_video_url: 'https://www.youtube.com/watch?v=idaXF2Er4TU', files: files)
+      allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('12345678')
+      first_content = user.event_contents.create(title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>',
+                                                 external_video_url: 'https://www.youtube.com/watch?v=idaXF2Er4TU')
+      allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABCDEFGH')
       second_content = user.event_contents.create(title: 'Ruby Video', description: 'Apresentação sobre TDD',
                                                  external_video_url: 'https://www.youtube.com/watch?v=2DvrRadXwWY')
+      allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('98764512')
       third_content = user.event_contents.create(title: 'Stimulus', description: 'PDF sobre Stimulus',
                                                  external_video_url: 'https://www.youtube.com/watch?v=1cw6qO1EYGw')
       first_curriculum_content = create(:curriculum_content, id: 1, curriculum: curriculum, event_content: first_content)
@@ -27,23 +30,22 @@ describe 'Curriculum API' do
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
 
 
-      get "/api/v1/curriculums/#{schedule_item.id}"
+      get "/api/v1/curriculums/#{schedule_item.code}"
 
       expect(response).to have_http_status :success
       expect(response.content_type).to include('application/json')
       curriculum_response = response.parsed_body['curriculum']
       tasks_response = curriculum_response['curriculum_tasks']
       contents_response = curriculum_response['curriculum_contents']
-      p response.parsed_body
       expect(contents_response.length).to eq 3
-      expect(contents_response[0]['code']).to eq 1
+      expect(contents_response[0]['code']).to eq '12345678'
       expect(contents_response[0]['title']).to eq 'Ruby PDF'
-      expect(contents_response[0]['description']).to eq 'Descrição Ruby PDF'
+      expect(contents_response[0]['description']).to eq '<strong>Descrição Ruby PDF</strong>'
       expect(contents_response[0]['external_video_url']).to eq 'https://www.youtube.com/watch?v=idaXF2Er4TU'
       expect(contents_response[0]['files'][0]['filename']).to eq 'capi.png'
       expect(contents_response[0]['files'][1]['filename']).to eq 'nota-ufjf.pdf'
       expect(contents_response[0]['files'][2]['filename']).to eq 'joker.mp4'
-      expect(contents_response[1]['code']).to eq 2
+      expect(contents_response[1]['code']).to eq 'second_content.code'
       expect(contents_response[1]['title']).to eq 'Ruby Video'
       expect(contents_response[1]['description']).to eq 'Apresentação sobre TDD'
       expect(contents_response[1]['external_video_url']).to eq 'https://www.youtube.com/watch?v=2DvrRadXwWY'
@@ -54,11 +56,19 @@ describe 'Curriculum API' do
       expect(tasks_response[0]['title']).to eq 'Exercício Rails'
       expect(tasks_response[0]['description']).to eq 'Seu primeiro exercício ruby'
       expect(tasks_response[0]['certificate_requirement']).to eq 'Obrigatória'
-      expect(tasks_response[0]['attached_contents'][0]['attached_content_code']).to eq 1
-      expect(tasks_response[0]['attached_contents'][1]['attached_content_code']).to eq 2
+      expect(tasks_response[0]['attached_contents'][0]['attached_content_code']).to eq first_content.code
+      expect(tasks_response[0]['attached_contents'][1]['attached_content_code']).to eq second_content.code
       expect(tasks_response[1]['title']).to eq 'Exercício Stimulus'
       expect(tasks_response[1]['description']).to eq 'Seu primeiro exercício stimulus'
       expect(tasks_response[1]['certificate_requirement']).to eq 'Opcional'
+    end
+
+    it 'with a schedule item that does not exist' do
+      get "/api/v1/curriculums/55"
+
+      expect(response).to have_http_status :not_found
+      expect(response.content_type).to include('application/json')
+      expect(response.parsed_body['error']).to eq 'Currículo não encontrado!'
     end
   end
 end
