@@ -18,13 +18,14 @@ class CurriculumTasksController < ApplicationController
   end
 
   def show
-    @task = @curriculum.curriculum_tasks.find_by(id: params[:id])
+    @task = @curriculum.curriculum_tasks.find_by(code: params[:code])
+    redirect_to schedule_item_path(@curriculum.schedule_item_code), alert: t('curriculum_tasks.set_curriculum.error') if @task.nil?
   end
 
   private
 
   def set_curriculum
-    @curriculum = current_user.curriculums.find_by(id: params[:curriculum_id])
+    @curriculum = current_user.curriculums.find_by(code: params[:curriculum_code])
     redirect_to events_path, alert: t('curriculum_tasks.set_curriculum.error') unless @curriculum
   end
 

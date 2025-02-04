@@ -53,7 +53,7 @@ describe 'User access curriculum content details', type: :system do
     curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: content)
 
     login_as second_user
-    visit curriculum_curriculum_content_path(curriculum, curriculum_content)
+    visit curriculum_curriculum_content_path(curriculum, curriculum_content.code)
 
     expect(current_path).to eq events_path
     expect(page).to have_content 'Conteúdo indisponível!'
@@ -69,9 +69,23 @@ describe 'User access curriculum content details', type: :system do
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
 
     login_as user
-    visit curriculum_curriculum_content_path(curriculum, curriculum_content)
+    visit curriculum_curriculum_content_path(curriculum, curriculum_content.code)
     click_on 'VOLTAR'
 
     expect(current_path).to eq schedule_item_path(schedule_item.id)
+  end
+
+  it 'and curriculum content doesnt exists' do
+    user = create(:user)
+    create(:profile, user: user)
+    schedule_item = build(:schedule_item, id: 99, title: 'TDD com Rails', description: 'Introdução a programação com TDD')
+    curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.id)
+    allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+
+    login_as user
+    visit curriculum_curriculum_content_path(curriculum, 'ABCDE')
+
+    expect(current_path).to eq schedule_item_path(schedule_item.id)
+    expect(page).to have_content 'Conteúdo indisponível!'
   end
 end

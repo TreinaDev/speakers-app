@@ -26,7 +26,7 @@
     <% if @curriculum.curriculum_contents.any? %>
       <% @curriculum.curriculum_contents.each do |content| %>
         <div>
-          <%= link_to content.event_content.title, curriculum_curriculum_content_path(@curriculum, content.id), class: 'link_primary' %>
+          <%= link_to content.event_content.title, curriculum_curriculum_content_path(@curriculum, content.code), class: 'link_primary' %>
         </div>
       <% end %>
     <% else %>
@@ -44,7 +44,7 @@
     <% if @curriculum.curriculum_tasks.any? %>
       <% @curriculum.curriculum_tasks.each do |task| %>
         <div>
-          <%= link_to task.title, curriculum_curriculum_task_path(@curriculum, task.id), class: 'link-primary' %>
+          <%= link_to task.title, curriculum_curriculum_task_path(@curriculum, task.code), class: 'link_primary' %>
         </div>
       <% end %>
     <% else %>

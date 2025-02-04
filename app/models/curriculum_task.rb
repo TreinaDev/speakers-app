@@ -5,4 +5,14 @@ class CurriculumTask < ApplicationRecord
   has_many :curriculum_contents, through: :curriculum_task_contents
   validates :title, :description, :certificate_requirement, presence: true
   validates_uniqueness_of :title, scope: :curriculum_id
+  validates :code, presence: true
+
+  after_initialize :generate_code, if: :new_record?
+
+  def generate_code
+    loop do
+      self.code = SecureRandom.alphanumeric(8).upcase
+      break unless CurriculumTask.where(code: code).exists?
+    end
+  end
 end
