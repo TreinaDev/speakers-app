@@ -2,64 +2,71 @@ require 'rails_helper'
 
 describe ExternalEventApi::ScheduleItemsService do
   context '#where' do
-    it 'when API return success' do
+    it 'when API returns success' do
       event = build(:event, name: 'Ruby on Rails')
       email = 'test@email.com'
       service = ExternalEventApi::ScheduleItemsService.new(event_code: event.code, email: email)
       json_response =
-
+      [
         {
-          "schedule_items": [
+          "date": "2025-02-15",
+          "activities": [
             {
-              "id": 1,
-              "start_time": "2000-01-01T11:00:00.000Z",
-              "end_time": "2025-02-07 14:57:52 UTC",
-              "lenght": 45,
-              "title": "Title 1",
-              "description": "Something 1",
-              "speaker_email": "speaker0@email.com",
-              "schedule_code": 1,
-              "created_at": "2025-01-22T19:04:25.408Z",
-              "updated_at": "2025-01-22T19:04:25.408Z"
+              "name": "Apresentação",
+              "description": "Conheça sobre o fascinante mundo fullstack",
+              "start_time": "2025-02-01T18:00:00.000-03:00",
+              "end_time": "2025-02-01T19:00:00.000-03:00",
+              "responsible_name": "bruno",
+              "responsible_email": "speaker2@email.com",
+              "schedule_type": "activity"
             },
             {
-              "id": 2,
-              "start_time": "2000-01-01T14:00:00.000Z",
-              "end_time": "2025-02-07 14:57:52 UTC",
-              "lenght": 90,
-              "title": "Title 2",
-              "description": "Something 2",
-              "speaker_email": "speaker0@email.com",
-              "schedule_code": 1,
-              "created_at": "2025-01-22T19:04:25.416Z",
-              "updated_at": "2025-01-22T19:04:25.416Z"
-            },
+              "name": "Apresentação",
+              "description": "Conheça sobre o fascinante mundo fullstack",
+              "start_time": "2025-02-03T16:00:00.000-03:00",
+              "end_time": "2025-02-03T18:00:00.000-03:00",
+              "responsible_name": "Bruno",
+              "responsible_email": "speaker2@email.com",
+              "schedule_type": "activity"
+            }
+          ]
+        },
+        {
+          "date": "2025-02-16",
+          "activities": [
             {
-              "id": 3,
-              "start_time": "2000-01-01T11:00:00.000Z",
-              "end_time": "2025-02-07 14:57:52 UTC",
-              "lenght": 120,
-              "title": "Title 3",
-              "description": "Something 3",
-              "speaker_email": "speaker0@email.com",
-              "schedule_code": 2,
-              "created_at": "2025-01-22T19:04:25.422Z",
-              "updated_at": "2025-01-22T19:04:25.422Z"
+              "name": "Outra",
+              "description": "Tudo certo",
+              "start_time": "2025-02-03T12:00:00.000-03:00",
+              "end_time": "2025-02-03T15:00:00.000-03:00",
+              "responsible_name": "Bruno",
+              "responsible_email": "speaker2@email.com",
+              "schedule_type": "activity"
             }
           ]
         }
+      ]
 
       response = instance_double(Faraday::Response, success?: true, body: json_response.to_json)
       allow(Faraday).to receive(:get).and_return(response)
-      schedule_items = service.call
-
-      expect(schedule_items.length).to eq 3
-      expect(schedule_items[0].title).to eq 'Title 1'
-      expect(schedule_items[0].description).to eq 'Something 1'
-      expect(schedule_items[1].title).to eq 'Title 2'
-      expect(schedule_items[1].description).to eq 'Something 2'
-      expect(schedule_items[2].title).to eq 'Title 3'
-      expect(schedule_items[2].description).to eq 'Something 3'
+      schedule_data = service.call
+      expect(schedule_data.length).to eq 2
+      expect(schedule_data[0][:schedule].date).to eq '2025-02-15'
+      expect(schedule_data[0][:schedule_items].length).to eq 2
+      expect(schedule_data[0][:schedule_items][0].name).to eq 'Apresentação'
+      expect(schedule_data[0][:schedule_items][0].description).to eq 'Conheça sobre o fascinante mundo fullstack'
+      expect(schedule_data[0][:schedule_items][0].responsible_name).to eq 'bruno'
+      expect(schedule_data[0][:schedule_items][0].responsible_email).to eq 'speaker2@email.com'
+      expect(schedule_data[0][:schedule_items][1].name).to eq 'Apresentação'
+      expect(schedule_data[0][:schedule_items][1].description).to eq 'Conheça sobre o fascinante mundo fullstack'
+      expect(schedule_data[0][:schedule_items][1].responsible_name).to eq 'Bruno'
+      expect(schedule_data[0][:schedule_items][1].responsible_email).to eq 'speaker2@email.com'
+      expect(schedule_data[1][:schedule].date).to eq '2025-02-16'
+      expect(schedule_data[1][:schedule_items].length).to eq 1
+      expect(schedule_data[1][:schedule_items][0].name).to eq 'Outra'
+      expect(schedule_data[1][:schedule_items][0].description).to eq 'Tudo certo'
+      expect(schedule_data[1][:schedule_items][0].responsible_name).to eq 'Bruno'
+      expect(schedule_data[1][:schedule_items][0].responsible_email).to eq 'speaker2@email.com'
     end
 
     it 'when API return not found' do

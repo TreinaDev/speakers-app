@@ -46,7 +46,7 @@ describe Event do
       items = []
       items << build(:schedule_item, name: 'Ruby on Rails', description: 'Introdução a programação')
       items << build(:schedule_item, name: "TDD e introdução a API's", description: 'Desvolvimento Web')
-      schedules = [{ schedule: speaker_schedule, schedule_items: items }]
+      schedules = [ { schedule: speaker_schedule, schedule_items: items } ]
       allow(event).to receive(:schedule_items).and_return(schedules)
       schedule_items = event.schedule_items(user.token)
 

@@ -98,6 +98,8 @@ pt-BR:
       curriculum_task_title: 'Tarefas da programação'
       no_curriculum_task: 'Nenhuma tarefa cadastrada para essa programação.'
       new_curriculum_task_button: 'Adicionar tarefa'
+      start_time: 'Início'
+      end_time: 'Encerramento'
   curriculum_contents:
     new:
       title: 'Adicionar conteúdo a programação:'

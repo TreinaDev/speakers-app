@@ -11,11 +11,21 @@ describe 'User sees list of participants' do
   it 'with success' do
     user = create(:user, first_name: 'João', email: 'joão@email.com')
     event = [ build(:event, name: 'Dev week') ]
-    schedule_items = [ build(:schedule_item, title: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD', speaker_email: user.email, length: 100) ]
+    schedule1 = Schedule.new(date: "2025-02-15")
+    schedule_items =
+      [ build(:schedule_item, name: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD', start_time: '11:00', end_time: '12:00'),
+        build(:schedule_item, name: "TDD e introdução a API's", description: 'Desvolvimento Web', start_time: '10:00', end_time: '15:00'),
+        build(:schedule_item, name: 'Python', description: 'Aprendizado de Máquina', start_time: '09:00', end_time: '16:00') ]
+    schedules = [
+      {
+        schedule: schedule1,
+        schedule_items: schedule_items
+      }
+    ]
     participants = [ build(:participant, name: 'João'), build(:participant, name: 'Lucas'), build(:participant, name: 'Thiago') ]
     allow(Event).to receive(:all).and_return(event)
     allow(Event).to receive(:find).and_return(event.first)
-    allow(event.first).to receive(:schedule_items).and_return(schedule_items)
+    allow(event.first).to receive(:schedule_items).and_return(schedules)
     allow(ScheduleItem).to receive(:find).and_return(schedule_items.first)
     allow(schedule_items.first).to receive(:participants).and_return(participants)
 
@@ -33,11 +43,21 @@ describe 'User sees list of participants' do
   it 'does not locate participants' do
     user = create(:user, first_name: 'João', email: 'joão@email.com')
     event = [ build(:event, name: 'Dev week') ]
-    schedule_items = [ build(:schedule_item, title: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD', speaker_email: user.email, length: 100) ]
+    schedule1 = Schedule.new(date: "2025-02-15")
+    schedule_items =
+      [ build(:schedule_item, name: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD', start_time: '11:00', end_time: '12:00'),
+        build(:schedule_item, name: "TDD e introdução a API's", description: 'Desvolvimento Web', start_time: '10:00', end_time: '15:00'),
+        build(:schedule_item, name: 'Python', description: 'Aprendizado de Máquina', start_time: '09:00', end_time: '16:00') ]
+    schedules = [
+      {
+        schedule: schedule1,
+        schedule_items: schedule_items
+      }
+    ]
     participants = []
     allow(Event).to receive(:all).and_return(event)
     allow(Event).to receive(:find).and_return(event.first)
-    allow(event.first).to receive(:schedule_items).and_return(schedule_items)
+    allow(event.first).to receive(:schedule_items).and_return(schedules)
     allow(ScheduleItem).to receive(:find).and_return(schedule_items.first)
     allow(schedule_items.first).to receive(:participants).and_return(participants)
 

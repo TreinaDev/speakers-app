@@ -14,7 +14,7 @@ class ExternalEventApi::ScheduleItemsService < ApplicationService
         items = []
         speaker_schedule = Schedule.new(date: schedule['date'])
         schedule['activities'].each do |item|
-          items << speaker_schedule.build_schedule_item(**item)
+          items << ScheduleItem.new(**item)
         end
         { schedule: speaker_schedule, schedule_items: items }
       end

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :events, only: %i[ index show ], param: :code
   resources :event_contents, only: %i[ index show new create edit update ]
   resources :event_tasks, only: %i[ index show new create edit update ]
-  resources :schedule_items, only: %i[ show ]
+  resources :schedule_items, only: %i[ show ], param: :code
   resources :profiles, only: %i[ show new create ], param: :username
   resources :curriculums, only: [] do
     resources :curriculum_contents, only: %i[ new create show ]
