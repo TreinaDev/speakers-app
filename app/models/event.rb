@@ -21,7 +21,7 @@ class Event
 
   @@instances = []
   def initialize(**params)
-    super(event_permited_params(params))
+    super(event_permitted_params(params))
     @@instances << self
   end
 
@@ -56,7 +56,7 @@ class Event
 
   private
 
-  def event_permited_params(params)
+  def event_permitted_params(params)
     ActionController::Parameters.new(params).permit(Event.attribute_names)
   end
 end
