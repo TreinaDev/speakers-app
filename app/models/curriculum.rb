@@ -3,8 +3,9 @@ class Curriculum < ApplicationRecord
   has_many :curriculum_contents
   has_many :event_contents, through: :curriculum_contents
   has_many :curriculum_tasks
-
   validates :code, presence: true
+  validates :code, uniqueness: true
+
 
   after_initialize :generate_code, if: :new_record?
 

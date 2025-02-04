@@ -3,9 +3,9 @@ class CurriculumTask < ApplicationRecord
   enum :certificate_requirement, { mandatory: 1, optional: 0 }, default: :optional
   has_many :curriculum_task_contents
   has_many :curriculum_contents, through: :curriculum_task_contents
-  validates :title, :description, :certificate_requirement, presence: true
+  validates :title, :description, :certificate_requirement, :code, presence: true
+  validates :code, uniqueness: true
   validates_uniqueness_of :title, scope: :curriculum_id
-  validates :code, presence: true
 
   after_initialize :generate_code, if: :new_record?
 

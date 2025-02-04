@@ -7,10 +7,10 @@ class EventContent < ApplicationRecord
   has_many_attached :files
   validate :must_have_less_than_five_files
   validate :valid_file_size
-  validates :title, presence: true
+  validates :title, :code, presence: true
+  validates :code, uniqueness: true
   validate :check_external_video_url
   has_rich_text :description
-  validates :code, presence: true
 
   after_initialize :generate_code, if: :new_record?
 

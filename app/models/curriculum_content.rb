@@ -6,6 +6,7 @@ class CurriculumContent < ApplicationRecord
   validates_uniqueness_of :curriculum_id, scope: :event_content_id
   validate :must_be_event_content_owner
   validates :code, presence: true
+  validates :code, uniqueness: true
 
   after_initialize :generate_code, if: :new_record?
 
@@ -16,7 +17,7 @@ class CurriculumContent < ApplicationRecord
   def to_param
     code
   end
-  
+
   protected
 
   def generate_code
