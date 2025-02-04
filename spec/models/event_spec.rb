@@ -40,18 +40,20 @@ describe Event do
 
   context '#schedule_items' do
     it 'should get all schedules items associated with event' do
+      user = create(:user)
       event = build(:event, name: 'Ruby on Rails')
-      items = [
-        build(:schedule_item, title: 'Ruby on Rails', description: 'Introdução a programação'),
-        build(:schedule_item, title: "TDD e introdução a API's", description: 'Desvolvimento Web')
-      ]
-      allow(event).to receive(:schedule_items).and_return(items)
-      schedule_items = event.schedule_items('teste@email.com')
+      speaker_schedule = build(:schedule)
+      items = []
+      items << build(:schedule_item, name: 'Ruby on Rails', description: 'Introdução a programação')
+      items << build(:schedule_item, name: "TDD e introdução a API's", description: 'Desvolvimento Web')
+      schedules = [ { schedule: speaker_schedule, schedule_items: items } ]
+      allow(event).to receive(:schedule_items).and_return(schedules)
+      schedule_items = event.schedule_items(user.token)
 
-      expect(schedule_items[0].title).to eq 'Ruby on Rails'
-      expect(schedule_items[0].description).to eq 'Introdução a programação'
-      expect(schedule_items[1].title).to eq "TDD e introdução a API's"
-      expect(schedule_items[1].description).to eq 'Desvolvimento Web'
+      expect(schedule_items[0][:schedule_items][0].name).to eq 'Ruby on Rails'
+      expect(schedule_items[0][:schedule_items][0].description).to eq 'Introdução a programação'
+      expect(schedule_items[0][:schedule_items][1].name).to eq "TDD e introdução a API's"
+      expect(schedule_items[0][:schedule_items][1].description).to eq 'Desvolvimento Web'
     end
 
     it 'raise connection failed error' do
@@ -59,7 +61,7 @@ describe Event do
       logger = Rails.logger
       allow(logger).to receive(:error)
       allow(Faraday).to receive(:get).and_raise(Faraday::ConnectionFailed)
-      event.schedule_items('teste@email.com')
+      event.schedule_items('ABCD1234')
 
       expect(logger).to have_received(:error).with(instance_of(Faraday::ConnectionFailed))
     end
@@ -69,9 +71,9 @@ describe Event do
       logger = Rails.logger
       allow(logger).to receive(:error)
       allow(Faraday).to receive(:get).and_raise(StandardError)
-      event.schedule_items('teste@email.com')
+      event.schedule_items('ABCD1234')
 
-      expect(logger).to have_received(:error).with("Erro: StandardError")
+      expect(logger).to have_received(:error)
     end
   end
 

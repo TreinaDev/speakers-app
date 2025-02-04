@@ -55,23 +55,26 @@ describe 'User see event details', type: :system do
     event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
             start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
             event_type: 'Presencial', location: 'Juiz de Fora', participants_limit: 100, status: 'Publicado')
-    seven_days = 7.days.from_now
-    eight_days = 8.days.from_now
-    nine_days = 9.days.from_now
+    schedule1 = Schedule.new(date: "2025-02-15")
     schedule_items =
-      [ build(:schedule_item, title: 'Ruby on Rails', description: 'Introdução a programação', start_time: seven_days, end_time: seven_days + 3600),
-        build(:schedule_item, title: "TDD e introdução a API's", description: 'Desvolvimento Web', start_time: eight_days),
-        build(:schedule_item, title: 'Python', description: 'Aprendizado de Máquina', start_time: nine_days) ]
+      [ build(:schedule_item, name: 'Ruby on Rails', description: 'Introdução a programação', start_time: '11:00', end_time: '12:00'),
+        build(:schedule_item, name: "TDD e introdução a API's", description: 'Desvolvimento Web', start_time: '10:00', end_time: '15:00'),
+        build(:schedule_item, name: 'Python', description: 'Aprendizado de Máquina', start_time: '09:00', end_time: '16:00') ]
+    schedules = [
+      {
+        schedule: schedule1,
+        schedule_items: schedule_items
+      }
+    ]
     allow(Event).to receive(:find).and_return(event)
-    allow(event).to receive(:schedule_items).and_return(schedule_items)
+    allow(event).to receive(:schedule_items).and_return(schedules)
 
     login_as user, scope: :user
     visit event_path(event.code)
 
-    expect(page).to have_content I18n.l(seven_days, format: :brazilian)
-    expect(page).to have_content I18n.l(seven_days + 3600, format: :brazilian_hour)
-    expect(page).to have_content I18n.l(eight_days, format: :brazilian)
-    expect(page).to have_content I18n.l(nine_days, format: :brazilian)
+    expect(page).to have_content '11:00 - 12:00'
+    expect(page).to have_content '10:00 - 15:00'
+    expect(page).to have_content '09:00 - 16:00'
   end
 
   it 'and should see a message when doesnt have schedule items' do

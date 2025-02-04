@@ -2,17 +2,11 @@
 
 <div class='border rounded p-3'>
   <div>
-    <h1> <%= @schedule_item.title %> </h1>
-    <p class='font-bold inline'> Data:</p>
-    <p class='inline'> <%= l(@schedule_item.start_time.to_date, format: :default) %> </p>
+    <h1 class='heading-1'> <%= @schedule_item.name %> </h1>
+    <h3 class='font-bold inline'><%= t('.start_time') %>: <%= @schedule_item.start_time.strftime("%H:%M") %></h3>
+    <h3 class='font-bold inline'><%= t('.end_time') %>: <%= @schedule_item.end_time.strftime("%H:%M") %> </h3>
     <span class= 'block'></span>
-    <p class='font-bold inline'> Horário:</p>
-    <p class='inline'> <%= l(@schedule_item.start_time.to_datetime, format: :brazilian_hour) %> - </p>
-    <p class='inline'> <%= l(@schedule_item.end_time.to_datetime, format: :brazilian_hour) %> </p>
-    <span class= 'block'></span>
-    <p class= 'font-bold inline'> <%= t('.estimated_participants') %></p>
-    <span class= 'inline'> <%= @schedule_item.length %> </span>
-    <h2> <%= ScheduleItem.human_attribute_name(:description) %> </h2>
+    <h2 class='heading-2'> <%= ScheduleItem.human_attribute_name(:description) %> </h2>
     <p> <%= @schedule_item.description %> </p>
     <%= render 'participants/participants', participants: @participants %>
   </div>

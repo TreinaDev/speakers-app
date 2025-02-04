@@ -8,18 +8,18 @@ class ExternalEventApi::ScheduleItemsService < ApplicationService
   def get_user_schedule_items
     result = []
     begin
-      response = Faraday.get('http://localhost:3001/events/schedule_items', { email: kwargs[:email], event_id: kwargs[:event_id] })
-      if response.success?
-        schedule_items = JSON.parse(response.body)
-        result = schedule_items['schedule_items'].map do |item|
-          ScheduleItem.new(id: item['id'], title: item['title'], description: item['description'], speaker_email: item['speaker_email'],
-                           length: item['length'], start_time: item['start_time'], end_time: item['end_time'])
+      response = EventClient.get_schedule_items(token: kwargs[:token], event_code: kwargs[:event_code])
+      json_response = JSON.parse(response.body)
+      result = json_response.map do |schedule|
+        items = []
+        speaker_schedule = Schedule.new(date: schedule['date'])
+        schedule['activities'].each do |item|
+          items << ScheduleItem.new(**item)
         end
+        { schedule: speaker_schedule, schedule_items: items }
       end
-    rescue Faraday::ConnectionFailed => e
-      Rails.logger.error e
-    rescue => e
-      Rails.logger.error "Erro: #{e}"
+    rescue StandardError => error
+      Rails.logger.error error
     end
     result
   end

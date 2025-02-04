@@ -1,21 +1,25 @@
 class ScheduleItem
   extend ActiveModel::Translation
+  include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attr_accessor :id, :title, :speaker_email, :description, :length, :start_time, :end_time
+  attribute :name, :string
+  attribute :description, :string
+  attribute :start_time, :time
+  attribute :end_time, :time
+  attribute :responsible_name, :string
+  attribute :responsible_email, :string
+  attribute :schedule_type, :string
+  attribute :code, :string
+
   @@instances = []
-  def initialize(id:, title:, speaker_email:, description:, length:, start_time:, end_time:)
-    @id = id
-    @title = title
-    @speaker_email = speaker_email
-    @description = description
-    @length = length
-    @start_time = start_time
-    @end_time = end_time
+  def initialize(**params)
+    super(schedule_item_permitted_params(params))
     @@instances << self
   end
 
-  def self.find(schedule_item_id:, email:)
-    ExternalEventApi::FindScheduleItemService.call(email: email, schedule_item_id: schedule_item_id)
+  def self.find(schedule_item_code:, email:)
+    ExternalEventApi::FindScheduleItemService.call(email: email, schedule_item_code: schedule_item_code)
   end
 
   def self.count
@@ -27,6 +31,12 @@ class ScheduleItem
   end
 
   def participants
-    ExternalParticipantApi::ListParticipantsService.call(schedule_item_id: id)
+    ExternalParticipantApi::ListParticipantsService.call(schedule_item_code: code)
+  end
+
+  private
+
+  def schedule_item_permitted_params(params)
+    ActionController::Parameters.new(params).permit(ScheduleItem.attribute_names)
   end
 end
