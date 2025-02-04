@@ -22,12 +22,12 @@ describe 'User see schedule item details', type: :request do
 
   it 'must be same speaker email' do
     first_user = create(:user, email: 'joao@email.com')
-    first_schedule_item = build(:schedule_item, speaker_email: first_user.email)
+    first_schedule_item = build(:schedule_item, responsible_email: first_user.email)
     other_user = create(:user, email: 'other@email.com')
     create(:profile, user: other_user)
 
     login_as other_user, scope: :user
-    get schedule_item_path(first_schedule_item.id)
+    get schedule_item_path(first_schedule_item.code)
 
     expect(response).to redirect_to events_path
     expect(flash[:alert]).to eq 'Essa Programação não existe'

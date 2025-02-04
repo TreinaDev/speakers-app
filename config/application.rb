@@ -43,5 +43,6 @@ module SpeakersApp
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.participant_api = config_for(:participant_api)
+    config.event_api = config_for(:event_api)
   end
 end

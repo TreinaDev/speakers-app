@@ -5,11 +5,10 @@ describe ExternalEventApi::FindScheduleItemService do
     it 'when API return success' do
       ScheduleItem.delete_all
       json_schedule_item =   {
-        "id": 1,
-        "title": "Ruby on Rails",
+        "code": "ABCD1234",
+        "name": "Ruby on Rails",
         "description": "Testes e TDD",
-        "speaker_email": "joao@email.com",
-        "length": 100,
+        "responsible_email": "joao@email.com",
         "start_time": "2025-02-07 13:57:52 UTC",
         "end_time": "2025-02-07 14:57:52 UTC"
       }
@@ -19,10 +18,9 @@ describe ExternalEventApi::FindScheduleItemService do
       schedule_item = service.call
 
       expect(ScheduleItem.count).to eq 1
-      expect(schedule_item.title).to eq 'Ruby on Rails'
+      expect(schedule_item.name).to eq 'Ruby on Rails'
       expect(schedule_item.description).to eq 'Testes e TDD'
-      expect(schedule_item.speaker_email).to eq 'joao@email.com'
-      expect(schedule_item.length).to eq 100
+      expect(schedule_item.responsible_email).to eq 'joao@email.com'
     end
 
     it 'when API return not found' do

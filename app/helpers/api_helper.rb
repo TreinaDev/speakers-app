@@ -4,7 +4,17 @@ module ApiHelper
     PARTICIPANT_EVENT_LIST = Rails.configuration.participant_api['event_list'].freeze
 
     def self.get_participant_event_list(event_code)
-      url = "#{ PARTICIPANT_URL }#{ PARTICIPANT_EVENT_LIST }#{ event_code }"
+      url = "#{PARTICIPANT_URL}#{PARTICIPANT_EVENT_LIST}#{event_code}"
+      Faraday.get(url)
+    end
+  end
+
+  class EventClient
+    EVENT_URL = Rails.configuration.event_api['base'].freeze
+    SCHEDULE_ITEMS_URL = Rails.configuration.event_api['schedule_items']
+
+    def self.get_schedule_items(token:, event_code:)
+      url = "#{EVENT_URL}#{SCHEDULE_ITEMS_URL % { token: token, event_code: event_code }}"
       Faraday.get(url)
     end
   end
