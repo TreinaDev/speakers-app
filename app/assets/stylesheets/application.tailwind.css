@@ -445,4 +445,16 @@
   .tab__combo-btn {
     @apply flex gap-1 mt-6;
   }
+
+  .schedule-item__card{
+    @apply p-2 border border-solid rounded-lg bg-white border-gray-900 shadow-md text-center;
+  }
+
+  .schedule-item__card-title {
+    @apply font-semibold text-blue-500 mb-2 mt-3;
+  }
+
+  .schedule_schedule_items-card {
+    @apply grid p-2 border mb-2 hover:shadow-xl hover:bg-gray-400;
+  }
 }

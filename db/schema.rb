@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_02_203346) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_04_151541) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -54,6 +54,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_203346) do
     t.integer "event_content_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
+    t.index ["code"], name: "index_curriculum_contents_on_code", unique: true
     t.index ["curriculum_id"], name: "index_curriculum_contents_on_curriculum_id"
     t.index ["event_content_id"], name: "index_curriculum_contents_on_event_content_id"
   end
@@ -71,9 +73,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_203346) do
     t.integer "curriculum_id", null: false
     t.string "title"
     t.text "description"
-    t.integer "certificate_requirement", default: 0, null: false
+    t.integer "certificate_requirement", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
+    t.index ["code"], name: "index_curriculum_tasks_on_code", unique: true
     t.index ["curriculum_id"], name: "index_curriculum_tasks_on_curriculum_id"
   end
 
@@ -82,6 +86,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_203346) do
     t.string "schedule_item_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
+    t.index ["code"], name: "index_curriculums_on_code", unique: true
     t.index ["user_id"], name: "index_curriculums_on_user_id"
   end
 
@@ -91,6 +97,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_203346) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.string "external_video_url"
+    t.string "code"
+    t.index ["code"], name: "index_event_contents_on_code", unique: true
     t.index ["user_id"], name: "index_event_contents_on_user_id"
   end
 
