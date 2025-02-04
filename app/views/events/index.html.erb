@@ -3,8 +3,8 @@
   <% if @events.any? %>
     <ul class="flex flex-wrap gap-6">
       <% @events.each do |event| %>
-        <%= link_to_if event.status == 'published', published(event), event_path(event.code) do %>
-          <%= unpublished(event) %>
+        <%= link_to event_path(event.code) do %>
+          <%= event_card(event) %>
         <% end %>
       <% end %>
     </ul>
