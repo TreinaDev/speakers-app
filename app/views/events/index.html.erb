@@ -1,10 +1,24 @@
 <div> 
-  <h1><%= t('.my_events') %></h1>
+  <h1 class="mb-20"><%= t('.my_events') %></h1>
   <% if @events.any? %>
-    <ul class="flex flex-wrap gap-6">
+    <ul class="flex justify-center flex-wrap gap-6">
       <% @events.each do |event| %>
         <%= link_to event_path(event.code) do %>
-          <%= event_card(event) %>
+          <li id="<%= event.code %>" class="event__card border border-gray-200 w-96 p-6 rounded-lg shadow flex-column items-center">
+            <%= image_tag event.logo_url.presence || "default_image.jpeg", class: "w-96 h-48 w-full object-cover rounded-lg mr-6", alt: t('.no_image')%>
+            <h2 class="text-2xl font-bold text-indigo-700 w-96 mb-2 mt-2 truncate w-full"><%= event.name %></h2>
+            <div class="event__card-footer">
+              <div class="event__card-date">
+                <p class="event__card-date-day"><%= day(event.start_date) %></p>
+                <p class="event__card-date-month"><%= month_name(event.start_date) %></p>
+                <p class="event__card-date-year"><%= year(event.start_date) %></p>
+              </div>
+              <div class="event__card-address">
+                <%= image_tag 'location.svg', class: 'icon' %>
+                <p class="self-center"><%= event.address %></p>
+              </div>
+            </div>
+          </li>
         <% end %>
       <% end %>
     </ul>
