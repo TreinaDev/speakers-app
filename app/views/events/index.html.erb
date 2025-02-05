@@ -1,8 +1,8 @@
 <div> 
-  <h1><%= t('.my_events') %></h1>
+  <h1 class="mb-20"><%= t('.my_events') %></h1>
   <% if @events.any? %>
-    <ul class="flex flex-wrap gap-6">
-      <% @events.each do |event| %>
+    <ul class="flex justify-center flex-wrap gap-6">
+      <% @paginated_events.each do |event| %>
         <%= link_to event_path(event.code) do %>
           <%= event_card(event) %>
         <% end %>
@@ -11,4 +11,7 @@
   <% else %>
     <p><%= t('.no_events') %></p>
   <% end %>
+</div>
+<div class="text-center mt-5">
+  <%= paginate @paginated_events %>
 </div>

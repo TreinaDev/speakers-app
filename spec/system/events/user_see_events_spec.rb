@@ -28,8 +28,16 @@ describe 'user visit home and see list of events', type: :system do
     expect(page).to have_content 'Meus Eventos'
     expect(page).to have_content('Event1')
     expect(page).to have_content('Event2')
-    expect(page).to have_content('Data de início 01/02/2025')
-    expect(page).to have_content('Data de início 01/02/2025')
+    within "##{ events.first.code }" do
+      expect(page).to have_css ".event__card-date-day", text: '01'
+      expect(page).to have_css ".event__card-date-month", text: 'FEVEREIRO'
+      expect(page).to have_css ".event__card-date-year", text: '2025'
+    end
+    within "##{ events.last.code }" do
+      expect(page).to have_css ".event__card-date-day", text: '01'
+      expect(page).to have_css ".event__card-date-month", text: 'FEVEREIRO'
+      expect(page).to have_css ".event__card-date-year", text: '2025'
+    end
   end
 
   it 'and dont exists events for him' do
