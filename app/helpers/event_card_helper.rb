@@ -12,7 +12,7 @@ module EventCardHelper
   def event_image(event)
     image_tag(event.logo_url.presence || "default_image.jpeg",
               class: "w-96 h-48 w-full object-cover rounded-lg mr-6",
-              alt: t('.no_image'))
+              alt: t('views.events.events.no_image'))
   end
 
   def event_title(event)
