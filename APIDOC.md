@@ -1,0 +1,1 @@
+get '/api/v1/curriculums/:schedule_item_code'
