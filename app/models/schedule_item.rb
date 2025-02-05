@@ -18,8 +18,8 @@ class ScheduleItem
     @@instances << self
   end
 
-  def self.find(schedule_item_code:, email:)
-    ExternalEventApi::FindScheduleItemService.call(email: email, schedule_item_code: schedule_item_code)
+  def self.find(schedule_item_code:, token:)
+    ExternalEventApi::FindScheduleItemService.call(token: token, schedule_item_code: schedule_item_code)
   end
 
   def self.count

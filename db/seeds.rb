@@ -9,7 +9,7 @@
 #   end
 
 User.skip_callback(:validation, :before, :api_auth_user)
-user = User.create!(first_name: 'João', last_name: 'Campus', email: 'joao@email.com', password: '123456', token: 'ABCD1234')
+user = User.create!(first_name: 'João', last_name: 'Campus', email: 'marcos@email.com', password: '123456', token: 'ABCD1234')
 User.create!(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456', token: 'ASDF4567')
 User.set_callback(:validation, :before, :api_auth_user)
 

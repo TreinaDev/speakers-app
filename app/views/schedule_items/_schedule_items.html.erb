@@ -11,7 +11,7 @@
           
           <% data.each do |item_data| %>
             <% item_data[:schedule_items].each do |item| %>
-              <%= link_to schedule_item_path(item.responsible_email) do %>
+              <%= link_to schedule_item_path(item.code) do %>
                 <div class="schedule_schedule_items-card">
                   <span><%= item.name %></span>
                   <span><b><%= ScheduleItem.human_attribute_name(:time) %>:</b>

@@ -9,7 +9,7 @@ describe ScheduleItem do
                                       responsible_email: user.email, start_time: '11:00', end_time: '12:00')
       allow(ScheduleItem).to receive(:find).and_return(schedule_item_instance)
 
-      schedule_item = ScheduleItem.find(schedule_item_code: schedule_item_instance.code, email: user.email)
+      schedule_item = ScheduleItem.find(schedule_item_code: schedule_item_instance.code, token: user.token)
 
       expect(ScheduleItem.count).to eq 1
       expect(schedule_item.name).to eq 'Entrevista com João'
@@ -23,7 +23,7 @@ describe ScheduleItem do
       ScheduleItem.delete_all
       allow(ScheduleItem).to receive(:find).and_return(nil)
 
-      schedule_item = ScheduleItem.find(schedule_item_code: 999999, email: 'something@email.com')
+      schedule_item = ScheduleItem.find(schedule_item_code: 999999, token: 'ABCD1234')
 
       expect(ScheduleItem.count).to eq 0
       expect(schedule_item).to be_nil

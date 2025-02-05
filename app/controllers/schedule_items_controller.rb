@@ -2,7 +2,7 @@ class ScheduleItemsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @schedule_item = ScheduleItem.find(schedule_item_code: params[:code], email: current_user.email)
+    @schedule_item = ScheduleItem.find(schedule_item_code: params[:code], token: current_user.token)
     redirect_to events_path, alert: t('.not_found') if @schedule_item.nil?
     @participants = @schedule_item&.participants
     generate_curriculum if @schedule_item
