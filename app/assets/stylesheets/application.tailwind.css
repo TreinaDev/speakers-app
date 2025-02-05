@@ -434,6 +434,8 @@
   }
   /* Fim da Home Page */
 
+  /* Início da Tab navigation */
+
   .tab__btn--active {
     @apply bg-gray-900 text-gray-100 px-5;
   }
@@ -446,6 +448,10 @@
     @apply flex gap-1 mt-6;
   }
 
+  /* Fim da Tab navigation */
+
+  /* Início de ScheduleItem card */
+
   .schedule-item__card{
     @apply p-2 border border-solid rounded-lg bg-white border-gray-900 shadow-md text-center;
   }
@@ -457,4 +463,43 @@
   .schedule_schedule_items-card {
     @apply grid p-2 border mb-2 hover:shadow-xl hover:bg-gray-400;
   }
+  /* Fim de ScheduleItem card */
+
+  /* Início de Event card */
+
+  .event__card {
+    @apply bg-gray-50 transition-all duration-300 hover:bg-gray-200 hover:translate-y-1 hover:shadow-lg;
+  }
+
+  .event__card-footer {
+    @apply grid grid-cols-8;
+  }
+
+  .event__card-date {
+    @apply flex flex-col text-gray-600 col-span-3 p-2 text-center justify-center relative;
+  }
+
+  .event__card-date-week, .event__card-date-year {
+    @apply text-xs;
+  }
+
+  .event__card-date-img {
+    @apply absolute bottom-1/2 left-1/2;
+  }
+
+  .event__card-date-day {
+    @apply text-4xl;
+  }
+
+  .event__card-address {
+    @apply flex flex-row col-span-5 p-1 m-2 gap-4 max-h-36;
+  }
+
+  /* Fim de Event  card */
+
+  /* Início Kaminari */
+  .page {
+    @apply text-2xl rounded-full m-2 h-10 w-10;
+  }
+  /* Fim Kaminari */
 }

@@ -11,7 +11,7 @@ FactoryBot.define do
     status { "published" }
     created_at { "2025-01-31T16:24:11.521-03:00" }
     updated_at { "2025-01-31T16:24:11.534-03:00" }
-    code { "ABC123XYZ" }
+    code { SecureRandom.alphanumeric(8).upcase }
 
     initialize_with {
       new(name: name, url: url, description: description, start_date: start_date,

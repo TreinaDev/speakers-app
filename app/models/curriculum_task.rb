@@ -13,6 +13,11 @@ class CurriculumTask < ApplicationRecord
     code
   end
 
+  def translated_certificate_requirement(symbol)
+    I18n.t("activerecord.attributes.curriculum_task.certificate_requirements.#{symbol}")
+  end
+
+
   protected
 
   def generate_code

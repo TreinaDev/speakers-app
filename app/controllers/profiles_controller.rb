@@ -7,7 +7,8 @@ class ProfilesController < ApplicationController
     @profile = Profile.find_by(username: params[:username])
     return redirect_to events_path, alert: t('profiles.show.error', profile: params[:username]) if @profile.nil? && user_signed_in?
     return redirect_to root_path, alert: t('profiles.show.error', profile: params[:username]) if @profile.nil?
-    @events = Event.all(@profile.user.token)
+    @events = Event.all(@profile.user.token).sort_by { |event| event.start_date }.reverse
+    @paginated_events = Kaminari.paginate_array(@events).page(params[:page]).per(15)
   end
 
   def new

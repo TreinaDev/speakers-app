@@ -48,7 +48,7 @@ describe 'User views the public profile', type: :system do
     expect(page).to have_link('Facebook')
     expect(page).to have_content('Meus Eventos (2)')
     expect(page).to have_content('Event1')
-    expect(page).to have_content('Event1 description')
+    expect(page).to have_content('Event2')
   end
 
   it 'as owner' do
