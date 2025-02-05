@@ -9,6 +9,7 @@ describe 'User register content for your schedule item curriculum', type: :syste
     user.event_contents.create(title: 'Desenvolvimento', description: 'Lógica de Programação')
     schedule1 = Schedule.new(date: "2025-02-15")
     schedule_item1 = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
+    curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item1.code)
     schedules = [
       {
         schedule: schedule1,

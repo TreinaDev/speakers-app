@@ -30,8 +30,8 @@ class Event
     ExternalEventApi::GetAllEventsService.call(token: token)
   end
 
-  def self.find(code)
-    ExternalEventApi::FindEventService.call(code: code)
+  def self.find(code:, token:)
+    ExternalEventApi::FindEventService.call(code: code, token: token)
   end
 
   def schedule_items(token)
