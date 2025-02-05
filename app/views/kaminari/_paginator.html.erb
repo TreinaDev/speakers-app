@@ -12,7 +12,7 @@
     <%= prev_page_tag unless current_page.first? %>
     <% each_page do |page| -%>
       <% if page.display_tag? -%>
-        <%= page_tag page %>
+        <span><%= page_tag page %></span>
       <% elsif !page.was_truncated? -%>
         <%= gap_tag %>
       <% end -%>
