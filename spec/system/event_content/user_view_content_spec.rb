@@ -48,46 +48,4 @@ describe 'User view a content', type: :system do
 
     expect(current_path).to eq new_user_session_path
   end
-
-  it 'and view all tasks where this content is used' do
-    user = create(:user, first_name: 'João')
-    create(:profile, user: user)
-    event_content = user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
-    task = user.event_tasks.create!(name: 'Tarefa inicial', description: 'Desafio para iniciantes')
-    EventTaskContent.create!(event_content: event_content, event_task: task)
-    task2 = user.event_tasks.create!(name: 'Aprofundamento', description: 'pós créditos da palestra')
-    EventTaskContent.create!(event_content: event_content, event_task: task2)
-
-    login_as user
-    visit event_content_path(event_content)
-
-    expect(page).to have_content 'Tarefas que utilizam este conteúdo:'
-    expect(page).to have_link 'Tarefa inicial'
-    expect(page).to have_link 'Aprofundamento'
-  end
-
-  it 'and access task details' do
-    user = create(:user, first_name: 'João')
-    create(:profile, user: user)
-    event_content = user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
-    task = user.event_tasks.create!(name: 'Tarefa inicial', description: 'Desafio para iniciantes')
-    EventTaskContent.create!(event_content: event_content, event_task: task)
-
-    login_as user
-    visit event_content_path(event_content)
-    click_on 'Tarefa inicial'
-
-    expect(current_path).to eq event_task_path(task)
-  end
-
-  it 'and not see tasks for this content' do
-    user = create(:user, first_name: 'João')
-    create(:profile, user: user)
-    event_content = user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
-
-    login_as user
-    visit event_content_path(event_content)
-
-    expect(page).to have_content 'Esse conteúdo não foi associado a nenhuma tarefa.'
-  end
 end

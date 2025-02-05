@@ -11,8 +11,8 @@ RSpec.describe User, type: :model do
 
   context '#api_auth_user' do
     it 'with success' do
-      token = { "token"=> "ABCD1234" }
-      allow_any_instance_of(ExternalEventApi::UserFindEmailService).to receive(:call).and_return(token)
+      code = { "code"=> "ABCD1234" }
+      allow_any_instance_of(ExternalEventApi::UserFindEmailService).to receive(:call).and_return(code)
       user = User.new(email: 'joao@email.com', first_name: 'João', last_name: 'Almeida', password: '123456')
 
       user.save
