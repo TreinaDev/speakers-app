@@ -496,4 +496,10 @@
   }
 
   /* Fim de Event  card */
+
+  /* Início Kaminari */
+  .page {
+    @apply text-2xl rounded-full m-2 h-10 w-10;
+  }
+  /* Fim Kaminari */
 }

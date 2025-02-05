@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @events = Event.all(current_user.token)
+    @events = Event.all(current_user.token).sort_by { |event| event.start_date }.reverse
+    @paginated_events = Kaminari.paginate_array(@events).page(params[:page]).per(15)
   end
 
   def show
