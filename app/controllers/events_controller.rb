@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:code])
+    @event = Event.find(code: params[:code], token: current_user.token)
     redirect_to events_path, alert: t('event.show.event_not_find') unless @event
     @schedules = @event&.schedule_items(current_user.token)&.group_by { |schedule| schedule[:schedule].itself }
     @feedbacks = Feedback.event(event_code: @event&.code, speaker: current_user.email)

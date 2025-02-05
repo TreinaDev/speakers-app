@@ -8,7 +8,7 @@ class ExternalEventApi::FindEventService < ApplicationService
   def find
     event = nil
     begin
-      response = Faraday.get("http://localhost:3001/api/v1/events/#{ kwargs[:code] }")
+      response = Faraday.get("http://localhost:3001/api/v1/speakers/#{ kwargs[:token] }/event/#{ kwargs[:code] }")
       if response.success?
         event = Event.new(**JSON.parse(response.body))
       end
