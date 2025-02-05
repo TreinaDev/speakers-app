@@ -12,7 +12,7 @@ RSpec.describe EventCardHelper, type: :helper do
       expect(html).to have_selector("p.event__card-date-day", text: '10')
       expect(html).to have_selector("p.event__card-date-month", text: 'FEVEREIRO')
       expect(html).to have_selector("p.event__card-date-year", text: '2025')
-      expect(html).to have_selector("p.self-center", text: 'Main Street - 42')
+      expect(html).to have_selector("p.event__card-address-name", text: 'Main Street - 42')
     end
   end
 end

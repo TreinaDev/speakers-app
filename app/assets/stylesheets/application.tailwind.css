@@ -125,7 +125,7 @@
   }
 
   .btn_primary {
-    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mr-4 mt-4 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2;
+    @apply text-white bg-blue-700 cursor-pointer hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mr-4 mt-4 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2;
     font-size: 1.01rem;
   }
 
@@ -476,7 +476,7 @@
   }
 
   .event__card-date {
-    @apply flex flex-col text-gray-600 col-span-3 p-2 text-center justify-center relative;
+    @apply flex flex-col text-gray-600 col-span-2 p-2 text-center justify-center relative;
   }
 
   .event__card-date-week, .event__card-date-year {
@@ -488,13 +488,16 @@
   }
 
   .event__card-date-day {
-    @apply text-4xl;
+    @apply text-4xl text-center;
   }
 
   .event__card-address {
-    @apply flex flex-row col-span-5 p-1 m-2 gap-4 max-h-36;
+    @apply flex items-stretch flex-row col-span-6 p-1 m-2 gap-4 max-h-36;
   }
 
+  .event__card-address-name {
+    @apply self-center break-all; 
+  }
   /* Fim de Event  card */
 
   /* Início Kaminari */

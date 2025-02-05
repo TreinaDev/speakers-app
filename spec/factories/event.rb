@@ -6,7 +6,7 @@ FactoryBot.define do
     start_date { "2025-02-01T14:00:00.000-03:00" }
     end_date { end_time_rand }
     event_type { "inperson" }
-    location { "Main Street" }
+    address { "Main Street, n° 670, New York City" }
     participants_limit { 50 }
     status { "published" }
     created_at { "2025-01-31T16:24:11.521-03:00" }
@@ -15,7 +15,7 @@ FactoryBot.define do
 
     initialize_with {
       new(name: name, url: url, description: description, start_date: start_date,
-       end_date: end_date, event_type: event_type, location: location, participants_limit: participants_limit,
+       end_date: end_date, event_type: event_type, address: address, participants_limit: participants_limit,
        status: status, created_at: created_at, updated_at: updated_at, code: code)
     }
   end
