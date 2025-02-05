@@ -1,6 +1,6 @@
 module EventCardHelper
   def event_card(event)
-    content_tag :li, id: event.code, class: "event__card border border-gray-200 w-96 p-6 rounded-lg shadow flex-column items-center" do
+    content_tag :li, id: event.code, class: "event__card border border-gray-200 w-96 p-5 rounded-lg shadow flex-column items-center" do
       event_image(event) +
       event_title(event) +
       event_footer(event)
@@ -11,7 +11,7 @@ module EventCardHelper
 
   def event_image(event)
     image_tag(event.logo_url.presence || "default_image.jpeg",
-              class: "w-96 h-48 w-full object-cover rounded-lg mr-6",
+              class: "h-56 w-full object-cover rounded-lg",
               alt: t('views.events.events.no_image'))
   end
 
@@ -36,7 +36,7 @@ module EventCardHelper
   def event_address(event)
     content_tag :div, class: "event__card-address" do
       image_tag('location.svg', class: 'icon') +
-      content_tag(:p, event.address, class: "self-center")
+      content_tag(:p, event.address, class: "event__card-address-name")
     end
   end
 end

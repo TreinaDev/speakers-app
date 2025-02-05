@@ -476,7 +476,7 @@
   }
 
   .event__card-date {
-    @apply flex flex-col text-gray-600 col-span-3 p-2 text-center justify-center relative;
+    @apply flex flex-col text-gray-600 col-span-2 p-2 text-center justify-center relative;
   }
 
   .event__card-date-week, .event__card-date-year {
@@ -488,13 +488,16 @@
   }
 
   .event__card-date-day {
-    @apply text-4xl;
+    @apply text-4xl text-center;
   }
 
   .event__card-address {
-    @apply flex flex-row col-span-5 p-1 m-2 gap-4 max-h-36;
+    @apply flex items-stretch flex-row col-span-6 p-1 m-2 gap-4 max-h-36;
   }
 
+  .event__card-address-name {
+    @apply self-center break-all; 
+  }
   /* Fim de Event  card */
 
   /* Início Kaminari */

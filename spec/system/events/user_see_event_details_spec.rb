@@ -34,7 +34,7 @@ describe 'User see event details', type: :system do
     create(:profile, user: user)
     event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
             start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-            event_type: 'Presencial', location: 'Juiz de Fora', participants_limit: 100, status: 'Publicado')
+            event_type: 'Presencial', address: 'Juiz de Fora', participants_limit: 100, status: 'Publicado')
     schedule1 = Schedule.new(date: "2025-02-15")
     schedule_items =
       [ build(:schedule_item, name: 'Ruby on Rails', description: 'Introdução a programação', start_time: '11:00', end_time: '12:00'),
@@ -62,7 +62,7 @@ describe 'User see event details', type: :system do
     create(:profile, user: user)
     event = build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
             start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
-            event_type: 'Presencial', location: 'Juiz de Fora', participants_limit: 100, status: 'Publicado')
+            event_type: 'Presencial', address: 'Juiz de Fora', participants_limit: 100, status: 'Publicado')
 
     allow(Event).to receive(:find).and_return(event)
     allow(event).to receive(:schedule_items).and_return([])
