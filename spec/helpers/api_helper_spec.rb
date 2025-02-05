@@ -26,4 +26,20 @@ describe ApiHelper::EventClient, type: :helper do
       expect(result).to eq(response)
     end
   end
+
+  context '.post_auth_speaker_email_and_return_code' do
+    it 'must perform post to event api' do
+      email = 'test@email.com'
+      code = { "code" => "ABCD1234" }
+      response = instance_double(Faraday::Response, success?: true, body: code.to_json)
+      connection = instance_double(Faraday::Connection)
+      allow(Faraday).to receive(:new).and_return(connection)
+      allow(connection).to receive(:post).and_return(response)
+
+      post_request = described_class.post_auth_speaker_email_and_return_code(email)
+
+      expect(post_request).to eq(response)
+      expect(post_request.body).to eq code.to_json
+    end
+  end
 end
