@@ -120,4 +120,30 @@ describe 'User edit event content', type: :system, js: true do
     expect(page).to have_css("img[src*='mark_zuckerberg.jpeg']")
     expect(page).not_to have_css("img[src*='puts.png']")
   end
+
+  it 'and mark as updated' do
+    user = create(:user, first_name: 'João')
+    create(:profile, user: user)
+    content = user.event_contents.create!(title: 'Dev week', description: 'Conteúdo da palestra de 01/01')
+
+    login_as user
+    visit root_path
+    click_on 'Meus Conteúdos'
+    click_on 'Dev week'
+    find("#pencil_edit").click
+    fill_in 'Título', with: 'Workshop POO'
+    fill_in_rich_text_area 'Descrição', with: 'Conteúdo do workshop de 09/04'
+    attach_file('Arquivos', [ Rails.root.join('spec/fixtures/puts.png') ])
+    check 'Marcar como atualização'
+    fill_in 'Comentário para a atualização'
+    click_on 'Atualizar Conteúdo'
+
+    expect(current_path).to eq event_content_path(content)
+    expect(page).not_to have_content 'Dev week'
+    expect(page).to have_content 'Conteúdo atualizado com sucesso!'
+    expect(page).to have_content 'Workshop POO'
+    expect(page).to have_content 'Conetúdo para auxiliar o workshop POO'
+    expect(page).to have_css("img[src*='puts.png']")
+    expect(page).to have_css("img[src*='mark_zuckerberg.jpeg']")
+  end
 end

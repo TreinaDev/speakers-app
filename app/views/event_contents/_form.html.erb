@@ -35,12 +35,22 @@
     <% end %>
   </div>
 
-  <div class="mb-3">
+  <div class="mb-8">
     <%= f.label :files, t('.files') %>
     <%= f.file_field :files, multiple: true %>
     <% if event_content.errors[:base].any? %> 
       <div class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:base).first %></div>
     <% end %>
+  </div>
+
+  <div class="flex gap-3 mb-3">
+    <%= f.check_box :is_update %>
+    <%= f.label :is_update, t('.is_update') %>
+  </div>
+
+  <div class="flex gap-3 mb-3">
+    <%= f.label :is_update, t('.is_update') %>
+    <%= f.text_area :is_update %>
   </div>
   
   <%= f.submit class: 'btn_primary' %>

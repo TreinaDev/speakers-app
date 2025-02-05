@@ -39,7 +39,8 @@ class EventContentsController < ApplicationController
   private
 
   def event_content_params
-    params.require(:event_content).permit(:title, :description, :external_video_url)
+    params.require(:event_content).permit(:title, :description, :external_video_url,
+                                          :is_update, :update_description)
   end
 
   def set_event_content
