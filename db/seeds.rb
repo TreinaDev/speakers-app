@@ -10,8 +10,16 @@
 
 User.skip_callback(:validation, :before, :api_auth_user)
 user = User.create!(first_name: 'João', last_name: 'Campus', email: 'joao@email.com', password: '123456', token: 'ABCD1234')
-user_2 = User.create!(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456', token: 'ASDF4567')
+User.create!(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456', token: 'ASDF4567')
 User.set_callback(:validation, :before, :api_auth_user)
+
+curriculum = FactoryBot.create(:curriculum, user: user, schedule_item_code: 'ABCDEEGH')
+first_content = user.event_contents.create(title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>', code: 'ABCD1234',
+                                                 external_video_url: 'https://www.youtube.com/watch?v=idaXF2Er4TU', files: [ { io: File.open(Rails.root.join('spec/fixtures/puts.png')),
+                                                filename: 'puts.png', content_type: 'image/png' } ])
+first_curriculum_content = FactoryBot.create(:curriculum_content, id: 1, curriculum: curriculum, event_content: first_content)
+first_task = FactoryBot.create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory)
+FactoryBot.create(:curriculum_task_content, curriculum_task: first_task, curriculum_content: first_curriculum_content)
 
 profile = Profile.create!(title: 'Instrutor / Desenvolvedor',
                           about_me: 'Sou João, desenvolvedor Ruby apaixonado por criar soluções eficientes e bem estruturadas.
