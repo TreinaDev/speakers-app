@@ -2,7 +2,7 @@
   <%= render 'event', event: @event %>
 
   <div data-controller="tabs" data-tabs-active-class="tab__btn--active" data-tabs-unactive-class="tab__btn--unactive" data-tabs-default-tab-value="tab1">
-    <div class="tab__combo-btn">
+    <div class="tab__combo_btn">
       <button id="tab1" data-tabs-target="btn" data-action="click->tabs#select"><%= t('.my_schedules') %></button>
       <button id="tab2" data-tabs-target="btn" data-action="click->tabs#select"><%= t('.participant_list') %></button>
       <button id="tab3" data-tabs-target="btn" data-action="click->tabs#select"><%= t('.feedbacks') %></button>

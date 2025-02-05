@@ -35,8 +35,23 @@ export default class extends Controller {
       btn.classList.add(...this.unactiveClasses);
     }
 
-    active(btn){
+    async active(btn){
       btn.classList.add(...this.activeClasses);
       btn.classList.remove(...this.unactiveClasses);
+      const tab = btn.parentNode
+      
+      switch(btn.id){
+        case 'tab1':
+          tab.style.setProperty('--current_button', '0')
+          break;
+        case 'tab2':
+          tab.style.setProperty('--current_button', '1')
+          break;
+        case 'tab3':
+          tab.style.setProperty('--current_button', '2')
+        break;
+        default:
+          tab.style.setProperty('--current_button', '0')
+      }
     }
 }

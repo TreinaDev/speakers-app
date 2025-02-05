@@ -435,15 +435,34 @@
   /* Fim da Home Page */
 
   .tab__btn--active {
-    @apply bg-gray-900 text-gray-100 px-5;
+   
   }
 
   .tab__btn--unactive {
-    @apply bg-gray-500 text-gray-100 px-5;
+    
   }
 
-  .tab__combo-btn {
-    @apply flex gap-1 mt-6;
+  .tab__combo_btn {
+    --current_button: 0;
+    @apply inline-flex w-1/2 mt-6 py-4 relative;
+  }
+
+  .tab__combo_btn button{
+   @apply flex-1 px-4 py-2 bg-blue-500 text-white rounded-md text-center;
+  }
+
+  .tab__combo_btn::after {
+    pointer-events: none;
+    position: absolute;
+    content: "";
+    z-index: -1;
+    inset: 0;
+    width: calc((100% / 3 - 2px));
+    border-radius: 20px;
+    border: 1px solid black;
+    translate: calc(var(--current_button) * 100%);
+    transition: translate 0.5s ease-in-out;
+    box-sizing: content-box
   }
 
   .schedule-item__card{
