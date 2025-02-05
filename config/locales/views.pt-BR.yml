@@ -36,6 +36,7 @@ pt-BR:
       view_pdf: 'Visualizar PDF:'
       edit: 'Editar'
       file: 'Arquivo'
+      update_history: 'Histórico de atualizações'
     event_content:
       content: 'Conteúdo'
     edit:
@@ -110,6 +111,7 @@ pt-BR:
       close: 'Fechar'
   shared:
     event_content_details:
+      update_history: 'Histórico de atualizações'
       no_files_attached: 'Não há arquivos anexados a esse conteúdo.'
       view_pdf: 'Visualizar PDF:'
     feedback_area:

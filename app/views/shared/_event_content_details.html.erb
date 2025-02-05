@@ -10,6 +10,12 @@
 </div>
 
 <div>
+  <% if content.update_histories.any? %>
+    <div>
+      <%= link_to t('.update_history'), event_content_update_histories_path(content), data: { turbo_frame: 'modal' }, class: 'link_primary' %>
+    </div>
+  <% end %>
+
   <div>
     <%= content.description %>
   </div>

@@ -1,0 +1,33 @@
+<%= turbo_frame_tag 'modal' do %>
+  <div class="modal">
+    <div class="modal__overlay"></div>
+    <div class="modal__content">
+      <div class="modal__header">
+        <h3>Histórico de atualizações</h3>
+        <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: 'Fechar', class: 'self-end' do %>
+          <%= image_tag 'close_icon.png', id: 'close_icon', class: 'modal__icon' %>
+        <% end %>
+      </div>
+      <% if @event_content.update_histories.any? %>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Data da atualização</th>
+                <th>Comentário</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @event_content.update_histories.each do |uh| %>
+                <tr>
+                  <td><%= uh.creation_date %></td>
+                  <td><%= uh.description %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

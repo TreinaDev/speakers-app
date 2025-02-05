@@ -1,0 +1,8 @@
+pt-BR:
+  activemodel:
+    models:
+      update_history: Histórico de atualizações
+    attributes:
+      update_history:
+        description: 'Comentário da atualização'
+        creation_date: 'Data da atualização'
