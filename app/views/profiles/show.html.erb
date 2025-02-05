@@ -56,12 +56,15 @@
 
         <% if @events.any? %>
             <ul class="flex flex-wrap gap-6">
-                <% @events.each do |event| %>
+                <% @paginated_events.each do |event| %>
                     <%= event_card(event) %>
-            <% end %>
+                <% end %>
             </ul>
         <% else %>
             <p class="mt-7"><%= t('.dont_exist_event') %></p>
         <% end %>
     </div>
 </section>
+<div class="text-center mt-5">
+  <%= paginate @paginated_events %>
+</div>
