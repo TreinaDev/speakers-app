@@ -28,8 +28,6 @@ class EventContentsController < ApplicationController
 
   def update
     generate_update_history if params[:event_content][:is_update] == '1'
-    p params[:event_content][:is_update]
-    p params[:event_content][:update_description]
     @event_content.files = params[:event_content][:files]
     if @event_content.update(event_content_params)
       redirect_to @event_content, notice: t('event_contents.update.success')
@@ -55,12 +53,10 @@ class EventContentsController < ApplicationController
   end
 
   def generate_update_history
-    p 'Fui chamado'
     @update_history = @event_content.update_histories.build(user: @event_content.user, creation_date: Date.today,
                                                             description: params[:event_content][:update_description])
 
-    return if @update_history.save
-    @event_content.errors.add(:base, @update_history.errors.full_messages_for(:description).first)
-    p @event_content.errors.full_messages.first
+    return if @update_history.valid?
+    @event_content.errors.add(:base, @update_history.errors.first)
   end
 end

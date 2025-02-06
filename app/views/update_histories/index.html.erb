@@ -3,24 +3,24 @@
     <div class="modal__overlay"></div>
     <div class="modal__content">
       <div class="modal__header">
-        <h3>Histórico de atualizações</h3>
+        <h3><%= t('.title') %></h3>
         <%= link_to "#", data: {controller: 'modals', action: 'modals#close' }, title: 'Fechar', class: 'self-end' do %>
           <%= image_tag 'close_icon.png', id: 'close_icon', class: 'modal__icon' %>
         <% end %>
       </div>
       <% if @event_content.update_histories.any? %>
-        <div>
-          <table>
+        <div class="table_container">
+          <table  class="table">
             <thead>
               <tr>
-                <th>Data da atualização</th>
-                <th>Comentário</th>
+                <th><%= t('.update_date') %></th>
+                <th><%= t('.update_description') %></th>
               </tr>
             </thead>
             <tbody>
               <% @event_content.update_histories.each do |uh| %>
                 <tr>
-                  <td><%= uh.creation_date %></td>
+                  <td><%= uh.creation_date.strftime('%d/%m/%Y') %></td>
                   <td><%= uh.description %></td>
                 </tr>
               <% end %>

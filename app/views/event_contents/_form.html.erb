@@ -49,15 +49,9 @@
         <%= f.check_box :is_update, data: { action: "updates#toggleUpdateDescription"} %>
         <%= f.label :is_update, t('.is_update') %>
       </div>
+      <span class="text-red-500 text-sm"><%= update_history.errors.full_messages.first  if update_history && update_history.errors.any?%></span>
     </div>
-    <% if event_content.errors[:base].any? %> 
-      <span class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:base).first %></span>
-    <% end %>
   <% end %>
-    <% if event_content.errors[:base].any? %>
-      <%= p event_content.errors.full_messages_for(:base).first %>
-      <span class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:base).first %></span>
-    <% end %>
   
 
   <%= f.submit class: 'btn_primary' %>

@@ -149,6 +149,11 @@ pt-BR:
     show:
       task: 'Tarefa'
       attached_contents: 'Material de apoio'
+  update_histories:
+      index:
+        title: 'Histórico de atualizações'
+        update_date: 'Data da atualização'
+        update_description: 'Comentário'
   home:
     index:
       register: 'Cadastre-se Agora'
