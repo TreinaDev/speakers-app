@@ -73,7 +73,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_180608) do
     t.integer "curriculum_id", null: false
     t.string "title"
     t.text "description"
-    t.integer "certificate_requirement", default: 0, null: false
+    t.integer "certificate_requirement", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "code"
