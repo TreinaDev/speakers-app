@@ -13,8 +13,8 @@
   </div>
 
   <div class="field mt-2">
-    <%= f.label :external_video_url, class: 'label-primary' %>
-    <%= f.text_field :external_video_url, class: 'field-primary', placeholder: 'Compartilhe seu vídeo diretamente do youtube ou vimeo' %>
+    <%= f.label :external_video_url %>
+    <%= f.text_field :external_video_url, placeholder: 'Compartilhe seu vídeo diretamente do youtube ou vimeo' %>
      <% if event_content.errors[:external_video_url].any? %> 
       <span class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:external_video_url).first %></span>
     <% end %>
@@ -35,14 +35,25 @@
     <% end %>
   </div>
 
-  <div class="mb-3">
+  <div class="mb-8">
     <%= f.label :files, t('.files') %>
     <%= f.file_field :files, multiple: true %>
     <% if event_content.errors[:base].any? %> 
       <div class="text-red-500 text-sm"><%= event_content.errors.full_messages_for(:base).first %></div>
     <% end %>
   </div>
+
+  <% if event_content.persisted? %>
+    <div data-controller="updates" data-updates-target="updateDescription">
+      <div class="flex gap-3">
+        <%= f.check_box :is_update, data: { action: "updates#toggleUpdateDescription"} %>
+        <%= f.label :is_update, t('.is_update') %>
+      </div>
+      <span class="text-red-500 text-sm"><%= update_history.errors.full_messages.first  if update_history && update_history.errors.any?%></span>
+    </div>
+  <% end %>
   
+
   <%= f.submit class: 'btn_primary' %>
   <%= link_to 'Cancelar', event_content, class: 'btn_primary' %>
 <% end %>

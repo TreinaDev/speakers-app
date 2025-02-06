@@ -27,6 +27,7 @@ class EventContentsController < ApplicationController
   def edit; end
 
   def update
+    generate_update_history if params[:event_content][:is_update] == '1'
     @event_content.files = params[:event_content][:files]
     if @event_content.update(event_content_params)
       redirect_to @event_content, notice: t('event_contents.update.success')
@@ -49,5 +50,13 @@ class EventContentsController < ApplicationController
 
   def set_event_content_files
     @files = @event_content.files.select { |file| file.persisted? }
+  end
+
+  def generate_update_history
+    @update_history = @event_content.update_histories.build(user: @event_content.user, creation_date: Date.today,
+                                                            description: params[:event_content][:update_description])
+
+    return if @update_history.valid?
+    @event_content.errors.add(:base, @update_history.errors.first)
   end
 end

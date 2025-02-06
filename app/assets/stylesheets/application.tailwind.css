@@ -524,4 +524,39 @@
     @apply text-2xl rounded-full m-2 h-10 w-10;
   }
   /* Fim Kaminari */
+
+  /* Início Tabela */
+  .table_container {
+    @apply w-full overflow-x-auto bg-gray-50 shadow-lg rounded-lg mt-8;
+  }
+
+  .table {
+    @apply w-full table-auto text-center text-sm text-gray-700;
+    border-spacing: 0;
+  }
+
+  .table thead {
+    @apply bg-primary text-white;
+  }
+
+  .table thead th {
+    @apply px-6 py-4 font-semibold text-lg border-b border-gray-200;
+  }
+
+  .table tbody tr {
+    @apply border-b hover:bg-blue-50 transition-colors duration-200;
+  }
+
+  .table tbody tr:last-child {
+    @apply border-none;
+  }
+
+  .table tbody td {
+    @apply px-6 py-3 text-gray-600;
+  }
+
+  .table tbody td:first-child {
+    @apply font-medium text-gray-800;
+  }
+  /* Fim Tabela */
 }

@@ -56,3 +56,6 @@ pt-BR:
       error: 'Falha ao adicionar tarefa.'
     set_curriculum:
       error: 'Conteúdo indisponível!'
+  update_histories:
+    index:
+      content_unavailable: 'Conteúdo indisponível.'

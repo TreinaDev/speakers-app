@@ -2,13 +2,15 @@ class EventContent < ApplicationRecord
   belongs_to :user
   has_many :curriculum_contents
   has_many :curriculums, through: :curriculum_contents
+  has_many :update_histories
   has_many_attached :files
+  has_rich_text :description
   validate :must_have_less_than_five_files
   validate :valid_file_size
   validates :title, :code, presence: true
   validates :code, uniqueness: true
   validate :check_external_video_url
-  has_rich_text :description
+
 
   after_initialize :generate_code, if: :new_record?
 

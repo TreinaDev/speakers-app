@@ -11,3 +11,6 @@ pt-BR:
         title: 'Título'
         description: 'Descrição'
         external_video_url: 'URL do seu vídeo'
+      update_history:
+        description: 'Comentário da atualização'
+        creation_date: 'Data da atualização'
