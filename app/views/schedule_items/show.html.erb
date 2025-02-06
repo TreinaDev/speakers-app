@@ -3,17 +3,18 @@
 <div class='border rounded p-3'>
   <div>
     <h1> <%= @schedule_item.name %> </h1>
-    <h3 class='font-bold inline'><%= t('.start_time') %>: <%= @schedule_item.start_time.strftime("%H:%M") %></h3>
-    <h3 class='font-bold inline'><%= t('.end_time') %>: <%= @schedule_item.end_time.strftime("%H:%M") %> </h3>
+    <span>
+      <b><%= ScheduleItem.human_attribute_name(:time) %>: </b><%= @schedule_item.start_time.strftime("%H:%M") %> - <%= @schedule_item.end_time.strftime("%H:%M") %>
+    </span>
     <span class= 'block'></span>
-    <h2> <%= ScheduleItem.human_attribute_name(:description) %> </h2>
+    <h2 class='mt-2'> <%= ScheduleItem.human_attribute_name(:description) %> </h2>
     <p> <%= @schedule_item.description %> </p>
     <%= render 'participants/participants', participants: @participants %>
   </div>
   
   <div>
     <div class='flex items-center justify-between mt-2'>
-      <h2 class='heading-3'> <%= t('.curriculum_content_title')%> </h2>
+      <h2> <%= t('.curriculum_content_title')%> </h2>
       <%= link_to t('.new_curriculum_content_button'), new_curriculum_curriculum_content_path(@curriculum), data: { turbo_frame: 'modal' }, class: 'btn_primary' %>
     </div>
     
@@ -32,7 +33,7 @@
 
   <div>
     <div class='flex items-center justify-between mt-2'>
-      <h2 class='heading-3'> <%= t('.curriculum_task_title')%> </h2>
+      <h2> <%= t('.curriculum_task_title')%> </h2>
       <%= link_to t('.new_curriculum_task_button'), new_curriculum_curriculum_task_path(@curriculum), data: { turbo_frame: 'modal' } , class: 'btn_primary' %>
     </div>
     <% if @curriculum.curriculum_tasks.any? %>
