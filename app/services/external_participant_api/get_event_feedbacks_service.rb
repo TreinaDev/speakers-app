@@ -8,11 +8,11 @@ class ExternalParticipantApi::GetEventFeedbacksService < ApplicationService
   def get_event_feedbacks
     feedbacks = []
     begin
-      response = Faraday.get('http://localhost:3002/event/feedbacks', { event_code: kwargs[:code], speaker: kwargs[:speaker] })
+      response = Faraday.get("http://localhost:3002/api/v1/events/#{kwargs[:event_code]}/feedbacks")
       if response.success?
         json_response = JSON.parse(response.body)
-        json_response.each do |feedback|
-          feedbacks << Feedback.new(id: feedback['id'], name: feedback['name'], title: feedback['title'], description: feedback['description'])
+        json_response['feedbacks'].each do |feedback|
+          feedbacks << Feedback.new(**feedback)
         end
       end
     rescue StandardError => error

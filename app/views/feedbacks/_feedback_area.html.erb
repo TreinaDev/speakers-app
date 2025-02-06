@@ -1,17 +1,19 @@
 <div id="feedbacks">
   <% if feedbacks&.any? %>
-    <h2><%= t('.see_feedbacks') %></h2>
     <h2><%= Feedback.model_name.plural.capitalize %></h2>
     <div class="modal-body">
       <% feedbacks.each do |feedback| %>
         <div class="feedback-card">
           <div class="feedback-header">
-            <span><%= t('.user') %>: <%= feedback.name %></span>
+            <span><%= t('.user') %>: <%= feedback.user %></span>
             <strong><%= feedback.title %></strong>
           </div>
           <div class="feedback-body">
             <span>
-              <%= feedback.description %>
+              <%= feedback.comment %>
+            </span>
+            <span>
+              <%= feedback.mark %>
             </span>
           </div>
         </div>
