@@ -5,7 +5,8 @@ class UpdateHistoriesController < ApplicationController
     @event_content = current_user.event_contents.find_by(code: params[:event_content_code])
     unless @event_content
       flash[:alert] = t('update_histories.index.content_unavailable')
-      redirect_to events_path
+      return redirect_to events_path
     end
+    @update_histories = @event_content.update_histories.sort_by(&:creation_date).reverse
   end
 end

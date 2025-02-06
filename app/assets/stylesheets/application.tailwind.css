@@ -514,7 +514,7 @@
   }
 
   .table thead {
-    @apply bg-blue-500 text-white;
+    @apply bg-primary text-white;
   }
 
   .table thead th {
