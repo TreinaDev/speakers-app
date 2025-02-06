@@ -303,7 +303,7 @@
 
   .not_found_feedback,
   .not-found-participants {
-    @apply p-1 rounded-md text-center mt-4;
+    @apply p-1 rounded-md text-center;
     color: rgb(189, 25, 25);
     border: solid 1px #aaa;
     padding: 1rem;
@@ -435,34 +435,34 @@
   /* Fim da Home Page */
 
   .tab__btn--active {
-   
+   @apply text-white;
+   transition: color 0.5s ease-in-out;
   }
 
   .tab__btn--unactive {
-    
+    @apply text-black;
+    transition: color 0.5s ease-in-out;
   }
 
   .tab__combo_btn {
     --current_button: 0;
-    @apply inline-flex w-1/2 mt-6 py-4 relative;
+    @apply inline-flex w-1/2 py-4 relative bg-slate-200 my-10;
+    border-radius: 2.5rem;
   }
 
   .tab__combo_btn button{
-   @apply flex-1 px-4 py-2 bg-blue-500 text-white rounded-md text-center;
+   @apply flex-1 px-4 py-2 text-center;
+   z-index: 2;
   }
 
   .tab__combo_btn::after {
-    pointer-events: none;
-    position: absolute;
+    @apply pointer-events-none absolute h-full inset-0 bg-primary;
     content: "";
-    z-index: -1;
-    inset: 0;
-    width: calc((100% / 3 - 2px));
-    border-radius: 20px;
-    border: 1px solid black;
+    z-index: 1;
+    width: calc((100% / 3));
+    border-radius: 2.5rem;
     translate: calc(var(--current_button) * 100%);
     transition: translate 0.5s ease-in-out;
-    box-sizing: content-box
   }
 
   .schedule-item__card{

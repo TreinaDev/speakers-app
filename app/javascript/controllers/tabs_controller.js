@@ -36,8 +36,6 @@ export default class extends Controller {
     }
 
     async active(btn){
-      btn.classList.add(...this.activeClasses);
-      btn.classList.remove(...this.unactiveClasses);
       const tab = btn.parentNode
       
       switch(btn.id){
@@ -53,5 +51,8 @@ export default class extends Controller {
         default:
           tab.style.setProperty('--current_button', '0')
       }
+
+      btn.classList.add(...this.activeClasses);
+      btn.classList.remove(...this.unactiveClasses);
     }
 }
