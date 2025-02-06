@@ -30,7 +30,7 @@
   }
 
   body {
-    @apply font-poppins flex flex-col h-full;
+    @apply font-poppins flex flex-col h-full bg-[#f4f2ee];
   }
 
   .section{
@@ -44,7 +44,7 @@
   }
 
   h1, h2, h3 {
-    @apply font-semibold text-blue-500 mb-2;
+    @apply font-semibold text-second-primary mb-2;
   }
 
   h1 {
@@ -125,8 +125,12 @@
   }
 
   .btn_primary {
-    @apply text-white bg-blue-700 cursor-pointer hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mr-4 mt-4 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2;
+    @apply text-white bg-second-primary  focus:ring-4 focus:outline-none mr-4 mt-4 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center my-2;
     font-size: 1.01rem;
+  }
+
+  .btn_primary:hover {
+    @apply cursor-pointer bg-dark-second-primary;
   }
 
   .text_area {
@@ -205,7 +209,7 @@
   }
 
   .nav_link_primary {
-    @apply text-lg font-bold text-white hover:dark:bg-gray-700 rounded-lg px-2 h-10 flex items-center;
+    @apply text-lg font-bold text-white hover:bg-gray-700 rounded-lg px-2 h-10 flex items-center;
   }
 
   /* Fim da NavBar */
@@ -213,7 +217,7 @@
   /* Profile */
 
   .profiles__link {
-    @apply border inline-flex font-semibold text-indigo-600 border-indigo-600 rounded-lg py-2 px-6 items-center;
+    @apply border inline-flex font-semibold text-indigo-600 border-indigo-600 hover:bg-gray-200 rounded-lg py-2 px-6 items-center;
   }
 
   .profiles__link .link_icon {
@@ -457,7 +461,7 @@
   }
 
   .schedule-item__card-title {
-    @apply font-semibold text-blue-500 mb-2 mt-3;
+    @apply font-semibold text-primary mb-2 mt-3;
   }
 
   .schedule_schedule_items-card {
