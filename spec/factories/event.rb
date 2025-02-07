@@ -21,7 +21,6 @@ FactoryBot.define do
   end
 end
 
-
 def start_time_rand
   rand(1..10).day.from_now
 end
