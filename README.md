@@ -4,7 +4,13 @@ Este projeto foi desenvolvido na Turma 13 do Treina Dev da Campus Code.
 
 É um sistema integrado de três aplicações para gerenciar conteúdos e tarefas de eventos e seus participantes.
 
-## Tecnologias
+## Sumário
+
+1 - <a href="#tech">Tecnologias</a>
+
+<h2 id="tech">Tecnologias</a>
+<hr>
+
 
 [![Ruby][Ruby-badge]][Ruby-url]
 [![RubyOnRails][RubyOnRails-badge]][RubyOnRails-url]
@@ -50,74 +56,8 @@ Para rodar os testes, execute:
 ```sh
 rspec
 ```
-## API
-Documentação da API
-### 1 - Currículo
-#### GET /api/v1/curriculums/:schedule_item_code
-Exibe as tarefas e conteúdos de um currículo, que representa todos os dados para uma programação.
-
-* status: 200
-* content-type: application/json
-
-```
-{
-  "curriculum": {
-    "curriculum_contents": [
-      {
-        "code": "MH0IBQ8O",
-        "title": "Ruby PDF",
-        "description": "\u003Cstrong\u003EDescrição Ruby PDF\u003C/strong\u003E",
-        "external_video_url": "\u003Ciframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/idaXF2Er4TU' frameborder='0' allowfullscreen\u003E\u003C/iframe\u003E",
-        "files": [
-          {
-            "filename": "puts.png",
-            "file_download_url": "http://127.0.0.1:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--97207adb5d87fac1fb977c3ae5b3896f2de5fe1a/puts.png"
-          }
-        ]
-      }
-    ],
-    "curriculum_tasks": [
-      {
-        "code": "FNRVUEUB",
-        "title": "Exercício Rails",
-        "description": "Seu primeiro exercício ruby",
-        "certificate_requirement": "Obrigatória",
-        "attached_contents": [
-          {
-            "attached_content_code": "MH0IBQ8O"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-* status: 404
-* content-type: application/json
-
-```
-{
-  "error": "Currículo não encontrado!"
-}
-```
-
-* curriculum_contents: Conteúdos;
-  - code: Código de identificação;
-  - title: Título;
-  - description: Descrição com texto enriquecido;
-  - external_video_url: Link de um video externo dentro de um iframe para exibição;
-* files: Arquivos;
-  - filename: Nome do arquivo;
-  - file_download_url: URL do arquivo;
-* curriculum_tasks: Tarefas;
-  - code: Código de identificação;
-  - title: Título;
-  - description: Descrição;
-  - certificate_requirement: Tarefa obrigatória ou opcional;
-* attached_contents: Conteúdos anexados a tarefa;
-  - attached_content_code: Código de referencia de um conteúdo;
-  
+## Documentação API
+<a href="APIDOC.md">Clique aqui para acessar a documentação </a>
 ## Contribuidores
 
 [<img src="https://avatars.githubusercontent.com/u/162291567" width=115 > <br> <sub> Bruno Herculano </sub>](https://github.com/Bruno-H-Terto)|[<img src="https://avatars.githubusercontent.com/u/126020568?v=4" width=115 > <br> <sub> Pedro Dias </sub>](https://github.com/PedroD98)|[<img src="https://avatars.githubusercontent.com/u/83383321?v=4" width=115 > <br> <sub> Matheus Santana </sub>](https://github.com/matheusfsantana)|[<img src="https://avatars.githubusercontent.com/u/104660897?v=4" width=115 > <br> <sub> Thiago Gois </sub>](https://github.com/ThiagoGois1011)|[<img src="https://avatars.githubusercontent.com/u/144969255?v=4" width=115 > <br> <sub> Lucas Caetano </sub>](https://github.com/caetano-lucas)| 
