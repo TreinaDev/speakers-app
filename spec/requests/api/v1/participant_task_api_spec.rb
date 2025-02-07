@@ -57,4 +57,19 @@ describe 'POST /api/v1/participant_tasks' do
     expect(ParticipantRecord.count).to eq 0
     expect(ParticipantTask.count).to eq 0
   end
+
+  it 'internal server error' do
+    user = create(:user, id: 10)
+    schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD')
+    curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+    create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', code: '1234ABCD',
+            description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory)
+
+    allow(CurriculumTask).to receive(:find_by).and_raise(ActiveRecord::ActiveRecordError)
+    post '/api/v1/participant_tasks', params: { participant_code: 'XLR8BEN1', task_code: '1234ABCD' }
+
+    expect(response).to have_http_status :internal_server_error
+    expect(response.content_type).to include('application/json')
+    expect(response.parsed_body['error']).to eq 'Algo deu errado.'
+  end
 end
