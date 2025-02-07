@@ -3,7 +3,7 @@ FactoryBot.define do
     name { "Tech Conference" }
     url { "www.techconf.com" }
     description { "Something" }
-    start_date { "2025-02-01T14:00:00.000-03:00" }
+    start_date { start_time_rand }
     end_date { end_time_rand }
     event_type { "inperson" }
     address { "Main Street, n° 670, New York City" }

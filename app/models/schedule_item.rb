@@ -11,6 +11,9 @@ class ScheduleItem
   attribute :responsible_email, :string
   attribute :schedule_type, :string
   attribute :code, :string
+  attribute :event_code, :string
+  attribute :event_start_date, :datetime
+  attribute :event_end_date, :datetime
 
   @@instances = []
   def initialize(**params)
