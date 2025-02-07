@@ -33,11 +33,14 @@ describe 'Curriculum API' do
       tasks_response = curriculum_response['curriculum_tasks']
       contents_response = curriculum_response['curriculum_contents']
       expect(contents_response.length).to eq 3
+      download_url_1 = rails_blob_url(first_content.files[0])
+      download_url_2 = rails_blob_url(first_content.files[1])
+      download_url_3 = rails_blob_url(first_content.files[2])
       expect(contents_response[0].deep_symbolize_keys).to include({ code: 'XLR8BE10', last_update: Date.today.strftime('%d/%m/%Y'), title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>',
                                                                     external_video_url: "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/idaXF2Er4TU' frameborder='0' allowfullscreen></iframe>",
-                                                                    files: [ { file_download_url: "http://www.example.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--34bb1868318e92534296ce473e5723673680545c/capi.png", filename: 'capi.png' },
-                                                                             { file_download_url: "http://www.example.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MiwicHVyIjoiYmxvYl9pZCJ9fQ==--c334c3494c13b74df05f58b8166423c4642953bc/nota-ufjf.pdf", filename: 'nota-ufjf.pdf' },
-                                                                             { file_download_url: "http://www.example.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MywicHVyIjoiYmxvYl9pZCJ9fQ==--2c7e74e916ab7d45606cc8b7c8384ae32b2e8300/joker.mp4", filename: 'joker.mp4' } ] })
+                                                                    files: [ { file_download_url: download_url_1, filename: 'capi.png' },
+                                                                             { file_download_url: download_url_2, filename: 'nota-ufjf.pdf' },
+                                                                             { file_download_url: download_url_3, filename: 'joker.mp4' } ] })
       expect(contents_response[1].deep_symbolize_keys).to eq({ code: 'CODIGO15', title: 'Ruby Video', description: 'Apresentação sobre TDD',
                                                                external_video_url: "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/2DvrRadXwWY' frameborder='0' allowfullscreen></iframe>"  })
       expect(contents_response[2].deep_symbolize_keys).to eq({ code: 'CODIGO26', title: 'Stimulus', description: 'PDF sobre Stimulus',
