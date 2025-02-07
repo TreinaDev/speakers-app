@@ -7,9 +7,9 @@ describe 'User can view feedback for an event', type: :system, js: true do
       create(:profile, user: user)
       event = build(:event, name: 'Ruby on Rails')
       allow(Event).to receive(:find).and_return(event)
-      event_feedbacks = [ build(:feedback, name: 'João', title: 'Muito bom!', description: 'Gostei muito'),
-                         build(:feedback, name: 'Anônimo', title: 'Podia ser melhor', description: 'Faltou café'),
-                         build(:feedback, name: 'Joaquim', title: 'Parabéns você foi selecionado', description: 'Esta mensagem foi marcada como Spam') ]
+      event_feedbacks = [ build(:feedback, user: 'João', title: 'Muito bom!', comment: 'Gostei muito'),
+                         build(:feedback, user: 'Anônimo', title: 'Podia ser melhor', comment: 'Faltou café'),
+                         build(:feedback, user: 'Joaquim', title: 'Parabéns você foi selecionado', comment: 'Esta mensagem foi marcada como Spam') ]
       allow(Feedback).to receive(:event).with(event_code: event.code, speaker: user.email).and_return(event_feedbacks)
 
       login_as user, scope: :user
@@ -19,13 +19,13 @@ describe 'User can view feedback for an event', type: :system, js: true do
       expect(page).to have_selector('#feedbacks', visible: true)
 
       within '#feedbacks' do
-        expect(page).to have_content 'Usuário: João'
+        expect(page).to have_content 'João'
         expect(page).to have_content 'Muito bom!'
         expect(page).to have_content 'Gostei muito'
-        expect(page).to have_content 'Usuário: Anônimo'
+        expect(page).to have_content 'Anônimo'
         expect(page).to have_content 'Podia ser melhor'
         expect(page).to have_content 'Faltou café'
-        expect(page).to have_content 'Usuário: Joaquim'
+        expect(page).to have_content 'Joaquim'
         expect(page).to have_content 'Parabéns você foi selecionado'
         expect(page).to have_content 'Esta mensagem foi marcada como Spam'
       end
