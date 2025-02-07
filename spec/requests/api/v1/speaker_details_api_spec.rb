@@ -32,7 +32,7 @@ describe 'Speaker Details API' do
     it 'and raise internal error' do
       user = create(:user, email: "joao@email.com", first_name: 'João', last_name: 'Campus')
       image = fixture_file_upload(Rails.root.join('spec/fixtures/puts.png'))
-      profile = create(:profile, title: 'Instrutor', about_me: 'Olá, meu nome é José e eu sou um instrutor de Ruby on Rails',
+      create(:profile, title: 'Instrutor', about_me: 'Olá, meu nome é José e eu sou um instrutor de Ruby on Rails',
                        user: user, profile_picture: image, pronoun: 'Ele/Dele', city: 'Florianópolis', birth: '1999-01-02', gender: 'Masculino')
 
       allow(User).to receive(:find_by).and_raise(ActiveRecord::ActiveRecordError)
@@ -41,6 +41,7 @@ describe 'Speaker Details API' do
       json = JSON.parse(response.body)
       expect(response.content_type).to include 'application/json'
       expect(response).to have_http_status :internal_server_error
+      expect(json['error']).to eq 'Algo deu errado.'
     end
   end
 end
