@@ -12,6 +12,7 @@ Exibe as tarefas e conteúdos de um currículo, que representa todos os dados pa
   "curriculum": {
     "curriculum_contents": [
       {
+        "last_update": "07/02/2025"
         "code": "MH0IBQ8O",
         "title": "Ruby PDF",
         "description": "\u003Cstrong\u003EDescrição Ruby PDF\u003C/strong\u003E",
@@ -24,6 +25,7 @@ Exibe as tarefas e conteúdos de um currículo, que representa todos os dados pa
         ]
       }
     ],
+    "tasks_available": true
     "curriculum_tasks": [
       {
         "code": "FNRVUEUB",
