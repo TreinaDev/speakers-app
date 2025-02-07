@@ -91,16 +91,18 @@ describe 'Curriculum API' do
       first_task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory)
       create(:curriculum_task, curriculum: curriculum, title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus', certificate_requirement: :optional)
       create(:curriculum_task_content, curriculum_task: first_task, curriculum_content: first_curriculum_content)
-      create(:curriculum_task_content, curriculum_task: first_task, curriculum_content: second_curriculum_content)
 
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
       get "/api/v1/curriculums/#{schedule_item.code}"
 
       expect(response).to have_http_status :success
       expect(response.content_type).to include('application/json')
+      curriculum_response = response.parsed_body['curriculum']
       tasks_response = curriculum_response['curriculum_tasks']
-      expect(tasks_response.length).to eq 1
-      expect(tasks_response.last).to eq "As tarefas só serão disponibilizadas após o início do evento (#{event.start_date.strftime('%d/%m/%Y')})"
+      expect(tasks_response.length).to eq 2
+      expect(curriculum_response['tasks_available']).to eq false
+      expect(tasks_response[0]).to eq({ title: 'Exercício Rails' })
+      expect(tasks_response[1]).to eq({ title: 'Exercício Stimulus' })
     end
   end
 end
