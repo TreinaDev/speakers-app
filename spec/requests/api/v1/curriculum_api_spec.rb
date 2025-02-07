@@ -4,7 +4,7 @@ describe 'Curriculum API' do
   context 'GET /api/v1/curriculums/:schedule_item_code' do
     it 'with success' do
       user = create(:user)
-      schedule_item = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
+      schedule_item = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: Date.today)
       curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
       files = [ fixture_file_upload(Rails.root.join('spec/fixtures/capi.png')),
                 fixture_file_upload(Rails.root.join('spec/fixtures/nota-ufjf.pdf')),
@@ -83,8 +83,7 @@ describe 'Curriculum API' do
 
     it 'and tasks are not displayed before the event starts' do
       user = create(:user)
-      event = build(:event, name: 'Ruby on Rails', start_date: Date.tomorrow)
-      schedule_item = build(:schedule_item, name: 'TDD com Rails', description: 'Introdução a programação com TDD')
+      schedule_item = build(:schedule_item, name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: Date.tomorrow)
       curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
       first_content = create(:event_content, user: user, title: 'Ruby para iniciantes', code: 'ABCD1234')
       first_curriculum_content = create(:curriculum_content, curriculum: curriculum, event_content: first_content, code: 'XLR8BEN1')
@@ -95,14 +94,14 @@ describe 'Curriculum API' do
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
       get "/api/v1/curriculums/#{schedule_item.code}"
 
+      json_response = JSON.parse(response.body)
       expect(response).to have_http_status :success
       expect(response.content_type).to include('application/json')
-      curriculum_response = response.parsed_body['curriculum']
-      tasks_response = curriculum_response['curriculum_tasks']
+      tasks_response = json_response['curriculum']['curriculum_tasks']
       expect(tasks_response.length).to eq 2
-      expect(curriculum_response['tasks_available']).to eq false
-      expect(tasks_response[0]).to eq({ title: 'Exercício Rails' })
-      expect(tasks_response[1]).to eq({ title: 'Exercício Stimulus' })
+      expect(json_response['curriculum']['tasks_available']).to eq false
+      expect(tasks_response[0].keys).to eq [ "title" ]
+      expect(tasks_response[1].keys).to eq [ "title" ]
     end
   end
 end

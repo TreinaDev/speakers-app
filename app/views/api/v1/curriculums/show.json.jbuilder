@@ -19,14 +19,18 @@ if @curriculum.present?
     json.tasks_available @tasks_available
     if  @curriculum.curriculum_tasks.any?
       json.curriculum_tasks @curriculum.curriculum_tasks do |task|
-        json.code task.code
-        json.title task.title
-        json.description task.description
-        json.certificate_requirement task.translated_certificate_requirement(task.certificate_requirement)
-        if task.curriculum_contents.any?
-          json.attached_contents task.curriculum_contents do |content|
-            json.attached_content_code content.event_content.code
+        if @tasks_available
+          json.code task.code
+          json.title task.title
+          json.description task.description
+          json.certificate_requirement task.translated_certificate_requirement(task.certificate_requirement)
+          if task.curriculum_contents.any?
+            json.attached_contents task.curriculum_contents do |content|
+              json.attached_content_code content.event_content.code
+            end
           end
+        else
+          json.title task.title
         end
       end
     end
