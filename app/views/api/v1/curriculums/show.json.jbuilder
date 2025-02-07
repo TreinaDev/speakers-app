@@ -2,7 +2,7 @@ if @curriculum.present?
   json.curriculum do
     if @curriculum.curriculum_contents.any?
       json.curriculum_contents @curriculum.curriculum_contents do |content|
-        json.code content.event_content.code
+        json.code content.code
         json.title content.event_content.title
         json.description content.event_content.description.body
         if content.event_content.external_video_url.present?
@@ -26,7 +26,7 @@ if @curriculum.present?
           json.certificate_requirement task.translated_certificate_requirement(task.certificate_requirement)
           if task.curriculum_contents.any?
             json.attached_contents task.curriculum_contents do |content|
-              json.attached_content_code content.event_content.code
+              json.attached_content_code content.code
             end
           end
         else

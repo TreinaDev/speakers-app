@@ -9,12 +9,12 @@ describe 'Curriculum API' do
       files = [ fixture_file_upload(Rails.root.join('spec/fixtures/capi.png')),
                 fixture_file_upload(Rails.root.join('spec/fixtures/nota-ufjf.pdf')),
                 fixture_file_upload(Rails.root.join('spec/fixtures/joker.mp4')) ]
-      first_content = create(:event_content, title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>', code: 'ABCD1234',
+      first_content = create(:event_content, title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>',
                               external_video_url: 'https://www.youtube.com/watch?v=idaXF2Er4TU', files: files, user: user)
       second_content = create(:event_content, title: 'Ruby Video', description: 'Apresentação sobre TDD',
-                              external_video_url: 'https://www.youtube.com/watch?v=2DvrRadXwWY', user: user, code: '74851234')
+                              external_video_url: 'https://www.youtube.com/watch?v=2DvrRadXwWY', user: user)
       third_content = create(:event_content, title: 'Stimulus', description: 'PDF sobre Stimulus',
-                              external_video_url: 'https://www.youtube.com/watch?v=1cw6qO1EYGw', user: user, code: 'WERAG234')
+                              external_video_url: 'https://www.youtube.com/watch?v=1cw6qO1EYGw', user: user)
       first_curriculum_content = create(:curriculum_content, id: 1, curriculum: curriculum, event_content: first_content, code: 'XLR8BE10')
       second_curriculum_content = create(:curriculum_content, id: 2, curriculum: curriculum, event_content: second_content, code: 'CODIGO15')
       create(:curriculum_content, curriculum: curriculum, event_content: third_content, code: 'CODIGO26')
@@ -32,31 +32,19 @@ describe 'Curriculum API' do
       tasks_response = curriculum_response['curriculum_tasks']
       contents_response = curriculum_response['curriculum_contents']
       expect(contents_response.length).to eq 3
-      expect(contents_response[0]['code']).to eq 'ABCD1234'
-      expect(contents_response[0]['title']).to eq 'Ruby PDF'
-      expect(contents_response[0]['description']).to eq '<strong>Descrição Ruby PDF</strong>'
-      expect(contents_response[0]['external_video_url']).to eq "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/idaXF2Er4TU' frameborder='0' allowfullscreen></iframe>"
-      expect(contents_response[0]['files'][0]['filename']).to eq 'capi.png'
-      expect(contents_response[0]['files'][1]['filename']).to eq 'nota-ufjf.pdf'
-      expect(contents_response[0]['files'][2]['filename']).to eq 'joker.mp4'
-      expect(contents_response[1]['code']).to eq '74851234'
-      expect(contents_response[1]['title']).to eq 'Ruby Video'
-      expect(contents_response[1]['description']).to eq 'Apresentação sobre TDD'
-      expect(contents_response[1]['external_video_url']).to eq "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/2DvrRadXwWY' frameborder='0' allowfullscreen></iframe>"
-      expect(contents_response[2]['title']).to eq 'Stimulus'
-      expect(contents_response[2]['description']).to eq 'PDF sobre Stimulus'
-      expect(contents_response[2]['external_video_url']).to eq "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/1cw6qO1EYGw' frameborder='0' allowfullscreen></iframe>"
+      expect(contents_response[0].deep_symbolize_keys).to include({ code: 'XLR8BE10', title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>',
+                                                                    external_video_url: "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/idaXF2Er4TU' frameborder='0' allowfullscreen></iframe>",
+                                                                    files: [ { file_download_url: "http://www.example.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--34bb1868318e92534296ce473e5723673680545c/capi.png", filename: 'capi.png' },
+                                                                             { file_download_url: "http://www.example.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MiwicHVyIjoiYmxvYl9pZCJ9fQ==--c334c3494c13b74df05f58b8166423c4642953bc/nota-ufjf.pdf", filename: 'nota-ufjf.pdf' },
+                                                                             { file_download_url: "http://www.example.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MywicHVyIjoiYmxvYl9pZCJ9fQ==--2c7e74e916ab7d45606cc8b7c8384ae32b2e8300/joker.mp4", filename: 'joker.mp4' } ] })
+      expect(contents_response[1].deep_symbolize_keys).to eq({ code: 'CODIGO15', title: 'Ruby Video', description: 'Apresentação sobre TDD',
+                                                               external_video_url: "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/2DvrRadXwWY' frameborder='0' allowfullscreen></iframe>"  })
+      expect(contents_response[2].deep_symbolize_keys).to eq({ code: 'CODIGO26', title: 'Stimulus', description: 'PDF sobre Stimulus',
+                                                               external_video_url: "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/1cw6qO1EYGw' frameborder='0' allowfullscreen></iframe>" })
       expect(tasks_response.length).to eq 2
-      expect(tasks_response[0]['code']).to eq 'CODIGO37'
-      expect(tasks_response[0]['title']).to eq 'Exercício Rails'
-      expect(tasks_response[0]['description']).to eq 'Seu primeiro exercício ruby'
-      expect(tasks_response[0]['certificate_requirement']).to eq 'Obrigatória'
-      expect(tasks_response[0]['attached_contents'][0]['attached_content_code']).to eq 'ABCD1234'
-      expect(tasks_response[0]['attached_contents'][1]['attached_content_code']).to eq '74851234'
-      expect(tasks_response[1]['code']).to eq 'CODIGO48'
-      expect(tasks_response[1]['title']).to eq 'Exercício Stimulus'
-      expect(tasks_response[1]['description']).to eq 'Seu primeiro exercício stimulus'
-      expect(tasks_response[1]['certificate_requirement']).to eq 'Opcional'
+      expect(tasks_response[0].deep_symbolize_keys).to eq({ code: 'CODIGO37', title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: 'Obrigatória',
+                                                            attached_contents: [ { attached_content_code: 'XLR8BE10' }, { attached_content_code: 'CODIGO15' } ] })
+      expect(tasks_response[1].deep_symbolize_keys).to eq({ code: 'CODIGO48', title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus', certificate_requirement: 'Opcional' })
     end
 
     it 'with a schedule item that does not exist' do
@@ -76,7 +64,7 @@ describe 'Curriculum API' do
       allow(Curriculum).to receive(:find_by).and_raise(ActiveRecord::ActiveRecordError)
       get "/api/v1/curriculums/#{schedule_item.code}"
 
-      expect(response).to have_http_status 500
+      expect(response).to have_http_status :internal_server_error
       expect(response.content_type).to include('application/json')
       expect(response.parsed_body['error']).to eq 'Algo deu errado.'
     end
@@ -100,8 +88,8 @@ describe 'Curriculum API' do
       tasks_response = json_response['curriculum']['curriculum_tasks']
       expect(tasks_response.length).to eq 2
       expect(json_response['curriculum']['tasks_available']).to eq false
-      expect(tasks_response[0].keys).to eq [ "title" ]
-      expect(tasks_response[1].keys).to eq [ "title" ]
+      expect(tasks_response[0].deep_symbolize_keys).to eq({ title: 'Exercício Rails' })
+      expect(tasks_response[1].deep_symbolize_keys).to eq({ title: 'Exercício Stimulus' })
     end
   end
 end
