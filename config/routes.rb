@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :curriculums, only: %i[ show ], param: :schedule_item_code
       resources :speakers, only: %i[ show ], param: :email, constraints: { email: /[^\/]+/ }
+      resources :participant_tasks, only: %i[ create ], params: [ :schedule_item_code, :participant_code, :task_code ]
     end
   end
 end
