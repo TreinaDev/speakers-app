@@ -1,17 +1,30 @@
 <div> 
-  <h1 class="mb-20"><%= t('.my_events') %></h1>
-  <% if @events.any? %>
-    <ul class="flex justify-center flex-wrap gap-6">
-      <% @paginated_events.each do |event| %>
-        <%= link_to event_path(event.code) do %>
-          <%= event_card(event) %>
-        <% end %>
-      <% end %>
-    </ul>
-  <% else %>
-    <p><%= t('.no_events') %></p>
-  <% end %>
-</div>
-<div class="text-center mt-5">
-  <%= paginate @paginated_events %>
+  <h1 class="mb-10 text-center"><%= t('.my_events') %></h1>
+  
+  <div class="flex flex-col" data-controller="tabs" data-tabs-active-class="tab__btn--active" data-tabs-unactive-class="tab__btn--unactive" data-tabs-default-tab-value="tab1">
+    <div class="tab__combo_btn self-center">
+      <button id="tab1" data-tabs-target="btn" data-action="click->tabs#select"><%= t('.ongoing_events') %> (<%= @ongoing_events.count %>)</button>
+      <button id="tab2" data-tabs-target="btn" data-action="click->tabs#select"><%= t('.future_events') %> (<%= @future_events.count %>)</button>
+      <button id="tab3" data-tabs-target="btn" data-action="click->tabs#select"><%= t('.past_events') %> (<%= @past_events.count %>)</button>
+    </div>
+
+    <div data-tabs-target="tab" id="tab1">
+      <div id="ongoing_events_list">
+        <%= render 'events/event_list', event_list: @ongoing_events, paginated_events: @paginated_ongoing_events, param_name: 'ongoing_page', status: :ongoing %>
+      </div>
+    </div>
+
+    <div data-tabs-target="tab" id="tab2">
+      <div id="future_events_list">
+        <%= render 'events/event_list', event_list: @future_events, paginated_events: @paginated_future_events, param_name: 'future_page', status: :future %>
+      </div>
+    </div>
+
+    <div data-tabs-target="tab" id="tab3">
+      <div id="past_events_list">
+        <%= render 'events/event_list', event_list: @past_events, paginated_events: @paginated_past_events, param_name: 'past_page', status: :past %>
+      </div>
+    </div>
+  </div>
+
 </div>

@@ -40,7 +40,7 @@ describe 'user visit home and see list of events', type: :system do
     end
   end
 
-  it 'and dont exists events for him' do
+  it 'and dont exists events ongoing for him', js: true do
     allow(Event).to receive(:all).and_return({})
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
     create(:profile, user: user)
@@ -49,7 +49,33 @@ describe 'user visit home and see list of events', type: :system do
     visit events_path
 
     expect(page).to have_content 'Meus Eventos'
-    expect(page).to have_content('Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.')
+    expect(page).to have_content('Não foram localizados eventos em andamento')
+  end
+
+  it 'and dont exists future events for him', js: true do
+    allow(Event).to receive(:all).and_return({})
+    user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+    create(:profile, user: user)
+
+    login_as user, scope: :user
+    visit events_path
+    click_on 'Em breve'
+
+    expect(page).to have_content 'Meus Eventos'
+    expect(page).to have_content('Não foram localizados eventos futuros')
+  end
+
+  it 'and dont exists past events for him', js: true do
+    allow(Event).to receive(:all).and_return({})
+    user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
+    create(:profile, user: user)
+
+    login_as user, scope: :user
+    visit events_path
+    click_on 'Finalizados'
+
+    expect(page).to have_content 'Meus Eventos'
+    expect(page).to have_content('Não foram localizados eventos finalizados')
   end
 
   it 'and cannot visit event page if not authenticated' do

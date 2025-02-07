@@ -70,9 +70,18 @@ pt-BR:
       event_page: 'Site do Evento'
       no_event_page: 'Página inexistente'
     index:
+      all_events: 'Todos os Eventos'
+      ongoing_events: 'Em andamento'
+      future_events: 'Em breve'
+      past_events: 'Finalizados'
       no_image: 'Imagem do Evento'
       my_events: 'Meus Eventos'
-      no_events: 'Não existe nenhum evento ao qual você faça parte. Se você acha que isso é um erro, entre em contato com algum organizador.'
+    event_list:
+      no_events: 'Não foram localizados eventos %{status}'
+      status:
+        ongoing: 'em andamento'
+        future: 'futuros'
+        past: 'finalizados'
   participants:
     participants:
       participant_number: 'Número de Participantes'
