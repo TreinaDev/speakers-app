@@ -15,7 +15,7 @@ describe 'user visit home and see list of events', type: :system do
   it 'with success' do
     events = []
     2.times do |n|
-      events << build(:event, name: "Event#{ n + 1}")
+      events << build(:event, name: "Event#{ n + 1}", start_date: '2025-02-01')
     end
 
     allow(Event).to receive(:all).and_return(events)

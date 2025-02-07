@@ -56,8 +56,10 @@ Para rodar os testes, execute:
 ```sh
 rspec
 ```
+
 ## Documentação API
 <a href="APIDOC.md">Clique aqui para acessar a documentação </a>
+
 ## Contribuidores
 
 [<img src="https://avatars.githubusercontent.com/u/162291567" width=115 > <br> <sub> Bruno Herculano </sub>](https://github.com/Bruno-H-Terto)|[<img src="https://avatars.githubusercontent.com/u/126020568?v=4" width=115 > <br> <sub> Pedro Dias </sub>](https://github.com/PedroD98)|[<img src="https://avatars.githubusercontent.com/u/83383321?v=4" width=115 > <br> <sub> Matheus Santana </sub>](https://github.com/matheusfsantana)|[<img src="https://avatars.githubusercontent.com/u/104660897?v=4" width=115 > <br> <sub> Thiago Gois </sub>](https://github.com/ThiagoGois1011)|[<img src="https://avatars.githubusercontent.com/u/144969255?v=4" width=115 > <br> <sub> Lucas Caetano </sub>](https://github.com/caetano-lucas)| 
