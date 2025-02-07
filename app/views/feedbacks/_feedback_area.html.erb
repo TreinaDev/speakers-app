@@ -4,7 +4,8 @@
     <div class="modal-body">
       <% feedbacks.each do |feedback| %>
         <div class="feedback-card">
-          <div class="feedback-header">
+        <div class="feedback-header flex gap-2">
+          <%= image_tag 'participant.svg', class: 'icon' %>
             <span><%= t('.user') %>: <%= feedback.user %></span>
             <strong><%= feedback.title %></strong>
           </div>
