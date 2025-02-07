@@ -11,6 +11,7 @@ describe 'Curriculum API' do
                 fixture_file_upload(Rails.root.join('spec/fixtures/joker.mp4')) ]
       first_content = create(:event_content, title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>',
                               external_video_url: 'https://www.youtube.com/watch?v=idaXF2Er4TU', files: files, user: user)
+      create(:update_history, event_content: first_content, creation_date: Date.today)
       second_content = create(:event_content, title: 'Ruby Video', description: 'Apresentação sobre TDD',
                               external_video_url: 'https://www.youtube.com/watch?v=2DvrRadXwWY', user: user)
       third_content = create(:event_content, title: 'Stimulus', description: 'PDF sobre Stimulus',
@@ -32,7 +33,7 @@ describe 'Curriculum API' do
       tasks_response = curriculum_response['curriculum_tasks']
       contents_response = curriculum_response['curriculum_contents']
       expect(contents_response.length).to eq 3
-      expect(contents_response[0].deep_symbolize_keys).to include({ code: 'XLR8BE10', title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>',
+      expect(contents_response[0].deep_symbolize_keys).to include({ code: 'XLR8BE10', last_update: Date.today.strftime('%d/%m/%Y'), title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>',
                                                                     external_video_url: "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/idaXF2Er4TU' frameborder='0' allowfullscreen></iframe>",
                                                                     files: [ { file_download_url: "http://www.example.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--34bb1868318e92534296ce473e5723673680545c/capi.png", filename: 'capi.png' },
                                                                              { file_download_url: "http://www.example.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MiwicHVyIjoiYmxvYl9pZCJ9fQ==--c334c3494c13b74df05f58b8166423c4642953bc/nota-ufjf.pdf", filename: 'nota-ufjf.pdf' },

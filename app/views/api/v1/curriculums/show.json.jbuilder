@@ -3,6 +3,7 @@ if @curriculum.present?
     if @curriculum.curriculum_contents.any?
       json.curriculum_contents @curriculum.curriculum_contents do |content|
         json.code content.code
+        json.last_update content.event_content.update_histories.last.creation_date.strftime('%d/%m/%Y') if content.event_content.update_histories.any?
         json.title content.event_content.title
         json.description content.event_content.description.body
         if content.event_content.external_video_url.present?

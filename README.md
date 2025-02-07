@@ -64,6 +64,7 @@ Exibe as tarefas e conteúdos de um currículo, que representa todos os dados pa
   "curriculum": {
     "curriculum_contents": [
       {
+        "last_update": "07/02/2025"
         "code": "MH0IBQ8O",
         "title": "Ruby PDF",
         "description": "\u003Cstrong\u003EDescrição Ruby PDF\u003C/strong\u003E",
@@ -76,6 +77,7 @@ Exibe as tarefas e conteúdos de um currículo, que representa todos os dados pa
         ]
       }
     ],
+    "tasks_available": true
     "curriculum_tasks": [
       {
         "code": "FNRVUEUB",
@@ -104,6 +106,7 @@ Exibe as tarefas e conteúdos de um currículo, que representa todos os dados pa
 
 * curriculum_contents: Conteúdos;
   - code: Código de identificação;
+  - last_update: Última atualização;
   - title: Título;
   - description: Descrição com texto enriquecido;
   - external_video_url: Link de um video externo dentro de um iframe para exibição;
@@ -117,6 +120,7 @@ Exibe as tarefas e conteúdos de um currículo, que representa todos os dados pa
   - certificate_requirement: Tarefa obrigatória ou opcional;
 * attached_contents: Conteúdos anexados a tarefa;
   - attached_content_code: Código de referencia de um conteúdo;
+* tasks_available: Disponibilidade das tarefas;
   
 ## Contribuidores
 
