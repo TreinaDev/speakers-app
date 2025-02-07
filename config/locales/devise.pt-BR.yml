@@ -29,8 +29,8 @@ pt-BR:
         updated_at: Atualizado em
     models:
       user:
-        one: Usuário
-        other: Usuários
+        one: Palestrante
+        other: Palestrantes
   devise:
     confirmations:
       confirmed: A sua conta foi confirmada com sucesso.
