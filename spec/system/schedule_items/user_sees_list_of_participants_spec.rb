@@ -32,6 +32,7 @@ describe 'User sees list of participants', type: :system, js: true do
 
     login_as user, scope: :user
     visit root_path
+    click_on 'Em breve'
     click_on 'Dev week'
     click_on 'Entrevista com João'
 
@@ -65,6 +66,7 @@ describe 'User sees list of participants', type: :system, js: true do
 
     login_as user, scope: :user
     visit root_path
+    click_on 'Em breve'
     click_on 'Dev week'
     click_on 'Entrevista com João'
 

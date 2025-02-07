@@ -1,0 +1,14 @@
+<% if event_list.present? %>
+  <ul class="flex mx-auto flex-wrap gap-6">
+    <% paginated_events.each do |event| %>
+      <%= link_to event_path(event.code) do %>
+        <%= event_card(event) %>
+      <% end %>
+    <% end %>
+  </ul>
+  <div class="text-center mt-5">
+    <%= paginate paginated_events, param_name: param_name, remote: true %>
+  </div>
+<% else %>
+  <p class="text-center"><%= t('.no_events', status: t(".status.#{status}")) %></p>
+<% end %>

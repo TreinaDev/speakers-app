@@ -17,6 +17,7 @@ describe 'User see event details', type: :system do
 
     login_as user, scope: :user
     visit root_path
+    click_on 'Em breve'
     click_on 'Ruby on Rails'
 
     start_date = 7.days.from_now.strftime('%d/%m/%Y')

@@ -31,6 +31,7 @@ describe 'User register task for your schedule item curriculum', type: :system, 
 
     login_as user, scope: :user
     visit root_path
+    click_on 'Em breve'
     click_on 'Ruby on Rails'
     click_on 'TDD com Rails'
     click_on 'Adicionar tarefa'

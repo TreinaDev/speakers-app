@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_05_180608) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_06_221608) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -73,7 +73,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_180608) do
     t.integer "curriculum_id", null: false
     t.string "title"
     t.text "description"
-    t.integer "certificate_requirement", default: 0, null: false
+    t.integer "certificate_requirement", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "code"
@@ -100,6 +100,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_180608) do
     t.string "code"
     t.index ["code"], name: "index_event_contents_on_code", unique: true
     t.index ["user_id"], name: "index_event_contents_on_user_id"
+  end
+
+  create_table "participant_records", force: :cascade do |t|
+    t.string "participant_code"
+    t.integer "user_id", null: false
+    t.string "schedule_item_code"
+    t.boolean "enabled_certificate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_participant_records_on_user_id"
+  end
+
+  create_table "participant_tasks", force: :cascade do |t|
+    t.integer "participant_record_id", null: false
+    t.integer "curriculum_task_id", null: false
+    t.boolean "task_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["curriculum_task_id"], name: "index_participant_tasks_on_curriculum_task_id"
+    t.index ["participant_record_id"], name: "index_participant_tasks_on_participant_record_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -165,6 +185,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_180608) do
   add_foreign_key "curriculum_tasks", "curriculums"
   add_foreign_key "curriculums", "users"
   add_foreign_key "event_contents", "users"
+  add_foreign_key "participant_records", "users"
+  add_foreign_key "participant_tasks", "curriculum_tasks"
+  add_foreign_key "participant_tasks", "participant_records"
   add_foreign_key "profiles", "users"
   add_foreign_key "social_networks", "profiles"
   add_foreign_key "update_histories", "event_contents"
