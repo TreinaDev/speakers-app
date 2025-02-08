@@ -3,12 +3,14 @@ require 'rails_helper'
 describe 'POST /api/v1/participant_tasks' do
   it 'with success' do
     user = create(:user, id: 10)
+    event = build(:event)
     schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', code: '1234ABCD',
                    description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory)
 
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+    allow(Event).to receive(:find).and_return(event)
     post '/api/v1/participant_tasks', params: { participant_code: 'XLR8BEN1', task_code: '1234ABCD' }
 
     expect(response).to have_http_status :success

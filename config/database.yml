@@ -10,8 +10,13 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  database: storage/development.sqlite3
+ primary:
+    <<: *default
+    database: storage/development.sqlite3
+    queue:
+      <<: *default
+      database: storage/development_queue.sqlite3
+      migrations_paths: db/queue_migrate
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -19,7 +24,10 @@ development:
 test:
   <<: *default
   database: storage/test.sqlite3
-
+  queue:
+    <<: *default
+    database: storage/production_queue.sqlite3
+    migrations_paths: db/queue_migrate
 
 # SQLite3 write its data on the local filesystem, as such it requires
 # persistent disks. If you are deploying to a managed service, you should
@@ -30,7 +38,11 @@ test:
 production:
   primary:
     <<: *default
-    # database: path/to/persistent/storage/production.sqlite3
+    database: storage/production.sqlite3
+  queue:
+    <<: *default
+    database: storage/production_queue.sqlite3
+    migrations_paths: db/queue_migrate
   cache:
     <<: *default
     # database: path/to/persistent/storage/production_cache.sqlite3
