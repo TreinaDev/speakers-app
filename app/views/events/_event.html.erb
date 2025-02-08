@@ -1,10 +1,30 @@
-<div id="event">
+
+<div class="relative p-5 border mt-5">
+  <%= render 'image_modal/modal', img: event.banner_url, class_attributes: 'w-full h-80 object-cover bg-center hover-img' %>
+  <div class="w-32 h-32 overflow-hidden rounded-full absolute bottom-0 left-0 border-4 border-gray-500 flex m-10">
+    <%= render 'image_modal/modal', img: event.logo_url, class_attributes: 'w-full h-full object-cover self-center hover-img' %>
+  </div>
+</div>
+
+<div class="flex gap-2 items-center mt-4 mb-4">
+  <%= image_tag 'event-calendar.svg', class: 'icon' %>
+  <span><%= full_date(event.start_date) %> - <%= full_date(event.end_date) %></span>
+</div>
+
+<div id="event" data-controller="collapse">
   <div class="event_card__heading">
     <h2><%= event.name %></h2>
-    <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= raw event.description %></span>
     <span><b><%= t('.event_page') %>:</b> <%= event.url.presence || t('.no_event_page') %></span>
-    <span><b><%= Event.human_attribute_name(:start_date) %>:</b> <%= formatted_date(event.start_date) %></span>
-    <span><b><%= Event.human_attribute_name(:end_date) %>:</b> <%= formatted_date(event.end_date) %></span>
     <span><b><%= Event.human_attribute_name(:address) %>:</b> <%= event.address %></span>
+    <div class="hidden" data-collapse-target="content">
+      <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= raw event.description %></span>
+    </div>
+    <button 
+    data-action="click->collapse#toggle"
+    data-collapse-target="button"
+    class="mt-2 px-4 py-2 text-semibold"
+  >
+    Mostrar mais
+  </button>
   </div>
 </div>

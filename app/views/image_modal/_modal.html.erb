@@ -1,0 +1,25 @@
+<div data-controller="image-modal">
+  <%= image_tag img, class: class_attributes %>
+
+  <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer" 
+    data-action="click->image-modal#open"
+    data-full-src="<%= img %>">
+    <span class="text-white font-semibold"><%= t('.expand') %></span>
+  </div>
+
+  <div 
+    class="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center hidden"
+    data-image-modal-target="modal"
+  >
+    <div class="relative bg-white p-4 rounded-lg">
+      <button 
+        class="absolute top-2 right-2 flex justify-center bg-gray-100 border-1 border-gray-700 rounded-full h-10 w-10"
+        data-action="click->image-modal#close"
+      >
+      <%= image_tag 'close_icon.png', class: 'icon self-center' %>
+      </button>
+
+      <%= image_tag "default_image.jpeg", class: "max-w-full max-h-[90vh]", data: { image_modal_target: "fullImage" } %>
+    </div>
+  </div>
+</div>
