@@ -1,5 +1,8 @@
 ---
 pt-BR:
+  home_title: "Início"
+  my_contents: "Meus Conteúdos"
+  new_content: "Novo Conteúdo"
   edit: 'Editar'
   file: 'Arquivo'
   copyright: '© Copyright 2025 Palestra+ | Todos os direitos reservados'

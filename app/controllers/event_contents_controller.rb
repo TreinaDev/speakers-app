@@ -14,7 +14,7 @@ class EventContentsController < ApplicationController
 
   def new
     @event_content = current_user.event_contents.build
-    add_breadcrumb "Novo Conteúdo", "#"
+    add_breadcrumb t("new_content"), "#"
   end
 
   def create
@@ -29,7 +29,7 @@ class EventContentsController < ApplicationController
   end
 
   def edit
-    add_breadcrumb "Editar #{@event_content.title}", "#"
+    add_breadcrumb "#{t("edit")} #{@event_content.title}", "#"
   end
 
   def update
@@ -67,6 +67,6 @@ class EventContentsController < ApplicationController
   end
 
   def set_event_content_breadcrumb
-    add_breadcrumb "Meus Conteúdos", event_contents_path
+    add_breadcrumb t("my_contents"), event_contents_path
   end
 end

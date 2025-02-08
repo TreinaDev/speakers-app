@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_breadcrumb
-    add_breadcrumb "Início", events_path
+    add_breadcrumb t("home_title"), events_path
   end
 end
