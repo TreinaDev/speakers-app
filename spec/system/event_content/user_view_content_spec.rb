@@ -15,7 +15,9 @@ describe 'User view a content', type: :system do
     login_as user
     visit root_path
     click_on 'Meus Conteúdos'
-    click_on 'Dev week'
+    within("#event_content_1") do
+      click_on 'Visualizar conteúdo'
+    end
 
     files = user.event_contents.last.files
     expect(page).to have_content('Dev week')
