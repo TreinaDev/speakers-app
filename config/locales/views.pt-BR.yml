@@ -69,6 +69,7 @@ pt-BR:
     event:
       event_page: 'Site do Evento'
       no_event_page: 'Página inexistente'
+      more: 'Mostrar mais'
     index:
       all_events: 'Todos os Eventos'
       ongoing_events: 'Em andamento'

@@ -1,6 +1,6 @@
 ---
 pt-BR:
-  full_date: '%{weekday} dia %{day} de %{month} de %{year}'
+  full_date: '%{weekday}, %{day} de %{month} de %{year}'
   home_title: "Início"
   my_contents: "Meus Conteúdos"
   new_content: "Novo Conteúdo"

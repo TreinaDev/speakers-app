@@ -23,7 +23,7 @@ describe 'User see event details', type: :system do
     expect(page).to have_content 'Ruby on Rails'
     expect(page).to have_content 'Introdução ao Rails com TDD'
     expect(page).to have_content 'Juiz de Fora'
-    expect(page).to have_content "sábado dia 08 de fevereiro de 2025 - domingo dia 09 de fevereiro de 2025"
+    expect(page).to have_content "sábado, 08 de fevereiro de 2025 - domingo, 09 de fevereiro de 2025"
     expect(page).to have_content 'www.meuevento.com/eventos/Ruby-on-Rails'
   end
 
