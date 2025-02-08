@@ -12,7 +12,9 @@ class ParticipantRecord < ApplicationRecord
       participant_mandatory_task_codes << new_task.curriculum_task.code
       update(enabled_certificate: true) if curriculum_mandatory_task_codes.length == participant_mandatory_task_codes.length &&
                                         curriculum_mandatory_task_codes.all? { |task| participant_mandatory_task_codes.include?(task) }
-
+    end
+  end
+  
   after_create :scheduling_for_certificate_creation
 
   private
