@@ -15,14 +15,13 @@
       <span><%= full_date(event.start_date) %> - <%= full_date(event.end_date) %></span>
     </div>
 
-    <div class="flex gap-2">
+    <div class="flex gap-2 mb-3">
       <%= image_tag 'location.svg', class: 'icon' %>
-      <span><%= event.address %></span>
+      <%= link_to event.address, "https://www.google.com/maps?q=#{event.address.gsub(' ', '+')}", target: '_blank', class: 'link_primary' %>
     </div>
     
     <div class="hidden" data-collapse-target="content">
       <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= raw event.description %></span>
-      <span><b><%= t('.event_page') %>:</b> <%= event.url.presence || t('.no_event_page') %></span>
     </div>
     <div class="flex flex-col justify-center mx-auto">
       <button 

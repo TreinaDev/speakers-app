@@ -24,7 +24,6 @@ describe 'User see event details', type: :system do
     expect(page).to have_content 'Introdução ao Rails com TDD'
     expect(page).to have_content 'Juiz de Fora'
     expect(page).to have_content "sábado, 08 de fevereiro de 2025 - domingo, 09 de fevereiro de 2025"
-    expect(page).to have_content 'www.meuevento.com/eventos/Ruby-on-Rails'
   end
 
   it 'and sees your schedules items' do
