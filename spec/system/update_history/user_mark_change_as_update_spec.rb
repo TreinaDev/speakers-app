@@ -9,7 +9,9 @@ describe 'User mark content change as an update', type: :system, js: true do
     login_as user
     visit root_path
     click_on 'Meus Conteúdos'
-    click_on 'Dev week'
+    within("#event_content_1") do
+      click_on 'Visualizar conteúdo'
+    end
     find("#pencil_edit").click
     fill_in 'Título', with: 'Workshop POO'
     fill_in_rich_text_area 'Descrição', with: 'Conteúdo do workshop de 09/04'

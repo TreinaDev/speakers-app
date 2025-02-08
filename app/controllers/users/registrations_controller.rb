@@ -9,10 +9,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super do |resource|
+      if resource.errors.any?
+        flash[:alert] = t("errors.messages.not_saved.another")
+      end
+    end
+  end
 
   # GET /resource/edit
   # def edit

@@ -1,10 +1,36 @@
-<div id="event">
-  <div class="event_card__heading">
-    <h2><%= event.name %></h2>
-    <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= raw event.description %></span>
-    <span><b><%= t('.event_page') %>:</b> <%= event.url.presence || t('.no_event_page') %></span>
-    <span><b><%= Event.human_attribute_name(:start_date) %>:</b> <%= formatted_date(event.start_date) %></span>
-    <span><b><%= Event.human_attribute_name(:end_date) %>:</b> <%= formatted_date(event.end_date) %></span>
-    <span><b><%= Event.human_attribute_name(:address) %>:</b> <%= event.address %></span>
+
+<div class="relative p-5 border mt-5">
+  <%= render 'image_modal/modal', img: event.banner_url.presence || "no_banner.png", class_attributes: 'w-full h-80 object-cover bg-center hover-img' %>
+  <div class="w-32 h-32 overflow-hidden rounded-full absolute bottom-0 left-0 border-4 border-gray-500 flex m-10">
+    <%= render 'image_modal/modal', img: event.logo_url.presence || "no_logo.png", class_attributes: 'w-full h-full object-cover self-center hover-img' %>
   </div>
+</div>
+
+<div id="event" data-controller="collapse">
+  <div class="event_card__heading">
+    <h2 class="my-3"><%= event.name %></h2>
+
+    <div class="flex gap-2 items-center mt-4 mb-4">
+      <%= image_tag 'event-calendar.svg', class: 'icon' %>
+      <span><%= full_date(event.start_date) %> - <%= full_date(event.end_date) %></span>
+    </div>
+
+    <div class="flex gap-2 mb-3">
+      <%= image_tag 'location.svg', class: 'icon' %>
+      <%= link_to event.address, "https://www.google.com/maps?q=#{event.address.gsub(' ', '+')}", target: '_blank', class: 'link_primary' %>
+    </div>
+    
+    <div class="hidden" data-collapse-target="content">
+      <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= raw event.description %></span>
+    </div>
+    <div class="flex flex-col justify-center mx-auto">
+      <button 
+        data-action="click->collapse#toggle"
+        data-collapse-target="button"
+        class="expanded"
+      >
+        <%= t('.more') %>
+      </button>
+      </div>
+    </div>
 </div>
