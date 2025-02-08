@@ -19,7 +19,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(code: params[:code], token: current_user.token)
-    redirect_to events_path, alert: t('event.show.event_not_find') unless @event
+    return redirect_to events_path, alert: t('event.show.event_not_find') unless @event
+    add_breadcrumb @event.name, "#" if @event
     @schedules = @event&.schedule_items(current_user.token)&.group_by { |schedule| schedule[:schedule].itself }
     @feedbacks = Feedback.event(event_code: @event&.code, speaker: current_user.email)
     @participants = @event&.participants

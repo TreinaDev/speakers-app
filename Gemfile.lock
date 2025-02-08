@@ -82,6 +82,8 @@ GEM
     bindex (0.8.1)
     brakeman (7.0.0)
       racc
+    breadcrumbs_on_rails (4.1.0)
+      railties (>= 5.0)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -427,6 +429,7 @@ PLATFORMS
 
 DEPENDENCIES
   brakeman
+  breadcrumbs_on_rails
   capybara
   cuprite
   debug
