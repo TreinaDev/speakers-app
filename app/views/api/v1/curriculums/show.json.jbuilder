@@ -25,6 +25,11 @@ if @curriculum.present?
           json.title task.title
           json.description task.description
           json.certificate_requirement task.translated_certificate_requirement(task.certificate_requirement)
+          if @participant_tasks.present? && @participant_tasks.include?(task.id)
+            json.task_status true
+          else
+            json.task_status false
+          end
           if task.curriculum_contents.any?
             json.attached_contents task.curriculum_contents do |content|
               json.attached_content_code content.code

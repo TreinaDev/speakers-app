@@ -25,7 +25,7 @@ describe 'Curriculum API' do
       create(:curriculum_task_content, curriculum_task: first_task, curriculum_content: second_curriculum_content)
 
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
-      get "/api/v1/curriculums/#{schedule_item.code}"
+      get "/api/v1/curriculums/#{schedule_item.code}/participants/XLR9BEN4"
 
       expect(response).to have_http_status :success
       expect(response.content_type).to include('application/json')
@@ -47,12 +47,13 @@ describe 'Curriculum API' do
                                                                external_video_url: "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/1cw6qO1EYGw' frameborder='0' allowfullscreen></iframe>" })
       expect(tasks_response.length).to eq 2
       expect(tasks_response[0].deep_symbolize_keys).to eq({ code: 'CODIGO37', title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: 'Obrigatória',
-                                                            attached_contents: [ { attached_content_code: 'XLR8BE10' }, { attached_content_code: 'CODIGO15' } ] })
-      expect(tasks_response[1].deep_symbolize_keys).to eq({ code: 'CODIGO48', title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus', certificate_requirement: 'Opcional' })
+                                                            attached_contents: [ { attached_content_code: 'XLR8BE10' }, { attached_content_code: 'CODIGO15' } ], task_status: false })
+      expect(tasks_response[1].deep_symbolize_keys).to eq({ code: 'CODIGO48', title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus',
+                                                            certificate_requirement: 'Opcional', task_status: false })
     end
 
     it 'with a schedule item that does not exist' do
-      get "/api/v1/curriculums/55"
+      get "/api/v1/curriculums/EURTHUEI/participants/ABCETFUF"
 
       expect(response).to have_http_status :not_found
       expect(response.content_type).to include('application/json')
@@ -66,7 +67,7 @@ describe 'Curriculum API' do
       user.event_contents.create(title: 'Ruby PDF')
 
       allow(Curriculum).to receive(:find_by).and_raise(ActiveRecord::ActiveRecordError)
-      get "/api/v1/curriculums/#{schedule_item.code}"
+      get "/api/v1/curriculums/#{schedule_item.code}/participants/ABCETFUF"
 
       expect(response).to have_http_status :internal_server_error
       expect(response.content_type).to include('application/json')
@@ -84,7 +85,7 @@ describe 'Curriculum API' do
       create(:curriculum_task_content, curriculum_task: first_task, curriculum_content: first_curriculum_content)
 
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
-      get "/api/v1/curriculums/#{schedule_item.code}"
+      get "/api/v1/curriculums/#{schedule_item.code}/participants/ABCETFUF"
 
       json_response = JSON.parse(response.body)
       expect(response).to have_http_status :success
@@ -94,6 +95,53 @@ describe 'Curriculum API' do
       expect(json_response['curriculum']['tasks_available']).to eq false
       expect(tasks_response[0].deep_symbolize_keys).to eq({ title: 'Exercício Rails' })
       expect(tasks_response[1].deep_symbolize_keys).to eq({ title: 'Exercício Stimulus' })
+    end
+
+    it 'and task_status is true for a participant' do
+      user = create(:user)
+      schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: Date.current)
+      curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+      first_task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory, code: 'CODIGO37')
+      create(:curriculum_task, curriculum: curriculum, title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus', certificate_requirement: :optional, code: 'CODIGO48')
+      participant_record = create(:participant_record, user: user, participant_code: 'XLR9BEN4', schedule_item_code: 'ABCD1234')
+      create(:participant_task, participant_record: participant_record, curriculum_task: first_task)
+
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      get "/api/v1/curriculums/#{schedule_item.code}/participants/XLR9BEN4"
+
+      expect(response).to have_http_status :success
+      expect(response.content_type).to include('application/json')
+      curriculum_response = response.parsed_body['curriculum']
+      tasks_response = curriculum_response['curriculum_tasks']
+      expect(tasks_response.length).to eq 2
+      expect(tasks_response[0].deep_symbolize_keys).to eq({ code: 'CODIGO37', title: 'Exercício Rails', description: 'Seu primeiro exercício ruby',
+                                                            certificate_requirement: 'Obrigatória', task_status: true })
+      expect(tasks_response[1].deep_symbolize_keys).to eq({ code: 'CODIGO48', title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus',
+                                                            certificate_requirement: 'Opcional', task_status: false })
+    end
+
+    it 'and task_status is false for a second participant' do
+      user = create(:user)
+      schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: Date.current)
+      curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+      first_task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory, code: 'CODIGO37')
+      create(:curriculum_task, curriculum: curriculum, title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus', certificate_requirement: :optional, code: 'CODIGO48')
+      participant_record = create(:participant_record, user: user, participant_code: 'XLR9BEN4', schedule_item_code: 'ABCD1234')
+      create(:participant_task, participant_record: participant_record, curriculum_task: first_task)
+      participant_record = create(:participant_record, user: user, participant_code: 'SEMTASK9', schedule_item_code: 'ABCD1234')
+
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      get "/api/v1/curriculums/#{schedule_item.code}/participants/SEMTASK9"
+
+      expect(response).to have_http_status :success
+      expect(response.content_type).to include('application/json')
+      curriculum_response = response.parsed_body['curriculum']
+      tasks_response = curriculum_response['curriculum_tasks']
+      expect(tasks_response.length).to eq 2
+      expect(tasks_response[0].deep_symbolize_keys).to eq({ code: 'CODIGO37', title: 'Exercício Rails', description: 'Seu primeiro exercício ruby',
+                                                            certificate_requirement: 'Obrigatória', task_status: false })
+      expect(tasks_response[1].deep_symbolize_keys).to eq({ code: 'CODIGO48', title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus',
+                                                            certificate_requirement: 'Opcional', task_status: false })
     end
   end
 end

@@ -30,7 +30,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :curriculums, only: %i[ show ], param: :schedule_item_code
+      resources :curriculums, only: %i[], param: :schedule_item_code do
+        resources :participants, only: %i[ show ], param: :participant_code, to: 'curriculums#show'
+      end
       resources :speakers, only: %i[ show ], param: :email, constraints: { email: /[^\/]+/ }
     end
   end
