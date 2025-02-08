@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_06_221608) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_07_141135) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -106,7 +106,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_06_221608) do
     t.string "participant_code"
     t.integer "user_id", null: false
     t.string "schedule_item_code"
-    t.boolean "enabled_certificate"
+    t.boolean "enabled_certificate", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_participant_records_on_user_id"
@@ -115,7 +115,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_06_221608) do
   create_table "participant_tasks", force: :cascade do |t|
     t.integer "participant_record_id", null: false
     t.integer "curriculum_task_id", null: false
-    t.boolean "task_status"
+    t.boolean "task_status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["curriculum_task_id"], name: "index_participant_tasks_on_curriculum_task_id"

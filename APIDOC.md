@@ -111,3 +111,39 @@ Exibe informações relacionadas a um Palestrante, como perfil e foto.
   "error": "Algo deu errado."
 }
 ```
+
+### 3 - Participante finaliza tarefa
+#### POST /api/v1/participant_tasks, params: [:participant_code, :task_code]
+Tabela participant_task é criada, assim como participant_record (caso não exista)
+##### Success
+
+* status: 200
+* content-type: application/json
+
+```
+{
+  "message": "OK"
+}
+```
+
+##### Not Found - quando tarefa não é encontrada
+
+* status: 404
+* content-type: application/json
+
+```
+{
+  "error": "Tarefa não encontrada."
+}
+```
+
+##### Not Found - quando participant_code é vazio
+
+* status: 404
+* content-type: application/json
+
+```
+{
+  "error": "Código do participante não pode ser em branco."
+}
+```
