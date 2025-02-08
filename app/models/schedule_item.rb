@@ -5,6 +5,7 @@ class ScheduleItem
 
   attribute :name, :string
   attribute :description, :string
+  attribute :date, :date
   attribute :start_time, :time
   attribute :end_time, :time
   attribute :responsible_name, :string
