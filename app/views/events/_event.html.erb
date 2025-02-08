@@ -1,8 +1,8 @@
 
 <div class="relative p-5 border mt-5">
-  <%= render 'image_modal/modal', img: event.banner_url, class_attributes: 'w-full h-80 object-cover bg-center hover-img' %>
+  <%= render 'image_modal/modal', img: event.banner_url.presence || "no_banner.png", class_attributes: 'w-full h-80 object-cover bg-center hover-img' %>
   <div class="w-32 h-32 overflow-hidden rounded-full absolute bottom-0 left-0 border-4 border-gray-500 flex m-10">
-    <%= render 'image_modal/modal', img: event.logo_url, class_attributes: 'w-full h-full object-cover self-center hover-img' %>
+    <%= render 'image_modal/modal', img: event.logo_url.presence || "no_logo.png", class_attributes: 'w-full h-full object-cover self-center hover-img' %>
   </div>
 </div>
 
