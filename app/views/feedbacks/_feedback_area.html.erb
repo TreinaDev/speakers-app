@@ -11,9 +11,11 @@
           </div>
           <div class="feedback-body">
             <span>
+              <p><%= t('.description')%>:</p>
               <%= feedback.comment %>
             </span>
-            <span>
+            <span class="flex gap- 2">
+              <p><%= t('.mark')%>:</p>
               <%= feedback.mark %>
             </span>
           </div>
