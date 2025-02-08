@@ -78,7 +78,7 @@ describe 'User see event details', type: :system do
   it 'and event doesnt exists' do
     user = create(:user, first_name: 'User1', last_name: 'LastName1', email: 'user1@email.com', password: '123456')
     create(:profile, user: user)
-    response = instance_double(Faraday::Response, success?: false)
+    instance_double(Faraday::Response, success?: false)
     allow(Event).to receive(:find).and_return(nil)
 
     login_as user, scope: :user
