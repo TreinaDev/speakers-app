@@ -153,4 +153,4 @@ pt-BR:
       not_saved:
         one: 'Não foi possível salvar %{resource}: 1 erro'
         other: 'Não foi possível salvar %{resource}: %{count} erros.'
-        another: 'Não foi possível realizar seu cadastro.'
+        another: 'Não foi possível realizar seu cadastro. Se você acha que isso é um erro, entre em contato com o organizador do seu evento.'
