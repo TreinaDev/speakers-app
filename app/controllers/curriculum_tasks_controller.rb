@@ -26,7 +26,7 @@ class CurriculumTasksController < ApplicationController
 
   def set_curriculum
     @curriculum = current_user.curriculums.find_by(code: params[:curriculum_code])
-    return redirect_to events_path, alert: t('curriculum_tasks.set_curriculum.error') unless @curriculum
+    redirect_to events_path, alert: t('curriculum_tasks.set_curriculum.error') unless @curriculum
   end
 
   def set_curriculum_task_params
