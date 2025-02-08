@@ -6,7 +6,8 @@ class CertificateIssuanceJob < ApplicationJob
     participant_enableds.each do |participant|
       user = User.find(participant.user_id)
       Certificate.create(responsable_name: user.full_name, user: user, speaker_code: user.token, event_name: event_name,
-                         schedule_item_name: schedule_item_name, date_of_occurrence: date_of_occurrence, issue_date: date_perfome, length: length)
+                         schedule_item_name: schedule_item_name, date_of_occurrence: date_of_occurrence, issue_date: date_perfome,
+                         length: length, schedule_item_code: schedule_item_code, participant_code: participant.participant_code)
     end
   end
 end
