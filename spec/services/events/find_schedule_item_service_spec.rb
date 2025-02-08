@@ -10,7 +10,12 @@ describe ExternalEventApi::FindScheduleItemService do
         "description": "Testes e TDD",
         "responsible_email": "joao@email.com",
         "start_time": "2025-02-07 13:57:52 UTC",
-        "end_time": "2025-02-07 14:57:52 UTC"
+        "end_time": "2025-02-07 14:57:52 UTC",
+        "event": {
+          "code": "ABCS1234",
+          "start_date": "2025-02-07 13:57:52 UTC",
+          "end_date": "2025-02-08 13:57:52 UTC"
+        }
       }
       service = ExternalEventApi::FindScheduleItemService.new(schedule_item_id: json_schedule_item['id'], email: json_schedule_item['speaker_email'])
       response = instance_double(Faraday::Response, success?: true, body: json_schedule_item.to_json)
@@ -21,6 +26,9 @@ describe ExternalEventApi::FindScheduleItemService do
       expect(schedule_item.name).to eq 'Ruby on Rails'
       expect(schedule_item.description).to eq 'Testes e TDD'
       expect(schedule_item.responsible_email).to eq 'joao@email.com'
+      expect(schedule_item.event_code).to eq 'ABCS1234'
+      expect(schedule_item.event_start_date).to eq '2025-02-07 13:57:52 UTC'
+      expect(schedule_item.event_end_date).to eq '2025-02-08 13:57:52 UTC'
     end
 
     it 'when API return not found' do

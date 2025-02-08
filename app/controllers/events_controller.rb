@@ -10,11 +10,6 @@ class EventsController < ApplicationController
     @paginated_ongoing_events = Kaminari.paginate_array(@ongoing_events).page(params[:ongoing_page]).per(9)
     @paginated_future_events = Kaminari.paginate_array(@future_events).page(params[:future_page]).per(9)
     @paginated_past_events = Kaminari.paginate_array(@past_events).page(params[:past_page]).per(9)
-
-    respond_to do |format|
-      format.html
-      format.turbo_stream
-    end
   end
 
   def show

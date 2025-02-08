@@ -7,7 +7,7 @@
     <% end %>
   </ul>
   <div class="text-center mt-5">
-    <%= paginate paginated_events, param_name: param_name, remote: true %>
+    <%= paginate paginated_events, param_name: param_name %>
   </div>
 <% else %>
   <p class="text-center"><%= t('.no_events', status: t(".status.#{status}")) %></p>
