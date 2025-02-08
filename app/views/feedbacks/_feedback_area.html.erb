@@ -3,17 +3,22 @@
     <h2><%= Feedback.model_name.plural.capitalize %></h2>
     <div class="modal-body">
       <% feedbacks.each do |feedback| %>
-        <div class="feedback-card">
-        <div class="feedback-header flex gap-2">
-          <%= image_tag 'participant.svg', class: 'icon' %>
-            <span><%= t('.user') %>: <%= feedback.user %></span>
+        <div class="feedback-card border">
+          <div class="feedback-header flex gap-2">
+            <div class="flex gap-2">
+              <%= image_tag 'participant.svg', class: 'icon' %>
+              <span><%= feedback.user %></span>
+            </div>
+              <p><%= t('.title')%>:</p>
             <strong><%= feedback.title %></strong>
           </div>
           <div class="feedback-body">
             <span>
+              <p><%= t('.description')%>:</p>
               <%= feedback.comment %>
             </span>
-            <span>
+            <span class="flex gap- 2">
+              <p><%= t('.mark')%>:</p>
               <%= feedback.mark %>
             </span>
           </div>

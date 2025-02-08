@@ -94,6 +94,9 @@ pt-BR:
       no_feedback: 'Nenhum Feedback disponível'
       see_feedbacks: 'Ver Feedbacks'
       user: 'Usuário'
+      mark: 'Nota (1 até 5)'
+      description: 'Descrição'
+      title: 'Título'
   schedule_items:
     schedule_items:
       schedule_items_title: 'Suas Agendas'
