@@ -6,25 +6,32 @@
   </div>
 </div>
 
-<div class="flex gap-2 items-center mt-4 mb-4">
-  <%= image_tag 'event-calendar.svg', class: 'icon' %>
-  <span><%= full_date(event.start_date) %> - <%= full_date(event.end_date) %></span>
-</div>
-
 <div id="event" data-controller="collapse">
   <div class="event_card__heading">
-    <h2><%= event.name %></h2>
-    <span><b><%= t('.event_page') %>:</b> <%= event.url.presence || t('.no_event_page') %></span>
-    <span><b><%= Event.human_attribute_name(:address) %>:</b> <%= event.address %></span>
+    <h2 class="my-3"><%= event.name %></h2>
+
+    <div class="flex gap-2 items-center mt-4 mb-4">
+      <%= image_tag 'event-calendar.svg', class: 'icon' %>
+      <span><%= full_date(event.start_date) %> - <%= full_date(event.end_date) %></span>
+    </div>
+
+    <div class="flex gap-2">
+      <%= image_tag 'location.svg', class: 'icon' %>
+      <span><%= event.address %></span>
+    </div>
+    
     <div class="hidden" data-collapse-target="content">
       <span><b><%= Event.human_attribute_name(:description) %>:</b> <%= raw event.description %></span>
+      <span><b><%= t('.event_page') %>:</b> <%= event.url.presence || t('.no_event_page') %></span>
     </div>
-    <button 
-    data-action="click->collapse#toggle"
-    data-collapse-target="button"
-    class="mt-2 px-4 py-2 text-semibold"
-  >
-    Mostrar mais
-  </button>
-  </div>
+    <div class="flex flex-col justify-center mx-auto">
+      <button 
+        data-action="click->collapse#toggle"
+        data-collapse-target="button"
+        class="expanded"
+      >
+        Mostrar mais
+      </button>
+      </div>
+    </div>
 </div>

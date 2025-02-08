@@ -1,5 +1,5 @@
 <div id="schedule_items">
-  <h2><%= t('.schedule_items_title') %></h2>
+  <h2 class="mb-6"><%= t('.schedule_items_title') %></h2>
   
   <% if schedules&.empty? %>
     <p><%= t('.no_schedule_items') %></p>
@@ -14,10 +14,13 @@
               <%= link_to schedule_item_path(item.code) do %>
                 <div class="schedule_schedule_items-card">
                   <span><%= item.name %></span>
-                  <span><b><%= ScheduleItem.human_attribute_name(:time) %>:</b>
-                    <%= item.start_time.strftime("%H:%M") %> -
-                    <%= item.end_time.strftime("%H:%M") %>
-                  </span>
+                  <div class="flex gap-2 flex justify-center">
+                    <%= image_tag 'clock.svg', class: 'icon' %>
+                    <span>
+                      <%= item.start_time.strftime("%H:%M") %> -
+                      <%= item.end_time.strftime("%H:%M") %>
+                    </span>
+                  </div>
                 </div>
               <% end %>
             <% end %>
