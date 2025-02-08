@@ -592,4 +592,27 @@
     @apply font-medium text-gray-800;
   }
   /* Fim Tabela */
+
+  /* Início show de Eventos */
+  /* Fim show de Eventos */
+
+  /* Inícion Collapse */
+  .expanded {
+    @apply px-6 text-white font-semibold mt-2 rounded-md h-12 bg-second-primary;
+    transition: background ease-in-out 0.2s;
+  }
+
+  .expanded:hover {
+    @apply cursor-pointer bg-dark-second-primary;
+  }
+
+  .contract {
+    @apply px-6 text-indigo-600 font-semibold mt-2  rounded-md h-12 border border-indigo-600;
+    transition: background ease-in-out 0.2s;
+  }
+
+  .contract:hover {
+    @apply cursor-pointer bg-[#c2c2c1];
+  }
+  /* Fim Collapse */
 }

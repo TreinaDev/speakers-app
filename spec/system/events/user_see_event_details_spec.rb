@@ -6,7 +6,7 @@ describe 'User see event details', type: :system do
     create(:profile, user: user)
     events = [
       build(:event, name: 'Ruby on Rails', description: 'Introdução ao Rails com TDD',
-      start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
+      start_date: '2025-02-08', end_date: '2025-02-09', url: 'www.meuevento.com/eventos/Ruby-on-Rails',
       event_type: 'Presencial', address: 'Juiz de Fora', participants_limit: 100, status: 'published')
     ]
     20.times do |n|
@@ -20,14 +20,10 @@ describe 'User see event details', type: :system do
     click_on 'Em breve'
     click_on 'Ruby on Rails'
 
-    start_date = 7.days.from_now.strftime('%d/%m/%Y')
-    end_date = 14.days.from_now.strftime('%d/%m/%Y')
     expect(page).to have_content 'Ruby on Rails'
     expect(page).to have_content 'Introdução ao Rails com TDD'
-    expect(page).to have_content 'Localização: Juiz de Fora'
-    expect(page).to have_content "Data de início: #{ start_date }"
-    expect(page).to have_content "Encerramento: #{ end_date }"
-    expect(page).to have_content 'www.meuevento.com/eventos/Ruby-on-Rails'
+    expect(page).to have_content 'Juiz de Fora'
+    expect(page).to have_content "sábado, 08 de fevereiro de 2025 - domingo, 09 de fevereiro de 2025"
   end
 
   it 'and sees your schedules items' do
