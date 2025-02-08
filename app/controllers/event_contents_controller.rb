@@ -2,15 +2,19 @@ class EventContentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_event_content, only: %i[ show edit update ]
   before_action :set_event_content_files, only: %i[ edit update ]
+  before_action :set_event_content_breadcrumb
 
   def index
     @event_contents = current_user.event_contents
   end
 
-  def show; end
+  def show
+    add_breadcrumb @event_content.title, "#"
+  end
 
   def new
     @event_content = current_user.event_contents.build
+    add_breadcrumb "Novo Conteúdo", "#"
   end
 
   def create
@@ -24,7 +28,9 @@ class EventContentsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    add_breadcrumb "Editar #{@event_content.title}", "#"
+  end
 
   def update
     generate_update_history if params[:event_content][:is_update] == '1'
@@ -58,5 +64,9 @@ class EventContentsController < ApplicationController
 
     return if @update_history.valid?
     @event_content.errors.add(:base, @update_history.errors.first)
+  end
+
+  def set_event_content_breadcrumb
+    add_breadcrumb "Meus Conteúdos", event_contents_path
   end
 end

@@ -1,0 +1,12 @@
+<ol class="breadcrumb">
+  <% breadcrumbs.each_with_index do |breadcrumb, index| %>
+    <li>
+      <% if index == 0 %>
+        <%= link_to image_tag("home_icon.png") + breadcrumb.name, breadcrumb.path  %>
+      <% else %>
+        <%= image_tag("right_arrow_icon.png") %>
+        <%= link_to  breadcrumb.name, breadcrumb.path  %>
+      <% end %>
+    </li>
+  <% end %>
+</ol>

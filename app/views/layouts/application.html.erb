@@ -27,8 +27,9 @@
     <%= turbo_frame_tag 'modal' %>
     <%= render "shared/navbar" %>
     <% if request.path != root_path %>
-      <main class="section flex-grow">
+      <main class="section-main flex-grow">
       <%= render "shared/flash" %>
+      <%= render "shared/breadcrumb" %>
     <% else %>
       <main>
     <% end %>

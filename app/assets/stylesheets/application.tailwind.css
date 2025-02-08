@@ -38,6 +38,11 @@
     padding: 14vh 10vw;
   }
 
+  .section-main{
+    width: 100%;
+    padding: 12vh 10vw;
+  }
+
   .section-x{
     width: 100%;
     padding: 0 10vw;
@@ -73,6 +78,30 @@
 }
 
 @layer components {
+
+  .breadcrumb {
+    @apply inline-flex bg-primary items-center gap-3 rounded-l-3xl rounded-r-3xl mb-2;
+  }
+  
+  .breadcrumb li {
+    @apply flex items-center text-white gap-2;
+  }
+
+  .breadcrumb li:last-child {
+    @apply  font-bold ;
+  }
+
+  .breadcrumb li:last-child a{
+    @apply bg-second-primary pr-3;
+  }
+
+  .breadcrumb a {
+    @apply p-2 flex items-center  gap-2 rounded-l-3xl rounded-r-3xl;
+  }
+
+  .breadcrumb li img { 
+    @apply w-5 h-5; 
+  }
 
   .btn--success {
     @apply w-full  text-white font-semibold mt-2 rounded-md h-12 bg-second-primary;
