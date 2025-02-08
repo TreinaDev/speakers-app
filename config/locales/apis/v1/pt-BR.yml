@@ -1,2 +1,4 @@
 pt-BR:
+  generic_not_found: 'Recurso não encontrado!'
   not_found_error: '%{model} não encontrado!'
+  internal_server_error: 'Algo deu errado.'

@@ -3,6 +3,7 @@ Documentação da API
 ### 1 - Currículo
 #### GET /api/v1/curriculums/:schedule_item_code
 Exibe as tarefas e conteúdos de um currículo, que representa todos os dados para uma programação.
+Com o campo 'task_status', é possível verificar se a tarefa específica foi concluída por um participante.
 
 * status: 200
 * content-type: application/json
@@ -32,6 +33,7 @@ Exibe as tarefas e conteúdos de um currículo, que representa todos os dados pa
         "title": "Exercício Rails",
         "description": "Seu primeiro exercício ruby",
         "certificate_requirement": "Obrigatória",
+        "task_status": false
         "attached_contents": [
           {
             "attached_content_code": "MH0IBQ8O"
