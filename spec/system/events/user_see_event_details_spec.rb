@@ -9,7 +9,7 @@ describe 'User see event details', type: :system do
       start_date: 7.days.from_now, end_date: 14.days.from_now, url: 'www.meuevento.com/eventos/Ruby-on-Rails',
       event_type: 'Presencial', address: 'Juiz de Fora', participants_limit: 100, status: 'published')
     ]
-    20.times do |n|
+    5.times do |n|
       events << build(:event, name: "Event #{n}")
     end
     allow(Event).to receive(:all).and_return(events)
