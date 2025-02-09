@@ -1,6 +1,23 @@
-<%= link_to(event_content, class: "card") do %>
-  <div>
-    <p class="card_title_2"><%= t('.content')%></p>
-    <h3 class="card_title"><%= event_content.title %></h3>
+<div class="card" id="<%= dom_id(event_content) %>">
+  <div class="card_header">
+    <%= link_to event_content_path(event_content) do %>
+      <%= image_tag 'card_image.jpeg', class: "w-full h-auto object-cover"%>
+    <% end %>
   </div>
-<% end %>
+
+  <div class="p-4">
+    <div class="text-xl font-semibold mb-2"><%= event_content.title %></div>
+    <div class="mt-3"></div>
+    <div class="flex items-center gap-1">
+      <% if event_content.files.any? %>
+        <%= image_tag "file_icon.svg", class: "w-5, h-5" %><%= event_content.files.length  %> <%= event_content.files.length == 1 ? "Arquivo" : "Arquivos "%>
+      <% else %>
+        <%= image_tag "file_icon.svg", class: "w-5, h-5" %> Nenhum arquivo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="p-4 bg-gray-100 text-center mb-4">
+     <%= link_to "Visualizar conteúdo", event_content_path(event_content), class: "btn_primary rounded-3xl w-full"  %>
+  </div>
+</div>

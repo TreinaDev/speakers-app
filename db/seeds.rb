@@ -8,10 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.skip_callback(:validation, :before, :api_auth_user)
-user = User.create!(first_name: 'João', last_name: 'Campus', email: 'marcos@email.com', password: '123456', token: 'ABCD1234')
-User.create!(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456', token: 'ASDF4567')
-User.set_callback(:validation, :before, :api_auth_user)
+user = User.new(first_name: 'João', last_name: 'Campus', email: 'marcos@email.com', password: '123456', token: 'ABCD1234')
+joao = User.new(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456', token: 'ASDF4567')
+user.save(validate: false)
+joao.save(validate: false)
 
 curriculum = FactoryBot.create(:curriculum, user: user, schedule_item_code: 'ABCDEEGH')
 first_content = user.event_contents.create(title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>', code: 'ABCD1234',

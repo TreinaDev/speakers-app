@@ -26,6 +26,7 @@ describe 'Curriculum API' do
 
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
       get "/api/v1/curriculums/#{schedule_item.code}/participants/XLR9BEN4"
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
 
       expect(response).to have_http_status :success
       expect(response.content_type).to include('application/json')
@@ -99,10 +100,13 @@ describe 'Curriculum API' do
 
     it 'and task_status is true for a participant' do
       user = create(:user)
+      event = build(:event)
       schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: Date.current)
       curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
       first_task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory, code: 'CODIGO37')
       create(:curriculum_task, curriculum: curriculum, title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus', certificate_requirement: :optional, code: 'CODIGO48')
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      allow(Event).to receive(:find).and_return(event)
       participant_record = create(:participant_record, user: user, participant_code: 'XLR9BEN4', schedule_item_code: 'ABCD1234')
       create(:participant_task, participant_record: participant_record, curriculum_task: first_task)
 
@@ -121,15 +125,19 @@ describe 'Curriculum API' do
     end
 
     it 'and task_status is false for a second participant' do
+      event = build(:event)
       user = create(:user)
       schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: Date.current)
       curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
       first_task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory, code: 'CODIGO37')
       create(:curriculum_task, curriculum: curriculum, title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus', certificate_requirement: :optional, code: 'CODIGO48')
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      allow(Event).to receive(:find).and_return(event)
       participant_record = create(:participant_record, user: user, participant_code: 'XLR9BEN4', schedule_item_code: 'ABCD1234')
       create(:participant_task, participant_record: participant_record, curriculum_task: first_task)
       participant_record = create(:participant_record, user: user, participant_code: 'SEMTASK9', schedule_item_code: 'ABCD1234')
 
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
       get "/api/v1/curriculums/#{schedule_item.code}/participants/SEMTASK9"
 

@@ -1,17 +1,25 @@
 FactoryBot.define do
   factory :user do
-    first_name { 'João' }
-    last_name { 'Campus' }
-    email { generate :email }
-    password { '123456' }
-    token { SecureRandom.alphanumeric(8).upcase }
-  end
+    first_name { "João" }
+    last_name  { "Campus" }
+    email      { Faker::Internet.email }
+    password   { "123456" }
+    token      { SecureRandom.hex(10) }
 
-  before(:create) do
-    User.skip_callback(:validation, :before, :api_auth_user)
-  end
+    transient do
+      skip_api_auth { true }
+    end
 
-  after(:create) do
-    User.set_callback(:validation, :before, :api_auth_user)
+    before(:create) do |user, evaluator|
+      if evaluator.skip_api_auth
+        user.class.skip_callback(:validation, :before, :api_auth_user)
+      end
+    end
+
+    after(:create) do |user, evaluator|
+      if evaluator.skip_api_auth
+        user.class.set_callback(:validation, :before, :api_auth_user)
+      end
+    end
   end
 end

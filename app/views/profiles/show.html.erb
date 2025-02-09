@@ -13,7 +13,7 @@
                 <h3 class="font-bold text-2xl"></h3>
                 <div class="profiles__social_network">
                     <% @profile.social_networks.each do |network| %>
-                            <%= link_to(network.url, class: 'profiles__link', target: "_blank") do %>
+                            <%= link_to(url_for(network.url), class: 'profiles__link', target: "_blank") do %>
                                 <%= raw File.read(Rails.root.join("app", "assets", "images", network.social_network_type + ".svg")) %>
                                 <p><%= network.translated_social_network_type(network.social_network_type) %></p>
                             <% end %>

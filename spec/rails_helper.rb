@@ -44,6 +44,7 @@ include Warden::Test::Helpers
 include ActionText::SystemTestHelper
 
 RSpec.configure do |config|
+  config.include ActiveJob::TestHelper, type: :job
   config.include Warden::Test::Helpers
   config.include FactoryBot::Syntax::Methods
   config.before(:each, type: :system) do

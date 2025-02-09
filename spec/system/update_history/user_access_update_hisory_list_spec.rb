@@ -27,7 +27,9 @@ describe 'User access update history list' do
     login_as user
     visit root_path
     click_on 'Meus Conteúdos'
-    click_on 'Dev week'
+    within("#event_content_1") do
+      click_on 'Visualizar conteúdo'
+    end
     click_on 'Histórico de atualizações'
 
     expect(page).to have_content Date.today.strftime('%d/%m/%Y')
