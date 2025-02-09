@@ -5,6 +5,17 @@ class ParticipantRecord < ApplicationRecord
   validates :schedule_item_code, :participant_code, presence: true
   after_create :scheduling_for_certificate_creation
 
+  def change_enabled_certificate(curriculum, new_task)
+    if new_task.present? && new_task.curriculum_task.mandatory? && curriculum.present?
+      curriculum_mandatory_task_codes = curriculum.curriculum_tasks.mandatory.map { |task| task.code }
+
+      participant_mandatory_task_codes = participant_tasks.map { |task| task.curriculum_task.code if task.curriculum_task.mandatory? }.compact
+      participant_mandatory_task_codes << new_task.curriculum_task.code
+      update(enabled_certificate: true) if curriculum_mandatory_task_codes.length == participant_mandatory_task_codes.length &&
+                                        curriculum_mandatory_task_codes.all? { |task| participant_mandatory_task_codes.include?(task) }
+    end
+  end
+
   private
 
   def scheduling_for_certificate_creation
@@ -28,6 +39,7 @@ class ParticipantRecord < ApplicationRecord
       I18n.t('hour_minute_length', hours: hours, minutes: minutes)
     else
       I18n.t('minute_length', minutes: minutes)
+
     end
   end
 end
