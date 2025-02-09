@@ -23,14 +23,16 @@
     <% end %>
   </div>
 
-  <div class="field border-t border-b border-gray-400 py-4">
+  <div class="field border-t border-b border-gray-400 py-4" data-controller="select-toggle">
     <%= f.label :pronoun %>
-    <%= f.select :pronoun, @pronoun_list, { include_blank: "" }, class: 'select_primary' %>
+    <%= f.select :pronoun, @pronoun_list, { include_blank: "" }, class: 'select_primary', data: { action: "change->select-toggle#toggle" } %>
     <% if @profile.errors[:pronoun].any? %> 
       <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:pronoun).first %></span>
     <% end %>
-    <%= f.label :other_pronoun, class: 'my-2' %>
-    <%= f.text_field :other_pronoun %>
+    <div data-select-toggle-target="input" class="field mb-0" style="display: none;">
+      <%= f.label :other_pronoun %>
+      <%= f.text_field :other_pronoun %>
+    </div>
     <div class="flex mt-6 items-center">
       <%= f.check_box :display_pronoun, class: 'mr-4' %>
       <%= f.label :display_pronoun, class: 'label_primary' %>
@@ -61,14 +63,16 @@
     </div>
   </div>
 
-  <div class="field border-t border-b border-gray-400 py-4">
+  <div class="field border-t border-b border-gray-400 py-4" data-controller="select-toggle">
     <%= f.label :gender %>
-    <%= f.select :gender, @gender_list, { include_blank: "" }, class: 'select_primary' %>
+    <%= f.select :gender, @gender_list, { include_blank: "" }, class: 'select_primary', data: { action: "change->select-toggle#toggle" } %>
     <% if @profile.errors[:gender].any? %> 
       <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:gender).first %></span>
     <% end %> 
-    <%= f.label :other_gender %>
-    <%= f.text_field :other_gender %>
+    <div data-select-toggle-target="input" class="field mb-0" style="display: none;">
+      <%= f.label :other_gender, class: 'my-2' %>
+      <%= f.text_field :other_gender %>
+    </div>
     <div class="flex mt-6 items-center">
       <%= f.check_box :display_gender, class: 'mr-4' %>
       <%= f.label :display_gender, class: 'label_primary' %>
