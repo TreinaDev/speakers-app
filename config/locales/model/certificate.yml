@@ -1,0 +1,5 @@
+pt-BR:
+  activemodel:
+    models:
+      certificate: 'Certificado'
+    attributes:

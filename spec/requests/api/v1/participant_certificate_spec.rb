@@ -49,7 +49,7 @@ describe 'Participant requests certificate', type: :request do
     expect(response.content_type).to include 'application/json'
     json_response = JSON.parse(response.body)
     expect(response).to have_http_status :not_found
-    expect(json_response['error']).to eq 'Certificate não encontrado!'
+    expect(json_response['error']).to eq 'Certificado não encontrado!'
   end
 
   it 'must not return a certificate if the schedule item is not found' do
@@ -65,6 +65,16 @@ describe 'Participant requests certificate', type: :request do
     expect(response.content_type).to include 'application/json'
     json_response = JSON.parse(response.body)
     expect(response).to have_http_status :not_found
-    expect(json_response['error']).to eq 'Certificate não encontrado!'
+    expect(json_response['error']).to eq 'Certificado não encontrado!'
+  end
+
+  it 'failure with an internal error' do
+    allow(ParticipantRecord). to receive(:find_by).and_raise(ActiveRecord::ActiveRecordError)
+    get api_v1_curriculum_certificate_path(curriculum_schedule_item_code: 'Something', participant_code: 'Something')
+
+    expect(response.content_type).to include 'application/json'
+    json_response = JSON.parse(response.body)
+    expect(response).to have_http_status :internal_server_error
+    expect(response.parsed_body['error']).to eq 'Algo deu errado.'
   end
 end
