@@ -33,7 +33,9 @@ describe 'User edit event content', type: :system, js: true do
     login_as user
     visit root_path
     click_on 'Meus Conteúdos'
-    click_on 'Dev week'
+    within("#event_content_1") do
+      click_on 'Visualizar conteúdo'
+    end
     find("#pencil_edit").click
     fill_in 'Título', with: 'Workshop POO'
     fill_in_rich_text_area 'Descrição', with: 'Conetúdo para auxiliar o workshop POO'
@@ -57,7 +59,9 @@ describe 'User edit event content', type: :system, js: true do
     login_as user
     visit root_path
     click_on 'Meus Conteúdos'
-    click_on 'Dev week'
+    within("#event_content_1") do
+      click_on 'Visualizar conteúdo'
+    end
     find("#pencil_edit").click
     fill_in 'Título', with: ''
     fill_in_rich_text_area 'Descrição', with: 'Conetúdo para auxiliar o workshop POO'
@@ -81,7 +85,9 @@ describe 'User edit event content', type: :system, js: true do
     login_as user
     visit root_path
     click_on 'Meus Conteúdos'
-    click_on 'Dev week'
+    within("#event_content_1") do
+      click_on 'Visualizar conteúdo'
+    end
     find("#pencil_edit").click
     attach_file('Arquivos', Rails.root.join('spec/fixtures/Reunião.pdf'))
     click_on 'Atualizar Conteúdo'
@@ -105,7 +111,9 @@ describe 'User edit event content', type: :system, js: true do
     login_as user
     visit root_path
     click_on 'Meus Conteúdos'
-    click_on 'Dev week'
+    within("#event_content_1") do
+      click_on 'Visualizar conteúdo'
+    end
     find("#pencil_edit").click
     fill_in 'Título', with: 'Workshop POO'
     fill_in_rich_text_area 'Descrição', with: 'Conetúdo para auxiliar o workshop POO'

@@ -69,6 +69,7 @@ pt-BR:
     event:
       event_page: 'Site do Evento'
       no_event_page: 'Página inexistente'
+      more: 'Mostrar mais'
     index:
       all_events: 'Todos os Eventos'
       ongoing_events: 'Em andamento'
@@ -190,3 +191,6 @@ pt-BR:
       how_works_text_4: 'Receba informações sobre onde e quando você vai ensinar.'
       call_action_title: 'Pronto para transformar suas palestras?'
       call_action_text: 'Junte-se a outros palestrantes que já estão usando nosso sistema para simplificar sua rotina e entregar mais valor aos seus participantes.'
+  image_modal:
+    modal:
+      expand: 'Expandir'

@@ -1,12 +1,7 @@
 <div class="flex items-center justify-center relative h-full w-full">
   <div class="mr-12 w-1/3">
     <h2 class="text-center">Crie sua conta</h2>
-    <% unless resource.errors.any? %>
-      <%= image_tag 'sign_up.png', class: 'w-96' %>
-    <% else %>
-      <%= render "users/shared/error_messages", resource: resource %>
-    <% end %>
-    
+    <%= image_tag 'sign_up.png', class: 'w-96' %>
     <div class="flex items-center justift-end p-2">
       <%= render "users/shared/links" %>
     </div>
@@ -18,16 +13,25 @@
       <div class="field m-0">
         <%= f.label :first_name, class: 'label_primary' %><br />
         <%= f.text_field :first_name, autofocus: true, class: 'field_primary' %>
+        <% if resource.errors[:first_name].any? %> 
+          <span class="text-red-500 text-sm"><%= resource.errors.full_messages_for(:first_name).first %></span>
+        <% end %>
       </div>
 
       <div class="field m-0">
         <%= f.label :last_name, class: 'label_primary' %><br />
         <%= f.text_field :last_name, class: 'field_primary' %>
+        <% if resource.errors[:last_name].any? %> 
+          <span class="text-red-500 text-sm"><%= resource.errors.full_messages_for(:last_name).first %></span>
+        <% end %>
       </div>
 
       <div class="field m-0">
         <%= f.label :email, class: 'label_primary' %><br />
         <%= f.email_field :email, autocomplete: "email", class: 'field_primary' %>
+        <% if resource.errors[:email].any? %> 
+          <span class="text-red-500 text-sm"><%= resource.errors.full_messages_for(:email).first %></span>
+        <% end %>
       </div>
 
       <div class="field m-0">
@@ -36,11 +40,17 @@
           <em style = "font-size: 12px;">(<%= @minimum_password_length %> <%= I18n.t('.devise.registrations.new.minimun_characters')%>)</em>
         <% end %>
         <%= f.password_field :password, autocomplete: "new-password", class: 'field_primary' %>
+        <% if resource.errors[:password].any? %> 
+          <span class="text-red-500 text-sm"><%= resource.errors.full_messages_for(:password).first %></span>
+        <% end %>
       </div>
 
       <div class="field m-0">
         <%= f.label :password_confirmation, class: 'label_primary' %><br />
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'field_primary' %>
+        <% if resource.errors[:password_confirmation].any? %> 
+          <span class="text-red-500 text-sm"><%= resource.errors.full_messages_for(:password_confirmation).first %></span>
+        <% end %>
       </div>
 
       <%= f.submit  I18n.t('.devise.registrations.new.new_sign_up'), class: 'btn--success mt-8' %>

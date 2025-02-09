@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Speacker create account', type: :system do
+describe 'Speaker create account', type: :system do
   it 'and must be previusly registred' do
     error = { "error"=> "Palestrante não encontrado." }
     response = double('response', status: 404, success?: false, body: error.to_json)
@@ -18,8 +18,7 @@ describe 'Speacker create account', type: :system do
     click_on 'Cadastrar'
 
     expect(User.count).to eq 0
-    expect(page).to have_content 'Palestrante não encontrado.'
-    expect(page).to have_content 'Token não pode ficar em branco'
+    expect(page).to have_content 'Não foi possível realizar seu cadastro. Se você acha que isso é um erro, entre em contato com o organizador do seu evento.'
   end
 
   it 'with success' do
@@ -70,6 +69,6 @@ describe 'Speacker create account', type: :system do
     click_on 'Cadastrar'
 
     expect(User.count).to eq 0
-    expect(page).to have_content 'Algo deu errado, contate o responsável.'
-  end
+    expect(page).to have_content 'Não foi possível realizar seu cadastro. Se você acha que isso é um erro, entre em contato com o organizador do seu evento.'
+    end
 end

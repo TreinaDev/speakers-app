@@ -3,6 +3,7 @@ class SocialNetwork < ApplicationRecord
   validates :url, :social_network_type, presence: true
   enum :social_network_type, { my_site: 0, youtube: 1, x: 2, github: 3, facebook: 4 }
   validate :validate_url_type
+  validate :valid_protocol
 
   def translated_social_network_type(type)
     I18n.t("activerecord.attributes.social_network.social_network_type.#{type}")
@@ -23,5 +24,9 @@ class SocialNetwork < ApplicationRecord
 
   def valid_my_site_domain?
     /^(https?:\/\/)?([\w\-]+\.)+[a-zA-Z]{2,}(\/[\w\-\.~!*'\(\);:@&=+$,#\[\]]*)?$/.match?(url)
+  end
+
+  def valid_protocol
+    self.url = "https://" + self.url  if self.url.present? && !self.url.start_with?("https://")
   end
 end

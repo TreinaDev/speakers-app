@@ -2,6 +2,7 @@
 pt-BR:
   hour_minute_length: '%{hours} horas e %{minutes} minutos'
   minute_length: '%{minutes} minutos'
+  full_date: '%{weekday}, %{day} de %{month} de %{year}'
   home_title: "Início"
   my_contents: "Meus Conteúdos"
   new_content: "Novo Conteúdo"
