@@ -37,7 +37,7 @@ RSpec.describe Certificate, type: :model do
       end_time = Time.new(2025, 2, 8, 15, 0, 0)
       schedule = instance_double('schedule', start_time: start_time, end_time: end_time)
 
-      expect(Certificate.time_diff(schedule)).to eq '5 horas e 0 minutos'
+      expect(Certificate.time_diff(schedule)).to eq '300 minutos'
     end
   end
 end

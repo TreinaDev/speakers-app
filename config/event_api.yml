@@ -1,4 +1,0 @@
-shared:
-  base: 'http://localhost:3001/api/v1/'
-  schedule_items: 'speakers/%{token}/schedules/%{event_code}'
-  speakers_auth: 'speakers'

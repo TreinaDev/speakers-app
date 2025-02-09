@@ -8,7 +8,7 @@ class ExternalEventApi::GetAllEventsService < ApplicationService
   def get_all_events
     results = []
     begin
-      response = Faraday.get("http://localhost:3001/api/v1/speakers/#{ kwargs[:token] }/events")
+      response = EventClient.get_all_events(token: kwargs[:token])
       if response.success?
         json_response = JSON.parse(response.body)
         json_response.each do |event|
