@@ -9,6 +9,7 @@ class ScheduleItemsController < ApplicationController
     add_breadcrumb @schedule_item.name, "#" if @schedule_item
     @participants = @schedule_item.participants
     generate_curriculum if @schedule_item
+    @schedule_item_feedbacks = FeedbackScheduleItem.schedule(schedule_item_code: @schedule_item.code)
   end
 
   private
