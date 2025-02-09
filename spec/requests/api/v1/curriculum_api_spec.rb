@@ -4,7 +4,8 @@ describe 'Curriculum API' do
   context 'GET /api/v1/curriculums/:schedule_item_code' do
     it 'with success' do
       user = create(:user)
-      schedule_item = build(:schedule_item, code: 99, name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: Date.current)
+      build(:participant, code: 'XLR9BEN4')
+      schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: 7.days.ago)
       curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
       files = [ fixture_file_upload(Rails.root.join('spec/fixtures/capi.png')),
                 fixture_file_upload(Rails.root.join('spec/fixtures/nota-ufjf.pdf')),
@@ -25,8 +26,7 @@ describe 'Curriculum API' do
       create(:curriculum_task_content, curriculum_task: first_task, curriculum_content: second_curriculum_content)
 
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
-      get "/api/v1/curriculums/#{schedule_item.code}/participants/XLR9BEN4"
-      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      get "/api/v1/curriculums/ABCD1234/participants/XLR9BEN4"
 
       expect(response).to have_http_status :success
       expect(response.content_type).to include('application/json')
@@ -154,6 +154,45 @@ describe 'Curriculum API' do
                                                             certificate_requirement: 'Obrigatória', task_status: false })
       expect(tasks_response[1].deep_symbolize_keys).to eq({ code: 'CODIGO48', title: 'Exercício Stimulus', description: 'Seu primeiro exercício stimulus',
                                                             certificate_requirement: 'Opcional', task_status: false })
+    end
+
+    it 'and certificate pdf ulr is listed if available' do
+      user = create(:user)
+      event = build(:event, name: 'Dev Week', start_date: 7.days.ago, end_date: 1.day.ago)
+      participant = build(:participant, code: 'XLR9BEN4')
+      schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: 7.days.ago)
+      create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+      allow(Event).to receive(:find).and_return(event)
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      allow(Participant).to receive(:find).and_return(participant)
+      create(:participant_record, user: user, participant_code: 'XLR9BEN4', schedule_item_code: 'ABCD1234', enabled_certificate: true)
+      create(:certificate, schedule_item_code: 'ABCD1234', participant_code: 'XLR9BEN4', token: 'PIMZBVXM04DWVNVWI90H')
+
+      get "/api/v1/curriculums/ABCD1234/participants/XLR9BEN4"
+
+      expect(response).to have_http_status :success
+      expect(response.content_type).to include('application/json')
+      json_response = JSON.parse(response.body)
+      expect(json_response['curriculum']['certificate_url']).to eq "http://www.example.com/certificates/PIMZBVXM04DWVNVWI90H.pdf"
+    end
+
+    it 'and certificate pdf ulr is not listed if unavailable' do
+      user = create(:user)
+      event = build(:event, name: 'Dev Week', start_date: 7.days.ago, end_date: 1.day.ago)
+      participant = build(:participant, code: 'XLR9BEN4')
+      schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: 7.days.ago)
+      create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+      allow(Event).to receive(:find).and_return(event)
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      allow(Participant).to receive(:find).and_return(participant)
+      create(:participant_record, user: user, participant_code: 'XLR9BEN4', schedule_item_code: 'ABCD1234', enabled_certificate: false)
+
+      get "/api/v1/curriculums/ABCD1234/participants/XLR9BEN4"
+
+      expect(response).to have_http_status :success
+      expect(response.content_type).to include('application/json')
+      json_response = JSON.parse(response.body)
+      expect(json_response['curriculum'].deep_symbolize_keys).to eq(tasks_available: true)
     end
   end
 end

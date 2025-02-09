@@ -18,6 +18,7 @@ if @curriculum.present?
       end
     end
     json.tasks_available @tasks_available
+    json.certificate_url certificate_pdf_url(@certificate.token) if @certificate.present?
     if  @curriculum.curriculum_tasks.any?
       json.curriculum_tasks @curriculum.curriculum_tasks do |task|
         if @tasks_available
