@@ -13,7 +13,7 @@ class CertificatesController < ApplicationController
       format.pdf do
         render pdf: "certificado_#{@certificate.token}",
                template: "certificates/show",
-               formats: [:html],
+               formats: [ :html ],
                orientation: "Landscape",
                disposition: 'inline',
                layout: 'pdf',
