@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   root "home#index"
 
   get "certificates/:token.pdf", to: "certificates#show", as: :certificate_pdf
-  resources :certificates, only: %i[ index ]
+  resources :certificates, only: %i[ index ] do
+    get 'search', on: :collection
+  end
   resources :events, only: %i[ index show ], param: :code
   resources :event_contents, only: %i[ index show new create edit update ], param: :code do
     resources :update_histories, only: %i[ index ]
