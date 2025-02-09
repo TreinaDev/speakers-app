@@ -21,7 +21,7 @@ class ParticipantRecord < ApplicationRecord
   def scheduling_for_certificate_creation
     user = User.find(self.user.id)
     schedule_item = ScheduleItem.find(schedule_item_code: self.schedule_item_code, token: user.token)
-    length = time_diff(schedule_item)
+    length = Certificate.time_diff(schedule_item)
     event = Event.find(code: schedule_item.event_code, token: user.token)
     CertificateIssuanceJob.set(wait_until: event.end_date).perform_later(
       schedule_item_code: schedule_item.code, schedule_item_name: schedule_item.name,

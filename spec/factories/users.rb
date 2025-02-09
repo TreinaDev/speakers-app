@@ -4,7 +4,7 @@ FactoryBot.define do
     last_name  { "Campus" }
     email      { Faker::Internet.email }
     password   { "123456" }
-    token      { SecureRandom.hex(10) }
+    token      { SecureRandom.alphanumeric(8).upcase }
 
     transient do
       skip_api_auth { true }
