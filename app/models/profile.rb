@@ -6,6 +6,18 @@ class Profile < ApplicationRecord
   validates :username, uniqueness: true
   before_create :generate_unique_username
 
+  def self.pronoun_options
+    [ I18n.t('profiles.pronoun_options.she_her'), I18n.t('profiles.pronoun_options.he_him'),
+      I18n.t('profiles.pronoun_options.they_them'), I18n.t('profiles.pronoun_options.prefer_not_inform'),
+      I18n.t('profiles.pronoun_options.other') ]
+  end
+
+  def self.gender_options
+    [ I18n.t('profiles.gender_options.male'), I18n.t('profiles.gender_options.female'),
+      I18n.t('profiles.gender_options.not_binary'), I18n.t('profiles.gender_options.prefer_not_answer'),
+      I18n.t('profiles.gender_options.other') ]
+  end
+
   private
 
   def generate_unique_username

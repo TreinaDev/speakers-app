@@ -25,7 +25,7 @@
 
   <div class="field border-t border-b border-gray-400 py-4" data-controller="select-toggle">
     <%= f.label :pronoun %>
-    <%= f.select :pronoun, @pronoun_list, { include_blank: "" }, class: 'select_primary', data: { action: "change->select-toggle#toggle" } %>
+    <%= f.select :pronoun, Profile.pronoun_options, { include_blank: "" }, class: 'select_primary', data: { action: "change->select-toggle#toggle" } %>
     <% if @profile.errors[:pronoun].any? %> 
       <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:pronoun).first %></span>
     <% end %>
@@ -65,7 +65,7 @@
 
   <div class="field border-t border-b border-gray-400 py-4" data-controller="select-toggle">
     <%= f.label :gender %>
-    <%= f.select :gender, @gender_list, { include_blank: "" }, class: 'select_primary', data: { action: "change->select-toggle#toggle" } %>
+    <%= f.select :gender, Profile.gender_options, { include_blank: "" }, class: 'select_primary', data: { action: "change->select-toggle#toggle" } %>
     <% if @profile.errors[:gender].any? %> 
       <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:gender).first %></span>
     <% end %> 
