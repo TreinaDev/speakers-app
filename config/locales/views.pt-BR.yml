@@ -70,6 +70,7 @@ pt-BR:
       event_page: 'Site do Evento'
       no_event_page: 'Página inexistente'
       more: 'Mostrar mais'
+      no_address: 'Endereço indiponível'
     index:
       all_events: 'Todos os Eventos'
       ongoing_events: 'Em andamento'

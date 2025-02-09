@@ -14,8 +14,10 @@ RSpec.describe ParticipantRecord, type: :model do
       schedule_item = build(:schedule_item)
       event = build(:event)
       user = create(:user)
+      participant = build(:participant)
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
       allow(Event).to receive(:find).and_return(event)
+      allow(Participant).to receive(:find).and_return(participant)
 
       participant_record = build(:participant_record, user: user)
 
@@ -30,11 +32,13 @@ RSpec.describe ParticipantRecord, type: :model do
       user = create(:user)
       event = build(:event)
       schedule_item = build(:schedule_item)
+      participant = build(:participant)
       curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
       task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails',
                    description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory)
       allow(Event).to receive(:find).and_return(event)
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      allow(Participant).to receive(:find).and_return(participant)
       record = create(:participant_record, user: user, enabled_certificate: false, schedule_item_code: schedule_item.code)
       participant_task = build(:participant_task, participant_record: record, curriculum_task: task, task_status: true)
 
@@ -48,8 +52,10 @@ RSpec.describe ParticipantRecord, type: :model do
       curriculum = nil
       event = build(:event)
       schedule_item = build(:schedule_item)
+      participant = build(:participant)
       allow(Event).to receive(:find).and_return(event)
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      allow(Participant).to receive(:find).and_return(participant)
       record = create(:participant_record, user: user, enabled_certificate: false)
       participant_task = nil
 

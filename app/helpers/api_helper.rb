@@ -1,18 +1,33 @@
 module ApiHelper
   class ParticipantClient
-    PARTICIPANT_URL = Rails.configuration.participant_api['base'].freeze
-    PARTICIPANT_EVENT_LIST = Rails.configuration.participant_api['event_list'].freeze
+    PARTICIPANT_URL = 'http://localhost:3002/api/v1/'.freeze
+    PARTICIPANT_EVENT_LIST = 'events/'.freeze
+    EVENT_FEEDBACKS_URL = 'events/%{event_code}/feedbacks'
+    FIND_PARTICIPANT_URL = 'users/'
 
     def self.get_participant_event_list(event_code)
-      url = "#{PARTICIPANT_URL}#{PARTICIPANT_EVENT_LIST}#{event_code}"
+      url = "#{PARTICIPANT_URL}#{PARTICIPANT_EVENT_LIST}#{ event_code }"
+      Faraday.get(url)
+    end
+
+    def self.event_feedbacks(event_code:)
+      url = "#{PARTICIPANT_URL}#{EVENT_FEEDBACKS_URL % { event_code: event_code }}"
+      Faraday.get(url)
+    end
+
+    def self.find_participant(participant_code:)
+      url = "#{PARTICIPANT_URL}#{FIND_PARTICIPANT_URL}#{ participant_code }"
       Faraday.get(url)
     end
   end
 
   class EventClient
-    EVENT_URL = Rails.configuration.event_api['base'].freeze
-    SCHEDULE_ITEMS_URL = Rails.configuration.event_api['schedule_items']
-    SPEAKER_AUTH_URL = Rails.configuration.event_api['speakers_auth']
+    EVENT_URL = 'http://localhost:3001/api/v1/'.freeze
+    SCHEDULE_ITEMS_URL = 'speakers/%{token}/schedules/%{event_code}'
+    SPEAKER_AUTH_URL = 'speakers'
+    FIND_EVENT_URL = 'speakers/%{token}/event/%{event_code}'
+    FIND_SCHEDULE_URL = 'speakers/%{token}/schedule_item/%{schedule_item_code}'
+    ALL_EVENTS_URL = 'speakers/%{token}/events'
 
     def self.get_schedule_items(token:, event_code:)
       url = "#{EVENT_URL}#{SCHEDULE_ITEMS_URL % { token: token, event_code: event_code }}"
@@ -27,6 +42,20 @@ module ApiHelper
       url = "#{EVENT_URL}#{SPEAKER_AUTH_URL}"
       email = { email: email }
       connection.post(url, email.to_json)
+    end
+
+    def self.find_event(token:, event_code:)
+      url = "#{EVENT_URL}#{FIND_EVENT_URL % { token: token, event_code: event_code }}"
+      Faraday.get(url)
+    end
+
+    def self.find_schedule(token:, schedule_item_code:)
+      url = "#{EVENT_URL}#{FIND_SCHEDULE_URL % { token: token, schedule_item_code: schedule_item_code }}"
+      Faraday.get(url)
+    end
+
+    def self.get_all_events(token:)
+      Faraday.get("#{EVENT_URL}#{ALL_EVENTS_URL % { token: token }}")
     end
   end
 end

@@ -8,7 +8,7 @@ class ExternalParticipantApi::GetEventFeedbacksService < ApplicationService
   def get_event_feedbacks
     feedbacks = []
     begin
-      response = Faraday.get("http://localhost:3002/api/v1/events/#{kwargs[:event_code]}/feedbacks")
+      response = ParticipantClient.event_feedbacks(event_code: kwargs[:event_code])
       if response.success?
         json_response = JSON.parse(response.body)
         json_response['feedbacks'].each do |feedback|

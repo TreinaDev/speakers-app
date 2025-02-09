@@ -4,6 +4,7 @@ describe 'POST /api/v1/participant_tasks' do
   it 'with success' do
     user = create(:user, id: 10)
     event = build(:event)
+    participant = build(:participant)
     schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', code: '1234ABCD',
@@ -11,6 +12,7 @@ describe 'POST /api/v1/participant_tasks' do
 
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
     allow(Event).to receive(:find).and_return(event)
+    allow(Participant).to receive(:find).and_return(participant)
     post '/api/v1/participant_tasks', params: { participant_code: 'XLR8BEN1', task_code: '1234ABCD' }
 
     expect(response).to have_http_status :success
@@ -77,6 +79,7 @@ describe 'POST /api/v1/participant_tasks' do
   it 'with the last mandatory task' do
     user = create(:user)
     event = build(:event)
+    participant = build(:participant)
     schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', code: '1234ABCD',
@@ -87,6 +90,7 @@ describe 'POST /api/v1/participant_tasks' do
                    description: 'Seu primeiro exercício ruby puro', certificate_requirement: :mandatory)
     allow(Event).to receive(:find).and_return(event)
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+    allow(Participant).to receive(:find).and_return(participant)
     record = create(:participant_record, participant_code: 'XLR8BEN1', schedule_item_code: schedule_item.code, user: user)
     create(:participant_task, participant_record: record, curriculum_task: task, task_status: true)
 
@@ -103,6 +107,7 @@ describe 'POST /api/v1/participant_tasks' do
   it 'with the last optional task and one mandatory task missing' do
     user = create(:user)
     event = build(:event)
+    participant = build(:participant)
     schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD')
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', code: '1234ABCD',
@@ -113,6 +118,7 @@ describe 'POST /api/v1/participant_tasks' do
            description: 'Seu primeiro exercício ruby puro', certificate_requirement: :mandatory)
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
     allow(Event).to receive(:find).and_return(event)
+    allow(Participant).to receive(:find).and_return(participant)
     record = create(:participant_record, participant_code: 'XLR8BEN1', schedule_item_code: schedule_item.code, user: user)
     create(:participant_task, participant_record: record, curriculum_task: task, task_status: true)
 

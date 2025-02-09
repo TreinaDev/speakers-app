@@ -340,12 +340,19 @@
     @apply flex flex-col;
   }
 
+  .feedback-body {
+    @apply px-5 py-2;
+  }
+
   .not_found_feedback,
   .not-found-participants {
     @apply p-1 rounded-md text-center;
     color: rgb(189, 25, 25);
-    border: solid 1px #aaa;
     padding: 1rem;
+  }
+
+  .list__participant, .list__feedback {
+    @apply border-2 border-gray-400 p-5;
   }
 
   /* Fim do Modal */
