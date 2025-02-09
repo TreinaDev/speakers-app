@@ -24,4 +24,38 @@ RSpec.describe ParticipantRecord, type: :model do
       }.to have_enqueued_job(CertificateIssuanceJob)
     end
   end
+      
+  context '.change_enabled_certificate' do
+    it 'with success' do
+      user = create(:user)
+      event = build(:event)
+      schedule_item = build(:schedule_item)
+      curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+      task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails',
+                   description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory)
+      allow(Event).to receive(:find).and_return(event)
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      record = create(:participant_record, user: user, enabled_certificate: false, schedule_item_code: schedule_item.code)
+      participant_task = build(:participant_task, participant_record: record, curriculum_task: task, task_status: true)
+
+      record.change_enabled_certificate(curriculum, participant_task)
+
+      expect(record.enabled_certificate).to eq(true)
+    end
+
+    it 'with curriculum and participant_task nil' do
+      user = create(:user)
+      curriculum = nil
+      event = build(:event)
+      schedule_item = build(:schedule_item)
+      allow(Event).to receive(:find).and_return(event)
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      record = create(:participant_record, user: user, enabled_certificate: false)
+      participant_task = nil
+
+      record.change_enabled_certificate(curriculum, participant_task)
+
+      expect(record.enabled_certificate).to eq(false)
+    end
+  end
 end
