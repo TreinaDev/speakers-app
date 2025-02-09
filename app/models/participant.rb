@@ -17,6 +17,10 @@ class Participant
     ExternalParticipantApi::GetParticipantDetailsService.call(participant_code: participant_code)
   end
 
+  def self.full_name(first_name, last_name)
+    "#{first_name} #{last_name}"
+  end
+
   private
 
   def participant_permitted_params(params)

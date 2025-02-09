@@ -23,10 +23,13 @@ class ParticipantRecord < ApplicationRecord
     schedule_item = ScheduleItem.find(schedule_item_code: self.schedule_item_code, token: user.token)
     length = Certificate.time_diff(schedule_item)
     event = Event.find(code: schedule_item.event_code, token: user.token)
+    participant = Participant.find(participant_code: participant_code)
+    participant_name = Participant.full_name(participant.name, participant.last_name)
     CertificateIssuanceJob.set(wait_until: event.end_date).perform_later(
       schedule_item_code: schedule_item.code, schedule_item_name: schedule_item.name,
       date_perfome: event.end_date, event_name: event.name, date_of_occurrence: schedule_item.date,
-      length: length
+      length: length, participant_name: participant_name, participant_register: participant.cpf,
+      participant_email: participant.email
     )
   end
 end
