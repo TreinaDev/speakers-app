@@ -10,13 +10,22 @@ class FeedbackScheduleItem
   attribute :user, :string
   attribute :schedule_item_id, :string
 
-
+  @@instances = []
   def initialize(**params)
     super(feedback_schedule_item_permited_params(params))
+    @@instances << self
   end
 
   def self.schedule(schedule_item_code:)
     ExternalParticipantApi::GetScheduleItemFeedbacksService.call(schedule_item_id: schedule_item_code)
+  end
+
+  def self.count
+    @@instances.size
+  end
+
+  def self.delete_all
+    @@instances = []
   end
 
   private
