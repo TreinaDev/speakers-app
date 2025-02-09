@@ -7,7 +7,7 @@ class Certificate < ApplicationRecord
   def self.time_diff(schedule_item)
     time_difference_in_seconds = schedule_item.end_time - schedule_item.start_time
     time_difference_in_minutes = (time_difference_in_seconds / 60).to_i
-  
+
     I18n.t('minute_length', minutes: time_difference_in_minutes)
   end
 
