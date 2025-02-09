@@ -78,13 +78,12 @@ describe 'POST /api/v1/participant_tasks' do
     curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
     task = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', code: '1234ABCD',
                    description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory)
-    task_2 = create(:curriculum_task, curriculum: curriculum, title: 'Exercício JavaScript', code: '4785ZRCD',
+    create(:curriculum_task, curriculum: curriculum, title: 'Exercício JavaScript', code: '4785ZRCD',
                    description: 'Seu primeiro exercício JavaScript', certificate_requirement: :optional)
     task_3 = create(:curriculum_task, curriculum: curriculum, title: 'Exercício Ruby', code: '1234ZRCD',
                    description: 'Seu primeiro exercício ruby puro', certificate_requirement: :mandatory)
     record = create(:participant_record, participant_code: 'XLR8BEN1', schedule_item_code: schedule_item.code, user: user)
     create(:participant_task, participant_record: record, curriculum_task: task, task_status: true)
-    create(:participant_task, participant_record: record, curriculum_task: task_2, task_status: true)
 
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
     post '/api/v1/participant_tasks', params: { participant_code: 'XLR8BEN1', task_code: task_3.code }
