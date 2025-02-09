@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  resources :certificate, only: %i[ show ], param: :token
+  get "certificates/:token.pdf", to: "certificates#show", as: :certificate_pdf
+  resources :certificates, only: %i[ index ]
   resources :events, only: %i[ index show ], param: :code
   resources :event_contents, only: %i[ index show new create edit update ], param: :code do
     resources :update_histories, only: %i[ index ]

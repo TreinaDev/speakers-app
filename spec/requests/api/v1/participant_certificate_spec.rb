@@ -19,7 +19,7 @@ describe 'Participant requests certificate', type: :request do
     expect(response.content_type).to include 'application/json'
     json_response = JSON.parse(response.body)
     expect(response).to have_http_status :ok
-    expect(json_response['certificate_url']).to eq certificate_url(certificate.token)
+    expect(json_response['certificate_url']).to eq certificate_pdf_url(certificate.token)
   end
 
   it 'should create and return a new certificate if it does not exist' do
@@ -37,7 +37,7 @@ describe 'Participant requests certificate', type: :request do
     expect(response.content_type).to include 'application/json'
     json_response = JSON.parse(response.body)
     expect(response).to have_http_status :ok
-    expect(json_response['certificate_url']).to eq certificate_url(Certificate.last.token)
+    expect(json_response['certificate_url']).to eq certificate_pdf_url(Certificate.last.token)
   end
 
   it 'must not return a certificate if the participant is not found' do
