@@ -24,7 +24,7 @@ RSpec.describe ParticipantRecord, type: :model do
       }.to have_enqueued_job(CertificateIssuanceJob)
     end
   end
-      
+
   context '.change_enabled_certificate' do
     it 'with success' do
       user = create(:user)
