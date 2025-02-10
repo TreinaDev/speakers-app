@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   resources :events, only: %i[ index show ], param: :code
   resources :event_contents, only: %i[ index show new create edit update ], param: :code do
     resources :update_histories, only: %i[ index ]
+    member do
+      delete 'remove_file/:id', to: 'event_contents#remove_file', as: 'remove_file'
+    end
   end
   resources :schedule_items, only: [ :show ], param: :code do
     post '/answer/:feedback_id', on: :member, as: 'answer', to: 'schedule_items#answer'

@@ -26,7 +26,6 @@ class ScheduleItemsController < ApplicationController
     generate_curriculum
     @schedule_item_feedbacks = FeedbackScheduleItem.schedule(schedule_item_code: @schedule_item.code)
     @participant_records = ParticipantRecord.where(schedule_item_code: @schedule_item.code)
-
     @participants = @participant_records.map { |record| Participant.find(participant_code: record.participant_code) } if @participant_records
   end
 end
