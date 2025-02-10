@@ -191,4 +191,16 @@ describe 'User register a profile', type: :system do
     expect(profile.display_city).to eq(false)
     expect(profile.display_birth).to eq(false)
   end
+
+  it 'with date of birth under 18 years old' do
+    user = create(:user, first_name: 'João')
+
+    login_as user
+    visit new_profile_path
+    fill_in 'Data de Nascimento', with: 15.years.ago
+    click_on 'Criar perfil'
+
+    expect(page).to have_content('Falha ao registrar o perfil.')
+    expect(page).to have_content('Palestrante deve ter mais de 18 anos.')
+  end
 end

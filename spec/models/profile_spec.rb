@@ -39,14 +39,14 @@ RSpec.describe Profile, type: :model do
         profile = build(:profile, birth: 1.days.from_now)
 
         expect(profile.valid?).to eq(false)
-        expect(profile.errors.full_messages).to include('Palestrante deve ter mais de 18 anos.')
+        expect(profile.errors[:birth_base].first).to include('Palestrante deve ter mais de 18 anos.')
       end
 
       it 'with date invalid' do
         profile = build(:profile, birth: 15.years.ago)
 
         expect(profile.valid?).to eq(false)
-        expect(profile.errors.full_messages).to include('Palestrante deve ter mais de 18 anos.')
+        expect(profile.errors[:birth_base].first).to include('Palestrante deve ter mais de 18 anos.')
       end
 
       it 'with success' do

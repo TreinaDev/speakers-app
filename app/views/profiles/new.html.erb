@@ -54,8 +54,10 @@
   <div class="field">
     <%= f.label :birth %>
     <%= f.date_field :birth, class: 'w-96' %>
-    <% if @profile.errors[:birth].any? %> 
+    <% if @profile.errors[:birth].any? %>
       <span class="text-red-500 text-sm"><%= @profile.errors.full_messages_for(:birth).first %></span>
+    <% else @profile.errors[:birth_base].any? %>
+      <span class="text-red-500 text-sm"><%= @profile.errors[:birth_base].first %></span>
     <% end %>
     <div class="flex my-6 items-center">
       <%= f.check_box :display_birth, class: 'mr-4' %>

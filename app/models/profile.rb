@@ -37,6 +37,6 @@ class Profile < ApplicationRecord
   end
 
   def validation_for_birth
-    errors.add(:base, I18n.t("activerecord.errors.messages.validation_for_birth")) if self.birth.present? && self.birth >= 18.years.ago
+    errors.add(:birth_base, I18n.t("activerecord.errors.messages.validation_for_birth")) if self.birth.present? && self.birth >= 18.years.ago
   end
 end
