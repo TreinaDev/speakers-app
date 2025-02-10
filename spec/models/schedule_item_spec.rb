@@ -55,30 +55,4 @@ describe ScheduleItem do
       expect { ScheduleItem.delete_all }.to change(ScheduleItem, :count).by(-10)
     end
   end
-
-  context '#participants' do
-    it 'should return all list participants' do
-      user = create(:user, email: 'joao@email.com')
-      schedule_item = build(:schedule_item, name: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD',
-                                      responsible_email: user.email, start_time: '11:00', end_time: '12:00')
-      participants = []
-      10.times do
-        participants << build(:participant)
-      end
-      allow(schedule_item).to receive(:participants).and_return(participants)
-      participants = schedule_item.participants
-
-      expect(participants.count).to eq 10
-    end
-
-    it 'should return zero if not found participants' do
-      user = create(:user, email: 'joao@email.com')
-      schedule_item = build(:schedule_item, name: 'Entrevista com João', description: 'Aprenda sobre RoR e TDD',
-                                      responsible_email: user.email, start_time: '11:00', end_time: '12:00')
-      allow(schedule_item).to receive(:participants).and_return([])
-      participants = schedule_item.participants
-
-      expect(participants.count).to eq 0
-    end
-  end
 end

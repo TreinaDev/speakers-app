@@ -108,19 +108,25 @@ pt-BR:
     show:
       estimated_participants: 'Número estimado de participantes:'
       not_found: 'Essa Programação não existe'
-      curriculum_content_title: 'Conteúdos da programação'
-      no_curriculum_content: 'Nenhum conteúdo cadastrado para essa programação.'
-      new_curriculum_content_button: 'Adicionar conteúdo'
       participants_list: 'Lista de Participantes'
       name: 'Nome'
       empty_participants_list: 'Não foram localizados Participantes para está agenda'
-      curriculum_task_title: 'Tarefas da programação'
-      no_curriculum_task: 'Nenhuma tarefa cadastrada para essa programação.'
-      new_curriculum_task_button: 'Adicionar tarefa'
       start_time: 'Início'
       end_time: 'Encerramento'
-      no_feedback: 'Nenhum feedback disponível para esta agenda'
       schedule_feedbacks: ' Feedbacks desta agenda'
+      my_curriculum: 'Meu material'
+      feedbacks: 'Feedbacks da Palestra'
+    curriculum_schedule:
+      curriculum_task_title: 'Tarefas da programação'
+      new_curriculum_task_button: 'Adicionar tarefa'
+      no_curriculum_task: 'Nenhuma tarefa cadastrada para essa programação.'
+      curriculum_content_title: 'Conteúdos da programação'
+      no_curriculum_content: 'Nenhum conteúdo cadastrado para essa programação.'
+      new_curriculum_content_button: 'Adicionar conteúdo'
+    feedback_area:
+      no_feedback: 'Nenhum feedback disponível para esta agenda'
+      answer: 'Resposta'
+      send: 'Enviar Resposta'
   curriculum_contents:
     new:
       title: 'Adicionar conteúdo a programação:'

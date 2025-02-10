@@ -34,10 +34,6 @@ class ScheduleItem
     @@instances = []
   end
 
-  def participants
-    ExternalParticipantApi::ListParticipantsService.call(schedule_item_code: code)
-  end
-
   private
 
   def schedule_item_permitted_params(params)

@@ -20,6 +20,10 @@ class FeedbackScheduleItem
     ExternalParticipantApi::GetScheduleItemFeedbacksService.call(schedule_item_id: schedule_item_code)
   end
 
+  def self.post_answer(feedback_id:, name:, email:, answer:)
+    ExternalParticipantApi::PostAnswerService.call(feedback_id: feedback_id, name: name, email: email, answer: answer)
+  end
+
   def self.count
     @@instances.size
   end
