@@ -1,0 +1,26 @@
+ <% if content.files.attached? %>
+  <h3 class='mt-5'>Arquivos anexados</h3>
+  <div class="flex flex-wrap mt-10 gap-4 border border-gray-700 relative p-10 mb-10 rounded-3xl">
+    <% content.files.each do |file| %>
+    <div class='flex relative p-2'>
+      <% if file.content_type.starts_with?('image/') %>
+        <%= image_tag file, width: 300, height: 200, class: 'card max-h-48 w-48 object-cover m-0' %>
+      <% elsif file.content_type.starts_with?('video/') %>
+        <%= video_tag url_for(file), controls: true, class: 'card max-h-48 w-48 object-cover m-0' %>
+      <% elsif file.content_type == 'application/pdf' %>
+        <%= link_to(url_for(file), target: '_blank', class: 'card max-h-48 w-48 flex flex-col justify-center items-center m-0' ) do %>
+          <%= image_tag("pdf.png", class: 'w-2/3 h-2/3 object-cover') %>
+          <p><%= "#{file.filename.to_s}" %></p>
+        <% end %>
+      <% else %>
+        <%= link_to t('file') + " #{file.filename.to_s}", url_for(file), target: '_blank', class: 'card max-h-96' %>
+      <% end %>
+        <%= button_to "✖", remove_file_event_content_path(event_content, file.signed_id), method: :delete, class: 'absolute top-0 right-0 mb-2 ml-3 bg-red-500 hover:bg-red-300 text-white rounded-full px-2 py-1 text-sm' if content == event_content %>
+    </div>
+    <% end %>
+  </div>
+  <% else %>
+  <div class="mt-10">
+    <strong><%=t('event_contents.show.no_files_attached')%></strong>
+  </div>
+<% end %>

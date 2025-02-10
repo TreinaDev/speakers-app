@@ -43,6 +43,20 @@ class EventContentsController < ApplicationController
     end
   end
 
+  def remove_file
+    @event_content = EventContent.find_by(code: params[:code])
+    file = ActiveStorage::Blob.find_signed(params[:id])
+    if file.attachments.first.purge
+      respond_to do |format|
+        format.html do
+          flash.now[:notice] = t('events_contents.show.file_removed')
+          return redirect_to event_content_path(@event_content)
+        end
+      end
+    end
+    redirect_to event_content_path(@event_content), alert: t('events_contents.show.file_remove_failed')
+  end
+
   private
 
   def event_content_params

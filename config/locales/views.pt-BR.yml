@@ -37,6 +37,8 @@ pt-BR:
       edit: 'Editar'
       file: 'Arquivo'
       update_history: 'Histórico de atualizações'
+      file_removed: Arquivo deletado
+      file_remove_failed: Falha ao deletar arquivo
     event_content:
       content: 'Conteúdo'
     edit:
