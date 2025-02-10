@@ -32,6 +32,7 @@ describe 'Curriculum API' do
 
       expect(response).to have_http_status :success
       expect(response.content_type).to include('application/json')
+
       curriculum_response = response.parsed_body['curriculum']
       tasks_response = curriculum_response['curriculum_tasks']
       contents_response = curriculum_response['curriculum_contents']
@@ -160,7 +161,7 @@ describe 'Curriculum API' do
                                                             certificate_requirement: 'Opcional', task_status: false })
     end
 
-    it 'and certificate pdf ulr is listed if available' do
+    it 'and certificate pdf url is listed if available' do
       user = create(:user)
       event = build(:event, name: 'Dev Week', start_date: 7.days.ago, end_date: 1.day.ago)
       participant = build(:participant, code: 'XLR9BEN4')
@@ -204,7 +205,7 @@ describe 'Curriculum API' do
       expect(certificate.schedule_item_code).to eq 'ABCD1234'
     end
 
-    it 'and certificate pdf ulr not is listed if event ongoing' do
+    it 'and certificate pdf url not is listed if event ongoing' do
       user = create(:user)
       event = build(:event, name: 'Dev Week', start_date: 7.days.ago, end_date: 1.day.from_now)
       participant = build(:participant, code: 'XLR9BEN4')
@@ -221,10 +222,10 @@ describe 'Curriculum API' do
       expect(response.content_type).to include('application/json')
       expect(Certificate.count).to eq 0
       json_response = JSON.parse(response.body)
-      expect(json_response['curriculum'].deep_symbolize_keys).to eq(tasks_available: true)
+      expect(json_response['curriculum'].deep_symbolize_keys).to eq({ tasks_available: true, curriculum_tasks: [], curriculum_contents: [] })
     end
 
-    it 'and certificate pdf ulr is not listed if unavailable' do
+    it 'and certificate pdf url is not listed if unavailable' do
       user = create(:user)
       event = build(:event, name: 'Dev Week', start_date: 7.days.ago, end_date: 1.day.ago)
       participant = build(:participant, code: 'XLR9BEN4')
@@ -240,7 +241,7 @@ describe 'Curriculum API' do
       expect(response).to have_http_status :success
       expect(response.content_type).to include('application/json')
       json_response = JSON.parse(response.body)
-      expect(json_response['curriculum'].deep_symbolize_keys).to eq(tasks_available: true)
+      expect(json_response['curriculum'].deep_symbolize_keys).to eq({ tasks_available: true, curriculum_tasks: [], curriculum_contents: [] })
     end
   end
 end
