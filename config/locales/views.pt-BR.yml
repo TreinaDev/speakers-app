@@ -117,6 +117,8 @@ pt-BR:
       new_curriculum_task_button: 'Adicionar tarefa'
       start_time: 'Início'
       end_time: 'Encerramento'
+      no_feedback: 'Nenhum feedback disponível para esta agenda'
+      schedule_feedbacks: ' Feedbacks desta agenda'
   curriculum_contents:
     new:
       title: 'Adicionar conteúdo a programação:'

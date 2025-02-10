@@ -3,6 +3,7 @@ module ApiHelper
     PARTICIPANT_URL = 'http://localhost:3002/api/v1/'.freeze
     PARTICIPANT_EVENT_LIST = 'events/'.freeze
     EVENT_FEEDBACKS_URL = 'events/%{event_code}/feedbacks'
+    SCHEDULE_ITEMS_FEEDBACKS_URL = 'schedule_items/%{schedule_item_id}/item_feedbacks'
     FIND_PARTICIPANT_URL = 'users/'
 
     def self.get_participant_event_list(event_code)
@@ -12,6 +13,11 @@ module ApiHelper
 
     def self.event_feedbacks(event_code:)
       url = "#{PARTICIPANT_URL}#{EVENT_FEEDBACKS_URL % { event_code: event_code }}"
+      Faraday.get(url)
+    end
+
+    def self.schedule_item_feedbacks(schedule_item_id:)
+      url = "#{PARTICIPANT_URL}#{SCHEDULE_ITEMS_FEEDBACKS_URL % { schedule_item_id: schedule_item_id }}"
       Faraday.get(url)
     end
 

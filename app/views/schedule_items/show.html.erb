@@ -48,4 +48,38 @@
       </div>
     <% end %>
   </div>
+  <div>
+    <h2><%= t('.schedule_feedbacks') %>: </h2>
+     <% if @schedule_item_feedbacks %>
+    <div class="modal-body">
+      <% @schedule_item_feedbacks.each do |schedule_item_feedback| %>
+        <div class="feedback-card border-2 bg-gray-200 my-3 p-2">
+          <div class="feedback-header flex gap-2">
+           
+          </div>
+          
+          <div class="feedback-body">
+            <div class="flex gap-2">
+              <strong><%= schedule_item_feedback.title %></strong>
+            </div>
+            <span>
+              <%= schedule_item_feedback.comment %>
+            </span>
+            <span class="flex gap-2">
+              <% (1..5).each do |star| %>
+                <% if star <= schedule_item_feedback.mark.floor %>
+                  <span class="text-3xl text-yellow-400">★</span> 
+                <% else %>
+                  <span class="text-3xl text-gray-500">★</span>
+                <% end %>
+              <% end %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="not_found_feedback" ><%= t('.no_feedback') %></p>
+  <% end %>
+  </div>
 </div>
