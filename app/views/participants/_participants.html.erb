@@ -1,6 +1,6 @@
 <div id="participant_list" class="list__participant">
   <h2><%= t('.participant_list') %></h2>
-  <% if participants.present? %>
+  <% if participants.present? && !participants.first.nil? %>
   <div class="mb-3">
     <small><%= t('.participant_number') %>: <%= participants.count %></small>
   </div>
