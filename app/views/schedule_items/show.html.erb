@@ -1,13 +1,13 @@
 <% turbo_page_requires_reload %>
 
-<div class='border rounded p-3'>
+<div class='border rounded-lg p-3 mt-4 shadow-md'>
   <div>
     <h1><%= @schedule_item.name %></h1>
       <div class="flex gap-2 items-center mt-4 mb-4">
       <%= image_tag 'event-calendar.svg', class: 'icon' %>
       <span><%= full_date(@schedule_item.date) %></span>
     </div>
-    <div class="flex gap-2 flex mt-5">
+    <div class="flex gap-2 mt-5">
         <%= image_tag 'clock.svg', class: 'icon' %>
         <span>
           <%= @schedule_item.start_time.strftime("%H:%M") %> -

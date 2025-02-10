@@ -52,7 +52,7 @@
             <% else %>
               <%= f.collection_check_boxes(:curriculum_content_ids, curriculum_contents, :id, :title) do |b| %>
                   <%= b.check_box %>
-                  <%= b.label(class: "text-sm text-gray-900 mr-2") %>
+                  <%= b.label(class: "text-sm text-gray-900 mr-2 label_primary") %>
               <% end %>
             <% end %>
         </div>
