@@ -11,6 +11,7 @@ class ExternalParticipantApi::GetScheduleItemFeedbacksService < ApplicationServi
       response = ParticipantClient.schedule_item_feedbacks(schedule_item_id: kwargs[:schedule_item_id])
       if response.success?
         json_response = JSON.parse(response.body)
+        p json_response
         json_response['item_feedbacks'].each do |schedule_item_feedback|
           schedule_item_feedbacks << FeedbackScheduleItem.new(**schedule_item_feedback)
         end

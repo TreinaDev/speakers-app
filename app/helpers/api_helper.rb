@@ -1,6 +1,6 @@
 module ApiHelper
   class ParticipantClient
-    PARTICIPANT_URL = 'http://localhost:3002/api/v1/'.freeze
+    PARTICIPANT_URL = 'http://localhost:3001/api/v1/'.freeze
     PARTICIPANT_EVENT_LIST = 'events/'.freeze
     EVENT_FEEDBACKS_URL = 'events/%{event_code}/feedbacks'
     SCHEDULE_ITEMS_FEEDBACKS_URL = 'schedule_items/%{schedule_item_id}/item_feedbacks'
