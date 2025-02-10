@@ -154,36 +154,3 @@ Tabela participant_task é criada, assim como participant_record (caso não exis
   "error": "Código do participante não pode ser em branco."
 }
 ```
-
-
-### 4 - Participante solicita seu certificado
-#### GET /api/v1/curriculums/:curriculum_schedule_item_code/certificates/:participant_code
-Cria um certificado (ou localiza um existente) quando solicitado por um participante via URL
-
-##### Success
-* status: 200
-* content-type: application/json
-
-```
-{
-  "certificate_url": "http://localhost:3000/certificate/9WA6KVATK5B5BXBKVQ1Y"
-}
-```
-
-##### Not Found - quando o código do participante ou o código do item da agenda não são localizados
-
-```
-{
-  "error": "Certificado não encontrado!"
-}
-```
-
-#### Internal Server Error
-
-* status: 500
-* content-type: application/json
-
-```
-{
-  "error": "Algo deu errado."
-}
