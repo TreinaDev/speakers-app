@@ -48,7 +48,7 @@ describe 'Participant requests certificate', type: :request do
     allow(ScheduleItem).to receive(:find).and_return(schedule_item)
     allow(Event).to receive(:find).and_return(event)
     allow(Participant).to receive(:find).and_return(participant)
-    participant_record = create(:participant_record, user: user, participant_code: 'ABC123', schedule_item_code: schedule_item.code, enabled_certificate: true)
+    create(:participant_record, user: user, participant_code: 'ABC123', schedule_item_code: schedule_item.code, enabled_certificate: true)
 
     get api_v1_curriculum_certificate_path(curriculum_schedule_item_code: schedule_item.code, participant_code: 'Something')
 
@@ -81,7 +81,6 @@ describe 'Participant requests certificate', type: :request do
     get api_v1_curriculum_certificate_path(curriculum_schedule_item_code: 'Something', participant_code: 'Something')
 
     expect(response.content_type).to include 'application/json'
-    json_response = JSON.parse(response.body)
     expect(response).to have_http_status :internal_server_error
     expect(response.parsed_body['error']).to eq 'Algo deu errado.'
   end
