@@ -28,7 +28,8 @@ Rails.application.routes.draw do
       delete 'remove_file/:id', to: 'event_contents#remove_file', as: 'remove_file'
     end
   end
-  resources :schedule_items, only: [ :show ], param: :code do
+
+  resources :schedule_items, only: %i[ show ], param: :code do
     post '/answer/:feedback_id', on: :member, as: 'answer', to: 'schedule_items#answer'
   end
 

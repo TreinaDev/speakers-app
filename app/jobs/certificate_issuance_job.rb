@@ -9,6 +9,13 @@ class CertificateIssuanceJob < ApplicationJob
                          schedule_item_name: schedule_item_name, date_of_occurrence: date_of_occurrence, issue_date: date_perfome,
                          length: length, schedule_item_code: schedule_item_code, participant_code: participant.participant_code,
                          participant_name: participant_name, participant_register: participant_register)
+
+      CertificateNotifyMailer.send_certificate(
+      participant_code: participant.participant_code,
+      participant_name: participant_name,
+      participant_email: participant_email,
+      schedule_item_code: schedule_item_code
+    ).deliver_later
     end
   end
 end

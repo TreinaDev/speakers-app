@@ -1,0 +1,14 @@
+<div>
+  <h1>Seu certificado chegou!!!</h1>
+  <div>
+    Oi <%= @participant_name %>, seu certificado chegou!!!
+  </div>
+
+  <div>
+    <p>Acesse o <%= link_to 'link', @url %> para realizar o download de seu certificado.</p>
+  </div>
+
+  <div>
+    Não conseguiu acessar o link? Copie o enderço ao lado <%= @url %>
+  </div>
+</div>
