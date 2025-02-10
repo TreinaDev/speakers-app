@@ -54,10 +54,8 @@ describe 'User register a profile', type: :system do
     expect(networks.find_by(url: 'https://www.facebook.com/joaoalmeida').present?).to eq(true)
   end
 
-  it 'with other gender and pronoun' do
+  it 'with other gender and pronoun', js: true do
     user = create(:user, first_name: 'João')
-    service = ExternalEventApi::UserFindEmailService
-    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return("ABCD1234")
 
     login_as user
     visit new_profile_path
@@ -105,7 +103,7 @@ describe 'User register a profile', type: :system do
     expect(page).to have_content('Cidade não pode ficar em branco')
   end
 
-  it 'with blank fields for gender and pronoun' do
+  it 'with blank fields for gender and pronoun', js: true do
     user = create(:user, first_name: 'João')
 
     login_as user
@@ -123,8 +121,6 @@ describe 'User register a profile', type: :system do
 
   it 'with invalid network' do
     user = create(:user, first_name: 'João')
-    service = ExternalEventApi::UserFindEmailService
-    allow_any_instance_of(service).to receive(:presence_fetch_api_email?).and_return("ABCD1234")
 
     login_as user
     visit new_profile_path
@@ -194,5 +190,17 @@ describe 'User register a profile', type: :system do
     expect(profile.display_gender).to eq(true)
     expect(profile.display_city).to eq(false)
     expect(profile.display_birth).to eq(false)
+  end
+
+  it 'with date of birth under 18 years old' do
+    user = create(:user, first_name: 'João')
+
+    login_as user
+    visit new_profile_path
+    fill_in 'Data de Nascimento', with: 15.years.ago
+    click_on 'Criar perfil'
+
+    expect(page).to have_content('Falha ao registrar o perfil.')
+    expect(page).to have_content('Palestrante deve ter mais de 18 anos.')
   end
 end

@@ -1,5 +1,8 @@
 pt-BR:
   activerecord:
+    errors:
+      messages:
+        validation_for_birth: 'Palestrante deve ter mais de 18 anos.'
     models:
       profile: Perfil
     attributes:

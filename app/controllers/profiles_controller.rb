@@ -14,8 +14,6 @@ class ProfilesController < ApplicationController
 
   def new
     @profile = current_user.build_profile
-    @pronoun_list = pronoun_options
-    @gender_list = gender_options
   end
 
   def create
@@ -25,26 +23,12 @@ class ProfilesController < ApplicationController
     if @profile.save
       redirect_to events_path, notice: t('profiles.create.success')
     else
-      @pronoun_list = pronoun_options
-      @gender_list = gender_options
       flash.now[:alert] = t('profiles.create.error')
       render :new, status: :unprocessable_entity
     end
   end
 
   private
-
-  def pronoun_options
-    [ t('profiles.pronoun_options.she_her'), t('profiles.pronoun_options.he_him'),
-      t('profiles.pronoun_options.they_them'), t('profiles.pronoun_options.prefer_not_inform'),
-      t('profiles.pronoun_options.other') ]
-  end
-
-  def gender_options
-    [ t('profiles.gender_options.male'), t('profiles.gender_options.female'),
-      t('profiles.gender_options.not_binary'), t('profiles.gender_options.prefer_not_answer'),
-      t('profiles.gender_options.other') ]
-  end
 
   def profile_params
     filtered_params = params.require(:profile).permit(:title, :about_me, :profile_picture, :pronoun, :city, :birth,
