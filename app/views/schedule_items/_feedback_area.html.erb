@@ -31,11 +31,11 @@
           
           <div>
             <%= form_with(url: answer_schedule_item_path(schedule_item.code, feedback.id)) do |form| %>
-              <div>
+              <div class="mb-4">
                 <%= form.label :comment, t('.answer') %>
                 <%= form.text_area :comment %>
               </div>
-              <%= form.submit t('.send'), class: 'bg-blue-300 w-36' %>
+              <%= form.submit t('.send'), class: 'btn_primary' %>
             <% end %>
           </div>
         </div>
