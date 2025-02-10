@@ -28,7 +28,7 @@ module ApiHelper
   end
 
   class EventClient
-    EVENT_URL = 'http://localhost:3001/api/v1/'.freeze
+    EVENT_URL = 'http://localhost:3003/api/v1/'.freeze
     SCHEDULE_ITEMS_URL = 'speakers/%{token}/schedules/%{event_code}'
     SPEAKER_AUTH_URL = 'speakers'
     FIND_EVENT_URL = 'speakers/%{token}/event/%{event_code}'

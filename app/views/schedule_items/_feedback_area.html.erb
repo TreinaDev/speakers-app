@@ -1,0 +1,37 @@
+<div id="feedbacks" class="list__feedback">
+  <h2><%= Feedback.model_name.plural.capitalize %></h2>
+  <% if feedbacks&.any? %>
+    <div class="modal-body">
+      <% feedbacks.each do |feedback| %>
+        <div class="feedback-card border-2 bg-gray-200 my-3 p-2">
+          <div class="feedback-header flex gap-2">
+            <div class="flex gap-2">
+              <%= image_tag 'participant.svg', class: 'icon' %>
+              <span class="self-center"><%= feedback.user %></span>
+            </div>
+          </div>
+          
+          <div class="feedback-body">
+            <div class="flex gap-2">
+              <strong><%= feedback.title %></strong>
+            </div>
+            <span>
+              <%= feedback.comment %>
+            </span>
+            <span class="flex gap-2">
+              <% (1..5).each do |star| %>
+                <% if star <= feedback.mark.floor %>
+                  <span class="text-3xl text-yellow-400">★</span> 
+                <% else %>
+                  <span class="text-3xl text-gray-500">★</span>
+                <% end %>
+              <% end %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="not_found_feedback" ><%= t('.no_feedback') %></p>
+  <% end %>
+</div>

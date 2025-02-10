@@ -8,7 +8,7 @@ FactoryBot.define do
     schedule_item_id { SecureRandom.alphanumeric(8).upcase }
 
     initialize_with {
-      new(id: id, user: user, title: title, comment: comment, mark: mark)
+      new(id: id, user: user, title: title, comment: comment, mark: mark, schedule_item_id: schedule_item_id)
     }
   end
 end
