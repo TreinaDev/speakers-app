@@ -1,5 +1,13 @@
 class CertificatesController < ApplicationController
+  skip_before_action :set_breadcrumb
   def index; end
+
+  def search
+    @certificate = Certificate.find_by(token: params[:query])
+    return render :index if @certificate
+
+    redirect_to certificates_path, alert: t('.index.certificate_not_found')
+  end
 
   def show
     @certificate = Certificate.find_by(token: params[:token])

@@ -8,7 +8,6 @@ describe 'Participante sees your certificate' do
     event = build(:event, name: 'Ruby on Rails', start_date: 7.days.ago, end_date: 1.day.ago)
     schedule_item = build(:schedule_item, name: 'Palestra sobre TDD', start_time: Time.now,
                           end_time: Time.now + 1.hour, date: 2.days.ago)
-    user = create(:user, first_name: 'Maria', last_name: 'Josefina')
 
     certificate = create(:certificate,
       user: user,

@@ -34,8 +34,11 @@
           </div>
         </div>
       <% else %>
-        <%= link_to t('.create_account'), new_user_registration_path, class: 'nav_link_primary' %>
-        <%= link_to t('.access_account'), new_user_session_path, class: 'nav_link_primary' %>
+        <% unless request.path == certificates_path || request.path == search_certificates_path %>
+          <%= link_to t('.validate_certificate'), certificates_path, class: 'nav_link_primary' %>
+        <% end %>
+          <%= link_to t('.create_account'), new_user_registration_path, class: 'nav_link_primary' %>
+          <%= link_to t('.access_account'), new_user_session_path, class: 'nav_link_primary' %>
       <% end %>
     </div>
   </div>
