@@ -25,7 +25,7 @@ describe ExternalParticipantApi::GetScheduleItemFeedbacksService do
       }
       response = instance_double(Faraday::Response, success?: true, body: json.to_json)
       allow(Faraday).to receive(:get).and_return(response)
-      service = ExternalParticipantApi::GetScheduleItemFeedbacksService.new(event_id: 1, speaker: 'joao@email.com')
+      service = ExternalParticipantApi::GetScheduleItemFeedbacksService.new(schedule_item_id: 1)
 
       feedbacks = service.call
 
@@ -50,7 +50,7 @@ describe ExternalParticipantApi::GetScheduleItemFeedbacksService do
       allow(logger).to receive(:error)
       service = ExternalParticipantApi::GetScheduleItemFeedbacksService.new(schedule_item_id: 1)
 
-      schedule_item_feedbacks = service.call
+      service.call
 
       expect(logger).to have_received(:error).with(Faraday::ConnectionFailed)
     end
