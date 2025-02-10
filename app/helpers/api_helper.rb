@@ -18,7 +18,7 @@ module ApiHelper
         conn.headers['Content-Type'] = 'application/json'
       end
       url = "#{PARTICIPANT_URL}#{POST_ANSWER_URL % { id: feedback_id }}"
-      data = { 
+      data = {
         feedback_answer: {
           name: name,
           email: email,
