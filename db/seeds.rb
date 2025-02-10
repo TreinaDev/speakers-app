@@ -10,14 +10,31 @@
 
 user = User.new(first_name: 'João', last_name: 'Campus', email: 'marcos@email.com', password: '123456', token: 'ABCD1234')
 joao = User.new(first_name: 'João', last_name: 'Campus', email: 'speaker0@email.com', password: '123456', token: 'ASDF4567')
+matheus = User.new(first_name: 'Matheus', last_name: 'Santana', email: 'matheus@email.com', password: '123456', token: 'IMPOSTOR')
 user.save(validate: false)
 joao.save(validate: false)
+matheus.save(validate: false)
+FactoryBot.create(:profile, user: matheus)
+curriculum_matheus = FactoryBot.create(:curriculum, user: matheus, schedule_item_code: 'IMPOSTOR')
+matheus_content = matheus.event_contents.create(title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>',
+                                                 external_video_url: 'https://www.youtube.com/watch?v=idaXF2Er4TU', files: [ { io: File.open(Rails.root.join('spec/fixtures/puts.png')),
+                                                filename: 'puts.png', content_type: 'image/png' } ])
+
+matheus.event_contents.create(title: 'Introdução a Ruby', description: 'Descrição Ruby', external_video_url: 'https://www.youtube.com/watch?v=bLDH3NypOVo')
+matheus.event_contents.create(title: 'Introdução a TDD com Ruby', description: 'Descrição Ruby', external_video_url: 'https://www.youtube.com/watch?v=awn-Z_0lle0')
+matheus.event_contents.create(title: 'Variaveis de ambiente em Ruby', description: 'Descrição Ruby', external_video_url: 'https://www.youtube.com/watch?v=iXKuv-Y4c_Q')
+
+matheus_curriculum_content = FactoryBot.create(:curriculum_content, curriculum: curriculum_matheus, event_content: matheus_content)
+matheus_task = FactoryBot.create(:curriculum_task, curriculum: curriculum_matheus, title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory)
+FactoryBot.create(:curriculum_task_content, curriculum_task: matheus_task, curriculum_content: matheus_curriculum_content)
+FactoryBot.create(:certificate, responsable_name: matheus.full_name, speaker_code: 'IMPOSTOR', schedule_item_name: 'Workshop - Arquitetura Serverless na AWS',
+                  schedule_item_code: 'IMPOSTOR', participant_code: 'MASTER123', token: 'ACBD1234ABCD1234ABCD', event_name: 'AWS re:Invent')
 
 curriculum = FactoryBot.create(:curriculum, user: user, schedule_item_code: 'ABCDEEGH')
 first_content = user.event_contents.create(title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>', code: 'ABCD1234',
                                                  external_video_url: 'https://www.youtube.com/watch?v=idaXF2Er4TU', files: [ { io: File.open(Rails.root.join('spec/fixtures/puts.png')),
                                                 filename: 'puts.png', content_type: 'image/png' } ])
-first_curriculum_content = FactoryBot.create(:curriculum_content, id: 1, curriculum: curriculum, event_content: first_content)
+first_curriculum_content = FactoryBot.create(:curriculum_content, curriculum: curriculum, event_content: first_content)
 first_task = FactoryBot.create(:curriculum_task, curriculum: curriculum, title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: :mandatory)
 FactoryBot.create(:curriculum_task_content, curriculum_task: first_task, curriculum_content: first_curriculum_content)
 
