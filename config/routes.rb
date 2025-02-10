@@ -25,10 +25,10 @@ Rails.application.routes.draw do
   resources :event_contents, only: %i[ index show new create edit update ], param: :code do
     resources :update_histories, only: %i[ index ]
   end
-  resources :schedule_items, only: [:show], param: :code do
+  resources :schedule_items, only: %i[ show ], param: :code do
     post '/answer/:feedback_id', on: :member, as: 'answer', to: 'schedule_items#answer'
   end
-  
+
   resources :profiles, only: %i[ show new create ], param: :username
   resources :curriculums, only: [], param: :code do
     resources :curriculum_contents, only: %i[ new create show ], param: :code

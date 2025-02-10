@@ -67,7 +67,7 @@ describe 'User can view feedback for an schedule item', type: :system, js: true 
       expect(page).not_to have_selector('#feedbacks', visible: true)
       click_on 'Feedbacks da Palestra'
       expect(page).to have_selector('#feedbacks', visible: true)
-      
+
       within "#feedback_1" do
         fill_in 'Resposta', with: 'Que pena!'
         click_on 'Enviar Resposta'
@@ -94,7 +94,7 @@ describe 'User can view feedback for an schedule item', type: :system, js: true 
       expect(page).not_to have_selector('#feedbacks', visible: true)
       click_on 'Feedbacks da Palestra'
       expect(page).to have_selector('#feedbacks', visible: true)
-      
+
       within "#feedback_1" do
         fill_in 'Resposta', with: ''
         click_on 'Enviar Resposta'
