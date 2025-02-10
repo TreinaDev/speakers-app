@@ -38,14 +38,14 @@ describe 'Curriculum API' do
       download_url_2 = rails_blob_url(first_content.files[1])
       download_url_3 = rails_blob_url(first_content.files[2])
       expect(contents_response[0].deep_symbolize_keys).to include({ code: 'XLR8BE10', last_update: Date.current.strftime('%d/%m/%Y'), title: 'Ruby PDF', description: '<strong>Descrição Ruby PDF</strong>',
-                                                                    external_video_url: "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/idaXF2Er4TU' frameborder='0' allowfullscreen></iframe>",
+                                                                    external_video_url: "<iframe id='external-video' width='1000' height='600' src='https://www.youtube.com/embed/idaXF2Er4TU' frameborder='0' allowfullscreen class='rounded-3xl max-w-full'></iframe>",
                                                                     files: [ { file_download_url: download_url_1, filename: 'capi.png' },
                                                                              { file_download_url: download_url_2, filename: 'nota-ufjf.pdf' },
                                                                              { file_download_url: download_url_3, filename: 'joker.mp4' } ] })
       expect(contents_response[1].deep_symbolize_keys).to eq({ code: 'CODIGO15', title: 'Ruby Video', description: 'Apresentação sobre TDD',
-                                                               external_video_url: "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/2DvrRadXwWY' frameborder='0' allowfullscreen></iframe>"  })
+                                                               external_video_url: "<iframe id='external-video' width='1000' height='600' src='https://www.youtube.com/embed/2DvrRadXwWY' frameborder='0' allowfullscreen class='rounded-3xl max-w-full'></iframe>" })
       expect(contents_response[2].deep_symbolize_keys).to eq({ code: 'CODIGO26', title: 'Stimulus', description: 'PDF sobre Stimulus',
-                                                               external_video_url: "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/1cw6qO1EYGw' frameborder='0' allowfullscreen></iframe>" })
+                                                               external_video_url: "<iframe id='external-video' width='1000' height='600' src='https://www.youtube.com/embed/1cw6qO1EYGw' frameborder='0' allowfullscreen class='rounded-3xl max-w-full'></iframe>" })
       expect(tasks_response.length).to eq 2
       expect(tasks_response[0].deep_symbolize_keys).to eq({ code: 'CODIGO37', title: 'Exercício Rails', description: 'Seu primeiro exercício ruby', certificate_requirement: 'Obrigatória',
                                                             attached_contents: [ { attached_content_code: 'XLR8BE10' }, { attached_content_code: 'CODIGO15' } ], task_status: false })
