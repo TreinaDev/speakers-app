@@ -2,6 +2,7 @@ class ScheduleItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :setup_show
 
+
   def show; end
 
   def answer
