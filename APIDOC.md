@@ -27,8 +27,8 @@ Se disponível, a url para visualização do certificado será exibida em 'certi
         ]
       }
     ],
-    "tasks_available": true
-    "certificate_url": ""http://localhost:3000/certificates/PIMZBVXM04DWVNVWI90H.pdf""
+    "tasks_available": true,
+    "certificate_url": ""http://localhost:3000/certificates/PIMZBVXM04DWVNVWI90H.pdf"",
     "curriculum_tasks": [
       {
         "code": "FNRVUEUB",
