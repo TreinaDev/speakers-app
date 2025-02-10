@@ -17,7 +17,7 @@ describe ApiHelper::EventClient, type: :helper do
       speaker = create(:user)
       event_code = 'ABCS1234'
       response = instance_double(Faraday::Response)
-      expected_url = "http://localhost:3001/api/v1/speakers/#{speaker.token}/schedules/#{event_code}"
+      expected_url = "http://localhost:3003/api/v1/speakers/#{speaker.token}/schedules/#{event_code}"
       allow(Faraday).to receive(:get).with(expected_url).and_return(response)
 
       result = described_class.get_schedule_items(event_code: event_code, token: speaker.token)

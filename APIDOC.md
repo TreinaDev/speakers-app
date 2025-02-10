@@ -4,6 +4,7 @@ Documentação da API
 #### GET /api/v1/curriculums/:schedule_item_code
 Exibe as tarefas e conteúdos de um currículo, que representa todos os dados para uma programação.
 Com o campo 'task_status', é possível verificar se a tarefa específica foi concluída por um participante.
+Se disponível, a url para visualização do certificado será exibida em 'certificate_url'
 
 * status: 200
 * content-type: application/json
@@ -26,7 +27,8 @@ Com o campo 'task_status', é possível verificar se a tarefa específica foi co
         ]
       }
     ],
-    "tasks_available": true
+    "tasks_available": true,
+    "certificate_url": ""http://localhost:3000/certificates/PIMZBVXM04DWVNVWI90H.pdf"",
     "curriculum_tasks": [
       {
         "code": "FNRVUEUB",
@@ -55,6 +57,7 @@ Com o campo 'task_status', é possível verificar se a tarefa específica foi co
 ```
 
 * curriculum_contents: Conteúdos;
+  - last_update: Última atualização do conteúdo;
   - code: Código de identificação;
   - title: Título;
   - description: Descrição com texto enriquecido;
@@ -62,6 +65,8 @@ Com o campo 'task_status', é possível verificar se a tarefa específica foi co
 * files: Arquivos;
   - filename: Nome do arquivo;
   - file_download_url: URL do arquivo;
+* task_available: Diz se as tarefas do currículo já estão disponíveis;
+* certificate_url: Disponibiliza a url para visualização do certificado;
 * curriculum_tasks: Tarefas;
   - code: Código de identificação;
   - title: Título;
@@ -149,36 +154,3 @@ Tabela participant_task é criada, assim como participant_record (caso não exis
   "error": "Código do participante não pode ser em branco."
 }
 ```
-
-
-### 4 - Participante solicita seu certificado
-#### GET /api/v1/curriculums/:curriculum_schedule_item_code/certificates/:participant_code
-Cria um certificado (ou localiza um existente) quando solicitado por um participante via URL
-
-##### Success
-* status: 200
-* content-type: application/json
-
-```
-{
-  "certificate_url": "http://localhost:3000/certificate/9WA6KVATK5B5BXBKVQ1Y"
-}
-```
-
-##### Not Found - quando o código do participante ou o código do item da agenda não são localizados
-
-```
-{
-  "error": "Certificado não encontrado!"
-}
-```
-
-#### Internal Server Error
-
-* status: 500
-* content-type: application/json
-
-```
-{
-  "error": "Algo deu errado."
-}

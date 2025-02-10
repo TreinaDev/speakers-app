@@ -1,0 +1,27 @@
+<div class="certificate">
+  <div id="header">
+    <%= wicked_pdf_image_tag 'palestra+.png', class: "logo" %>
+  </div>
+  <div class="certificate-header">
+    <%= t('pdf.certificate')%>
+  </div>
+
+  <div class="certificate-card">
+    <p><strong><%= t('pdf.participant_name')%>:</strong> <%= @certificate.participant_name %></p>
+    <p><strong><%= t('pdf.register')%>:</strong> <%= @certificate.participant_register %></p>
+    <p><strong><%= t('pdf.event_name')%>:</strong> <%= @certificate.event_name %></p>
+    <p><strong><%= t('pdf.schedule_item_name')%>:</strong> <%= @certificate.schedule_item_name %> (Código: <%= @certificate.schedule_item_code %>)</p>
+    <p><strong><%= t('pdf.date_schedule')%>:</strong> <%= @certificate.date_of_occurrence.strftime('%d/%m/%Y') %></p>
+    <p><strong><%= t('pdf.length')%>:</strong> <%= @certificate.length %> minutos</p>
+    <p><strong><%= t('pdf.responsabel')%>:</strong> <%= @certificate.responsable_name %></p>
+    <p><strong><%= t('pdf.issue_date')%>:</strong> <%= @certificate.issue_date.strftime('%d/%m/%Y') %></p>
+    <div class="stamp">
+      <%= t('pdf.approved')%>
+    </div>
+  </div>
+
+  <div class="signature">
+    <p><%= t('pdf.signature')%>: ______________________</p>
+    <p><strong><%= t('pdf.token')%>:</strong> <%= @certificate.token %></p>
+  </div>
+</div>

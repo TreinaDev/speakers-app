@@ -28,7 +28,7 @@ describe 'User sees schedule item details', type: :system do
 
     expect(page).to have_content 'Entrevista com João'
     expect(page).to have_content 'Aprenda sobre RoR e TDD'
-    expect(page).to have_content "Horário: 11:00 - 12:00"
+    expect(page).to have_content "11:00 - 12:00"
     expect(page).not_to have_content 'Agenda 1'
     expect(page).not_to have_content 'Agenda 2'
     expect(page).not_to have_content 'Agenda 3'

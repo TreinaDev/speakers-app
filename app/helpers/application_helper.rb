@@ -9,10 +9,10 @@ module ApplicationHelper
   def render_external_video(url)
     if url.include?('youtube.com')
       video_code = url.split('=').last
-      "<iframe id='external-video' width='800' height='450' src='https://www.youtube.com/embed/#{video_code}' frameborder='0' allowfullscreen></iframe>".html_safe
+      "<iframe id='external-video' width='1000' height='600' src='https://www.youtube.com/embed/#{video_code}' frameborder='0' allowfullscreen class='rounded-3xl max-w-full'></iframe>".html_safe
     elsif url.include?('vimeo.com')
       video_code = url.split('/').last
-      "<iframe id='external-video' width='800' height='450' src='https://player.vimeo.com/video/#{video_code}' frameborder='0' allowfullscreen></iframe>".html_safe
+      "<iframe id='external-video' width='1000' height='600' src='https://player.vimeo.com/video/#{video_code}' frameborder='0' allowfullscreen class='rounded-3xl max-w-full'></iframe>".html_safe
     end
   end
 end

@@ -1,7 +1,6 @@
 <%= go_back_button(schedule_item_path(@curriculum.schedule_item_code)) %>
 
-<div class='border-2 rounded-3xl p-3'> 
-  <div>
-    <%= render 'shared/event_content_details', content: @curriculum_content.event_content%>
-  </div>
+<div>
+  <%= render 'shared/event_content_details', content: @curriculum_content.event_content%>
 </div>
+

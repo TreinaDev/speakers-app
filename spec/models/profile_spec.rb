@@ -33,5 +33,27 @@ RSpec.describe Profile, type: :model do
         expect(profile_2.username).to eq('joao_almeida1')
       end
     end
+
+    context '.validation_for_birth' do
+      it 'with future date' do
+        profile = build(:profile, birth: 1.days.from_now)
+
+        expect(profile.valid?).to eq(false)
+        expect(profile.errors[:birth_base].first).to include('Palestrante deve ter mais de 18 anos.')
+      end
+
+      it 'with date invalid' do
+        profile = build(:profile, birth: 15.years.ago)
+
+        expect(profile.valid?).to eq(false)
+        expect(profile.errors[:birth_base].first).to include('Palestrante deve ter mais de 18 anos.')
+      end
+
+      it 'with success' do
+        profile = build(:profile, birth: 18.years.ago)
+
+        expect(profile.valid?).to eq(true)
+      end
+    end
   end
 end

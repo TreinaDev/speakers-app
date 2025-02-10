@@ -17,12 +17,22 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  resources :certificate, only: %i[ show ], param: :token
+  get "certificates/:token.pdf", to: "certificates#show", as: :certificate_pdf
+  resources :certificates, only: %i[ index ] do
+    get 'search', on: :collection
+  end
   resources :events, only: %i[ index show ], param: :code
   resources :event_contents, only: %i[ index show new create edit update ], param: :code do
     resources :update_histories, only: %i[ index ]
+    member do
+      delete 'remove_file/:id', to: 'event_contents#remove_file', as: 'remove_file'
+    end
   end
-  resources :schedule_items, only: %i[ show ], param: :code
+
+  resources :schedule_items, only: %i[ show ], param: :code do
+    post '/answer/:feedback_id', on: :member, as: 'answer', to: 'schedule_items#answer'
+  end
+
   resources :profiles, only: %i[ show new create ], param: :username
   resources :curriculums, only: [], param: :code do
     resources :curriculum_contents, only: %i[ new create show ], param: :code
@@ -33,7 +43,6 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :curriculums, only: %i[], param: :schedule_item_code do
         resources :participants, only: %i[ show ], param: :participant_code, to: 'curriculums#show'
-        resources :certificates, only: %i[ show ], param: :participant_code, to: 'certificates#show'
       end
       resources :speakers, only: %i[ show ], param: :email, constraints: { email: /[^\/]+/ }
       resources :participant_tasks, only: %i[ create ], params: [ :participant_code, :task_code ]

@@ -1,0 +1,14 @@
+pt-BR:
+  pdf:
+    certificate: 'Certificado de Participação'
+    participant_name: 'Nome do Participante'
+    register: 'CPF'
+    event_name: 'Evento'
+    schedule_item_name: 'Palestra'
+    date_schedule: 'Data da Palestra'
+    length: 'Duração'
+    responsabel: 'Responsável'
+    issue_date: 'Emitido em'
+    approved: 'APROVADO'
+    signature: 'Assinatura'
+    token: 'Código de Verificação'

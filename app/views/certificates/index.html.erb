@@ -1,0 +1,35 @@
+<div>
+  <h1><%= t('.title') %></h1>
+</div>
+<div class="mt-10">
+  <h3><%= t('.code_input') %></h3>
+</div>
+
+<%= form_with url: search_certificates_path, method: :get do |f| %>
+  <div class="flex items-center gap-3">
+    <div class="field">
+      <%= f.text_field :query, id: 'search_certificate_input' %>
+    </div>
+    <div class="pb-2">
+      <%= f.submit t('.search'), class: 'btn_primary' %>
+    </div>
+  </div>
+<% end %>
+
+<% if @certificate %>
+  <div class="mt-2 mb-4 text-green-600">
+    <%= t('.valid_certificate', certificate_token: @certificate.token) %>
+  </div>
+  <div class="mt-5 mb-10">
+    <p class="mt-2"><strong><%= t('.student')%>:</strong> <%= @certificate.participant_name %></p>
+    <p class="mt-2"><strong><%= t('.event')%>:</strong> <%= @certificate.event_name %></p>
+    <p class="mt-2"><strong><%= t('.schedule_item')%>:</strong> <%= @certificate.schedule_item_name %></p>
+    <p class="mt-2"><strong><%= t('.instructor')%>:</strong> <%= @certificate.responsable_name %></p>
+    <p class="mt-2"><strong><%= t('.length')%>:</strong> <%= @certificate.length %> <%= t('.minutes') %></p>
+    <p class="mt-2"><strong><%= t('.issue_date')%>:</strong> <%= @certificate.issue_date.strftime('%d/%m/%Y') %></p>
+    <p class="mt-2"><strong><%= t('.certificate_code')%>:</strong> <%= @certificate.token %></p>
+  </div>
+  <div class="mt-5">
+    <%= link_to t('.download_certificate'), certificate_pdf_path(@certificate.token), class: 'btn_primary'%>
+  </div>
+<% end %>
