@@ -2,8 +2,8 @@
   <h2><%= Feedback.model_name.plural.capitalize %></h2>
   <% if feedbacks&.any? %>
     <div class="modal-body">
-      <% feedbacks.each do |feedback| %>
-        <div class="feedback-card border-2 bg-gray-200 my-3 p-2">
+      <% feedbacks.each_with_index do |feedback, index| %>
+        <div id="feedback_<%= index + 1%>"  class="feedback-card border-2 bg-gray-200 my-3 p-2">
           <div class="feedback-header flex gap-2">
             <div class="flex gap-2">
               <%= image_tag 'participant.svg', class: 'icon' %>
@@ -28,9 +28,20 @@
               <% end %>
             </span>
           </div>
+          
+          <div>
+            <%= form_with(url: answer_schedule_item_path(schedule_item.code, feedback.id)) do |form| %>
+              <div>
+                <%= form.label :comment, t('.answer') %>
+                <%= form.text_area :comment %>
+              </div>
+              <%= form.submit t('.send'), class: 'bg-blue-300 w-36' %>
+            <% end %>
+          </div>
         </div>
-      <% end %>
     </div>
+
+      <% end %>
   <% else %>
     <p class="not_found_feedback" ><%= t('.no_feedback') %></p>
   <% end %>

@@ -123,6 +123,8 @@ pt-BR:
       new_curriculum_content_button: 'Adicionar conteúdo'
     feedback_area:
       no_feedback: 'Nenhum feedback disponível para esta agenda'
+      answer: 'Resposta'
+      send: 'Enviar Resposta'
   curriculum_contents:
     new:
       title: 'Adicionar conteúdo a programação:'
