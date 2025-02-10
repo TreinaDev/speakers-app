@@ -171,6 +171,7 @@ pt-BR:
       update_description: 'Comentário'
   certificates:
     index:
+      search: 'Buscar'
       certificate_code: 'Código'
       title: 'Valide seu certificado'
       code_input: 'Insira o código único abaixo' 

@@ -6,7 +6,6 @@ class CertificatesController < ApplicationController
     @certificate = Certificate.find_by(token: params[:query])
     return render :index if @certificate
 
-    # flash[:alert] = t('.certificate_not_found') unless @certificate
     redirect_to certificates_path, alert: t('.index.certificate_not_found')
   end
 
