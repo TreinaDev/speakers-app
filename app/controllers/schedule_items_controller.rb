@@ -3,6 +3,8 @@ class ScheduleItemsController < ApplicationController
 
   def show
     @schedule_item = ScheduleItem.find(schedule_item_code: params[:code], token: current_user&.token)
+    puts 'Começo'
+    p @schedule_item.date
     return redirect_to events_path, alert: t('.not_found') if @schedule_item.nil?
     @event = Event.find(code: @schedule_item.event_code, token: current_user.token)
     add_breadcrumb @event.name, event_path(@schedule_item.event_code) if @event

@@ -4,6 +4,7 @@ describe 'Curriculum API' do
   context 'GET /api/v1/curriculums/:schedule_item_code' do
     it 'with success' do
       user = create(:user)
+      event = build(:event)
       build(:participant, code: 'XLR9BEN4')
       schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: 7.days.ago)
       curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
@@ -26,6 +27,7 @@ describe 'Curriculum API' do
       create(:curriculum_task_content, curriculum_task: first_task, curriculum_content: second_curriculum_content)
 
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      allow(Event).to receive(:find).and_return(event)
       get "/api/v1/curriculums/ABCD1234/participants/XLR9BEN4"
 
       expect(response).to have_http_status :success
@@ -77,6 +79,7 @@ describe 'Curriculum API' do
 
     it 'and tasks are not displayed before the event starts' do
       user = create(:user)
+      event = build(:event)
       schedule_item = build(:schedule_item, name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: 1.days.from_now)
       curriculum = create(:curriculum, user: user, schedule_item_code: schedule_item.code)
       first_content = create(:event_content, user: user, title: 'Ruby para iniciantes', code: 'ABCD1234')
@@ -86,6 +89,7 @@ describe 'Curriculum API' do
       create(:curriculum_task_content, curriculum_task: first_task, curriculum_content: first_curriculum_content)
 
       allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      allow(Event).to receive(:find).and_return(event)
       get "/api/v1/curriculums/#{schedule_item.code}/participants/ABCETFUF"
 
       json_response = JSON.parse(response.body)
@@ -174,6 +178,50 @@ describe 'Curriculum API' do
       expect(response.content_type).to include('application/json')
       json_response = JSON.parse(response.body)
       expect(json_response['curriculum']['certificate_url']).to eq "http://www.example.com/certificates/PIMZBVXM04DWVNVWI90H.pdf"
+    end
+
+    it 'and certificate pdf is create and listed' do
+      user = create(:user)
+      event = build(:event, name: 'Dev Week', start_date: 7.days.ago, end_date: 1.day.ago)
+      participant = build(:participant, code: 'XLR9BEN4', name: 'Júlio', last_name: 'Almeida')
+      schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: 7.days.ago)
+      create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+      allow(Event).to receive(:find).and_return(event)
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      allow(Participant).to receive(:find).and_return(participant)
+      create(:participant_record, user: user, participant_code: 'XLR9BEN4', schedule_item_code: 'ABCD1234', enabled_certificate: true)
+
+      get "/api/v1/curriculums/ABCD1234/participants/XLR9BEN4"
+
+      expect(response).to have_http_status :success
+      expect(response.content_type).to include('application/json')
+      expect(Certificate.count).to eq 1
+      certificate = Certificate.last
+      json_response = JSON.parse(response.body)
+      expect(json_response['curriculum']['certificate_url']).to eq "http://www.example.com/certificates/#{ certificate.token }.pdf"
+      expect(certificate.participant_name).to eq 'Júlio Almeida'
+      expect(certificate.participant_code).to eq 'XLR9BEN4'
+      expect(certificate.schedule_item_code).to eq 'ABCD1234'
+    end
+
+    it 'and certificate pdf ulr not is listed if event ongoing' do
+      user = create(:user)
+      event = build(:event, name: 'Dev Week', start_date: 7.days.ago, end_date: 1.day.from_now)
+      participant = build(:participant, code: 'XLR9BEN4')
+      schedule_item = build(:schedule_item, code: 'ABCD1234', name: 'TDD com Rails', description: 'Introdução a programação com TDD', event_start_date: 7.days.ago)
+      create(:curriculum, user: user, schedule_item_code: schedule_item.code)
+      allow(Event).to receive(:find).and_return(event)
+      allow(ScheduleItem).to receive(:find).and_return(schedule_item)
+      allow(Participant).to receive(:find).and_return(participant)
+      create(:participant_record, user: user, participant_code: 'XLR9BEN4', schedule_item_code: 'ABCD1234', enabled_certificate: true)
+
+      get "/api/v1/curriculums/ABCD1234/participants/XLR9BEN4"
+
+      expect(response).to have_http_status :success
+      expect(response.content_type).to include('application/json')
+      expect(Certificate.count).to eq 0
+      json_response = JSON.parse(response.body)
+      expect(json_response['curriculum'].deep_symbolize_keys).to eq(tasks_available: true)
     end
 
     it 'and certificate pdf ulr is not listed if unavailable' do

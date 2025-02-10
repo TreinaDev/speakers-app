@@ -15,6 +15,7 @@ class ExternalEventApi::FindScheduleItemService < ApplicationService
         schedule_item.event_code = json_response["event"]["code"]
         schedule_item.event_start_date = json_response["event"]["start_date"]
         schedule_item.event_end_date = json_response["event"]["end_date"]
+        schedule_item.date = json_response["start_time"]
       end
     rescue StandardError => error
       Rails.logger.error(error)

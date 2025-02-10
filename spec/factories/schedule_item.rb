@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :schedule_item do
     name { "Schedule" }
+    date { 1.days.from_now }
     description { "Something" }
     responsible_name { Faker::Name.name }
     code { SecureRandom.alphanumeric(8).upcase }
